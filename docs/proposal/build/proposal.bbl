@@ -1,0 +1,1651 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{split-keys-sts}{article}{}
+      \name{author}{5}{}{%
+        {{hash=7b34f010adb4c0e8cc80a17e8b6d6e29}{%
+           family={Akman},
+           familyi={A\bibinitperiod},
+           given={Gizem},
+           giveni={G\bibinitperiod}}}%
+        {{hash=29a4ae54d7a38499f983d36940f21a3d}{%
+           family={Damir},
+           familyi={D\bibinitperiod},
+           given={Mohamed\bibnamedelima Taoufiq},
+           giveni={M\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=d8af370b2cebe2315a88b601d7e05ab0}{%
+           family={Ginzboorg},
+           familyi={G\bibinitperiod},
+           given={Philip},
+           giveni={P\bibinitperiod}}}%
+        {{hash=ee59cccb1dc1cbea68e28312f8358c7b}{%
+           family={Sovio},
+           familyi={S\bibinitperiod},
+           given={Sampo},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7234d25f8bfca1a6846d23b5051a4a5e}{%
+           family={Niemi},
+           familyi={N\bibinitperiod},
+           given={Valtteri},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{a867b3858a82195ac84494f81db60a92}
+      \strng{fullhash}{cf13c60d1d4d43da5d1537b7571e39e9}
+      \strng{bibnamehash}{a867b3858a82195ac84494f81db60a92}
+      \strng{authorbibnamehash}{a867b3858a82195ac84494f81db60a92}
+      \strng{authornamehash}{a867b3858a82195ac84494f81db60a92}
+      \strng{authorfullhash}{cf13c60d1d4d43da5d1537b7571e39e9}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2694-1015}
+      \field{journaltitle}{Journal of Surveillance, Security and Safety}
+      \field{number}{3}
+      \field{title}{Split keys for station-to-station (STS) protocols}
+      \field{volume}{4}
+      \field{year}{2023}
+      \verb{doi}
+      \verb 10.20517/jsss.2023.16
+      \endverb
+      \verb{urlraw}
+      \verb https://www.oaepublish.com/articles/jsss.2023.16
+      \endverb
+      \verb{url}
+      \verb https://www.oaepublish.com/articles/jsss.2023.16
+      \endverb
+    \endentry
+    \entry{nike-group-discussion}{online}{}
+      \name{author}{1}{}{%
+        {{hash=b3d685b5338016acbc36d09d4a91e4bc}{%
+           family={al.},
+           familyi={a\bibinitperiod},
+           given={John\bibnamedelima Mattsson},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod},
+           prefix={et},
+           prefixi={e\bibinitperiod}}}%
+      }
+      \strng{namehash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \strng{fullhash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \strng{bibnamehash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \strng{authorbibnamehash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \strng{authornamehash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \strng{authorfullhash}{b3d685b5338016acbc36d09d4a91e4bc}
+      \field{sortinit}{a}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Non-Interactive Key Exchange, CSIDH, and Swoosh}
+      \field{urlday}{10}
+      \field{urlmonth}{2}
+      \field{urlyear}{2025}
+      \field{year}{2025}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/y_nQ3xMDRy8/m/uI1nU5iuAAAJ
+      \endverb
+      \verb{url}
+      \verb https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/y_nQ3xMDRy8/m/uI1nU5iuAAAJ
+      \endverb
+    \endentry
+    \entry{ml-kem-ind-cca}{misc}{}
+      \name{author}{14}{}{%
+        {{hash=8d5c89fcf9913dc6ae2b9c9f2b56e9e3}{%
+           family={Almeida},
+           familyi={A\bibinitperiod},
+           given={José\bibnamedelima Bacelar},
+           giveni={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=3ba29810218c025fb77892be5c30465e}{%
+           family={Olmos},
+           familyi={O\bibinitperiod},
+           given={Santiago\bibnamedelima Arranz},
+           giveni={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=9f57cce40b57fc93fb67f72834028011}{%
+           family={Barbosa},
+           familyi={B\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=a591e71debdbd9a86231c933df50ef0b}{%
+           family={Barthe},
+           familyi={B\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod}}}%
+        {{hash=7440b9933f24ca90ea51eb0b55a31d94}{%
+           family={Dupressoir},
+           familyi={D\bibinitperiod},
+           given={François},
+           giveni={F\bibinitperiod}}}%
+        {{hash=9aaabfdec4a2adeda65fe8b2056786ec}{%
+           family={Grégoire},
+           familyi={G\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d38e467670cd9366182c7462dd13ab17}{%
+           family={Laporte},
+           familyi={L\bibinitperiod},
+           given={Vincent},
+           giveni={V\bibinitperiod}}}%
+        {{hash=9fcd8e2849ea45833ced049b393c3100}{%
+           family={Léchenet},
+           familyi={L\bibinitperiod},
+           given={Jean-Christophe},
+           giveni={J\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=5b4f6f0806803772b9c27b50238685f6}{%
+           family={Low},
+           familyi={L\bibinitperiod},
+           given={Cameron},
+           giveni={C\bibinitperiod}}}%
+        {{hash=aecca5d48ae793eeef39f49874e8ebee}{%
+           family={Oliveira},
+           familyi={O\bibinitperiod},
+           given={Tiago},
+           giveni={T\bibinitperiod}}}%
+        {{hash=4737eee3c6f2e054401bf3efe55adc88}{%
+           family={Pacheco},
+           familyi={P\bibinitperiod},
+           given={Hugo},
+           giveni={H\bibinitperiod}}}%
+        {{hash=fbdd6e4f6c82cb84e1b07fee4e17c86c}{%
+           family={Quaresma},
+           familyi={Q\bibinitperiod},
+           given={Miguel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=e690ee937a17ca2f6870a1127062fcec}{%
+           family={Strub},
+           familyi={S\bibinitperiod},
+           given={Pierre-Yves},
+           giveni={P\bibinithyphendelim Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{d2f01a795a57b9092b69d9ac5c74ba07}
+      \strng{fullhash}{a318fd029b6fb805f75e34a4e4d10fc2}
+      \strng{bibnamehash}{d2f01a795a57b9092b69d9ac5c74ba07}
+      \strng{authorbibnamehash}{d2f01a795a57b9092b69d9ac5c74ba07}
+      \strng{authornamehash}{d2f01a795a57b9092b69d9ac5c74ba07}
+      \strng{authorfullhash}{a318fd029b6fb805f75e34a4e4d10fc2}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Cryptology {ePrint} Archive, Paper 2024/843}
+      \field{title}{Formally verifying Kyber Episode V: Machine-checked {IND}-{CCA} security and correctness of {ML}-{KEM} in {EasyCrypt}}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://eprint.iacr.org/2024/843
+      \endverb
+      \verb{url}
+      \verb https://eprint.iacr.org/2024/843
+      \endverb
+    \endentry
+    \entry{pqc-noise}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=717b28b10f293ef01540bf6fc3bb875b}{%
+           family={Angel},
+           familyi={A\bibinitperiod},
+           given={Yawning},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=5980627a69e9ed8ed44ff8eecf0a164e}{%
+           family={Dowling},
+           familyi={D\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=e07df980cdbfba600caca198384a3e85}{%
+           family={Hülsing},
+           familyi={H\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=f815ebe7db8d18dfd85219377661c0f9}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Los Angeles, CA, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{6425326a9d5e349e184e0934ea11b6b8}
+      \strng{fullhash}{7af136622558beb7d3348a1fc5ea6ba5}
+      \strng{bibnamehash}{6425326a9d5e349e184e0934ea11b6b8}
+      \strng{authorbibnamehash}{6425326a9d5e349e184e0934ea11b6b8}
+      \strng{authornamehash}{6425326a9d5e349e184e0934ea11b6b8}
+      \strng{authorfullhash}{7af136622558beb7d3348a1fc5ea6ba5}
+      \field{sortinit}{A}
+      \field{sortinithash}{2f401846e2029bad6b3ecc16d50031e2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We introduce PQNoise, a post-quantum variant of the Noise framework. We demonstrate that it is possible to replace the Diffie-Hellman key-exchanges in Noise with KEMs in a secure way. A challenge is the inability to combine key pairs of KEMs, which can be resolved by certain forms of randomness-hardening for which we introduce a formal abstraction. We provide a generic recipe to turn classical Noise patterns into PQNoise patterns. We prove that the resulting PQNoise patterns achieve confidentiality and authenticity in the fACCE model. Moreover we show that for those classical Noise-patterns that have been conjectured or proven secure in the fACCE model our matching PQNoise patterns eventually achieve the same security. Our security proof is generic and applies to any valid PQNoise pattern. This is made possible by another abstraction, called a hash-object, which hides the exact workings of how keying material is processed in an abstract stateful object that outputs pseudorandom keys under different corruption patterns. We also show that the hash chains used in Noise are a secure hash-object. Finally, we demonstrate the practicality of PQNoise delivering benchmarks for several base patterns.}
+      \field{booktitle}{Proceedings of the 2022 ACM SIGSAC Conference on Computer and Communications Security}
+      \field{isbn}{9781450394505}
+      \field{series}{CCS '22}
+      \field{title}{Post Quantum Noise}
+      \field{year}{2022}
+      \field{pages}{97\bibrangedash 109}
+      \range{pages}{13}
+      \verb{doi}
+      \verb 10.1145/3548606.3560577
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3548606.3560577
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3548606.3560577
+      \endverb
+      \keyw{noise,post-quantum cryptography,pqnoise,protocol,provable security}
+    \endentry
+    \entry{ctidh}{article}{}
+      \name{author}{8}{}{%
+        {{hash=64408c3e9bc792371c2dc7bbb20f2d9f}{%
+           family={Banegas},
+           familyi={B\bibinitperiod},
+           given={Gustavo},
+           giveni={G\bibinitperiod}}}%
+        {{hash=cc77f8b5fa3840f90938819e591aae07}{%
+           family={Bernstein},
+           familyi={B\bibinitperiod},
+           given={Daniel\bibnamedelima J.},
+           giveni={D\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=1834b6e20fa7096f0c7ea4e0aa8ed4fc}{%
+           family={Campos},
+           familyi={C\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=129110ffbac70bd6a654a1c52ce2e621}{%
+           family={Chou},
+           familyi={C\bibinitperiod},
+           given={Tung},
+           giveni={T\bibinitperiod}}}%
+        {{hash=2c76d81f56d9dce0a910572140690325}{%
+           family={Lange},
+           familyi={L\bibinitperiod},
+           given={Tanja},
+           giveni={T\bibinitperiod}}}%
+        {{hash=77204ef7a14a221ea8f3278cd0d02beb}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=6820851ebfe044fde445b304fe732415}{%
+           family={Smith},
+           familyi={S\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod}}}%
+        {{hash=346cabf4d4337bfe57a3fd67362a6db6}{%
+           family={Sotáková},
+           familyi={S\bibinitperiod},
+           given={Jana},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8f403b71939954de5dbf18dd96004064}
+      \strng{fullhash}{4dfe81e79771ee25034924193a046887}
+      \strng{bibnamehash}{8f403b71939954de5dbf18dd96004064}
+      \strng{authorbibnamehash}{8f403b71939954de5dbf18dd96004064}
+      \strng{authornamehash}{8f403b71939954de5dbf18dd96004064}
+      \strng{authorfullhash}{4dfe81e79771ee25034924193a046887}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IACR Transactions on Cryptographic Hardware and Embedded Systems}
+      \field{month}{8}
+      \field{note}{Artifact available at \url{https://artifacts.iacr.org/tches/2021/a20}}
+      \field{number}{4}
+      \field{title}{{CTIDH}: faster constant-time {CSIDH}}
+      \field{volume}{2021}
+      \field{year}{2021}
+      \field{pages}{351\bibrangedash 387}
+      \range{pages}{37}
+      \verb{doi}
+      \verb 10.46586/tches.v2021.i4.351-387
+      \endverb
+    \endentry
+    \entry{crystal-kyber}{inproceedings}{}
+      \name{author}{9}{}{%
+        {{hash=a9539145b18ecc235369e5a2fb343671}{%
+           family={Bos},
+           familyi={B\bibinitperiod},
+           given={Joppe},
+           giveni={J\bibinitperiod}}}%
+        {{hash=af45937f5146427dab90d717c0274a3b}{%
+           family={Ducas},
+           familyi={D\bibinitperiod},
+           given={Leo},
+           giveni={L\bibinitperiod}}}%
+        {{hash=3a691fc6ff884507edcdc40d4048c61a}{%
+           family={Kiltz},
+           familyi={K\bibinitperiod},
+           given={Eike},
+           giveni={E\bibinitperiod}}}%
+        {{hash=707dcc39dee1cf44bf8166ff5f296ac2}{%
+           family={Lepoint},
+           familyi={L\bibinitperiod},
+           given={T},
+           giveni={T\bibinitperiod}}}%
+        {{hash=928bcadb00050adca6148fe4cbefc5d7}{%
+           family={Lyubashevsky},
+           familyi={L\bibinitperiod},
+           given={Vadim},
+           giveni={V\bibinitperiod}}}%
+        {{hash=19c0a70c0adf29a8265f6bed42a4a6ee}{%
+           family={Schanck},
+           familyi={S\bibinitperiod},
+           given={John\bibnamedelima M.},
+           giveni={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=6ad6aaf85bcdaa083e71211a4c9cd987}{%
+           family={Seiler},
+           familyi={S\bibinitperiod},
+           given={Gregor},
+           giveni={G\bibinitperiod}}}%
+        {{hash=589d33cc0094d51211bef3b93ec84fcd}{%
+           family={Stehle},
+           familyi={S\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{c4f50c47c21eed70afffaadf3562e7ac}
+      \strng{fullhash}{d5a888632d3378e9cc13ad53d17bb860}
+      \strng{bibnamehash}{c4f50c47c21eed70afffaadf3562e7ac}
+      \strng{authorbibnamehash}{c4f50c47c21eed70afffaadf3562e7ac}
+      \strng{authornamehash}{c4f50c47c21eed70afffaadf3562e7ac}
+      \strng{authorfullhash}{d5a888632d3378e9cc13ad53d17bb860}
+      \field{sortinit}{B}
+      \field{sortinithash}{d7095fff47cda75ca2589920aae98399}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2018 IEEE European Symposium on Security and Privacy (EuroS\&P)}
+      \field{title}{CRYSTALS - Kyber: A CCA-Secure Module-Lattice-Based KEM}
+      \field{year}{2018}
+      \field{pages}{353\bibrangedash 367}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/EuroSP.2018.00032
+      \endverb
+      \keyw{Encryption;Lattices;Electronic mail;Protocols;Public key;post quantum cryptography;key encapsulation;module lattices;learning with errors}
+    \endentry
+    \entry{csidh-fault-injection-2}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=1834b6e20fa7096f0c7ea4e0aa8ed4fc}{%
+           family={Campos},
+           familyi={C\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=589db6a880384d0c056aaf2b69233c98}{%
+           family={Krämer},
+           familyi={K\bibinitperiod},
+           given={Juliane},
+           giveni={J\bibinitperiod}}}%
+        {{hash=42c3dd84afe0d86f0fce322b6205bafc}{%
+           family={Müller},
+           familyi={M\bibinitperiod},
+           given={Marcel},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Kolkata, India}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{1a99cb33c535531a2b00ffc648198f7b}
+      \strng{fullhash}{1a99cb33c535531a2b00ffc648198f7b}
+      \strng{bibnamehash}{1a99cb33c535531a2b00ffc648198f7b}
+      \strng{authorbibnamehash}{1a99cb33c535531a2b00ffc648198f7b}
+      \strng{authornamehash}{1a99cb33c535531a2b00ffc648198f7b}
+      \strng{authorfullhash}{1a99cb33c535531a2b00ffc648198f7b}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The isogeny-based post-quantum schemes SIKE (NIST PQC round 3 alternate candidate) and CSIDH (Asiacrypt 2018) have received only little attention with respect to their fault attack resilience so far. We aim to fill this gap and provide a better understanding of their vulnerability by analyzing their resistance towards safe-error attacks. We present four safe-error attacks, two against SIKE and two against a constant-time implementation of CSIDH that uses dummy isogenies. The attacks use targeted bitflips during the respective isogeny-graph traversals. All four attacks lead to full key recovery. By using voltage and clock glitching, we physically carried out two of the attacks - one against each scheme -, thus demonstrate that full key recovery is also possible in practice.}
+      \field{booktitle}{Security, Privacy, and Applied Cryptography Engineering: 11th International Conference, SPACE 2021, Kolkata, India, December 10–13, 2021, Proceedings}
+      \field{isbn}{978-3-030-95084-2}
+      \field{title}{Safe-Error Attacks on\&nbsp;SIKE and\&nbsp;CSIDH}
+      \field{year}{2021}
+      \field{pages}{104\bibrangedash 125}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1007/978-3-030-95085-9_6
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-3-030-95085-9_6
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-3-030-95085-9_6
+      \endverb
+      \keyw{Fault attacks,Isogeny-based cryptography,Post-quantum cryptography}
+    \endentry
+    \entry{dctidh}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=1834b6e20fa7096f0c7ea4e0aa8ed4fc}{%
+           family={Campos},
+           familyi={C\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=747199a17b1f75d6ca3b3fe9da89c8fa}{%
+           family={Hellenbrand},
+           familyi={H\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=77204ef7a14a221ea8f3278cd0d02beb}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=67c92c26208ca088cb22803fbe00eec1}{%
+           family={Reijnders},
+           familyi={R\bibinitperiod},
+           given={Krijn},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{fullhash}{f55947613372d7e335e9408651507f1e}
+      \strng{bibnamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authorbibnamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authornamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authorfullhash}{f55947613372d7e335e9408651507f1e}
+      \field{extraname}{1}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Cryptology {ePrint} Archive, Paper 2025/107}
+      \field{title}{{dCTIDH}: Fast \& Deterministic {CTIDH}}
+      \field{year}{2025}
+      \verb{urlraw}
+      \verb https://eprint.iacr.org/2025/107
+      \endverb
+      \verb{url}
+      \verb https://eprint.iacr.org/2025/107
+      \endverb
+    \endentry
+    \entry{csidh-fault-injection}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=1834b6e20fa7096f0c7ea4e0aa8ed4fc}{%
+           family={Campos},
+           familyi={C\bibinitperiod},
+           given={Fabio},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7803ff80a3ae380b32a5c87ab28e6f99}{%
+           family={Kannwischer},
+           familyi={K\bibinitperiod},
+           given={Matthias\bibnamedelima J.},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=77204ef7a14a221ea8f3278cd0d02beb}{%
+           family={Meyer},
+           familyi={M\bibinitperiod},
+           given={Michael},
+           giveni={M\bibinitperiod}}}%
+        {{hash=efc290c7ea675ffe6eb24c397b4216a0}{%
+           family={Onuki},
+           familyi={O\bibinitperiod},
+           given={Hiroshi},
+           giveni={H\bibinitperiod}}}%
+        {{hash=c081e1758ad06236d93e498be8bb4074}{%
+           family={Stöttinger},
+           familyi={S\bibinitperiod},
+           given={Marc},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{fullhash}{f1c21054f5c45ad01361e417c5d6a1a9}
+      \strng{bibnamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authorbibnamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authornamehash}{8bb9ea15b0e645e5f8962e609ea742bc}
+      \strng{authorfullhash}{f1c21054f5c45ad01361e417c5d6a1a9}
+      \field{extraname}{2}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2020 Workshop on Fault Detection and Tolerance in Cryptography (FDTC)}
+      \field{title}{Trouble at the CSIDH: Protecting CSIDH with Dummy-Operations Against Fault Injection Attacks}
+      \field{year}{2020}
+      \field{pages}{57\bibrangedash 65}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1109/FDTC51366.2020.00015
+      \endverb
+      \keyw{Kernel;Computational modeling;Resistance;Public key;Protocols;Optimization;Erbium;Isogeny-based Cryptography;CSIDH;Fault Injection Attack;Fault Resistant Implementation}
+    \endentry
+    \entry{nike-abstract}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=d04dd3866a8ac6e6cee4f4b09d9aab28}{%
+           family={Cash},
+           familyi={C\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3a691fc6ff884507edcdc40d4048c61a}{%
+           family={Kiltz},
+           familyi={K\bibinitperiod},
+           given={Eike},
+           giveni={E\bibinitperiod}}}%
+        {{hash=b7ce99f593e2c7899b27afe41a6c28a0}{%
+           family={Shoup},
+           familyi={S\bibinitperiod},
+           given={Victor},
+           giveni={V\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=8a95cc66959ef5def3eec3edbc99a2bd}{%
+           family={Smart},
+           familyi={S\bibinitperiod},
+           given={Nigel},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{fullhash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{bibnamehash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{authorbibnamehash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{authornamehash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{authorfullhash}{c387f362e9cc3604d0a7782f2fc45553}
+      \strng{editorbibnamehash}{8a95cc66959ef5def3eec3edbc99a2bd}
+      \strng{editornamehash}{8a95cc66959ef5def3eec3edbc99a2bd}
+      \strng{editorfullhash}{8a95cc66959ef5def3eec3edbc99a2bd}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Cryptology -- EUROCRYPT 2008}
+      \field{isbn}{978-3-540-78967-3}
+      \field{title}{The Twin Diffie-Hellman Problem and Applications}
+      \field{year}{2008}
+      \field{pages}{127\bibrangedash 145}
+      \range{pages}{19}
+    \endentry
+    \entry{csidh}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=f2a3286d6cde9b200b33a6f645565f45}{%
+           family={Castryck},
+           familyi={C\bibinitperiod},
+           given={Wouter},
+           giveni={W\bibinitperiod}}}%
+        {{hash=2c76d81f56d9dce0a910572140690325}{%
+           family={Lange},
+           familyi={L\bibinitperiod},
+           given={Tanja},
+           giveni={T\bibinitperiod}}}%
+        {{hash=c5600e684df67620a973b95e3e67a627}{%
+           family={Martindale},
+           familyi={M\bibinitperiod},
+           given={Chloe},
+           giveni={C\bibinitperiod}}}%
+        {{hash=badb6857e0166024630cca00f60bebc6}{%
+           family={Panny},
+           familyi={P\bibinitperiod},
+           given={Lorenz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=4fc91c1dc6de5628ebc2e4ab8675a1c5}{%
+           family={Renes},
+           familyi={R\bibinitperiod},
+           given={Joost},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer}%
+      }
+      \strng{namehash}{1c7a4d347d48ec1d3a5846085bd6a550}
+      \strng{fullhash}{904db878d6c32fbfb42b112051ab71cd}
+      \strng{bibnamehash}{1c7a4d347d48ec1d3a5846085bd6a550}
+      \strng{authorbibnamehash}{1c7a4d347d48ec1d3a5846085bd6a550}
+      \strng{authornamehash}{1c7a4d347d48ec1d3a5846085bd6a550}
+      \strng{authorfullhash}{904db878d6c32fbfb42b112051ab71cd}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Advances in Cryptology – ASIACRYPT 2018}
+      \field{series}{Lecture Notes in Computer Science}
+      \field{title}{CSIDH: An Efficient Post-Quantum Commutative Group Action}
+      \field{volume}{11274}
+      \field{year}{2018}
+      \field{pages}{395\bibrangedash 427}
+      \range{pages}{33}
+      \verb{doi}
+      \verb 10.1007/978-3-030-03332-3_15
+      \endverb
+    \endentry
+    \entry{edhoc-sec-analysis-draft-15}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=83661e4a38d5de6c5e8631e2af2498af}{%
+           family={Cottier},
+           familyi={C\bibinitperiod},
+           given={Baptiste},
+           giveni={B\bibinitperiod}}}%
+        {{hash=8477cabfb261c3696163854eae25beb1}{%
+           family={Pointcheval},
+           familyi={P\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+      }
+      \name{editor}{5}{}{%
+        {{hash=0a4942ec9c5673d682f8e91f70be000b}{%
+           family={Jourdan},
+           familyi={J\bibinitperiod},
+           given={Guy-Vincent},
+           giveni={G\bibinithyphendelim V\bibinitperiod}}}%
+        {{hash=eae2480a46207d70441f6a76208dbf21}{%
+           family={Mounier},
+           familyi={M\bibinitperiod},
+           given={Laurent},
+           giveni={L\bibinitperiod}}}%
+        {{hash=918081b9a8494c2488cc8dd5fbbf2661}{%
+           family={Adams},
+           familyi={A\bibinitperiod},
+           given={Carlisle},
+           giveni={C\bibinitperiod}}}%
+        {{hash=057ba9e337ecd8eec651e96b738423e2}{%
+           family={Sèdes},
+           familyi={S\bibinitperiod},
+           given={Florence},
+           giveni={F\bibinitperiod}}}%
+        {{hash=9aad04178515420ebd902003065b473e}{%
+           family={Garcia-Alfaro},
+           familyi={G\bibinithyphendelim A\bibinitperiod},
+           given={Joaquin},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature Switzerland}%
+      }
+      \strng{namehash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{fullhash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{bibnamehash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{authorbibnamehash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{authornamehash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{authorfullhash}{2ecf1a7cb1fa1072fd621c7626c4c685}
+      \strng{editorbibnamehash}{b8ecff2af6db36dcd7fd8e4bdd22263a}
+      \strng{editornamehash}{b8ecff2af6db36dcd7fd8e4bdd22263a}
+      \strng{editorfullhash}{f0c141dd8d2d71f95d0015402236e118}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Foundations and Practice of Security}
+      \field{isbn}{978-3-031-30122-3}
+      \field{title}{Security Analysis of Improved EDHOC Protocol}
+      \field{year}{2023}
+      \field{pages}{3\bibrangedash 18}
+      \range{pages}{16}
+    \endentry
+    \entry{kem-definition}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e712b1b3271b096addfc108a5acd1bcb}{%
+           family={Cramer},
+           familyi={C\bibinitperiod},
+           given={Ronald},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b7ce99f593e2c7899b27afe41a6c28a0}{%
+           family={Shoup},
+           familyi={S\bibinitperiod},
+           given={Victor},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{28529ef3f553114c55c401a14081df4e}
+      \strng{fullhash}{28529ef3f553114c55c401a14081df4e}
+      \strng{bibnamehash}{28529ef3f553114c55c401a14081df4e}
+      \strng{authorbibnamehash}{28529ef3f553114c55c401a14081df4e}
+      \strng{authornamehash}{28529ef3f553114c55c401a14081df4e}
+      \strng{authorfullhash}{28529ef3f553114c55c401a14081df4e}
+      \field{sortinit}{C}
+      \field{sortinithash}{4d103a86280481745c9c897c925753c0}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{SIAM Journal on Computing}
+      \field{number}{1}
+      \field{title}{Design and Analysis of Practical Public-Key Encryption Schemes Secure against Adaptive Chosen Ciphertext Attack}
+      \field{volume}{33}
+      \field{year}{2003}
+      \field{pages}{167\bibrangedash 226}
+      \range{pages}{60}
+      \verb{doi}
+      \verb 10.1137/S0097539702403773
+      \endverb
+      \verb{eprint}
+      \verb https://doi.org/10.1137/S0097539702403773
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1137/S0097539702403773
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1137/S0097539702403773
+      \endverb
+    \endentry
+    \entry{kem-design}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=90cc90bd9be43576e00511a082a74e1a}{%
+           family={Dent},
+           familyi={D\bibinitperiod},
+           given={Alexander\bibnamedelima W.},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=f1420d151dab5011755e3ee14a2f147a}{%
+           family={Paterson},
+           familyi={P\bibinitperiod},
+           given={Kenneth\bibnamedelima G.},
+           giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{fullhash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{bibnamehash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{authorbibnamehash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{authornamehash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{authorfullhash}{90cc90bd9be43576e00511a082a74e1a}
+      \strng{editorbibnamehash}{f1420d151dab5011755e3ee14a2f147a}
+      \strng{editornamehash}{f1420d151dab5011755e3ee14a2f147a}
+      \strng{editorfullhash}{f1420d151dab5011755e3ee14a2f147a}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Cryptography and Coding}
+      \field{isbn}{978-3-540-40974-8}
+      \field{title}{A Designer's Guide to KEMs}
+      \field{year}{2003}
+      \field{pages}{133\bibrangedash 151}
+      \range{pages}{19}
+    \endentry
+    \entry{tee-mobile}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=8860c5c4e5e571bd813afc6c7c0bdafd}{%
+           family={Ekberg},
+           familyi={E\bibinitperiod},
+           given={Jan-Erik},
+           giveni={J\bibinithyphendelim E\bibinitperiod}}}%
+        {{hash=f469fe1742f1b6cd712c7d9aa8dc8dcf}{%
+           family={Kostiainen},
+           familyi={K\bibinitperiod},
+           given={Kari},
+           giveni={K\bibinitperiod}}}%
+        {{hash=92d559b15918dee67f108af178a6de3d}{%
+           family={Asokan},
+           familyi={A\bibinitperiod},
+           given={N.},
+           giveni={N\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Germany}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \strng{fullhash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \strng{bibnamehash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \strng{authorbibnamehash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \strng{authornamehash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \strng{authorfullhash}{0a2bb75a95f110e0737c5a82ded838fc}
+      \field{sortinit}{E}
+      \field{sortinithash}{8da8a182d344d5b9047633dfc0cc9131}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A trusted execution environment (TEE) is a secure processing environment that is isolated from the normal processing environment where the device operating system and applications run. The first mobile phones with hardware-based TEEs appeared almost a decade ago, and today almost every smartphone and tablet contains a TEE like ARM TrustZone. Despite such a large-scale deployment, the use of TEE functionality has been limited for developers. With emerging standardization this situation is about to change. In this tutorial, we explain the security features provided by mobile TEEs and describe On-board Credentials (ObC) system that enables third-party TEE development. We discuss ongoing TEE standardization activities, including the recent Global Platform standards and the Trusted Platform Module (TPM) 2.0 specification, and identify open problems for the near future of mobile hardware security.}
+      \field{booktitle}{Proceedings of the 2013 ACM SIGSAC Conference on Computer \& Communications Security}
+      \field{isbn}{9781450324779}
+      \field{series}{CCS '13}
+      \field{title}{Trusted execution environments on mobile devices}
+      \field{year}{2013}
+      \field{pages}{1497\bibrangedash 1498}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1145/2508859.2516758
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/2508859.2516758
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/2508859.2516758
+      \endverb
+      \keyw{trusted execution environments,mobile devices}
+    \endentry
+    \entry{edhoc-sec-analysis-draft-23}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=35a58a4618b7a026a45edb3b8ef95aa2}{%
+           family={Ferreira},
+           familyi={F\bibinitperiod},
+           given={Loïc},
+           giveni={L\bibinitperiod}}}%
+      }
+      \name{editor}{1}{}{%
+        {{hash=cf7c0382045f06385a28d0235a0bbc97}{%
+           family={Oswald},
+           familyi={O\bibinitperiod},
+           given={Elisabeth},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cham}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature Switzerland}%
+      }
+      \strng{namehash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{fullhash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{bibnamehash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{authorbibnamehash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{authornamehash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{authorfullhash}{35a58a4618b7a026a45edb3b8ef95aa2}
+      \strng{editorbibnamehash}{cf7c0382045f06385a28d0235a0bbc97}
+      \strng{editornamehash}{cf7c0382045f06385a28d0235a0bbc97}
+      \strng{editorfullhash}{cf7c0382045f06385a28d0235a0bbc97}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Ephemeral Diffie-Hellman Over COSE (EDHOC) is designed to be a compact and lightweight authenticated key exchange protocol, providing mutual authentication, forward secrecy, and identity protection. EDHOC aims at being suitable for low-power networks such as cellular IoT, 6TiSCH, and LoRaWAN. In this paper, we perform a security analysis of the last draft of EDHOC (draft {\$}{\$}23{\$}{\$}23). We analyse the full protocol including its four different authentication methods. Our results show that the security of the authenticated key exchange in EDHOC depends essentially on that of the authenticated encryption algorithm used during that phase. Finally, we provide more precise estimates of the computational security bounds for all authentication methods in EDHOC so that meaningful choices of quantitative parameters can be done to instantiate the protocol securely.}
+      \field{booktitle}{Topics in Cryptology -- CT-RSA 2024}
+      \field{isbn}{978-3-031-58868-6}
+      \field{title}{Computational Security Analysis of the Full EDHOC Protocol}
+      \field{year}{2024}
+      \field{pages}{25\bibrangedash 48}
+      \range{pages}{24}
+    \endentry
+    \entry{nike-definition}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=4fd7151a714ad1817c2efce303c4cb0b}{%
+           family={Freire},
+           familyi={F\bibinitperiod},
+           given={Eduarda\bibnamedelimb S.\bibnamedelimi V.},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=405c6134bda3e13e109f9c9e4c3dbc6c}{%
+           family={Hofheinz},
+           familyi={H\bibinitperiod},
+           given={Dennis},
+           giveni={D\bibinitperiod}}}%
+        {{hash=3a691fc6ff884507edcdc40d4048c61a}{%
+           family={Kiltz},
+           familyi={K\bibinitperiod},
+           given={Eike},
+           giveni={E\bibinitperiod}}}%
+        {{hash=f1420d151dab5011755e3ee14a2f147a}{%
+           family={Paterson},
+           familyi={P\bibinitperiod},
+           given={Kenneth\bibnamedelima G.},
+           giveni={K\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=b546c6ecb60a7e39813b82396f566400}{%
+           family={Kurosawa},
+           familyi={K\bibinitperiod},
+           given={Kaoru},
+           giveni={K\bibinitperiod}}}%
+        {{hash=e014995686aaf6609d3d9f2d91fc7484}{%
+           family={Hanaoka},
+           familyi={H\bibinitperiod},
+           given={Goichiro},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Heidelberg}%
+      }
+      \list{publisher}{1}{%
+        {Springer Berlin Heidelberg}%
+      }
+      \strng{namehash}{4aabe00a17d4925c8506ef0be7df684c}
+      \strng{fullhash}{3b39c01173b32b767bc978e8c24fe390}
+      \strng{bibnamehash}{4aabe00a17d4925c8506ef0be7df684c}
+      \strng{authorbibnamehash}{4aabe00a17d4925c8506ef0be7df684c}
+      \strng{authornamehash}{4aabe00a17d4925c8506ef0be7df684c}
+      \strng{authorfullhash}{3b39c01173b32b767bc978e8c24fe390}
+      \strng{editorbibnamehash}{f4a8d16cae75509846a39f3175b60429}
+      \strng{editornamehash}{f4a8d16cae75509846a39f3175b60429}
+      \strng{editorfullhash}{f4a8d16cae75509846a39f3175b60429}
+      \field{sortinit}{F}
+      \field{sortinithash}{2638baaa20439f1b5a8f80c6c08a13b4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Public-Key Cryptography -- PKC 2013}
+      \field{isbn}{978-3-642-36362-7}
+      \field{title}{Non-Interactive Key Exchange}
+      \field{year}{2013}
+      \field{pages}{254\bibrangedash 271}
+      \range{pages}{18}
+    \endentry
+    \entry{swoosh}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=010219c3a560f29c20205d4baab9a5b5}{%
+           family={Gajland},
+           familyi={G\bibinitperiod},
+           given={Phillip},
+           giveni={P\bibinitperiod}}}%
+        {{hash=9ebe84819403ff388c123f6e52b4010c}{%
+           family={Kock},
+           familyi={K\bibinitperiod},
+           given={Bor},
+           giveni={B\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=fbdd6e4f6c82cb84e1b07fee4e17c86c}{%
+           family={Quaresma},
+           familyi={Q\bibinitperiod},
+           given={Miguel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=39f36844bb95530987dbeba2dba22ddc}{%
+           family={Malavolta},
+           familyi={M\bibinitperiod},
+           given={Giulio},
+           giveni={G\bibinitperiod}}}%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Philadelphia, PA}%
+      }
+      \list{publisher}{1}{%
+        {USENIX Association}%
+      }
+      \strng{namehash}{04f0066fcfe0aabfca12d695484198c1}
+      \strng{fullhash}{b8aa7226d263dba5ff17fe4825b89a01}
+      \strng{bibnamehash}{04f0066fcfe0aabfca12d695484198c1}
+      \strng{authorbibnamehash}{04f0066fcfe0aabfca12d695484198c1}
+      \strng{authornamehash}{04f0066fcfe0aabfca12d695484198c1}
+      \strng{authorfullhash}{b8aa7226d263dba5ff17fe4825b89a01}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{33rd USENIX Security Symposium (USENIX Security 24)}
+      \field{isbn}{978-1-939133-44-1}
+      \field{month}{8}
+      \field{title}{{SWOOSH}: Efficient {Lattice-Based} {Non-Interactive} Key Exchange}
+      \field{year}{2024}
+      \field{pages}{487\bibrangedash 504}
+      \range{pages}{18}
+      \verb{urlraw}
+      \verb https://www.usenix.org/conference/usenixsecurity24/presentation/gajland
+      \endverb
+      \verb{url}
+      \verb https://www.usenix.org/conference/usenixsecurity24/presentation/gajland
+      \endverb
+    \endentry
+    \entry{edhoc-sec-analysis-draft-17}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=7fc8f59c7b2b48e5bb8a7d735fc55189}{%
+           family={Günther},
+           familyi={G\bibinitperiod},
+           given={Felix},
+           giveni={F\bibinitperiod}}}%
+        {{hash=58b10c086f7cd81d106697b0db782051}{%
+           family={Tshibumbu\bibnamedelima Mukendi},
+           familyi={T\bibinitperiod\bibinitdelim M\bibinitperiod},
+           given={Marc\bibnamedelima Ilunga},
+           giveni={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{0fc1a953e88e4f9fa105502c186f3854}
+      \strng{fullhash}{0fc1a953e88e4f9fa105502c186f3854}
+      \strng{bibnamehash}{0fc1a953e88e4f9fa105502c186f3854}
+      \strng{authorbibnamehash}{0fc1a953e88e4f9fa105502c186f3854}
+      \strng{authornamehash}{0fc1a953e88e4f9fa105502c186f3854}
+      \strng{authorfullhash}{0fc1a953e88e4f9fa105502c186f3854}
+      \field{sortinit}{G}
+      \field{sortinithash}{32d67eca0634bf53703493fb1090a2e8}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2023 IEEE 8th European Symposium on Security and Privacy (EuroS\&P)}
+      \field{title}{Careful with MAc-then-SIGn: A Computational Analysis of the EDHOC Lightweight Authenticated Key Exchange Protocol}
+      \field{year}{2023}
+      \field{pages}{773\bibrangedash 796}
+      \range{pages}{24}
+      \verb{doi}
+      \verb 10.1109/EuroSP57164.2023.00051
+      \endverb
+      \keyw{Analytical models;Protocols;Buildings;Authentication;Registers;Cryptography}
+    \endentry
+    \entry{oscore-tee-performance}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{hash=93da5fc4154cd5b9025d41cf61affc13}{%
+           family={Hristozov},
+           familyi={H\bibinitperiod},
+           given={Stefan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=3cbe6b261c726025eae5f6d033e13e2f}{%
+           family={Huber},
+           familyi={H\bibinitperiod},
+           given={Manuel},
+           giveni={M\bibinitperiod}}}%
+        {{hash=8988e4206730ffa0ecb54886c691cb99}{%
+           family={Xu},
+           familyi={X\bibinitperiod},
+           given={Lei},
+           giveni={L\bibinitperiod}}}%
+        {{hash=63385e55098ab72c7b2f554390b89713}{%
+           family={Fietz},
+           familyi={F\bibinitperiod},
+           given={Jaro},
+           giveni={J\bibinitperiod}}}%
+        {{hash=a0a1bac4d58f66655f275fa460a1097e}{%
+           family={Liess},
+           familyi={L\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=e667bb75f672d6b53b669f117a54dc64}{%
+           family={Sigl},
+           familyi={S\bibinitperiod},
+           given={Georg},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Virtual Event, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{c8d3687d6371a3feea8b2b3b5b1741da}
+      \strng{fullhash}{a4309010c0c491b3bef41a9113348b7e}
+      \strng{bibnamehash}{c8d3687d6371a3feea8b2b3b5b1741da}
+      \strng{authorbibnamehash}{c8d3687d6371a3feea8b2b3b5b1741da}
+      \strng{authornamehash}{c8d3687d6371a3feea8b2b3b5b1741da}
+      \strng{authorfullhash}{a4309010c0c491b3bef41a9113348b7e}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Eleventh ACM Conference on Data and Application Security and Privacy}
+      \field{isbn}{9781450381437}
+      \field{series}{CODASPY '21}
+      \field{title}{The Cost of OSCORE and EDHOC for Constrained Devices}
+      \field{year}{2021}
+      \field{pages}{245\bibrangedash 250}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1145/3422337.3447834
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3422337.3447834
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3422337.3447834
+      \endverb
+      \keyw{coap security,edhoc,ietf,iot,oscore}
+    \endentry
+    \entry{pqc-wireguard}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{hash=e07df980cdbfba600caca198384a3e85}{%
+           family={Hülsing},
+           familyi={H\bibinitperiod},
+           given={Andreas},
+           giveni={A\bibinitperiod}}}%
+        {{hash=4d85d89c906762d189a4a61548146e49}{%
+           family={Ning},
+           familyi={N\bibinitperiod},
+           given={Kai-Chun},
+           giveni={K\bibinithyphendelim C\bibinitperiod}}}%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=21948c7b06ca4ed6c0b6134340ea40cd}{%
+           family={Weber},
+           familyi={W\bibinitperiod},
+           given={Fiona\bibnamedelima Johanna},
+           giveni={F\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=4a679758029de32f85912e46c1f53911}{%
+           family={Zimmermann},
+           familyi={Z\bibinitperiod},
+           given={Philip\bibnamedelima R.},
+           giveni={P\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{555e78fc63a8ee6ca69bd2e788ef113e}
+      \strng{fullhash}{5f24235a2b836b9fa1136a271886b4bb}
+      \strng{bibnamehash}{555e78fc63a8ee6ca69bd2e788ef113e}
+      \strng{authorbibnamehash}{555e78fc63a8ee6ca69bd2e788ef113e}
+      \strng{authornamehash}{555e78fc63a8ee6ca69bd2e788ef113e}
+      \strng{authorfullhash}{5f24235a2b836b9fa1136a271886b4bb}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2021 IEEE Symposium on Security and Privacy (SP)}
+      \field{title}{Post-quantum WireGuard}
+      \field{year}{2021}
+      \field{pages}{304\bibrangedash 321}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1109/SP40001.2021.00030
+      \endverb
+      \keyw{Adaptation models;Privacy;Protocols;Authentication;Virtual private networks;Security;Standards}
+    \endentry
+    \entry{edhoc-sec-analysis-draft-12}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=fe0e7e85178b7b7348b45dba2e0853e6}{%
+           family={Jacomme},
+           familyi={J\bibinitperiod},
+           given={Charlie},
+           giveni={C\bibinitperiod}}}%
+        {{hash=cee54823012eb33465b151f55b6fc598}{%
+           family={Klein},
+           familyi={K\bibinitperiod},
+           given={Elise},
+           giveni={E\bibinitperiod}}}%
+        {{hash=ad1639fb6caa9a3c52a6f85ff4955c51}{%
+           family={Kremer},
+           familyi={K\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod}}}%
+        {{hash=83803036c8dcbacd4ccf298a44230232}{%
+           family={Racouchot},
+           familyi={R\bibinitperiod},
+           given={Maı̈wenn},
+           giveni={M\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Anaheim, CA}%
+      }
+      \list{publisher}{1}{%
+        {USENIX Association}%
+      }
+      \strng{namehash}{238791b75194dc8cdf439189ae9edf46}
+      \strng{fullhash}{a21f2246443799e3e87437f464bfaeca}
+      \strng{bibnamehash}{238791b75194dc8cdf439189ae9edf46}
+      \strng{authorbibnamehash}{238791b75194dc8cdf439189ae9edf46}
+      \strng{authornamehash}{238791b75194dc8cdf439189ae9edf46}
+      \strng{authorfullhash}{a21f2246443799e3e87437f464bfaeca}
+      \field{sortinit}{J}
+      \field{sortinithash}{b2f54a9081ace9966a7cb9413811edb4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{32nd USENIX Security Symposium (USENIX Security 23)}
+      \field{isbn}{978-1-939133-37-3}
+      \field{month}{8}
+      \field{title}{A comprehensive, formal and automated analysis of the {EDHOC} protocol}
+      \field{year}{2023}
+      \field{pages}{5881\bibrangedash 5898}
+      \range{pages}{18}
+      \verb{urlraw}
+      \verb https://www.usenix.org/conference/usenixsecurity23/presentation/jacomme
+      \endverb
+      \verb{url}
+      \verb https://www.usenix.org/conference/usenixsecurity23/presentation/jacomme
+      \endverb
+    \endentry
+    \entry{optls}{inproceedings}{}
+      \name{author}{2}{}{%
+        {{hash=088445b3855bedf4bcc9d25651eb98b2}{%
+           family={Krawczyk},
+           familyi={K\bibinitperiod},
+           given={Hugo},
+           giveni={H\bibinitperiod}}}%
+        {{hash=cb3164d34b74c5082f82578ab9975c4e}{%
+           family={Wee},
+           familyi={W\bibinitperiod},
+           given={Hoeteck},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \strng{fullhash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \strng{bibnamehash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \strng{authorbibnamehash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \strng{authornamehash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \strng{authorfullhash}{0e067b1e7b86cd2950bf5fa54c63a1b5}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2016 IEEE European Symposium on Security and Privacy (EuroS\&P)}
+      \field{title}{The OPTLS Protocol and TLS 1.3}
+      \field{year}{2016}
+      \field{pages}{81\bibrangedash 96}
+      \range{pages}{16}
+      \verb{doi}
+      \verb 10.1109/EuroSP.2016.18
+      \endverb
+      \keyw{Protocols;Servers;Cryptography;Authentication;DH-HEMTs;Analytical models}
+    \endentry
+    \entry{mlwe}{article}{}
+      \name{author}{2}{}{%
+        {{hash=33997d2235d412072c8409189c68b4cd}{%
+           family={Langlois},
+           familyi={L\bibinitperiod},
+           given={Adeline},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a62525428858d55df35a4c76348af2b9}{%
+           family={Stehlé},
+           familyi={S\bibinitperiod},
+           given={Damien},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \strng{fullhash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \strng{bibnamehash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \strng{authorbibnamehash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \strng{authornamehash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \strng{authorfullhash}{ec29a10c3d48d5038b89aa4f54e2c8a2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Most lattice-based cryptographic schemes are built upon the assumed hardness of the Short Integer Solution (SIS) and Learning With Errors (LWE) problems. Their efficiencies can be drastically improved by switching the hardness assumptions to the more compact Ring-SIS and Ring-LWE problems. However, this change of hardness assumptions comes along with a possible security weakening: SIS and LWE are known to be at least as hard as standard (worst-case) problems on euclidean lattices, whereas Ring-SIS and Ring-LWE are only known to be as hard as their restrictions to special classes of ideal lattices, corresponding to ideals of some polynomial rings. In this work, we define the Module-SIS and Module-LWE problems, which bridge SIS with Ring-SIS, and LWE with Ring-LWE, respectively. We prove that these average-case problems are at least as hard as standard lattice problems restricted to module lattices (which themselves bridge arbitrary and ideal lattices). As these new problems enlarge the toolbox of the lattice-based cryptographer, they could prove useful for designing new schemes. Importantly, the worst-case to average-case reductions for the module problems are (qualitatively) sharp, in the sense that there exist converse reductions. This property is not known to hold in the context of Ring-SIS/Ring-LWE: Ideal lattice problems could reveal easy without impacting the hardness of Ring-SIS/Ring-LWE.}
+      \field{issn}{1573-7586}
+      \field{journaltitle}{Designs, Codes and Cryptography}
+      \field{month}{06}
+      \field{number}{3}
+      \field{title}{Worst-case to average-case reductions for module lattices}
+      \field{volume}{75}
+      \field{year}{2015}
+      \field{pages}{565\bibrangedash 599}
+      \range{pages}{35}
+      \verb{doi}
+      \verb 10.1007/s10623-014-9938-4
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/s10623-014-9938-4
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/s10623-014-9938-4
+      \endverb
+    \endentry
+    \entry{eu-quantum-migration}{report}{}
+      \name{author}{3}{}{%
+        {{hash=3950d1841918cb6fa5cdfc58fe1a2bd4}{%
+           family={Olejnik},
+           familyi={O\bibinitperiod},
+           given={Lukasz},
+           giveni={L\bibinitperiod}}}%
+        {{hash=3f36c3a9a6de5a71f8dae0f99a39e1f9}{%
+           family={Riemann},
+           familyi={R\bibinitperiod},
+           given={Robert},
+           giveni={R\bibinitperiod}}}%
+        {{hash=19e0a4468bf9bd4ed5ec3bfb751ba70b}{%
+           family={Zerdick},
+           familyi={Z\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{institution}{2}{%
+        {Technology}%
+        {Privacy understandingnit of the European Data Protection Supervisor (EDPS)}%
+      }
+      \strng{namehash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \strng{fullhash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \strng{bibnamehash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \strng{authorbibnamehash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \strng{authornamehash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \strng{authorfullhash}{6f5f9332b8f22fb4609a22e0c0c98b67}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{EDPS TechDispatch on Quantum Computing and Cryptography}
+      \field{type}{techreport}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://www.edps.europa.eu/sites/default/files/publication/06-08-2020_techdispatch_quantum_computing_en.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.edps.europa.eu/sites/default/files/publication/06-08-2020_techdispatch_quantum_computing_en.pdf
+      \endverb
+    \endentry
+    \entry{crqc}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=a47d8e4c02a365fa78d41badcad9a282}{%
+           family={Ott},
+           familyi={O\bibinitperiod},
+           given={David},
+           giveni={D\bibinitperiod}}}%
+        {{hash=7fb48a393b06b2af72957822907f60d0}{%
+           family={Peikert},
+           familyi={P\bibinitperiod},
+           given={Christopher},
+           giveni={C\bibinitperiod}}}%
+        {{hash=144a1895488b00b966ce3c47af455d9f}{%
+           family={participants},
+           familyi={p\bibinitperiod},
+           prefix={other\bibnamedelima workshop},
+           prefixi={o\bibinitperiod\bibinitdelim w\bibinitperiod}}}%
+      }
+      \strng{namehash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \strng{fullhash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \strng{bibnamehash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \strng{authorbibnamehash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \strng{authornamehash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \strng{authorfullhash}{b4164f0f7cb7080e6fbaa3538569a33d}
+      \field{sortinit}{O}
+      \field{sortinithash}{2cd7140a07aea5341f9e2771efe90aae}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CY}
+      \field{eprinttype}{arXiv}
+      \field{title}{Identifying Research Challenges in Post Quantum Cryptography Migration and Cryptographic Agility}
+      \field{year}{2019}
+      \verb{eprint}
+      \verb 1909.07353
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/1909.07353
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/1909.07353
+      \endverb
+    \endentry
+    \entry{edhoc-security-overview}{article}{}
+      \name{author}{5}{}{%
+        {{hash=3c59921d81b9ea946694cf50002e8c20}{%
+           family={Pérez},
+           familyi={P\bibinitperiod},
+           given={Elsa\bibnamedelima López},
+           giveni={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=59f837c58267a6aafc2b041479d59f65}{%
+           family={Selander},
+           familyi={S\bibinitperiod},
+           given={Göran},
+           giveni={G\bibinitperiod}}}%
+        {{hash=410553282e4c6b9b53747ea22320b8a9}{%
+           family={Mattsson},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima Preuß},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=11301474a5d5a25814d36750eff6f8f9}{%
+           family={Watteyne},
+           familyi={W\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=52f9b22da9976e0b2d75b259a50f8f1f}{%
+           family={Vučinić},
+           familyi={V\bibinitperiod},
+           given={Mališa},
+           giveni={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{af9bbc6d75009038a211299785ef5192}
+      \strng{fullhash}{808f9646f16d431b8ac698ae241d9baf}
+      \strng{bibnamehash}{af9bbc6d75009038a211299785ef5192}
+      \strng{authorbibnamehash}{af9bbc6d75009038a211299785ef5192}
+      \strng{authornamehash}{af9bbc6d75009038a211299785ef5192}
+      \strng{authorfullhash}{808f9646f16d431b8ac698ae241d9baf}
+      \field{sortinit}{P}
+      \field{sortinithash}{ff3bcf24f47321b42cb156c2cc8a8422}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computer}
+      \field{number}{9}
+      \field{title}{EDHOC Is a New Security Handshake Standard: An Overview of Security Analysis}
+      \field{volume}{57}
+      \field{year}{2024}
+      \field{pages}{101\bibrangedash 110}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/MC.2024.3415908
+      \endverb
+      \keyw{Protocols;Computer security;Standards}
+    \endentry
+    \entry{lwe}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=f945cb644f60f5c1d47ef6bce1233586}{%
+           family={Regev},
+           familyi={R\bibinitperiod},
+           given={Oded},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Baltimore, MD, USA}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{f945cb644f60f5c1d47ef6bce1233586}
+      \strng{fullhash}{f945cb644f60f5c1d47ef6bce1233586}
+      \strng{bibnamehash}{f945cb644f60f5c1d47ef6bce1233586}
+      \strng{authorbibnamehash}{f945cb644f60f5c1d47ef6bce1233586}
+      \strng{authornamehash}{f945cb644f60f5c1d47ef6bce1233586}
+      \strng{authorfullhash}{f945cb644f60f5c1d47ef6bce1233586}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Our main result is a reduction from worst-case lattice problems such as SVP and SIVP to a certain learning problem. This learning problem is a natural extension of the 'learning from parity with error' problem to higher moduli. It can also be viewed as the problem of decoding from a random linear code. This, we believe, gives a strong indication that these problems are hard. Our reduction, however, is quantum. Hence, an efficient solution to the learning problem implies a quantum algorithm for SVP and SIVP. A main open question is whether this reduction can be made classical.Using the main result, we obtain a public-key cryptosystem whose hardness is based on the worst-case quantum hardness of SVP and SIVP. Previous lattice-based public-key cryptosystems such as the one by Ajtai and Dwork were only based on unique-SVP, a special case of SVP. The new cryptosystem is much more efficient than previous cryptosystems: the public key is of size Õ(n2) and encrypting a message increases its size by Õ(n)(in previous cryptosystems these values are Õ(n4) and Õ(n2), respectively). In fact, under the assumption that all parties share a random bit string of length Õ(n2), the size of the public key can be reduced to Õ(n).}
+      \field{booktitle}{Proceedings of the Thirty-Seventh Annual ACM Symposium on Theory of Computing}
+      \field{isbn}{1581139608}
+      \field{series}{STOC '05}
+      \field{title}{On lattices, learning with errors, random linear codes, and cryptography}
+      \field{year}{2005}
+      \field{pages}{84\bibrangedash 93}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1145/1060590.1060603
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/1060590.1060603
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/1060590.1060603
+      \endverb
+      \keyw{statistical queries,quantum computing,public key encryption,lattices,cryptography,computational learning theory}
+    \endentry
+    \entry{tee-overview}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=34ea9bd54c17cbf18cf2c2076bfbfa67}{%
+           family={Sabt},
+           familyi={S\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod}}}%
+        {{hash=4b0e7c1084b9a44923a3f542cb7a8f11}{%
+           family={Achemlal},
+           familyi={A\bibinitperiod},
+           given={Mohammed},
+           giveni={M\bibinitperiod}}}%
+        {{hash=68dd81e717901b7ea12174ce55056fff}{%
+           family={Bouabdallah},
+           familyi={B\bibinitperiod},
+           given={Abdelmadjid},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \strng{fullhash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \strng{bibnamehash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \strng{authorbibnamehash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \strng{authornamehash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \strng{authorfullhash}{d52c9bccdf29d4e49810d53c4af90ee2}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2015 IEEE Trustcom/BigDataSE/ISPA}
+      \field{title}{Trusted Execution Environment: What It is, and What It is Not}
+      \field{volume}{1}
+      \field{year}{2015}
+      \field{pages}{57\bibrangedash 64}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/Trustcom.2015.357
+      \endverb
+      \keyw{Security;Kernel;Hardware;Runtime;Secure storage;Context;survey;TEE;TrustZone;DRTM;secure boot;secure scheduling;trusted UI}
+    \endentry
+    \entry{kemtls}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=d73f5269a295977070bf92d05cf9415e}{%
+           family={Schwabe},
+           familyi={S\bibinitperiod},
+           given={Peter},
+           giveni={P\bibinitperiod}}}%
+        {{hash=3a8502de61eb320277cd5ba32a784d2a}{%
+           family={Stebila},
+           familyi={S\bibinitperiod},
+           given={Douglas},
+           giveni={D\bibinitperiod}}}%
+        {{hash=c41728d5f4d0882ba14e8bc2d978b9b2}{%
+           family={Wiggers},
+           familyi={W\bibinitperiod},
+           given={Thom},
+           giveni={T\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Virtual Event, {USA}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{dd056226b361919368ee3b2a416513b9}
+      \strng{fullhash}{dd056226b361919368ee3b2a416513b9}
+      \strng{bibnamehash}{dd056226b361919368ee3b2a416513b9}
+      \strng{authorbibnamehash}{dd056226b361919368ee3b2a416513b9}
+      \strng{authornamehash}{dd056226b361919368ee3b2a416513b9}
+      \strng{authorfullhash}{dd056226b361919368ee3b2a416513b9}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2020 {ACM} {SIGSAC} Conference on Computer and Communications Security}
+      \field{isbn}{9781450370899}
+      \field{series}{{CCS '20}}
+      \field{title}{Post-Quantum {TLS} Without Handshake Signatures}
+      \field{year}{2020}
+      \field{pages}{1461\bibrangedash 1480}
+      \range{pages}{20}
+      \verb{doi}
+      \verb 10.1145/3372297.3423350
+      \endverb
+      \verb{urlraw}
+      \verb https://kemtls.org/publication/kemtls/
+      \endverb
+      \verb{url}
+      \verb https://kemtls.org/publication/kemtls/
+      \endverb
+      \keyw{transport layer security,key-encapsulation mechanism,{NIST PQC},post-quantum cryptography}
+    \endentry
+    \entry{edhoc-rfc}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=59f837c58267a6aafc2b041479d59f65}{%
+           family={Selander},
+           familyi={S\bibinitperiod},
+           given={Göran},
+           giveni={G\bibinitperiod}}}%
+        {{hash=410553282e4c6b9b53747ea22320b8a9}{%
+           family={Mattsson},
+           familyi={M\bibinitperiod},
+           given={John\bibnamedelima Preuß},
+           giveni={J\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=d2503e0ab0b080509563ae50517889c1}{%
+           family={Palombini},
+           familyi={P\bibinitperiod},
+           given={Francesca},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {RFC Editor}%
+      }
+      \strng{namehash}{75bb4f239f9737e155cc420d4638bddb}
+      \strng{fullhash}{75bb4f239f9737e155cc420d4638bddb}
+      \strng{bibnamehash}{75bb4f239f9737e155cc420d4638bddb}
+      \strng{authorbibnamehash}{75bb4f239f9737e155cc420d4638bddb}
+      \strng{authornamehash}{75bb4f239f9737e155cc420d4638bddb}
+      \strng{authorfullhash}{75bb4f239f9737e155cc420d4638bddb}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{RFC 9528}
+      \field{month}{3}
+      \field{number}{9528}
+      \field{pagetotal}{82}
+      \field{series}{Request for Comments}
+      \field{title}{{Ephemeral Diffie-Hellman Over COSE (EDHOC)}}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.17487/RFC9528
+      \endverb
+      \verb{urlraw}
+      \verb https://www.rfc-editor.org/info/rfc9528
+      \endverb
+      \verb{url}
+      \verb https://www.rfc-editor.org/info/rfc9528
+      \endverb
+    \endentry
+    \entry{FIPS203}{report}{}
+      \name{author}{2}{}{%
+        {{hash=91348c04260bd8fbee564adff6c9431e}{%
+           family={Standards},
+           familyi={S\bibinitperiod},
+           given={National\bibnamedelima Institute},
+           giveni={N\bibinitperiod\bibinitdelim I\bibinitperiod},
+           prefix={of},
+           prefixi={o\bibinitperiod}}}%
+        {{hash=e7e767d7c0e58b16e57d3ab16150db80}{%
+           family={Technology},
+           familyi={T\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {U.S. Department of Commerce}%
+      }
+      \list{location}{1}{%
+        {Washington, D.C.}%
+      }
+      \strng{namehash}{e94f05990128e9f2bf16dd176922276f}
+      \strng{fullhash}{e94f05990128e9f2bf16dd176922276f}
+      \strng{bibnamehash}{e94f05990128e9f2bf16dd176922276f}
+      \strng{authorbibnamehash}{e94f05990128e9f2bf16dd176922276f}
+      \strng{authornamehash}{e94f05990128e9f2bf16dd176922276f}
+      \strng{authorfullhash}{e94f05990128e9f2bf16dd176922276f}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Module-Lattice-Based Key-Encapsulation Mechanism Standard}
+      \field{type}{techreport}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.6028/NIST.FIPS.203
+      \endverb
+      \verb{urlraw}
+      \verb https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf
+      \endverb
+      \verb{url}
+      \verb https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

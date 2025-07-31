@@ -1,0 +1,124 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.12">
+  <diagram name="Page-1" id="FUrr0S-VQZxl6Vm0aQBQ">
+    <mxGraphModel dx="2094" dy="756" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vZWsi2n2gFfCWIBBviUr-8" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=light-dark(#FF0000,#FFFFFF);" vertex="1" parent="1">
+          <mxGeometry x="-35" y="970" width="445" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vZWsi2n2gFfCWIBBviUr-7" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=light-dark(#FF0000,#FFFFFF);" vertex="1" parent="1">
+          <mxGeometry x="395" y="520" width="445" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="vZWsi2n2gFfCWIBBviUr-6" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=light-dark(#FF0000,#FFFFFF);" vertex="1" parent="1">
+          <mxGeometry x="537.5" y="1480" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="vZWsi2n2gFfCWIBBviUr-5" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=light-dark(#FF0000,#FFFFFF);" vertex="1" parent="1">
+          <mxGeometry x="120" y="890" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-1" value="Initiator" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="110" y="65" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-2" value="Responder" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="570" y="70" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-3" value="&lt;b&gt;SIG-SIG&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="370" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-4" value="$$sk_I, pk_I$$" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="130" y="30" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-5" value="$$sk_R, pk_R$$" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="600" y="35" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-9" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="160" y="240" width="440" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-7" value="" style="endArrow=classic;html=1;rounded=0;" parent="IuUdXdDwJAqnldKcYIbA-9" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="30" as="sourcePoint" />
+            <mxPoint x="440" y="30" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-8" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_1 = (METHOD,SUITES,G_x, C_I, EAD_1)$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="IuUdXdDwJAqnldKcYIbA-9" vertex="1">
+          <mxGeometry x="104.76190476190477" width="251.42857142857144" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-13" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="160" y="610" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-10" value="" style="endArrow=classic;html=1;rounded=0;" parent="IuUdXdDwJAqnldKcYIbA-13" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="40" as="sourcePoint" />
+            <mxPoint y="40" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="71.62790697674419" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-11" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_2 = (G_y, CTXT_2)$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="IuUdXdDwJAqnldKcYIbA-13" vertex="1">
+          <mxGeometry x="184.18604651162792" width="61.395348837209305" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-15" value="&lt;div&gt;$$G_{xy} \leftarrow xG_y$$&lt;/div&gt;&lt;div&gt;$$TH_2 \leftarrow H(G_y, H(msg_1))$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div&gt;$$PRK_{2e}\leftarrow HKDF\_Extract(TH_2, G_{xy})$$&lt;/div&gt;&lt;div&gt;$$K_2 \leftarrow KDF(PRK_{2e},0,TH_2,CTXT_2\_length)$$&lt;/div&gt;&lt;div&gt;$$PTXT_2 \leftarrow CTXT_2 \oplus K_2$$&lt;/div&gt;&lt;div&gt;Verify \(\sigma_2\) using the locally-stored credential \(CRED_R\)&lt;/div&gt;&lt;div&gt;referenced by \(ID\_CRED_R\)&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="40" y="620" width="310" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-17" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint y="840" as="sourcePoint" />
+            <mxPoint x="360" y="840" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="140" y="840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-18" value="&lt;b&gt;Responder is authenticated&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="95" y="840" width="195" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-19" value="&lt;div&gt;$$TH_3 \leftarrow H(TH_2, PTXT_2, CRED_R)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PRK_{4e3m} \leftarrow PRK_{3e2m}$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$context_3 \leftarrow ID\_CRED_I || TH_3 || CRED_I || EAD_3$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$MAC_3 \leftarrow KDF(PRK_{4e3m}, 6, context_3, MAC_3\_lenght)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$\sigma_3 \leftarrow SIG.SIGN(sk_I, (ID\_CRED_I, (TH_3 || CRED_I || EAD_3), MAC_3))$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$K_3 \leftarrow KDF(PRK_{3e2m}, 3, TH_3, KEY\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$IV_3 \leftarrow KDF(PRK_{3e2m}, 4, TH_3, IV\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PTXT_3 \leftarrow (ID\_CRED_I, \sigma_3, EAD_3)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;$$AD_3 \leftarrow (I_{AEAD}, \text{&quot; &quot;},TH_3)$$&lt;/div&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$CTXT_3 \leftarrow AEAD.Enc(K_3, IV_3, PTXT_3, AD_3)$$&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$TH_4 \leftarrow H(TH_3, PTXT_3, CRED_I)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PRK_{out} \leftarrow KDF(PRK_{4e3m}, 7, TH_4, H\_length)$$&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-190" y="940" width="760" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-22" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="160" y="1230" as="sourcePoint" />
+            <mxPoint x="600" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-23" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_3 = CTXT_3$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="300" y="1200" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-24" value="&lt;div&gt;$$TH_3 \leftarrow H(TH_2, PTXT_2, CRED_R)$$&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$K_3 \leftarrow KDF(PRK_{3e2m}, 3, TH_3, KEY\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$IV_3 \leftarrow KDF(PRK_{3e2m}, 4, TH_3, IV\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;$$AD_3 \leftarrow (I_{AEAD}, \text{&quot; &quot;},TH_3)$$&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PTXT_3 \leftarrow AEAD.Dec(K_3,IV_3,CTXT_3,AD_3)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div&gt;Verify \(\sigma_3\) using the locally-stored credential \(CRED_I\) referenced by \(ID\_CRED_I\)&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="465" y="1330" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-25" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="1440" as="sourcePoint" />
+            <mxPoint x="800" y="1440" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="580" y="1440" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-27" value="&lt;b&gt;Initiator is authenticated&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="530" y="1450" width="185" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-28" value="&lt;div&gt;$$PRK_{4e3m} \leftarrow PRK_{3e2m}$$&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$TH_4 \leftarrow H(TH_3, PTXT_3, CRED_I)$$&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$PRK_{out} \leftarrow KDF(PRK_{4e3m}, 7, TH_4, H\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$K_4 \leftarrow KDF(PRK_{4e3m}, 8, TH_4, KEY\_length)$$&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="467.5" y="1430" width="310" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-29" value="&lt;div&gt;$$PRK_{exporter} \leftarrow KDF(PRK_{out}, 10, \text{&quot; &quot;}, H\_length)$$&lt;/div&gt;&lt;div&gt;&lt;b&gt;Shared Key = \(PRK_{exporter}\)&lt;/b&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="210" y="1540" width="365" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-6" value="&lt;div&gt;$$x \leftarrow \{0,1\}^\lambda$$&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$G_x \leftarrow xG$$&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="95" y="140" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-14" value="&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(C_I\): Initiator connection ID&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(METHOD\): authentication method&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(SUITES\): cipher suites&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(EAD_1\): external associated data&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="110" y="190" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="vZWsi2n2gFfCWIBBviUr-2" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=light-dark(#FF0000,#FFFFFF);shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="550" y="435" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="IuUdXdDwJAqnldKcYIbA-12" value="&lt;div align=&quot;right&quot;&gt;$$y \leftarrow \{0,1\}^\lambda,$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$G_y \leftarrow yG$$&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$G_{xy} \leftarrow yG_x$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$C_R$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$TH_2 \leftarrow H(G_y, H(msg_1))$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$PRK_{2e}\leftarrow HKDF\_Extract(TH_2, G_{xy})$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$PRK_{3e2m} \leftarrow PRK_{2e}$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$context_2 \leftarrow C_R||ID\_CRED_R||TH_2||CRED_R||EAD_2$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$MAC_2 \leftarrow KDF(PRK_{3e2m},2,context_2,MAC_2\_length )$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$\sigma_2 \leftarrow SIG.SIGN(sk_R,(ID\_CRED_R, (TH_2||CRED_R||EAD_2),MAC_2))$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$PTXT_2 \leftarrow (C_R, ID\_CRED_R, \sigma_2, EAD_2)$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$K_2 \leftarrow KDF(PRK_{2e},0,TH_2,PTXT_2\_length)$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$CTXT_2 \leftarrow PTXT_2 \oplus K_2$$&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="390" y="300" width="450.00000000000006" height="300" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

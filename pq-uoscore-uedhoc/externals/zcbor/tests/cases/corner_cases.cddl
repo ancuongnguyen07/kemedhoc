@@ -1,0 +1,356 @@
+;
+; Copyright (c) 2020 Nordic Semiconductor ASA
+;
+; SPDX-License-Identifier: Apache-2.0
+;
+
+Numbers = [
+	one: 1,
+	minustwo: -2,
+	fourtoten: 4..10,
+	twobytes: uint .size 2,
+	onetofourbytes: uint .size 0b1..0o4, ; Testing binary and octal
+	minusfivektoplustwohundred: -5000..200,
+	fourbillion: 0xEE6B2800,
+	negint: nint,
+	posint: uint,
+	tagged_int: #6.65535(int),
+]
+
+MyInt = int
+
+Numbers2 = [
+	threebytes: uint .size 4,
+	int32: int .size 4,
+	big_int: int .size 8,
+	big_uint: uint .gt 0x100000000,
+	big_uint2: uint .size 8,
+	big_nint: -0x80000001,
+	big_nint2: -0x80000000,
+	tagged_int: #6.1234(MyInt),
+]
+
+TaggedUnion = #6.4321(bool) // #6.2345(uint)
+
+; Using .size and .cbor together with maps.
+NumberMap = {
+	"byte" => uint .size 1,
+	? "opt_short" => uint .size 2,
+	? "opt_cbor" => bstr .size 5 .cbor (uint .size 4),
+}
+
+Strings = [
+	hello: "hello",
+	threehundrebytebstr: bstr .size 300,
+	#6.0(tentothirtybytetstr: tstr .size 10..30),
+	cborNumbers: bstr .cbor Numbers,
+	cborseqSimples: bstr .cborseq Simples,
+	?optCborStrings: bstr .cbor Strings,
+]
+
+Simples = [
+	booltrue: true,
+	boolfalse: false,
+	boolval: bool,
+	nilval: nil,
+	undef: undefined,
+]
+
+Simple1 = Simples
+Simple2 = Simple1
+
+Optional = [
+	#6.10(boolval: bool),
+	?optbool: bool,
+	?opttwo: 2,
+	manduint: uint,
+	*multi8: 8,
+]
+
+Group = (1,-2)
+MultiGroup = +(3,-4)
+Union = Group / MultiGroup / (3,4) / "\"hello\""
+
+Map = {
+	listkey: [5,6] => bool,
+	union: (7=>uint) / (-8=>uint),
+	twotothree: 2*3 nil => bstr,
+}
+
+EmptyMap = {}
+
+NestedListMap = [*{?1 => 4}]
+NestedMapListMap = {+[] => [*{}]}
+
+Level1 = [Level2]
+Level2 = [2**3Level3] ; Use ** here to test backwards compatibility.
+Level3 = [4*5Level4]
+Level4 = [0]
+
+Range = [
+	?optMinus5to5: -5..5,
+	?optStr3to6: tstr .size 3..6,
+	?optMinus9toMinus6excl: -9...-6,
+	+multi8: 8,
+	+multiHello: "hello",
+	+multi0to10: 0..0x0A, ; Testing hexadecimal
+]
+
+ValueRange = [
+	greater10: uint .gt 10,
+	less1000: int .lt 1000,
+	greatereqmin10: int .ge -10,
+	lesseq1: uint .le 1,
+	equal42: uint .eq 42,
+	equalstrworld: tstr .eq "world",
+]
+
+SingleBstr = bstr
+
+SingleInt = 52
+
+SingleInt2 = uint .lt 10
+
+Unabstracted = [
+	unabstractedunion1: (choice1: 1 // choice2: 2),
+	(unabstractedunion2: 3 / choice4: 4)
+]
+
+QuantityRange = (
+	upto4nils: 0*0x04nil,
+	from3true: 3*true,
+)
+
+MyKeys = (
+	?1 => int,
+	?2 => int
+)
+
+DoubleMap = {
+	* (uint => { MyKeys })
+}
+
+Floats = [
+	float_16: float16,
+	float_32: float32,
+	float_64: float64,
+	pi: 3.1415,
+	e: 2.71828 .size 8,
+	floats: *float,
+]
+
+; Test using ranges (greater/less than) on floats.
+Floats2 = [
+	float_lt_1: float .lt 1,
+	float_ge_min_10000: float .ge -10000,
+]
+
+Floats3 = [
+	float_16_32: float16-32,
+	float_32_64: float32-64,
+]
+
+Prelude = [
+	bytes,
+	text,
+	tdate,
+	time,
+	number,
+	biguint,
+	bignint,
+	bigint,
+	integer,
+	unsigned,
+	decfrac,
+	bigfloat,
+	eb64url,
+	eb64legacy,
+	eb16,
+	encoded-cbor,
+	uri,
+	b64url,
+	b64legacy,
+	regexp,
+	mime-message,
+	cbor-any,
+	float16-32,
+	float32-64,
+	null,
+]
+
+; Testing complex .cbor statements, including nested .cbor.
+CBORBstr = bstr .cbor ([
+	hello: bstr .cbor "Hello",
+	pi: bstr .cbor 3.1415,
+	big_uint_bstr: (bstr .cbor biguint),
+	nilval2: bstr .cbor nil
+])
+
+
+result_code = int
+mac_address = bstr .size 6
+uuid = bstr .size 16
+
+; Test combination of map + optional + * + size check
+MapLength = {
+	"r" : (result:result_code),
+	"m" : (mac_addr:mac_address),
+	?"e" : (end_device_array:[* uuid]),
+}
+
+Structure_One = (
+	id: 1,
+	some_array: bstr
+)
+
+UnionInt1 = [
+	(union_uint1: 5, "This is a five") //
+	(union_uint2: 1000, bstr) //
+	(union_uint3: -100000, null, number)
+]
+
+UnionInt2 = [
+	(5, "This is a five") //
+	(1000, bstr) //
+	(-100000, null, number) //
+	Structure_One
+]
+
+Intmax1 = [
+	INT_8_MIN: -128,
+	INT_8_MAX: 127,
+	UINT_8_MAX: 255,
+	INT_16_MIN: -32768,
+	INT_16_MAX: 32767,
+	UINT_16_MAX: 65535,
+	INT_32_MIN: -2147483648,
+	INT_32_MAX: 2147483647,
+	UINT_32_MAX: 4294967295,
+	INT_64_MIN: -9223372036854775808,
+	INT_64_MAX: 9223372036854775807,
+	UINT_64_MAX: 18446744073709551615,
+]
+
+Intmax2 = [
+	INT_8: -128..127,
+	UINT_8: 0..255,
+	INT_16: -32768..32767,
+	UINT_16: 0..65535,
+	INT_32: -2147483648..2147483647,
+	UINT_32: 0..4294967295,
+	INT_64: -9223372036854775808..9223372036854775807,
+	UINT_64: 0..18446744073709551615,
+]
+
+Intmax3 = [
+	(254 / 255),
+	int .le 65535,
+	{-128 => bstr .size 127},
+]
+
+InvalidIdentifiers = [
+	? "1one",
+	? Ø: 2,
+	? "{[a-z]}",
+]
+
+Uint64List = [
+	* uint64: uint .size 8,
+	? nint64: nint .size 8,
+	? uint64_lit: 0x0123456789abcdef,
+	* nint64_lit: -0x0123456789abcdef,
+]
+
+BstrSize = {
+	bstr12,
+	check: ("c" => bstr .size 16 / bstr .size 0),
+}
+bstr12 = ("s" : bstr .size 12)
+
+; found in https://github.com/NordicSemiconductor/zcbor/pull/398
+MapUnionPrimAlias = {
+	(0: 0) /
+	(1: int) /
+	(2: nil) /
+	(3: m_nil) /
+	(4: mm_nil) /
+	(5: m_int) /
+	(6: m_6)
+}
+m_nil = nil
+mm_nil = m_nil
+m_int = int
+m_6 = 6
+
+; Doesn't need test code, it's tested when the struct is compiled.
+Keywords = [
+	_Alignas: int,
+	_Alignof: int,
+	_Atomic: int,
+	_BitInt: int,
+	_Bool: int,
+	_Complex: int,
+	_Decimal128: int,
+	_Decimal32: int,
+	_Decimal64: int,
+	_Generic: int,
+	_Imaginary: int,
+	_Noreturn: int,
+	_Pragma: int,
+	_Static_assert: int,
+	_Thread_local: int,
+	alignas: int,
+	alignof: int,
+	atomic_bool: int,
+	atomic_int: int,
+	auto: int,
+	bool,
+	break: int,
+	case: int,
+	char: int,
+	complex: int,
+	const: int,
+	constexpr: int,
+	continue: int,
+	default: int,
+	do: int,
+	double: int,
+	else: int,
+	enum: int,
+	extern: int,
+	false,
+	float,
+	for: int,
+	goto: int,
+	if: int,
+	imaginary: int,
+	inline: int,
+	int,
+	long: int,
+	noreturn: int,
+	nullptr: int,
+	register: int,
+	restrict: int,
+	return: int,
+	short: int,
+	signed: int,
+	sizeof: int,
+	static: int,
+	static_assert: int,
+	struct: int,
+	switch: int,
+	thread_local: int,
+	true,
+	typedef: int,
+	typeof: int,
+	typeof_unqual: int,
+	union: int,
+	unsigned,
+	void: int,
+	volatile: int,
+	while: int]
+
+EmptyGroup = ()
+EmptyList = []
+
+EmptyContainer = [int, EmptyGroup, EmptyList, EmptyMap]

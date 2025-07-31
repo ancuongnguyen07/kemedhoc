@@ -1,0 +1,24 @@
+[
+  "4715762d77a7683c28156483ed42bf16",
+  [
+    [
+      "Hacl.HMAC.Blake2s_128.compute_blake2s_128",
+      1,
+      0,
+      0,
+      [
+        "@query", "constructor_distinct_Spec.Hash.Definitions.Blake2S",
+        "equality_tok_Hacl.Impl.Blake2.Core.M128@tok",
+        "equality_tok_Spec.Hash.Definitions.Blake2S@tok",
+        "equation_FStar.Pervasives.dfst",
+        "equation_Hacl.Hash.Definitions.mk_impl",
+        "equation_Spec.Hash.Definitions.is_shake",
+        "proj_equation_Prims.Mkdtuple2__1",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_Prims.Mkdtuple2__1"
+      ],
+      0,
+      "50941271dc6d36958dba9f9b06ba53a1"
+    ]
+  ]
+]

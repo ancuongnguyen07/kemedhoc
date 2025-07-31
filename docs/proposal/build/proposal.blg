@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is 'build/proposal.blg'
+[36] biber:340> INFO - === ke helmi 12, 2025, 09:11:06
+[43] Biber.pm:418> INFO - Reading 'build/proposal.bcf'
+[75] Biber.pm:972> INFO - Found 32 citekeys in bib section 0
+[80] Biber.pm:4383> INFO - Processing section 0
+[86] Biber.pm:4574> INFO - Looking for bibtex file 'references.bib' for section 0
+[87] bibtex.pm:1713> INFO - LaTeX decoding ...
+[129] bibtex.pm:1518> INFO - Found BibTeX data source 'references.bib'
+[266] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[266] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[266] Biber.pm:4203> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-US'
+[266] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[285] bbl.pm:654> INFO - Writing 'build/proposal.bbl' with encoding 'UTF-8'
+[301] bbl.pm:757> INFO - Output to build/proposal.bbl

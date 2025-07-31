@@ -1,0 +1,170 @@
+# === Directories ===
+OUTPUT_DIR     = .output
+HINT_DIR       = .hints
+DEP_FILE       = .depend
+
+include Makefile.include
+
+ifeq (,$(FSTAR))
+  $(error FSTAR is not defined)
+endif
+
+ifeq (,$(KRML_HOME))
+  $(error KRML_HOME is not defined)
+endif
+
+ifeq (,$(HACL_HOME))
+  $(error HACL_HOME is not defined)
+endif
+
+##########################
+# Pretty-printing helper #
+##########################
+
+
+SHELL=/bin/bash
+
+to-obj-dir = $(addprefix obj/,$(notdir $1))
+
+# A helper to generate pretty logs, callable as:
+#   $(call run-with-log,CMD,TXT,STEM)
+#
+# Arguments:
+#  CMD: command to execute (may contain double quotes, but not escaped)
+#  TXT: readable text to print out once the command terminates
+#  STEM: path stem for the logs, stdout will be in STEM.out, stderr in STEM.err, CMD in STEM.cmd
+ifeq (,$(NOSHORTLOG))
+run-with-log = \
+  @echo "$(subst ",\",$1)" > $3.cmd; \
+  $(TIME) -q -f '%E' -o $3.time sh -c "$(subst ",\",$1)" > $3.out 2> >( tee $3.err 1>&2 ); \
+  ret=$$?; \
+  time=$$(cat $3.time); \
+  if [ $$ret -eq 0 ]; then \
+    echo "$2, $$time"; \
+  else \
+    echo "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"; \
+    echo -e "\033[31mFatal error while running\033[0m: $1"; \
+    echo -e "\033[31mFailed after\033[0m: $$time"; \
+    echo -e "\033[36mFull log is in $3.{out,err}, see excerpt below\033[0m:"; \
+    tail -n 20 $3.err; \
+    echo "<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>"; \
+    false; \
+  fi
+else
+run-with-log = $1
+endif
+
+
+# === File Discovery ===
+FSTAR_FILES    = $(wildcard *.fst)
+CHECKED_FILES  = $(addprefix $(OUTPUT_DIR)/, $(FSTAR_FILES:.fst=.checked))
+
+# Main entry points (first one is default)
+.PHONY: verify
+
+all: verify
+
+verify: $(CHECKED_FILES)
+
+%.checked: | hints obj
+	$(call run-with-log, \
+	  $(FSTAR) $< $(FSTAR_FLAGS) && touch -c $@ \
+	  ,[VERIFY] $(notdir $*),$(call to-obj-dir,$@))
+
+.PHONY: clean
+clean:
+	rm -f -r ./obj/* ./dist/*
+
+
+# We need those flags to properly extract code which uses Vale
+ADDITIONAL_VALE_KRML_FLAGS = \
+  -library 'Vale.Stdcalls.*' \
+  -no-prefix 'Vale.Stdcalls.*' \
+  -static-header 'Vale.Inline.*' \
+  -library 'Vale.Inline.X64.Fadd_inline' \
+  -library 'Vale.Inline.X64.Fmul_inline' \
+  -library 'Vale.Inline.X64.Fswap_inline' \
+  -library 'Vale.Inline.X64.Fsqr_inline' \
+  -no-prefix 'Vale.Inline.X64.Fadd_inline' \
+  -no-prefix 'Vale.Inline.X64.Fmul_inline' \
+  -no-prefix 'Vale.Inline.X64.Fswap_inline' \
+  -no-prefix 'Vale.Inline.X64.Fsqr_inline' \
+  -no-prefix 'EverCrypt.Vale'
+
+# === Definitions of FStar flags ===
+
+ENABLE_HINTS = \
+  --use_hints --use_hint_hashes \
+  --record_hints
+
+FSTAR_FLAGS = \
+  --cmi --query_stats \
+  --z3rlimit_factor 16 \
+  --cache_checked_modules $(FSTAR_INCLUDES) \
+  --odir obj \
+  --already_cached "* -Impl.EDHOC -Spec.EDHOC " \
+  --cache_dir obj --hint_dir hints \
+
+
+FSTAR_ROOTS = $(EDHOC_HOME)/*.fsti $(addsuffix /*.fst,$(SOURCE_DIRS))
+
+FSTAR_COMMAND = $(FSTAR) $(FSTAR_FLAGS)
+
+# This is the only bulletproof way that I know of forcing a regeneration of the
+# .depend file every single time. Why, you may ask? Well, it's frequent enough
+# to add a new file that you don't want to decipher a cryptic error only to
+# remember you should run `make depend`. Also, if you move files around, it's
+# good to force regeneration even though .depend may be more recent than the
+# mtime of the moved files.
+# ifndef MAKE_RESTARTS
+# .depend:
+# $(call run-with-log,\
+#   $(FSTAR_COMMAND) --dep full $(FSTAR_ROOTS) > $@\
+#   ,[FSTAR-DEPEND],$(call to-obj-dir,depend))
+# endif
+# include .depend
+
+# Verification
+# ------------
+
+# Creating these directories via a make rule, rather than rely on F* creating
+# them, as two calls to F* might race.
+hints:
+	mkdir $@
+
+obj:
+	mkdir $@
+
+# === Targets ===
+# .PHONY: all verify clean distclean
+
+# all: verify
+
+# verify: $(CHECKED_FILES)
+
+# $(OUTPUT_DIR):
+# 	mkdir -p $(OUTPUT_DIR)
+
+# $(HINT_DIR):
+# 	mkdir -p $(HINT_DIR)
+
+
+# %.fsti-in:
+# 	@echo $(FSTAR_FLAGS) $(ENABLE_HINTS) --hint_file $(HINT_DIR)/$(basename $@).fsti.hints
+
+# %.checked: %.fst %.fsti | $(OUTPUT_DIR) $(HINT_DIR)
+# 	@echo "Verifying $< ..."
+# 	$(FSTAR_COMMAND) $< $(ENABLE_HINTS) --hint_file $(HINT_DIR)/$(basename $<).hints
+# 	touch -c $@
+
+# $(OUTPUT_DIR)/%.checked: %.fst %.fsti | $(OUTPUT_DIR) $(HINT_DIR)
+# 	@echo "Verifying $< ..."
+# 	$(FSTAR_COMMAND) $< $(ENABLE_HINTS) --hint_file $(HINT_DIR)/$(notdir $*).hints
+# 	touch $@
+
+# clean:
+# 	rm -rf $(OUTPUT_DIR) $(HINT_DIR) *.checked
+
+# distclean: clean
+# 	rm -f .depend
+

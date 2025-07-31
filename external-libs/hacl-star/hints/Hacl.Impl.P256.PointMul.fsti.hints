@@ -1,0 +1,41 @@
+[
+  "40289bc9bf396efc23651fbbde5ac56d",
+  [
+    [
+      "Hacl.Impl.P256.PointMul.point_mul",
+      1,
+      0,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_0eef7cb13b84846856f80233596ab64b"
+      ],
+      0,
+      "6dfc24a6dada0ed5eb803421e82aa9e0"
+    ],
+    [
+      "Hacl.Impl.P256.PointMul.point_mul_g",
+      1,
+      0,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_c756add430c4c246d74e34389159dd2b"
+      ],
+      0,
+      "b4e9182891af0b300082b0b7a0aaa86a"
+    ],
+    [
+      "Hacl.Impl.P256.PointMul.point_mul_double_g",
+      1,
+      0,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_aff0e4c03ecf0b94c2a6354e3abdfdd2"
+      ],
+      0,
+      "de5e1de1b0a3cc79bff1c1d485d72dd0"
+    ]
+  ]
+]

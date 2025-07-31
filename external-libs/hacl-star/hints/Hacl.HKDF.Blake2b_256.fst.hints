@@ -1,0 +1,33 @@
+[
+  "1952be7893ae4a53c4269e14a41aace0",
+  [
+    [
+      "Hacl.HKDF.Blake2b_256.expand_blake2b_256",
+      1,
+      0,
+      0,
+      [
+        "@query", "constructor_distinct_Spec.Hash.Definitions.Blake2B",
+        "equality_tok_Spec.Hash.Definitions.Blake2B@tok",
+        "equation_Spec.Hash.Definitions.is_shake",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "c9cdbeb8a4ce89744468b2c7a4470a33"
+    ],
+    [
+      "Hacl.HKDF.Blake2b_256.extract_blake2b_256",
+      1,
+      0,
+      0,
+      [
+        "@query", "constructor_distinct_Spec.Hash.Definitions.Blake2B",
+        "equality_tok_Spec.Hash.Definitions.Blake2B@tok",
+        "equation_Spec.Hash.Definitions.is_shake",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "cfe17680a3ede0676f7cebc54adda13b"
+    ]
+  ]
+]

@@ -1,0 +1,35 @@
+name: Test C code
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: compile
+      run: make
+    - name: test everything
+      run: make test
+
+    - name: test disable Ed25519
+      env:
+        CFLAGS: "-DCOMPACT_DISABLE_ED25519"
+      run: make clean test 
+
+    - name: test disable X25519
+      env:
+        CFLAGS: "-DCOMPACT_DISABLE_X25519"
+      run: make clean test 
+
+    - name: Set up Go 1.13
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13
+      id: go
+
+    - name: integration test
+      run: make test-dist

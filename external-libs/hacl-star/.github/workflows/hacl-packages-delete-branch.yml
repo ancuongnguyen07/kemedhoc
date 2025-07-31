@@ -1,0 +1,20 @@
+name: Delete branch on hacl-packages
+
+on:
+  pull_request:
+    types: [ closed ]
+
+permissions: {}
+
+jobs:
+  hacl-packages-delete-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout hacl-packages
+        uses: actions/checkout@v4
+        with:
+          repository: cryspen/hacl-packages
+          token: ${{ secrets.HACL_BOT }}
+      - name: delete remote branch
+        run: |
+          git push -d origin hacl-star-${{ github.head_ref }}

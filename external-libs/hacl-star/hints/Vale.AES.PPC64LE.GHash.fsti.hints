@@ -1,0 +1,80 @@
+[
+  "e0cb2adeab26fa11dc4730c6d8226fa6",
+  [
+    [
+      "Vale.AES.PPC64LE.GHash.in_b_blocks",
+      1,
+      1,
+      0,
+      [ "@query" ],
+      0,
+      "4a4e310fad9901d2868274905f14fd6b"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_lemma_ReduceLast",
+      1,
+      1,
+      0,
+      [ "@query" ],
+      0,
+      "ec96c6357c17085d76780d37adb62c73"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_wp_ReduceLast",
+      1,
+      1,
+      0,
+      [ "@query" ],
+      0,
+      "bff6f7b3e4fefa59c29578598f99d29b"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_quick_ReduceLast",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "729799704a0052adb86c333e5836a9f1"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_quick_GhashUnroll_n",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "7e8cd02b36b48521832d7e00d6c18e67"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_quick_Ghash_register",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "0636eb55ca26b76459b16ecd48296821"
+    ],
+    [
+      "Vale.AES.PPC64LE.GHash.va_quick_Ghash_buffer",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "58b4b08c93ea170ab0f376011c0d88ef"
+    ]
+  ]
+]

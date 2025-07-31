@@ -1,0 +1,85 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0" version="26.0.16">
+  <diagram name="Page-1" id="XWPkccBYVVnC4Nx9CATy">
+    <mxGraphModel dx="3164" dy="2282" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="1" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="9YbtS8lcmKs7civO99YA-5" value="Initiator" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="85" y="-295" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-6" value="Responder" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+          <mxGeometry x="550" y="-290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-7" value="&lt;b&gt;KEM-KEM&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="345" y="-280" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-10" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="160" y="270" width="440" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-11" value="" style="endArrow=classic;html=1;rounded=0;" parent="9YbtS8lcmKs7civO99YA-10" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-17.5" y="-250" as="sourcePoint" />
+            <mxPoint x="422.5" y="-250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-12" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_1 = (METHOD,SUITES,G_x, C_I, EAD_1), ct_{auth_R}, enc_{auth}$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="9YbtS8lcmKs7civO99YA-10" vertex="1">
+          <mxGeometry x="87.26190476190477" y="-280" width="251.42857142857144" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-14" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="160" y="610" width="440" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-15" value="" style="endArrow=classic;html=1;rounded=0;" parent="9YbtS8lcmKs7civO99YA-14" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="40" as="sourcePoint" />
+            <mxPoint y="40" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="71.62790697674419" y="40" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-16" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_2 = (G_y, CTXT_2), ct_{auth_I}$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="9YbtS8lcmKs7civO99YA-14" vertex="1">
+          <mxGeometry x="184.18604651162792" width="61.395348837209305" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-17" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;$$G_{xy} \leftarrow KEM.Decap(sk_{KEM}, G_y)$$&lt;/div&gt;&lt;/div&gt;&lt;div&gt;$$TH_2 \leftarrow H(G_y, H(msg_1))$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div&gt;$$PRK_{2e}\leftarrow HKDF\_Extract(TH_2, G_{xy})$$&lt;/div&gt;&lt;div&gt;$$K_2 \leftarrow KDF(PRK_{2e},0,TH_2,CTXT_2\_length)$$&lt;/div&gt;&lt;div&gt;$$PTXT_2 \leftarrow CTXT_2 \oplus K_2$$&lt;/div&gt;&lt;div&gt;&lt;div&gt;$$TH_3 \leftarrow H(TH_2, PTXT_2, CRED_R)$$&lt;/div&gt;&lt;div&gt;&lt;div&gt;$$SALT_{3e2m} \leftarrow HKDF\_Expand(PRK_{2e},1,TH_2, H\_length)$$&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(255, 0, 0), rgb(255, 255, 255));&quot;&gt;$$PRK_{3e2m} \leftarrow HKDF\_Extract(SALT_{3e2m}, K_{auth_R})$$&lt;/span&gt;&lt;/div&gt;Verifies \(MAC_2\), if fails then aborts. &lt;br&gt;&lt;/div&gt;&lt;div&gt;Verifies \(CRED_R\) locally referenced by \(ID\_CRED_R\).&lt;b&gt;Responder is authenticated&lt;/b&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-100" y="660" width="460" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-20" value="&lt;br&gt;&lt;div align=&quot;left&quot;&gt;$$context_3 \leftarrow ID\_CRED_I || TH_3 || CRED_I || EAD_3$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$MAC_3 \leftarrow KDF(PRK_{4e3m}, 6, context_3, MAC_3\_lenght)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$K_3 \leftarrow KDF(PRK_{3e2m}, 3, TH_3, KEY\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$IV_3 \leftarrow KDF(PRK_{3e2m}, 4, TH_3, IV\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PTXT_3 \leftarrow (ID\_CRED_I, MAC_3, EAD_3)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;$$AD_3 \leftarrow (I_{AEAD}, \text{&quot; &quot;},TH_3)$$&lt;/div&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$CTXT_3 \leftarrow AEAD.Enc(K_3, IV_3, PTXT_3, AD_3)$$&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$TH_4 \leftarrow H(TH_3, PTXT_3, CRED_I)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PRK_{out} \leftarrow KDF(PRK_{4e3m}, 7, TH_4, H\_length)$$&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="-245" y="1080" width="760" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-21" value="" style="endArrow=classic;html=1;rounded=0;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="130" y="1310" as="sourcePoint" />
+            <mxPoint x="570" y="1310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-22" value="&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$msg_3 = CTXT_3$$&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="270" y="1280" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-23" value="&lt;div&gt;$$TH_3 \leftarrow H(TH_2, PTXT_2, CRED_R)$$&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$K_3 \leftarrow KDF(PRK_{3e2m}, 3, TH_3, KEY\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$IV_3 \leftarrow KDF(PRK_{3e2m}, 4, TH_3, IV\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;&lt;div align=&quot;left&quot;&gt;$$AD_3 \leftarrow (I_{AEAD}, \text{&quot; &quot;},TH_3)$$&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$PTXT_3 \leftarrow AEAD.Dec(K_3,IV_3,CTXT_3,AD_3)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="435" y="1410" width="330" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-26" value="&lt;div&gt;&lt;div&gt;Verifies \(MAC_3\), if fails then aborts&lt;/div&gt;&lt;div&gt;$$SALT_{4e3m} \leftarrow HKDF\_Expand(PRK_{3e2m}, 5, TH_3, H\_lenght)$$&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(255, 0, 0), rgb(255, 255, 255));&quot;&gt;$$PRK_{4e3m} \leftarrow HKDF\_Extract(SALT_{4e3m}, K_{auth_I})$$&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$TH_4 \leftarrow H(TH_3, PTXT_3, CRED_I)$$&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;div align=&quot;left&quot;&gt;$$PRK_{out} \leftarrow KDF(PRK_{4e3m}, 7, TH_4, H\_length)$$&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;$$K_4 \leftarrow KDF(PRK_{4e3m}, 8, TH_4, KEY\_length)$$&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="450" y="1450" width="310" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-27" value="&lt;div&gt;$$PRK_{exporter} \leftarrow KDF(PRK_{out}, 10, \text{&quot; &quot;}, H\_length)$$&lt;/div&gt;&lt;div&gt;&lt;b&gt;Shared Key = \(PRK_{exporter}\)&lt;/b&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="160" y="1590" width="365" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-29" value="&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(C_I\): Initiator connection ID&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(METHOD\): authentication method&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(SUITES\): cipher suites&lt;/span&gt;&lt;/div&gt;&lt;div align=&quot;left&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;\(EAD_1\): external associated data&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="80" y="-90" width="300" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-31" value="&lt;br&gt;&lt;div align=&quot;right&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$context_2 \leftarrow C_R||ID\_CRED_R||TH_2||CRED_R||EAD_2$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$MAC_2 \leftarrow KDF(PRK_{3e2m},2,context_2,MAC_2\_length )$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;&lt;br&gt;&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$PTXT_2 \leftarrow (C_R, ID\_CRED_R, MAC_2, EAD_2)$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;$$K_2 \leftarrow KDF(PRK_{2e},0,TH_2,PTXT_2\_length)$$&lt;/div&gt;&lt;div align=&quot;right&quot;&gt;&lt;span style=&quot;color: rgb(51, 153, 255);&quot;&gt;$$CTXT_2 \leftarrow PTXT_2 \oplus K_2$$&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=right;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="490" y="380" width="340" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-35" value="&lt;div&gt;&lt;div&gt;$$(pk_{KEM},sk_{KEM}) \leftarrow KEM\_KeyGen()$$&lt;/div&gt;&lt;div&gt;$$G_x \leftarrow pk_{KEM}$$&lt;/div&gt;&lt;/div&gt;&lt;div&gt;$$(ct_{auth_R}, K_{auth_R}) \leftarrow KEM.Encap(pk_R)$$&lt;/div&gt;&lt;div&gt;$$enc_{auth_R} \leftarrow AEAD.Enc(K_{auth_R}, ID\_CRED_I) $$&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#00CC66;" parent="1" vertex="1">
+          <mxGeometry x="10" y="-210" width="330" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-36" value="&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;$$K_{auth_I} \leftarrow KEM.Decap(sk_I, ct_{auth_I})$$&lt;/div&gt;&lt;div&gt;Remove signature \(\sigma_3\), use&amp;nbsp; the following PRK then use only \(MAC_3\) for integrity and implicit authentication:&lt;/div&gt;&lt;div&gt;$$SALT_{4e3m} \leftarrow HKDF\_Expand(PRK_{3e2m}, 5, TH_3, H\_lenght)$$&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(255, 0, 0), rgb(255, 255, 255));&quot;&gt;$$PRK_{4e3m} \leftarrow HKDF\_Extract(SALT_{4e3m}, K_{auth_I})$$&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#00CC66;" parent="1" vertex="1">
+          <mxGeometry x="-65" y="910" width="400" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="9YbtS8lcmKs7civO99YA-38" value="&lt;div&gt;&lt;div&gt;$$(ct,shared\_key) \leftarrow KEM.Encap(G_x)$$&lt;/div&gt;&lt;div&gt;$$G_y \leftarrow ct$$&lt;/div&gt;&lt;div&gt;$$G_{xy} \leftarrow shared\_key$$&lt;/div&gt;&lt;div&gt;$$C_R$$&lt;div align=&quot;right&quot;&gt;$$TH_2 \leftarrow H(G_y, H(msg_1))$$&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;$$K_{auth_R} \leftarrow KEM.Decap(sk_R, ct_{auth_R})$$&lt;/div&gt;&lt;div&gt;$$ID\_CRED_I \leftarrow AEAD.Dec(K_{auth_R}, enc_{auth_R})$$&lt;/div&gt;&lt;div&gt;Get locally-stored \(CRED_I\) referenced by \(ID\_CRED_I\), get \(pk_I\) and verify \(CRED_I\), &lt;b&gt;Initiator is authenticated&lt;/b&gt;.&lt;/div&gt;&lt;div&gt;$$(ct_{auth_I}, K_{auth_I}) \leftarrow KEM.Encap(pk_I)$$&lt;/div&gt;&lt;div&gt;$$SALT_{3e2m} \leftarrow HKDF\_Expand(PRK_{2e}, TH_2, ...)$$&lt;/div&gt;&lt;div&gt;Remove signature \(\sigma_2\), use the following PRK for \(MAC_2\) for integrity and implicit authentication:&lt;/div&gt;&lt;div&gt;$$SALT_{3e2m} \leftarrow HKDF\_Expand(PRK_{2e},1,TH_2, H\_length)$$&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;color: light-dark(rgb(255, 0, 0), rgb(255, 255, 255));&quot;&gt;$$PRK_{3e2m} \leftarrow HKDF\_Extract(SALT_{3e2m}, K_{auth_R})$$&lt;/span&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;strokeColor=#00CC66;" parent="1" vertex="1">
+          <mxGeometry x="455" y="30" width="410" height="440" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

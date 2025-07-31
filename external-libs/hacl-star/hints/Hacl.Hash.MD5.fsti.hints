@@ -1,0 +1,19 @@
+[
+  "e507e381e129378c9ed2d9fcd7bea877",
+  [
+    [
+      "Hacl.Hash.MD5.hash_oneshot",
+      1,
+      2,
+      1,
+      [
+        "@query", "constructor_distinct_Spec.Hash.Definitions.MD5",
+        "equality_tok_Spec.Hash.Definitions.MD5@tok",
+        "equation_Spec.Hash.Definitions.is_shake",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "e751d9173b66f6f690a73f17f938b248"
+    ]
+  ]
+]

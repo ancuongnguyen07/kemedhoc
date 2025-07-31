@@ -1,0 +1,33 @@
+[
+  "305b30a6d940c3193e5f6c1a876b60d5",
+  [
+    [
+      "Vale.Lib.Tactics.__squash_and_elim",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_b88b26704ce5354755b4f9e280b3a2d9",
+        "refinement_interpretation_Tm_refine_fcbc0459912ef1a927da34909ee1ce81"
+      ],
+      0,
+      "e5035967286132d9b74ccce9920db4eb"
+    ],
+    [
+      "Vale.Lib.Tactics.iterate_env",
+      1,
+      1,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query", "disc_equation_Prims.Cons",
+        "disc_equation_Prims.Nil",
+        "equation_FStar.Stubs.Reflection.Types.binders",
+        "fuel_guarded_inversion_Prims.list",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "a238014ec7a887a2f4bfeba76d05b131"
+    ]
+  ]
+]

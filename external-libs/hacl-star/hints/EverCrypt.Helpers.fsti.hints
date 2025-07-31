@@ -1,0 +1,28 @@
+[
+  "85b28c31b94e61a5919a29bb5e313253",
+  [
+    [
+      "EverCrypt.Helpers.uint8_pl",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query", "equation_Prims.eqtype",
+        "equation_Prims.nat", "function_token_typing_Prims.int",
+        "haseqTm_refine_542f9d4f129664613f2483a6c88bc7c2",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f"
+      ],
+      0,
+      "931ab0932dc062812c7f81d864c068a7"
+    ],
+    [
+      "EverCrypt.Helpers.uint8_l",
+      1,
+      2,
+      1,
+      [ "@query" ],
+      0,
+      "99ce88023e10e2f7989ffc781c816454"
+    ]
+  ]
+]

@@ -1,0 +1,1188 @@
+
+
+
+
+
+
+
+
+
+
+
+free att:channel.
+free sComp:bitstring.
+free sSignature1:bitstring.
+free sSignature2:bitstring.
+
+(* seeds for HKDF *)
+(* 8-9 ignored because they are for the optional message 4 materials.
+10 for the PRK_exporter which is out of scope in this analysis. *)
+free szero:bitstring.
+free sone:bitstring.
+free stwo:bitstring.
+free sthree:bitstring.
+free sfour:bitstring.
+free sfive:bitstring.
+free ssix:bitstring.
+free sseven:bitstring.
+free seight:bitstring.
+free snine:bitstring.
+free sten:bitstring.
+free seleven:bitstring.
+free srep:bitstring.
+
+fun aeadenc(bitstring,bitstring,bitstring,bitstring):bitstring.
+fun aeadmalleable(bitstring,bitstring):bitstring.
+fun const_cred():bitstring.
+fun const_grp():bitstring.
+fun edhoc_kdf(bitstring,bitstring,bitstring,bitstring):bitstring.
+fun edhoc_mac_length():bitstring.
+fun encxor(bitstring,bitstring):bitstring.
+fun error_code_one():bitstring.
+fun error_code_two():bitstring.
+fun fst(bitstring):bitstring.
+fun grpid():bitstring.
+fun hash(bitstring):bitstring.
+fun hash_length():bitstring.
+fun hkdfexpand(bitstring,bitstring):bitstring.
+fun hkdfextract(bitstring,bitstring):bitstring.
+(* There are 3 authentication keys: signature key, static DH, and KEM authentication key. *)
+fun id(bitstring,bitstring,bitstring):bitstring.
+fun iv_length():bitstring.
+(* KEM Decapsulation gets KEM ciphertext and decap (secret) key as inputs and return the shared key *)
+fun kemdecap(bitstring,bitstring):bitstring.
+(* KEM Encapsulation gets random seed and encap (public) key as inputs *)
+fun kemencap(bitstring,bitstring):bitstring.
+(* KEM Key gets the KEM encapsulation result as input and return the shared key *)
+fun kemkey(bitstring):bitstring.
+(* KEM Ciphertext gets the KEM encapsulation result as input and return the ciphertext *)
+fun kemcipher(bitstring):bitstring.
+fun kempk(bitstring):bitstring.
+fun key_length():bitstring.
+fun length():bitstring.
+
+(* AUTHENTICATION METHODS *)
+fun method_one():bitstring.
+fun method_three():bitstring.
+fun method_two():bitstring.
+fun method_zero():bitstring.
+fun method_four():bitstring. (*KEM-KEM method, non-standard*)
+
+fun pair(bitstring,bitstring):bitstring.
+fun pk(bitstring):bitstring.
+fun plaintext_length():bitstring.
+fun sign(bitstring,bitstring,bitstring):bitstring.
+fun sigtrue():bitstring.
+fun snd(bitstring):bitstring.
+fun suitesIConst():bitstring.
+fun suitesRConst():bitstring.
+
+(* ==================================== Events ===================================== *)
+event eAcceptI(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eAcceptIData(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eAcceptR(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eAcceptRData(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eCompromise(bitstring).
+event eDerivedIShared(bitstring,bitstring).
+event eDerivedIdR(bitstring,bitstring).
+event eDerivedR(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eDerivedRShared(bitstring,bitstring).
+event eHonest(bitstring).
+event eJudgeContactedI(bitstring).
+event eJudgeContactedR(bitstring).
+event eJudgeProcessedI(bitstring).
+event eJudgeProcessedR(bitstring).
+event eJudgeReceivedI(bitstring,bitstring).
+event eJudgeReceivedR(bitstring,bitstring).
+event eLeak(bitstring).
+event eLeakSessionKey(bitstring).
+event eLeakShare(bitstring).
+event eMethodOk(bitstring).
+event eSecretsI(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eSecretsR(bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring,bitstring).
+event eSendRData(bitstring,bitstring,bitstring).
+event eShare(bitstring).
+event eShareLT(bitstring).
+event eTHIShared(bitstring,bitstring).
+event eTHRShared(bitstring,bitstring).
+event eWasActiveI(bitstring,bitstring,bitstring).
+event eWasActiveR(bitstring,bitstring,bitstring,bitstring).
+(* Check MAC event:
+  params: (auth_pk, mac) *)
+event eCheckedMAC2(bitstring, bitstring).
+event eCheckedMAC3(bitstring, bitstring).
+(* ================================================================================= *)
+
+(* equation forall shared_key:bitstring, sk:bitstring;   kemdecap(kemencap(shared_key, kempk(sk)), sk) = shared_key. *)
+(* equation forall n:bitstring, sk:bitstring;   kemdecap(weakkem, sk) = weakkem. *)
+(* equation forall x:bitstring;   kemkey(x, kempk(weakkem)) = weakkem. *)
+(* Probabilistic KEM *)
+equation forall r:bitstring, sk:bitstring; kemdecap(kemcipher(kemencap(r, kempk(sk))), sk) = kemkey(kemencap(r, kempk(sk))).
+equation forall x_1:bitstring, x_2:bitstring;   fst((x_1, x_2)) = x_1.
+equation forall x_1:bitstring, x_2:bitstring;   snd((x_1, x_2)) = x_2.
+(* equation forall aa:bitstring, k:bitstring, m:bitstring, r:bitstring, r2:bitstring;   aeadmalleable(aeadenc(m, r, k, aa), r2) = aeadenc(m, r2, k, aa). *)
+reduc forall ad:bitstring, k:bitstring, m:bitstring, r:bitstring;   aeaddec(aeadenc(m, r, k, ad), k, ad) = m.
+reduc forall m:bitstring, r:bitstring, sk:bitstring;   revealsign(sign(m, r, sk)) = m.
+reduc forall m:bitstring, r:bitstring, sk:bitstring;   verify(sign(m, r, sk), m, pk(sk)) = sigtrue.
+reduc forall m:bitstring, x:bitstring;   decxor(encxor(m, x), x) = m.
+
+(* Credential retrieval. Instead of modeling a full certificate,
+the original author model a binded public key representing the certificate.
+It should be fine in symbolic model?.
+
+For example: CRED_I/CRED_R in the RFC is modeled as pkI/pkR in this symbolic model. *)
+reduc forall sig_key:bitstring, stat_dh_key:bitstring, kem_auth_key:bitstring;
+  get_sig_cred(id(sig_key, stat_dh_key, kem_auth_key)) = sig_key.
+reduc forall sig_key:bitstring, stat_dh_key:bitstring, kem_auth_key:bitstring;
+  get_DH_cred(id(sig_key, stat_dh_key, kem_auth_key)) = stat_dh_key.
+reduc forall sig_key:bitstring, stat_dh_key:bitstring, kem_auth_key:bitstring;
+  get_kem_auth(id(sig_key, stat_dh_key, kem_auth_key)) = kem_auth_key.
+
+reduc forall prk:bitstring, s:bitstring, context:bitstring, len:bitstring; check_mac(edhoc_kdf(prk, s, context, len)) = context.
+reduc forall x:bitstring;   check_cred(x) = const_cred.
+reduc forall x:bitstring;   check_grp(x) = const_grp.
+set preciseActions=true.
+
+(** Tables for storing Initiator and Responder's credentials*)
+table local_cred_I(bitstring).
+table local_cred_R(bitstring).
+
+event eInvalidCredI(bitstring).
+event eInvalidCredR(bitstring).
+
+event eValidCredI(bitstring).
+event eValidCredR(bitstring).
+
+event eHonestIInit(bitstring,bitstring).
+
+(* if NOT anonymity check*)
+(* ============================================================================ *)
+(* axiom k:bitstring; event(eShare(k)) && attacker(k) ==> event(eLeakShare(k)). *)
+
+(* Beginer-friendly queries *)
+(* --------------- Reachability
+The below queries should be FALSE as ProVerif verify query NOT *)
+
+
+(* query auth_pk:bitstring, x:bitstring; event(eCheckedMAC2(auth_pk, x)).
+query auth_pk:bitstring, x:bitstring; event(eCheckedMAC3(auth_pk, x)). *)
+
+(* Secrecy of shared session key*)
+(* query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring,
+      y:bitstring, g_x:bitstring, t:time, i:time, k:time, j:time;
+      event(eAcceptR(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            y, g_x))@i && event(eHonest(pkI))@j && attacker(prk_out)@k ==>
+            (event(eCompromise(pkI))@t && (t < i)) || (*Forward Secrecy*)
+            (event(eLeakSessionKey(prk_out))@t) (*Session Key Independence*)
+            (* (event(eLeakShare(g_x))@t) ||
+            (event(eLeakShare(y))@t) *)
+            .
+
+query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring,
+      x:bitstring, g_y:bitstring, t:time, i:time, k:time, j:time;
+      event(eAcceptI(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            x, g_y))@i && event(eHonest(pkR))@j && attacker(prk_out)@k ==>
+            (event(eCompromise(pkR))@t && (t < i)) || (*Forward Secrecy*)
+            (event(eLeakSessionKey(prk_out))@t) (*Session Key Independence*)
+            (* (event(eLeakShare(g_y))@t) ||
+            (event(eLeakShare(x))@t) *)
+            .
+
+(* Mutual Authentication *)
+
+(* In KEM-KEM method, as the Initiator sends its ID_CRED_I even in the
+message 1, so Responder is able to authenticate Initiator during message 2.
+And as similar to other methods, Initiator authenticates Responder after
+receiving message 2, while constructing message 3. *)
+query cid1:bitstring, cid2:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring, x:bitstring, g_x:bitstring,
+      y:bitstring, g_y:bitstring, t:time, i:time, k:time;
+      inj-event(eAcceptR(cid1, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, y, g_x))@i
+      && event(eHonest(pkI))@k
+      ==> (inj-event(eAcceptI(cid2, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, x, g_y))@t && (t < i)) ||
+          (event(eCompromise(pkI))@t && (t < i)) (*Key Compromise Impersonation KCI*)
+          .
+
+query cid1:bitstring, cid2:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring, x:bitstring, g_x:bitstring,
+      y:bitstring, g_y:bitstring, t:time, i:time, k:time;
+      inj-event(eAcceptI(cid1, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, x, g_y))@i
+      && event(eHonest(pkR))@k
+      ==> (inj-event(eDerivedR( cid2, pkI, pkR, prk3e2m, y, g_x ))@t && (t < i)) ||
+          (event(eCompromise(pkR))@t && (t < i)) (*Key Compromise Impersonation KCI*)
+          .
+
+(* Authentication Uniqueness *)
+query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring, y:bitstring, g_x:bitstring,
+      t:time, i:time, k:time, j:time;
+      event(eAcceptR(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, y, g_x))@i
+      && event(eAcceptR(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, y, g_x))@j
+      && event(eHonest(pkI))@k
+      ==> (event(eCompromise(pkI))@t) ||
+          (event(eHonest(pkI))@t && (i = j)).
+
+query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring, x:bitstring, g_y:bitstring,
+      t:time, i:time, k:time, j:time;
+      event(eAcceptI(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, x, g_y))@i
+      && event(eAcceptI(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out, x, g_y))@j
+      && event(eHonest(pkR))@k
+      ==> (event(eCompromise(pkR))@t) ||
+          (event(eHonest(pkR))@t && (i = j)).
+
+(* Uniqueness of the shared session key *)
+query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring,
+      x1:bitstring, x2:bitstring, g_y1:bitstring, g_y2:bitstring,
+      i:time, j:time;
+      event(eAcceptI(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            x1, g_y1))@i &&
+      event(eAcceptI(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            x2, g_y2))@j ==> i = j. 
+
+query cid:bitstring, method:bitstring, pkI:bitstring, pkR:bitstring,
+      prk3e2m:bitstring, prk4e3m:bitstring, prk_out:bitstring,
+      y1:bitstring, y2:bitstring, g_x1:bitstring, g_x2:bitstring,
+      i:time, j:time;
+      event(eAcceptR(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            y1, g_x1))@i &&
+      event(eAcceptR(cid, method, pkI, pkR, prk3e2m, prk4e3m, prk_out,
+            y2, g_x2))@j ==> i = j.
+
+(* Data-TranscriptHash authentication *)
+query ead1:bitstring, ead2:bitstring, ead3:bitstring, suiteI:bitstring, method:bitstring,
+      pkI:bitstring, pkR:bitstring, th1:bitstring, th2:bitstring, th3:bitstring, th4:bitstring,
+      m1:bitstring, plaintext1:bitstring, plaintext2:bitstring, plaintext3:bitstring,
+      prk_out:bitstring, x:bitstring, y:bitstring, g_x:bitstring, g_y:bitstring,
+      i:time, t:time, k:time;
+      inj-event(eAcceptRData(prk_out, method, pkI, pkR, y, g_x,
+                (th1, th2, (th3, (th4, (suiteI, (ead1, (ead2, (ead3, (m1, (plaintext1, plaintext2, plaintext3)))))))))))@i
+      && event(eHonest(pkI))@k
+      ==> (inj-event(eAcceptIData(prk_out, method, pkI, pkR, x, g_y,
+                (th1, th2, (th3, (th4, (suiteI, (ead1, (ead2, (ead3, (m1, (plaintext1, plaintext2, plaintext3)))))))))))@t
+          && (t < i)) ||
+          (event(eCompromise(pkI))@t && (t < i)).
+
+query ead1:bitstring, ead2:bitstring, ead3:bitstring, suiteI:bitstring, method:bitstring,
+      pkI:bitstring, pkR:bitstring, th1:bitstring, th2:bitstring, th3:bitstring, th4:bitstring,
+      m1:bitstring, plaintext1:bitstring, plaintext2:bitstring, plaintext3:bitstring,
+      prk_out:bitstring, x:bitstring, y:bitstring, g_x:bitstring, g_y:bitstring,
+      i:time, t:time, k:time;
+      inj-event(eAcceptIData(prk_out, method, pkI, pkR, x, g_y,
+                (th1, th2, (th3, (th4, (suiteI, (ead1, (ead2, (ead3, (m1, (plaintext1, plaintext2, plaintext3)))))))))))@i
+      && event(eHonest(pkR))@k
+      ==> (inj-event(eSendRData(method, pkR,
+                    (th1, th2, (suiteI, (ead1, (ead2, (m1, plaintext1, plaintext2)))))))@t
+          && (t < i)) ||
+          (event(eCompromise(pkR))@t && (t < i)). *)
+
+(*DoS Mitigation*)
+query cid:bitstring, pkI:bitstring, pkR:bitstring, g_x:bitstring, x:bitstring, y:bitstring,
+      prk3e2m:bitstring, i:time, t:time, j:time;
+    event(eDerivedR(cid, pkI, pkR, prk3e2m, y, g_x))@i
+    ==> (event(eHonestIInit(pkI,pkR))@j && j<i) ||
+      (event(eCompromise(pkR))@t && t<i).
+
+
+(* Non-repudiation *)
+(* The goal is to provide an evidence to a trusted third-party, called a judge,
+that a particular party indeed participated in a session. It is currently only
+applicable to signature-based authentication methods *)
+
+
+(* ============================================================================ *)
+
+let MakeDEO()=
+    0.
+let ContactJudgeFromI(ID_CRED_R_2:bitstring, TH_2J_2:bitstring,
+                      pkR_2:bitstring, EAD_2_2:bitstring, MAC_2J_2:bitstring,
+                      SIGNATURE_or_MAC_2_2:bitstring) =
+    (* let proofnrR_2:bitstring=(ID_CRED_R_2, (TH_2J_2, (pkR_2, (EAD_2_2, (MAC_2J_2, SIGNATURE_or_MAC_2_2))))) in
+    out(att,proofnrR_2);
+    event eJudgeContactedI( proofnrR_2 ). *)
+    0.
+
+let ContactJudgeFromR(ID_CRED_I_2:bitstring, TH_3J_2:bitstring,
+                      pkI_2:bitstring, EAD_3_2:bitstring, MAC_3J_2:bitstring,
+                      SIGNATURE_or_MAC_3_2:bitstring)=
+    (* let proofnrI_2:bitstring = (ID_CRED_I_2, (TH_3J_2, (pkI_2, (EAD_3_2, (MAC_3J_2, SIGNATURE_or_MAC_3_2))))) in
+    out(att,proofnrI_2);
+    event eJudgeContactedR( proofnrI_2 ). *)
+    0.
+
+let CompromiseShare(s_2:bitstring) =
+    event eLeakShare( s_2 );
+    event eLeakShare( kempk(s_2) );
+    out(att,s_2).
+
+let leakSKey(key_2:bitstring) =
+    event eLeakSessionKey( key_2 );
+    out(att,key_2).
+
+(* NonRepudiation-checked event *)
+let JudgeR()=
+    new stamp_2:bitstring;
+    in(att,(ID_CRED_R_2:bitstring, (TH_1_2:bitstring, TH_2_2:bitstring, (pkR_2:bitstring, (EAD_2_2:bitstring, MAC_2_2:bitstring, signed_2:bitstring)))));
+    let proofnrR_2:bitstring = (ID_CRED_R_2, (TH_1_2, TH_2_2, (pkR_2, (EAD_2_2, MAC_2_2)))) in
+    event eJudgeReceivedR( stamp_2, proofnrR_2 );
+    if verify(signed_2,
+              (sSignature1, (ID_CRED_R_2, (TH_2_2, (pkR_2, (EAD_2_2, MAC_2_2))))),
+              pkR_2) =
+       sigtrue then
+    
+        (event eWasActiveR( pkR_2, TH_1_2, TH_2_2, proofnrR_2 );
+         event eJudgeProcessedR( proofnrR_2 ))
+    else
+        (event eJudgeProcessedR( proofnrR_2 )).
+
+
+(* NonRepudiation-checked processes, only applicable to signatured-based authentication *)
+let JudgeI()=
+    new stamp_2:bitstring;
+    in(att,(ID_CRED_I_2:bitstring, (TH_3_2:bitstring, (pkI_2:bitstring, (EAD_1_2:bitstring, EAD_3_2:bitstring, (MAC_3_2:bitstring, signed_2:bitstring))))));
+    let proofnrI_2:bitstring=(ID_CRED_I_2, (TH_3_2, (pkI_2, (EAD_1_2, EAD_3_2, (MAC_3_2, signed_2))))) in
+    event eJudgeReceivedI( stamp_2, proofnrI_2 );
+    if verify(signed_2,
+              (sSignature2, (ID_CRED_I_2, (TH_3_2, (pkI_2, (EAD_1_2, EAD_3_2, MAC_3_2))))),
+              pkI_2) =
+       sigtrue then
+        (event eWasActiveI( pkI_2, TH_3_2, proofnrI_2 );
+         event eJudgeProcessedI( proofnrI_2 ))
+    else
+        (event eJudgeProcessedI( proofnrI_2 )).
+
+(* Initiator *)
+let I(cid_2:bitstring, skI_2:bitstring, I_2:bitstring, sk_kem_authI:bitstring,
+      ID_CRED_R_2:bitstring)=
+    (* Set up parameters *)
+    in(att,(method_2:bitstring, (suitesI_2:bitstring, (C_I_2:bitstring))));
+    event eMethodOk( method_2 );
+    new X_2:bitstring; (*secret ephemeral KEM key*)
+    new random_authR:bitstring; (*random bits for KEM authentication R*)
+    new EAD_1_2:bitstring;
+    new EAD_3_2:bitstring;
+    event eShare( X_2 );
+    (
+      (* (CompromiseShare(X_2)) | *)
+      
+      (
+      let CRED_I_2:bitstring = pk(skI_2) in (*For signature-based authentication*)
+      let KEM_CRED_I_2:bitstring = kempk(sk_kem_authI) in (*For KEM-based authentication*)
+      (* I_2 for static-DH-based authentication. It is a private static DH key.  *)
+      let ID_CRED_I_2:bitstring = id(CRED_I_2, I_2, KEM_CRED_I_2) in
+      (* get KEM authentication public key of R, which is known in advance through
+      for example, pre-provision. *)
+      
+      (* Check if the received credential is identical to my own credential.
+        It would prevent Reflection, or Selfie, attack.
+        DO NOT compare directly ID_CRED_I_2 <> ID_CRED_R_2 as it would make
+        identity leaked in the context of instinguishablity of ProVerif. *)
+      if ID_CRED_I_2 <> check_cred(ID_CRED_R_2) then
+      (* get local_cred_I(=ID_CRED_R_2) in *)
+          (
+            if method_2 = method_four then
+              (
+                (* KEM-KEM *)
+                let pkR_2:bitstring = get_kem_auth(ID_CRED_R_2) in
+                let encap_auth_R_2:bitstring = kemencap(random_authR, pkR_2) in
+                let K_AUTH_R_2:bitstring = kemkey(encap_auth_R_2) in
+                let CT_AUTH_R_2:bitstring = kemcipher(encap_auth_R_2) in
+                let plaintext_1_2:bitstring = (ID_CRED_I_2, EAD_1_2, KEM_CRED_I_2) in
+                
+                let pkI_2:bitstring = get_kem_auth(ID_CRED_I_2) in
+
+                let G_X_2:bitstring = kempk(X_2) in (*public KEM key*)
+
+                event eHonestIInit(pkI_2, pkR_2);
+
+                (* set up key for ciphertext_1 *)
+                
+                let TH_1_2:bitstring = hash((G_X_2, CT_AUTH_R_2)) in
+                let PRK_1e_2:bitstring = hkdfextract(TH_1_2, K_AUTH_R_2) in
+                let K_1_2:bitstring = edhoc_kdf(PRK_1e_2, szero, TH_1_2, key_length) in
+                (* let K_1_2:bitstring = K_AUTH_R_2 in *)
+                let IV_1_2:bitstring = edhoc_kdf(PRK_1e_2, sone, TH_1_2, iv_length) in
+                let CIPHERTEXT_1_2:bitstring = aeadenc(plaintext_1_2, srep, K_1_2, IV_1_2) in
+                (* let CIPHERTEXT_1_2:bitstring = encxor(plaintext_1_2, K_1_2) in *)
+                
+                (* -------------------------------------------------------- *)
+                (* let m1_2:bitstring = (method_2, suitesI_2, G_X_2, C_I_2, CT_AUTH_R_2, CIPHERTEXT_1_2) in *)
+                let m1_2:bitstring = (method_2, suitesI_2, G_X_2, C_I_2, CIPHERTEXT_1_2) in
+                out(att,m1_2); (*Send message 1*)
+
+                in(att,m2_2:bitstring); (*Receive message 2*)
+                let (G_Y_2:bitstring, CIPHERTEXT_2_2:bitstring, CT_AUTH_I_2:bitstring) = m2_2 in
+
+                (* let TH_1_2:bitstring=hash((method_2, (suitesI_2, (G_X_2, (C_I_2, EAD_1_2))))) in *)
+                let mess_1_hash_2:bitstring = hash(m1_2) in
+                let TH_2_2:bitstring = hash((G_Y_2, CT_AUTH_I_2, mess_1_hash_2)) in
+                let G_YX_2:bitstring = kemdecap(G_Y_2, X_2) in
+                (* let PRK_2e_2:bitstring = hkdfextract(TH_2_2, G_YX_2) in *)
+                let PRK_2e_2:bitstring = hkdfextract(hash((PRK_1e_2, TH_2_2)), G_YX_2) in
+                let KEYSTREAM_2_2:bitstring = edhoc_kdf(PRK_2e_2, stwo, TH_2_2, key_length) in
+                let IV_2_2:bitstring = edhoc_kdf(PRK_2e_2, sthree, TH_2_2, key_length) in
+
+                let plaintext_2_2:bitstring = aeaddec(CIPHERTEXT_2_2, KEYSTREAM_2_2, IV_2_2) in
+                let (C_R_2:bitstring, =ID_CRED_R_2, SIGNATURE_or_MAC_2_2:bitstring, EAD_2_2:bitstring) = plaintext_2_2 in
+                
+                (* let pkR_2:bitstring = get_sig_cred(ID_CRED_R_2) in
+                let pkI_2:bitstring = get_sig_cred(ID_CRED_I_2) in *)
+                (* let pkI_2:bitstring = get_kem_auth(ID_CRED_I_2) in *)
+
+                let SALT_3e2m_2:bitstring = edhoc_kdf(PRK_2e_2, sfour, TH_2_2, hash_length) in
+                let PRK_3e2m_2:bitstring = hkdfextract(SALT_3e2m_2, K_AUTH_R_2) in
+                (* let PRK_3e2m_2:bitstring = PRK_2e_2 in *)
+                (* Event records that I has derived a intermediate key from the ephemeral shared of R. *)
+                event eDerivedIShared( pkI_2, G_YX_2 );
+
+                (* MAC computation *)
+                let MAC_2_2:bitstring = edhoc_kdf(PRK_3e2m_2, sfive,
+                                                (ID_CRED_R_2, TH_2_2, pkR_2, EAD_2_2),
+                                                hash_length) in
+
+                (* Check MAC *)
+                (* if verify(SIGNATURE_or_MAC_2_2,
+                          (sSignature1, (ID_CRED_R_2, (TH_2_2, (pkR_2, (EAD_2_2, MAC_2_2))))),
+                          pkR_2) =
+                  sigtrue then *)
+                if SIGNATURE_or_MAC_2_2 = MAC_2_2 then
+                    (
+                      event eCheckedMAC2(ID_CRED_I_2, MAC_2_2);
+
+                      let TH_3_2:bitstring=hash((TH_2_2, (plaintext_2_2, pkR_2))) in
+                      (* Event records that Initiator has computed the TranscriptHash containing the shared
+                      component from Responder. *)
+                      event eTHIShared( pkI_2, TH_3_2 );
+
+                      let K_3_2:bitstring=edhoc_kdf(PRK_3e2m_2, ssix, TH_3_2, key_length) in
+                      let IV_3_2:bitstring=edhoc_kdf(PRK_3e2m_2, sseven, TH_3_2, iv_length) in
+                      let SALT_4e3m_2:bitstring = edhoc_kdf(PRK_3e2m_2, seight, TH_3_2, hash_length) in
+
+                      (* KEM-KEM *)
+                      let K_AUTH_I_2:bitstring = kemdecap(CT_AUTH_I_2, sk_kem_authI) in
+                      let PRK_4e3m_2:bitstring = hkdfextract(SALT_4e3m_2, K_AUTH_I_2) in
+                      (* let PRK_4e3m_2:bitstring = PRK_3e2m_2 in *)
+                      
+                      let MAC_3_2:bitstring = edhoc_kdf(PRK_4e3m_2, snine,
+                                                      (ID_CRED_I_2, TH_3_2, pkI_2, EAD_3_2), hash_length) in
+                      
+                      let SIGNATURE_or_MAC_3_2:bitstring = MAC_3_2 in
+                      (* let SIGNATURE_or_MAC_3_2:bitstring = sign((sSignature2, (ID_CRED_I_2, (TH_3_2, (pkI_2, (EAD_3_2, MAC_3_2))))),
+                                                            srep, skI_2) in *)
+                      let plaintext_3_2:bitstring = (ID_CRED_I_2, (SIGNATURE_or_MAC_3_2, EAD_3_2)) in
+                      let m3_2:bitstring = aeadenc(plaintext_3_2, srep, K_3_2, IV_3_2) in
+                      let TH_4_2:bitstring = hash((TH_3_2, (plaintext_3_2, pkI_2))) in
+                      let PRK_out_2:bitstring = edhoc_kdf(PRK_4e3m_2, sten, TH_4_2,
+                                                        hash_length) in
+                      event eAcceptI( cid_2, method_four, pkI_2, pkR_2, PRK_3e2m_2, PRK_4e3m_2,
+                                      PRK_out_2, X_2, G_Y_2
+                            );
+                      event eSecretsI( cid_2, method_four, pkI_2, pkR_2, PRK_2e_2, PRK_3e2m_2,
+                                        PRK_4e3m_2, PRK_out_2, KEYSTREAM_2_2, K_3_2, IV_3_2, X_2, G_Y_2
+                            );
+                      event eAcceptIData( PRK_out_2, method_four  , pkI_2, pkR_2, X_2, G_Y_2,
+                                          (TH_1_2, TH_2_2, (TH_3_2, (TH_4_2, (suitesI_2, (EAD_1_2, (EAD_2_2, (EAD_3_2, (m1_2, (plaintext_1_2, plaintext_2_2, plaintext_3_2)))))))))
+                            );
+                      (*Send message 3*)
+                      out(att,m3_2)
+                      (*NOTE! remember adding/removing semi-colon of the previous command
+                      to the syntax correct if you enable/disable the two processes below *)
+                      | (
+                        leakSKey(PRK_out_2)
+                      )
+                    )
+                ))
+            (* else (event eInvalidCredI(ID_CRED_R_2)) *)
+          
+      )).
+
+let CompromiseKEMencap(s_2:bitstring, ciphertext:bitstring)=
+    event eLeakShare( s_2 ); (*compromise the KEM random bits for encapsulation*)
+    (*Compromise KEM ciphertext, is not needed for attacker but is needed for event-based query?*)
+    event eLeakShare( ciphertext );
+    out(att,s_2).
+
+(* Responder *)
+let R(cid_2:bitstring, skR_2:bitstring, R_2:bitstring, sk_kem_authR_2:bitstring) =
+    (* Set up parameters *)
+    in(att,(C_R_2:bitstring, (EAD_2_2:bitstring, suitesR_2:bitstring)));
+    in(att, m1_2:bitstring);     (* Receive message 1 *)
+    let (method_2:bitstring, suitesI_2:bitstring, G_X_2:bitstring, C_I_2:bitstring,
+        CT_AUTH_R_2:bitstring, CIPHERTEXT_1_2:bitstring) = m1_2 in
+    (* let (method_2:bitstring, (suitesI_2:bitstring, (G_X_2:bitstring, (C_I_2:bitstring, EAD_1_2:bitstring)))) = m1_2 in *)
+    
+    event eMethodOk( method_2 );
+    new Y_2:bitstring; (*random bits for KEM encapsulation*)
+    event eShare( Y_2 );
+    let G_R_2:bitstring = R_2 in
+    (* let G_XY_2:bitstring=kemkey(Y_2, G_X_2) in
+    let G_Y_2:bitstring=kemencap(G_XY_2, G_X_2) in *)
+    let encapsulation:bitstring = kemencap(Y_2, G_X_2) in
+    let G_Y_2:bitstring = kemcipher(encapsulation) in
+    (
+      (* (CompromiseKEMencap(Y_2, G_Y_2)) | *)
+    (
+      (* set up credentials of Responder *)
+      let CRED_R_2:bitstring = pk(skR_2) in
+      let KEM_CRED_R_2:bitstring = kempk(sk_kem_authR_2) in
+      let ID_CRED_R_2:bitstring = id(CRED_R_2, G_R_2, KEM_CRED_R_2) in
+
+      if method_2 = method_four then
+            (
+            (* KEM-KEM *)
+            
+            let K_AUTH_R_2:bitstring = kemdecap(CT_AUTH_R_2, sk_kem_authR_2) in
+            (* set up key for ciphertext_1 *)
+            let TH_1_2:bitstring = hash((G_X_2, CT_AUTH_R_2)) in
+            let PRK_1e_2:bitstring = hkdfextract(TH_1_2, K_AUTH_R_2) in
+            let K_1_2:bitstring = edhoc_kdf(PRK_1e_2, szero, TH_1_2, key_length) in
+            (* let K_1_2:bitstring = K_AUTH_R_2 in *)
+            let IV_1_2:bitstring = edhoc_kdf(PRK_1e_2, sone, TH_1_2, iv_length) in
+            let plaintext_1_2:bitstring = aeaddec(CIPHERTEXT_1_2, K_1_2, IV_1_2) in
+            (* let plaintext_1_2:bitstring = decxor(CIPHERTEXT_1_2, K_1_2) in *)
+            
+
+            (* Check if the CRED_I is stored in the local storage of Responder *)
+            (* let (=ID_CRED_I_2) = plaintext_1_2 in *)
+            let (ID_CRED_I_2:bitstring, EAD_1_2:bitstring, KEM_CRED_I_2:bitstring) = plaintext_1_2 in
+            (* let TH_1_2:bitstring=hash((method_2, (suitesI_2, (G_X_2, (C_I_2, EAD_1_2))))) in *)
+
+            (* Check if the received credential is identical to my own credential.
+              It would prevent Reflection, or Selfie, attack.
+              DO NOT compare directly ID_CRED_R_2 <> ID_CRED_I_2 as it would make
+              identity leaked in the context of instinguishablity of ProVerif. *)
+            (* if ID_CRED_R_2 <> check_cred(ID_CRED_I_2) then *)
+            get local_cred_R(=ID_CRED_I_2) in
+            (
+              let G_XY_2:bitstring = kemkey(encapsulation) in
+
+              (* let pkR_2:bitstring=get_sig_cred(ID_CRED_R_2) in *)
+              let pkR_2:bitstring = get_kem_auth(ID_CRED_R_2) in
+              let pkI_2:bitstring = get_kem_auth(ID_CRED_I_2) in
+
+              new encap_auth_random_seed:bitstring;
+              let encap_auth_I_2:bitstring = kemencap(encap_auth_random_seed, pkI_2) in
+              let K_AUTH_I_2:bitstring = kemkey(encap_auth_I_2) in
+              let CT_AUTH_I_2:bitstring = kemcipher(encap_auth_I_2) in
+
+              let mess_1_hash_2:bitstring = hash(m1_2) in
+              let TH_2_2:bitstring = hash((G_Y_2, CT_AUTH_I_2, mess_1_hash_2)) in
+              (* let PRK_2e_2:bitstring = hkdfextract(TH_2_2, G_YX_2) in *)
+              let PRK_2e_2:bitstring = hkdfextract(hash((PRK_1e_2, TH_2_2)), G_XY_2) in
+
+              let KEYSTREAM_2_2:bitstring = edhoc_kdf(PRK_2e_2, stwo, TH_2_2, key_length) in
+              let IV_2_2:bitstring = edhoc_kdf(PRK_2e_2, sthree, TH_2_2, iv_length) in
+              let SALT_3e2m_2:bitstring = edhoc_kdf(PRK_2e_2, sfour, TH_2_2, hash_length) in
+
+              let PRK_3e2m_2:bitstring = hkdfextract(SALT_3e2m_2, K_AUTH_R_2) in
+              (* let PRK_3e2m_2:bitstring = PRK_2e_2 in *)
+              let MAC_2_2:bitstring = edhoc_kdf(PRK_3e2m_2, sfive,
+                                              (ID_CRED_R_2, TH_2_2, pkR_2, EAD_2_2), hash_length) in
+              (* let SIGNATURE_or_MAC_2_2:bitstring=sign((sSignature1, (ID_CRED_R_2, (TH_2_2, (pkR_2, (EAD_2_2, MAC_2_2))))),
+                                                      srep, skR_2) in *)
+              let SIGNATURE_or_MAC_2_2:bitstring = MAC_2_2 in
+              let plaintext_2_2:bitstring=(C_R_2, (ID_CRED_R_2, (SIGNATURE_or_MAC_2_2, EAD_2_2))) in
+
+              event eDerivedR( cid_2, pkI_2, pkR_2, PRK_3e2m_2, Y_2, G_X_2 );
+              event eTHRShared( pkR_2, TH_2_2 );
+              event eDerivedRShared( pkR_2, G_XY_2 );
+              event eDerivedIdR( ID_CRED_R_2, PRK_3e2m_2 );
+
+
+              (* let m2_2:bitstring = (G_Y_2, encxor(plaintext_2_2, KEYSTREAM_2_2)) in *)
+              let CIPHERTEXT_2_2 = aeadenc(plaintext_2_2, srep, KEYSTREAM_2_2, IV_2_2) in
+              let m2_2:bitstring = (G_Y_2, CIPHERTEXT_2_2, CT_AUTH_I_2) in
+              event eSendRData( method_four, pkR_2,
+                                (TH_1_2, TH_2_2, (suitesI_2, (EAD_1_2, (EAD_2_2, (m1_2, plaintext_1_2, plaintext_2_2)))))
+                    );
+              out(att,m2_2); (*Send message 2*)
+
+              (* Message 3 *)
+              in(att,CIPHERTEXT_3_2:bitstring); (*Receive message 3*)
+              let TH_3_2:bitstring = hash((TH_2_2, (plaintext_2_2, pkR_2))) in
+              let K_3_2:bitstring = edhoc_kdf(PRK_3e2m_2, ssix, TH_3_2, key_length) in
+              let IV_3_2:bitstring = edhoc_kdf(PRK_3e2m_2, sseven, TH_3_2, iv_length) in
+              let SALT_4e3m_2:bitstring = edhoc_kdf(PRK_3e2m_2, seight, TH_3_2, hash_length) in
+              let PRK_4e3m_2:bitstring = hkdfextract(SALT_4e3m_2, K_AUTH_I_2) in
+              (* let PRK_4e3m_2:bitstring = PRK_3e2m_2 in *)
+              let plaintext_3_2:bitstring = aeaddec(CIPHERTEXT_3_2, K_3_2, IV_3_2) in
+
+              (* ATTENTION!!!! The ID_CRED_I should be removed in message 3 in later design.
+              If ID_CRED_I is removed from message 3, please then remove all pk_kem_auth_I_2 appearing
+              in later values. In this model, pk_kem_auth_I also represents CRED_I in the RFC. *)
+              let (=ID_CRED_I_2, (SIGNATURE_or_MAC_3_2:bitstring, EAD_3_2:bitstring)) = plaintext_3_2 in
+              (* let pkI_2:bitstring = get_sig_cred(ID_CRED_I_2) in *)
+              let pkI_2:bitstring = get_kem_auth(ID_CRED_I_2) in
+              let MAC_3_2:bitstring = edhoc_kdf(PRK_4e3m_2, snine,
+                                              (ID_CRED_I_2, TH_3_2, pkI_2, EAD_3_2), hash_length) in
+
+              (* Check MAC *)
+              (* if verify(SIGNATURE_or_MAC_3_2,
+                      (sSignature2, (ID_CRED_I_2, (TH_3_2, (pkI_2, (EAD_3_2, MAC_3_2))))),
+                      pkI_2) =
+                sigtrue then *)
+              if SIGNATURE_or_MAC_3_2 = MAC_3_2 then
+                  (
+                    event eCheckedMAC3(ID_CRED_R_2, MAC_3_2);
+
+                    let TH_4_2:bitstring = hash((TH_3_2, (plaintext_3_2, pkI_2))) in
+                    let PRK_out_2:bitstring = edhoc_kdf(PRK_4e3m_2, sten, TH_4_2,
+                                                      hash_length) in
+                    event eAcceptR( cid_2, method_four, pkI_2, pkR_2, PRK_3e2m_2, PRK_4e3m_2,
+                                    PRK_out_2, Y_2, G_X_2
+                          );
+                    event eSecretsR( cid_2, method_four, pkI_2, pkR_2, PRK_2e_2, PRK_3e2m_2,
+                                      PRK_4e3m_2, PRK_out_2, KEYSTREAM_2_2, K_3_2, IV_3_2, Y_2, G_X_2
+                          );
+                    event eAcceptRData( PRK_out_2, method_four, pkI_2, pkR_2, Y_2, G_X_2,
+                                        (TH_1_2, TH_2_2, (TH_3_2, (TH_4_2, (suitesI_2, (EAD_1_2, (EAD_2_2, (EAD_3_2, (m1_2, (plaintext_1_2, plaintext_2_2, plaintext_3_2)))))))))
+                          )
+                    (*NOTE! remember adding/removing semi-colon of the previous command
+                    to the syntax correct if you enable/disable the two processes below *)
+                    | (
+                      (* (ContactJudgeFromR(ID_CRED_I_2, TH_3_2, pkI_2, EAD_3_2, MAC_3_2,
+                                        SIGNATURE_or_MAC_3_2)) | *)
+                      leakSKey(PRK_out_2)
+                    )
+                  )  
+              )
+              else (event eInvalidCredR(ID_CRED_I_2))    
+          ))).
+
+(* Compromise the signature key *)
+let compromise(sk_2:bitstring)=
+    in(att,=sComp);
+    event eCompromise( pk(sk_2) );
+    out(att,sk_2).
+
+(* Compromise the static DH key *)
+(* let compromiseDH(k_2:bitstring)=
+    in(att,=sComp);
+    event eCompromise( k_2 );
+    event eLeak( k_2 );
+    out(att,k_2). *)
+
+(* Compromise the KEM authentication key *)
+let compromiseAuthKEM(auth_kem_k:bitstring)=
+    in(att,=sComp);
+    event eCompromise( kempk(auth_kem_k) );
+    out(att, auth_kem_k).
+
+
+process
+    (*Create Initiator's credentials*)
+    new computerId_1:bitstring;
+    new sk_1:bitstring;
+    new sk_auth_kem_1:bitstring;
+    new ltdh_1:bitstring;
+    let idd_1:bitstring = id(pk(sk_1), ltdh_1, kempk(sk_auth_kem_1)) in
+
+    (*Reveal Initiator's credential to the attacker*)
+    (* out(att, (idd_1, (pk(sk_1), ltdh_1, kempk(sk_auth_kem_1)))); *)
+    event eShareLT(ltdh_1);
+    event eHonest(pk(sk_1));
+    event eHonest(kempk(sk_auth_kem_1));
+
+    (*Create Responder's credentials*)
+    new sk_2:bitstring;
+    new sk_auth_kem_2:bitstring;
+    new ltdh_2:bitstring;
+    new computerId_2:bitstring;
+    let idd_2:bitstring=id(pk(sk_2), ltdh_2, kempk(sk_auth_kem_2)) in
+
+    (*add credential to tables*)
+    insert local_cred_I(idd_2);
+    insert local_cred_R(idd_1);
+
+    (*Reveal Responder's credential to the attacker*)
+    out(att,(idd_2, (pk(sk_2), ltdh_2, kempk(sk_auth_kem_2))));
+    event eShareLT(ltdh_2);
+    event eHonest( pk(sk_2) );
+    event eHonest( kempk(sk_auth_kem_2) );
+
+    (* Protocol model check - sanity check *)
+    (
+      !(
+        (*[C2] Session simulates that an honest Initiator communicates with an attacker*)
+        in(att, cred_2:bitstring);
+        I(computerId_1, sk_1, ltdh_1, sk_auth_kem_1, cred_2)
+      )
+      | !( (*[C3] Session simulates that an attacker communicates with an honest Responder*)
+        R(computerId_2, sk_2, ltdh_2, sk_auth_kem_2)
+      )
+      | ( (*Session simulates post-compromise*)
+        phase 1; event eCompromise(kempk(sk_auth_kem_1)); event eCompromise(kempk(sk_auth_kem_2));
+        out(att, sk_auth_kem_1); out(att, sk_auth_kem_2)
+      )
+    )
+
+(*
+WARNING: the following wellformedness checks failed!
+
+Inexistant lemma actions
+========================
+
+  lemma `secretR' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakSessionKey" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakSessionKey" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "DerivedR" (arity 5, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "AcceptIData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "SendRData" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "AcceptIData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "AcceptRData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_R_soundness' references action 
+    fact "JudgeContactedI" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_R_soundness' references action 
+    fact "WasActiveR" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_I_soundness' references action 
+    fact "JudgeContactedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_I_soundness' references action 
+    fact "WasActiveI" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `authRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `authRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `authIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `authIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+
+Restriction actions
+===================
+
+  restriction `JudgeR' references action 
+    fact "JudgeContactedI" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeR' references action 
+    fact "JudgeProcessedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeI' references action 
+    fact "JudgeContactedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeI' references action 
+    fact "JudgeProcessedI" (arity 1, Linear) 
+  but no rule has such an action.
+*)
+
+(*
+Generated from:
+Tamarin version 1.10.0
+Maude version 2.7.1
+Git revision: UNKNOWN, branch: UNKNOWN
+Compiled at: 2024-10-30 14:56:23.355649243 UTC
+*)
+
+(*
+WARNING: the following wellformedness checks failed!
+
+Inexistant lemma actions
+========================
+
+  lemma `secretR' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakSessionKey" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretR' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakSessionKey" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `secretI' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_non_inj' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthRI_unique' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "DerivedR" (arity 5, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_non_inj' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `honestauthIR_unique' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "AcceptIData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_I_to_R' references action 
+    fact "SendRData" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "AcceptIData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "AcceptRData" (arity 7, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "Compromise" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "Honest" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `data_authentication_R_to_I' references action 
+    fact "LeakShare" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_R_soundness' references action 
+    fact "JudgeContactedI" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_R_soundness' references action 
+    fact "WasActiveR" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_I_soundness' references action 
+    fact "JudgeContactedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  lemma `non_repudiation_I_soundness' references action 
+    fact "WasActiveI" (arity 3, Linear) 
+  but no rule has such an action.
+  
+  lemma `authRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `authRI_unique' references action 
+    fact "AcceptR" (arity 8, Linear) 
+  but no rule has such an action.
+  
+  lemma `authIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+  
+  lemma `authIR_unique' references action 
+    fact "AcceptI" (arity 9, Linear) 
+  but no rule has such an action.
+
+Restriction actions
+===================
+
+  restriction `JudgeR' references action 
+    fact "JudgeContactedI" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeR' references action 
+    fact "JudgeProcessedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeI' references action 
+    fact "JudgeContactedR" (arity 1, Linear) 
+  but no rule has such an action.
+  
+  restriction `JudgeI' references action 
+    fact "JudgeProcessedI" (arity 1, Linear) 
+  but no rule has such an action.
+*)
+
+(*
+Generated from:
+Tamarin version 1.10.0
+Maude version 2.7.1
+Git revision: UNKNOWN, branch: UNKNOWN
+Compiled at: 2024-10-30 14:56:23.355649243 UTC
+*)

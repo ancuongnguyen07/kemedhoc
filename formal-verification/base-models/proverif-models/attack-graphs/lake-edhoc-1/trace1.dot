@@ -1,0 +1,447 @@
+digraph {
+graph [ordering = out]
+edge [arrowhead = none, penwidth = 1.6, fontsize = 30]
+node [shape = point, width = 0, height = 0, fontsize = 30]
+Trace [label = <A trace has been found.<br/>
+>, shape = plaintext]
+P0__0 [label = "Honest Process", shape = plaintext]
+P__0 [label = "Attacker", shape = plaintext]
+Trace -> P0__0 [label = "", style = invisible, weight = 100]{rank = same; P0__0 P__0}
+P0__0 -> P0__1 [label = <>, weight = 100]
+/*RPar */
+P0__1 -> P0_1__1 [label = <>]
+P0__1 -> P0_0__1 [label = <>]
+P0__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0__1 P0_1__1}
+P0_0__1 [label = "!", shape = ellipse]
+P0_0_0__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0__1 -> P0_0_0__1 [label = <>, weight = 100]
+P0_0_0__1 -> P0_0_0__2 [label = <>, weight = 100]
+P0_0_0__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{26}</FONT><FONT COLOR="blue">new </FONT>sk_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{27}</FONT><FONT COLOR="blue">new </FONT>ltdh_1</TD></TR><TR><TD><FONT COLOR="darkgreen">{28}</FONT><FONT COLOR="blue">new </FONT>computerId</TD></TR></TABLE>>]
+P0_0_0__2 -> P0_0_0__3 [label = <>, weight = 100]
+P0_0_0__3 -> P0_0_0__4 [label = <>, weight = 100]
+P__0 -> P__1 [label = <>, weight = 100]
+{rank = same; P__1 P0_0_0__4}
+P0_0_0__4 -> P0_0_0__5 [label = <>, weight = 100]
+P__1 -> P__2 [label = <>, weight = 100]
+{rank = same; P__2 P0_0_0__5}
+P0_0_0__5 -> P__2 [label = <(~M,(~M_1,~M_2)) = (id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(pk(sk_3),exp(g,ltdh_1)))>, arrowhead = normal]
+P0_0_0__5 -> P0_0_0__6 [label = <>, weight = 100]
+P__2 -> P__3 [label = <>, weight = 100]
+{rank = same; P__3 P0_0_0__6}
+P0_0_0__6 -> P0_0_0__7 [label = <>, weight = 100]
+P0_0_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{31}</FONT><FONT COLOR="blue">event</FONT> eShareLT(ltdh_1)</TD></TR></TABLE>>]
+P0_0_0__7 -> P0_0_0__8 [label = <>, weight = 100]
+P0_0_0__8 -> P0_0_0__9 [label = <>, weight = 100]
+P0_0_0__9 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{32}</FONT><FONT COLOR="blue">event</FONT> eHonest(pk(sk_3))</TD></TR></TABLE>>]
+P0_0_0__9 -> P0_0_0__10 [label = <>, weight = 100]
+P0_0_0__10 -> P0_0_0__11 [label = <>, weight = 100]
+P0_0_0__11 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{33}</FONT><FONT COLOR="blue">event</FONT> eHonest(exp(g,ltdh_1))</TD></TR></TABLE>>]
+P0_0_0__11 -> P0_0_0__12 [label = <>, weight = 100]
+/*RPar */
+P0_0_0__12 -> P0_0_0_1__12 [label = <>]
+P0_0_0__12 -> P0_0_0_0__12 [label = <>]
+P0_0_0__12 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0_0__12 P0_0_0_1__12}
+P0_0_0_0__12 -> P0_0_0_0__13 [label = <>, weight = 100]
+P0_0_0_0__13 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">compromiseDH</FONT></TD></TR></TABLE>>]
+P0_0_0_0__13 -> P0_0_0_0__14 [label = <>, weight = 100]
+/*RPar */
+P0_0_0_1__12 -> P0_0_0_1_1__12 [label = <>]
+P0_0_0_1__12 -> P0_0_0_1_0__12 [label = <>]
+P0_0_0_1__12 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0_1_0__12 P0_0_0_1_1__12}
+P0_0_0_1_0__12 -> P0_0_0_1_0__13 [label = <>, weight = 100]
+P0_0_0_1_0__13 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">compromise</FONT></TD></TR></TABLE>>]
+P0_0_0_1_0__13 -> P0_0_0_1_0__14 [label = <>, weight = 100]
+/*RPar */
+P0_0_0_1_1__12 -> P0_0_0_1_1_1__12 [label = <>]
+P0_0_0_1_1__12 -> P0_0_0_1_1_0__12 [label = <>]
+P0_0_0_1_1__12 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0_1_1_0__12 P0_0_0_1_1_1__12}
+P0_0_0_1_1_0__12 [label = "!", shape = ellipse]
+P0_0_0_1_1_0_0__12 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0_0_1_1_0__12 -> P0_0_0_1_1_0_0__12 [label = <>, weight = 100]
+P0_0_0_1_1_0_0__12 -> P0_0_0_1_1_0_0__13 [label = <>, weight = 100]
+P0_0_0_1_1_0_0__13 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">R</FONT></TD></TR></TABLE>>]
+P0_0_0_1_1_0_0__13 -> P0_0_0_1_1_0_0__14 [label = <>, weight = 100]
+P0_0_0_1_1_1__12 [label = "!", shape = ellipse]
+/*RPar */
+P0_1__1 -> P0_1_1__1 [label = <>]
+P0_1__1 -> P0_1_0__1 [label = <>]
+P0_1__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_1_0__1 P0_1_1__1}
+P0_1_0__1 [label = "!", shape = ellipse]
+/*RPar */
+P0_1_1__1 -> P0_1_1_1__1 [label = <>]
+P0_1_1__1 -> P0_1_1_0__1 [label = <>]
+P0_1_1__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_1_1_0__1 P0_1_1_1__1}
+P0_1_1_0__1 [label = "!", shape = ellipse]
+{rank = same; P0_1_1_0_1__1 P0_1_1_0_0__1}
+P0_1_1_0_1__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1_1_0__1 -> P0_1_1_0_1__1 [label = <>]
+P0_1_1_0_0__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_1_1_0__1 -> P0_1_1_0_0__1 [label = <>]
+P0_1_1_0_0__1 -> P0_1_1_0_0__2 [label = <>, weight = 100]
+P0_1_1_0_0__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{8}</FONT><FONT COLOR="blue">new </FONT>stamp_2</TD></TR></TABLE>>]
+P0_1_1_0_0__2 -> P0_1_1_0_0__3 [label = <>, weight = 100]
+P0_1_1_0_1__1 -> P0_1_1_0_1__2 [label = <>, weight = 100]
+P0_1_1_0_1__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{8}</FONT><FONT COLOR="blue">new </FONT>stamp_5</TD></TR></TABLE>>]
+P0_1_1_0_1__2 -> P0_1_1_0_1__3 [label = <>, weight = 100]
+P0_1_1_1__1 [label = "!", shape = ellipse]
+P0_0_0_1_1_0_0__14 -> P0_0_0_1_1_0_0__15 [label = <>, weight = 100]
+P0_0_0_1_0__14 -> P0_0_0_1_0__15 [label = <>, weight = 100]
+P0_0_0_0__14 -> P0_0_0_0__15 [label = <>, weight = 100]
+P__3 -> P__4 [label = <>, weight = 100]
+{rank = same; P__4 P0_0_0_0__15 P0_0_0_1_0__15 P0_0_0_1_1_0_0__15}
+P0_0_0_1_1_0_0__15 -> P0_0_0_1_1_0_0__16 [label = <>, weight = 100]
+P__4 -> P__5 [label = <>, weight = 100]
+{rank = same; P__5 P0_0_0_1_1_0_0__16}
+P0_0_0_1_1_0_0__16 -> P__5 [label = <(a_3,(a_4,a_5))>, dir = back, arrowhead = normal]
+P0_0_0_1_1_0_0__16 -> P0_0_0_1_1_0_0__17 [label = <>, weight = 100]
+P0_0_0_1_0__15 -> P0_0_0_1_0__16 [label = <>, weight = 100]
+P0_0_0_0__15 -> P0_0_0_0__16 [label = <>, weight = 100]
+P__5 -> P__6 [label = <>, weight = 100]
+{rank = same; P__6 P0_0_0_0__16 P0_0_0_1_0__16 P0_0_0_1_1_0_0__17}
+P0_0_0_1_1_0_0__17 -> P0_0_0_1_1_0_0__18 [label = <>, weight = 100]
+P0_0_0_1_0__16 -> P0_0_0_1_0__17 [label = <>, weight = 100]
+P0_0_0_0__16 -> P0_0_0_0__17 [label = <>, weight = 100]
+P__6 -> P__7 [label = <>, weight = 100]
+{rank = same; P__7 P0_0_0_0__17 P0_0_0_1_0__17 P0_0_0_1_1_0_0__18}
+P0_0_0_1_1_0_0__18 -> P0_0_0_1_1_0_0__19 [label = <>, weight = 100]
+P__7 -> P__8 [label = <>, weight = 100]
+{rank = same; P__8 P0_0_0_1_1_0_0__19}
+P0_0_0_1_1_0_0__19 -> P__8 [label = <(method_two,(a_7,(a_8,(a_9,a_10))))>, dir = back, arrowhead = normal]
+P0_0_0_1_1_0_0__19 -> P0_0_0_1_1_0_0__20 [label = <>, weight = 100]
+P0_0_0_1_0__17 -> P0_0_0_1_0__18 [label = <>, weight = 100]
+P0_0_0_0__17 -> P0_0_0_0__18 [label = <>, weight = 100]
+P__8 -> P__9 [label = <>, weight = 100]
+{rank = same; P__9 P0_0_0_0__18 P0_0_0_1_0__18 P0_0_0_1_1_0_0__20}
+P0_0_0_1_1_0_0__20 -> P0_0_0_1_1_0_0__21 [label = <>, weight = 100]
+P0_0_0_1_1_0_0__21 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{171}</FONT><FONT COLOR="blue">event</FONT> eMethodOk(method_two)</TD></TR><TR><TD><FONT COLOR="darkgreen">{173}</FONT><FONT COLOR="blue">new </FONT>Y_1</TD></TR><TR><TD><FONT COLOR="darkgreen">{174}</FONT><FONT COLOR="blue">event</FONT> eShare(Y_1)</TD></TR></TABLE>>]
+P0_0_0_1_1_0_0__21 -> P0_0_0_1_1_0_0__22 [label = <>, weight = 100]
+/*RPar */
+P0_0_0_1_1_0_0__22 -> P0_0_0_1_1_0_0_1__22 [label = <>]
+P0_0_0_1_1_0_0__22 -> P0_0_0_1_1_0_0_0__22 [label = <>]
+P0_0_0_1_1_0_0__22 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0_1_1_0_0_0__22 P0_0_0_1_1_0_0_1__22}
+P0_0_0_1_1_0_0_0__22 -> P0_0_0_1_1_0_0_0__23 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_0__23 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{259}</FONT><FONT COLOR="blue">event</FONT> eDerivedR(computerId,pk(sk_3),hkdfextract(<br/>
+hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,Y_1)),Y_1,a_8)</TD></TR><TR><TD><FONT COLOR="darkgreen">{260}</FONT><FONT COLOR="blue">event</FONT> eTHRShared(pk(sk_3),hash((wrap(exp(<br/>
+g,Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),<br/>
+(wrap(a_8),(wrap(a_9),a_10)))))))))</TD></TR><TR><TD><FONT COLOR="darkgreen">{261}</FONT><FONT COLOR="blue">event</FONT> eDerivedRShared(pk(sk_3),exp(a_8,Y_1))<br/>
+</TD></TR><TR><TD><FONT COLOR="darkgreen">{262}</FONT><FONT COLOR="blue">event</FONT> eDerivedIdR(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+hkdfextract(hash((wrap(exp(g,Y_1)),wrap(hash((<br/>
+wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(a_9),<br/>
+a_10)))))))),exp(a_8,Y_1)))</TD></TR><TR><TD><FONT COLOR="darkgreen">{264}</FONT><FONT COLOR="blue">event</FONT> eSendRData(method_two,pk(sk_3),(hash(<br/>
+(wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(a_7,(a_10,(a_4,((method_two,(a_7,(a_8,(a_9,a_10)))),<br/>
+(a_3,(id(pk(sk_3),exp(g,ltdh_1)),(sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+srep,sk_3),a_4)))))))))</TD></TR></TABLE>>]
+P0_0_0_1_1_0_0_0__23 -> P0_0_0_1_1_0_0_0__24 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_0__24 -> P0_0_0_1_1_0_0_0__25 [label = <>, weight = 100]
+P0_0_0_1_0__18 -> P0_0_0_1_0__19 [label = <>, weight = 100]
+P0_0_0_0__18 -> P0_0_0_0__19 [label = <>, weight = 100]
+P__9 -> P__10 [label = <>, weight = 100]
+{rank = same; P__10 P0_0_0_0__19 P0_0_0_1_0__19 P0_0_0_1_1_0_0_0__25}
+P0_0_0_1_1_0_0_0__25 -> P0_0_0_1_1_0_0_0__26 [label = <>, weight = 100]
+P__10 -> P__11 [label = <>, weight = 100]
+{rank = same; P__11 P0_0_0_1_1_0_0_0__26}
+P0_0_0_1_1_0_0_0__26 -> P__11 [label = <(~M_3,(~M_4,~M_5))>, arrowhead = normal]
+P0_0_0_1_1_0_0_0__26 -> P0_0_0_1_1_0_0_0__27 [label = <>, weight = 100]
+P0_0_0_1_0__19 -> P0_0_0_1_0__20 [label = <>, weight = 100]
+P0_0_0_0__19 -> P0_0_0_0__20 [label = <>, weight = 100]
+P__11 -> P__12 [label = <>, weight = 100]
+{rank = same; P__12 P0_0_0_0__20 P0_0_0_1_0__20 P0_0_0_1_1_0_0_0__27}
+P0_0_0_1_1_0_0_1__22 -> P0_0_0_1_1_0_0_1__23 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_1__23 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">CompromiseShare</FONT></TD></TR><TR><TD><FONT COLOR="darkgreen">{179}</FONT><FONT COLOR="blue">event</FONT> eLeakShare(Y_1)</TD></TR><TR><TD><FONT COLOR="darkgreen">{180}</FONT><FONT COLOR="blue">event</FONT> eLeakShare(exp(g,Y_1))</TD></TR></TABLE>>]
+P0_0_0_1_1_0_0_1__23 -> P0_0_0_1_1_0_0_1__24 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_1__24 -> P0_0_0_1_1_0_0_1__25 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_0__27 -> P0_0_0_1_1_0_0_0__28 [label = <>, weight = 100]
+P0_0_0_1_0__20 -> P0_0_0_1_0__21 [label = <>, weight = 100]
+P0_0_0_0__20 -> P0_0_0_0__21 [label = <>, weight = 100]
+P__12 -> P__13 [label = <>, weight = 100]
+{rank = same; P__13 P0_0_0_0__21 P0_0_0_1_0__21 P0_0_0_1_1_0_0_0__28 P0_0_0_1_1_0_0_1__25}
+P0_0_0_1_1_0_0_1__25 -> P0_0_0_1_1_0_0_1__26 [label = <>, weight = 100]
+P__13 -> P__14 [label = <>, weight = 100]
+{rank = same; P__14 P0_0_0_1_1_0_0_1__26}
+P0_0_0_1_1_0_0_1__26 -> P__14 [label = <~M_6 = Y_1>, arrowhead = normal]
+P0_0_0_1_1_0_0_1__26 -> P0_0_0_1_1_0_0_1__27 [label = <>, weight = 100]
+P0_0_0_1_1_0_0_0__28 -> P0_0_0_1_1_0_0_0__29 [label = <>, weight = 100]
+P0_0_0_1_0__21 -> P0_0_0_1_0__22 [label = <>, weight = 100]
+P0_0_0_0__21 -> P0_0_0_0__22 [label = <>, weight = 100]
+P__14 -> P__15 [label = <>, weight = 100]
+{rank = same; P__15 P0_0_0_0__22 P0_0_0_1_0__22 P0_0_0_1_1_0_0_0__29 P0_0_0_1_1_0_0_1__27}
+P0_0_0_1_1_0_0_1__28 [label = "", width = 0.3, height = 0.3]
+P0_0_0_1_1_0_0_1__27 -> P0_0_0_1_1_0_0_1__28 [label = <>, weight = 100]
+P0_1_1_0_1__3 -> P0_1_1_0_1__4 [label = <>, weight = 100]
+P0_1_1_0_0__3 -> P0_1_1_0_0__4 [label = <>, weight = 100]
+P0_1_0__2 [label = "", style = invisible]
+P0_1_0__1 -> P0_1_0__2 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_1__13 [label = "", style = invisible]
+P0_0_0_1_1_1__12 -> P0_0_0_1_1_1__13 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_1__29 [label = "", style = invisible]
+P0_0_0_1_1_0_0_1__28 -> P0_0_0_1_1_0_0_1__29 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_0__29 -> P0_0_0_1_1_0_0_0__30 [label = <>, weight = 100]
+P0_0_0_1_0__22 -> P0_0_0_1_0__23 [label = <>, weight = 100]
+P0_0_0_0__22 -> P0_0_0_0__23 [label = <>, weight = 100]
+P__15 -> P__16 [label = <>, weight = 100]
+{rank = same; P__16 P0_0_0_0__23 P0_0_0_1_0__23 P0_0_0_1_1_0_0_0__30 P0_0_0_1_1_0_0_1__29 P0_0_0_1_1_1__13 P0_1_0__2 P0_1_1_0_0__4 P0_1_1_0_1__4}
+P0_1_1_0_1__4 -> P0_1_1_0_1__5 [label = <>, weight = 100]
+P__16 -> P__17 [label = <>, weight = 100]
+{rank = same; P__17 P0_1_1_0_1__5}
+P0_1_1_0_1__5 -> P__17 [label = <~X_1>, dir = back, arrowhead = normal]
+P0_1_1_0_1__5 -> P0_1_1_0_1__6 [label = <>, weight = 100]
+P0_1_1_0_0__4 -> P0_1_1_0_0__5 [label = <>, weight = 100]
+P0_1_0__3 [label = "", style = invisible]
+P0_1_0__2 -> P0_1_0__3 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_1__14 [label = "", style = invisible]
+P0_0_0_1_1_1__13 -> P0_0_0_1_1_1__14 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_1__30 [label = "", style = invisible]
+P0_0_0_1_1_0_0_1__29 -> P0_0_0_1_1_0_0_1__30 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_0__30 -> P0_0_0_1_1_0_0_0__31 [label = <>, weight = 100]
+P0_0_0_1_0__23 -> P0_0_0_1_0__24 [label = <>, weight = 100]
+P0_0_0_0__23 -> P0_0_0_0__24 [label = <>, weight = 100]
+P__17 -> P__18 [label = <>, weight = 100]
+{rank = same; P__18 P0_0_0_0__24 P0_0_0_1_0__24 P0_0_0_1_1_0_0_0__31 P0_0_0_1_1_0_0_1__30 P0_0_0_1_1_1__14 P0_1_0__3 P0_1_1_0_0__5 P0_1_1_0_1__6}
+P0_1_1_0_1__6 -> P0_1_1_0_1__7 [label = <>, weight = 100]
+P0_1_1_0_1__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{11}</FONT><FONT COLOR="blue">event</FONT> eJudgeReceivedR(stamp_5,(id(pk(sk_3),<br/>
+exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),(pk(sk_3),(a_4,(edhoc_kdf(hkdfextract(<br/>
+hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),a_4))),hash_length),sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+a_11,sk_3)))))))</TD></TR></TABLE>>]
+P0_1_1_0_1__7 -> P0_1_1_0_1__8 [label = <>, weight = 100]
+P0_1_1_0_1__8 -> P0_1_1_0_1__9 [label = <>, weight = 100]
+P0_1_1_0_1__9 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{13}</FONT><FONT COLOR="blue">event</FONT> eWasActiveR(pk(sk_3),hash((wrap(exp(<br/>
+g,Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),<br/>
+(wrap(a_8),(wrap(a_9),a_10)))))))),(id(pk(sk_3),<br/>
+exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),(pk(sk_3),(a_4,(edhoc_kdf(hkdfextract(<br/>
+hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),a_4))),hash_length),sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+a_11,sk_3)))))))</TD></TR></TABLE>>]
+P0_1_1_0_1__9 -> P0_1_1_0_1__10 [label = <>, weight = 100]
+P0_1_1_0_1__10 -> P0_1_1_0_1__11 [label = <>, weight = 100]
+P0_1_1_0_1__11 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{14}</FONT><FONT COLOR="blue">event</FONT> eJudgeProcessedR((id(pk(sk_3),exp(g,<br/>
+ltdh_1)),(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(<br/>
+method_two),(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),(a_4,(edhoc_kdf(hkdfextract(hash((wrap(<br/>
+exp(g,Y_1)),wrap(hash((wrap(method_two),(wrap(<br/>
+a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),exp(a_8,<br/>
+Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),(hash((<br/>
+wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),(<br/>
+wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),(<br/>
+pk(sk_3),a_4))),hash_length),sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+a_11,sk_3)))))))</TD></TR></TABLE>>]
+P0_1_1_0_1__11 -> P0_1_1_0_1__12 [label = <>, weight = 100]
+P0_1_1_0_1__13 [label = "", width = 0.3, height = 0.3]
+P0_1_1_0_1__12 -> P0_1_1_0_1__13 [label = <>, weight = 100]
+P0_1_1_0_0__5 -> P0_1_1_0_0__6 [label = <>, weight = 100]
+P0_1_0__4 [label = "", style = invisible]
+P0_1_0__3 -> P0_1_0__4 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_1__15 [label = "", style = invisible]
+P0_0_0_1_1_1__14 -> P0_0_0_1_1_1__15 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_1__31 [label = "", style = invisible]
+P0_0_0_1_1_0_0_1__30 -> P0_0_0_1_1_0_0_1__31 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_0__31 -> P0_0_0_1_1_0_0_0__32 [label = <>, weight = 100]
+P0_0_0_1_0__24 -> P0_0_0_1_0__25 [label = <>, weight = 100]
+P0_0_0_0__24 -> P0_0_0_0__25 [label = <>, weight = 100]
+P__18 -> P__19 [label = <>, weight = 100]
+{rank = same; P__19 P0_0_0_0__25 P0_0_0_1_0__25 P0_0_0_1_1_0_0_0__32 P0_0_0_1_1_0_0_1__31 P0_0_0_1_1_1__15 P0_1_0__4 P0_1_1_0_0__6}
+P0_1_1_0_0__6 -> P0_1_1_0_0__7 [label = <>, weight = 100]
+P__19 -> P__20 [label = <>, weight = 100]
+{rank = same; P__20 P0_1_1_0_0__7}
+P0_1_1_0_0__7 -> P__20 [label = <~X_2>, dir = back, arrowhead = normal]
+P0_1_1_0_0__7 -> P0_1_1_0_0__8 [label = <>, weight = 100]
+P0_1_0__5 [label = "", style = invisible]
+P0_1_0__4 -> P0_1_0__5 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_1__16 [label = "", style = invisible]
+P0_0_0_1_1_1__15 -> P0_0_0_1_1_1__16 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_1__32 [label = "", style = invisible]
+P0_0_0_1_1_0_0_1__31 -> P0_0_0_1_1_0_0_1__32 [label = <>, weight = 100, style = invisible]
+P0_0_0_1_1_0_0_0__32 -> P0_0_0_1_1_0_0_0__33 [label = <>, weight = 100]
+P0_0_0_1_0__25 -> P0_0_0_1_0__26 [label = <>, weight = 100]
+P0_0_0_0__25 -> P0_0_0_0__26 [label = <>, weight = 100]
+P__20 -> P__21 [label = <>, weight = 100]
+{rank = same; P__21 P0_0_0_0__26 P0_0_0_1_0__26 P0_0_0_1_1_0_0_0__33 P0_0_0_1_1_0_0_1__32 P0_0_0_1_1_1__16 P0_1_0__5 P0_1_1_0_0__8}
+P0_1_1_0_0__8 -> P0_1_1_0_0__9 [label = <>, weight = 100]
+P0_1_1_0_0__9 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{11}</FONT><FONT COLOR="blue">event</FONT> eJudgeReceivedR(stamp_2,(id(pk(sk_3),<br/>
+exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),(pk(sk_3),(a_4,(edhoc_kdf(hkdfextract(<br/>
+hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),a_4))),hash_length),sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+a_12,sk_3)))))))</TD></TR></TABLE>>]
+P0_1_1_0_0__9 -> P0_1_1_0_0__10 [label = <>, weight = 100]
+P0_1_1_0_0__10 -> P0_1_1_0_0__11 [label = <>, weight = 100]
+P0_1_1_0_0__11 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{13}</FONT><FONT COLOR="blue">event</FONT> eWasActiveR(pk(sk_3),hash((wrap(exp(<br/>
+g,Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),<br/>
+(wrap(a_8),(wrap(a_9),a_10)))))))),(id(pk(sk_3),<br/>
+exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),(pk(sk_3),(a_4,(edhoc_kdf(hkdfextract(<br/>
+hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),a_4))),hash_length),sign((sSignature1,<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,<br/>
+Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),(<br/>
+wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(a_4,<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length)))))),<br/>
+a_12,sk_3)))))))</TD></TR></TABLE>>]
+P0_1_1_0_0__11 -> P0_1_1_0_0__12 [label = <>, weight = 100]
+Abbrev [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"><TR> <TD> Abbreviations </TD></TR><TR><TD>~M_3 = exp(g,Y_1)</TD></TR><TR><TD>~M_4 = encxor((a_3,(id(pk(sk_3),exp(g,ltdh_1)),(sign(<br/>
+(sSignature1,(id(pk(sk_3),exp(g,ltdh_1)),(hash(<br/>
+(wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),(a_4,edhoc_kdf(hkdfextract(hash((wrap(<br/>
+exp(g,Y_1)),wrap(hash((wrap(method_two),(wrap(<br/>
+a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),exp(a_8,<br/>
+Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),(hash((<br/>
+wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),(<br/>
+wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),(<br/>
+pk(sk_3),a_4))),hash_length)))))),srep,sk_3),a_4))),<br/>
+edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),wrap(<br/>
+hash((wrap(method_two),(wrap(a_7),(wrap(a_8),(<br/>
+wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stzero,hash(<br/>
+(wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+plaintext_length))</TD></TR><TR><TD>~M_5 = a_3</TD></TR><TR><TD>~X_1 = (~M,(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(~M_1,(a_4,(edhoc_kdf(hkdfextract(hash((wrap(~M_3),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),exp(a_8,~M_6)),stwo,(~M,<br/>
+(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(~M_1,a_4))),hash_length),mangle(1-proj-2-tuple(<br/>
+2-proj-2-tuple(2-proj-2-tuple(decxor(~M_4,edhoc_kdf(<br/>
+hkdfextract(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,~M_6)),stzero,hash((wrap(~M_3),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),plaintext_length))))),a_11))))))<br/>
+=<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(<br/>
+g,Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),<br/>
+(wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(<br/>
+a_4,(edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length),<br/>
+sign((sSignature1,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),(a_4,edhoc_kdf(hkdfextract(hash((wrap(<br/>
+exp(g,Y_1)),wrap(hash((wrap(method_two),(wrap(<br/>
+a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),exp(a_8,<br/>
+Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),(hash((<br/>
+wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),(<br/>
+wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),(<br/>
+pk(sk_3),a_4))),hash_length)))))),a_11,sk_3))))))</TD></TR><TR><TD>~X_2 = (~M,(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(~M_1,(a_4,(edhoc_kdf(hkdfextract(hash((wrap(~M_3),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),exp(a_8,~M_6)),stwo,(~M,<br/>
+(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(~M_1,a_4))),hash_length),mangle(1-proj-2-tuple(<br/>
+2-proj-2-tuple(2-proj-2-tuple(decxor(~M_4,edhoc_kdf(<br/>
+hkdfextract(hash((wrap(~M_3),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+exp(a_8,~M_6)),stzero,hash((wrap(~M_3),wrap(hash(<br/>
+(wrap(method_two),(wrap(a_7),(wrap(a_8),(wrap(<br/>
+a_9),a_10)))))))),plaintext_length))))),a_12))))))<br/>
+=<br/>
+(id(pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(<br/>
+g,Y_1)),wrap(hash((wrap(method_two),(wrap(a_7),<br/>
+(wrap(a_8),(wrap(a_9),a_10)))))))),(pk(sk_3),(<br/>
+a_4,(edhoc_kdf(hkdfextract(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),exp(a_8,Y_1)),stwo,(id(<br/>
+pk(sk_3),exp(g,ltdh_1)),(hash((wrap(exp(g,Y_1)),<br/>
+wrap(hash((wrap(method_two),(wrap(a_7),(wrap(a_8),<br/>
+(wrap(a_9),a_10)))))))),(pk(sk_3),a_4))),hash_length),<br/>
+sign((sSignature1,(id(pk(sk_3),exp(g,ltdh_1)),<br/>
+(hash((wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),<br/>
+(wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),<br/>
+(pk(sk_3),(a_4,edhoc_kdf(hkdfextract(hash((wrap(<br/>
+exp(g,Y_1)),wrap(hash((wrap(method_two),(wrap(<br/>
+a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),exp(a_8,<br/>
+Y_1)),stwo,(id(pk(sk_3),exp(g,ltdh_1)),(hash((<br/>
+wrap(exp(g,Y_1)),wrap(hash((wrap(method_two),(<br/>
+wrap(a_7),(wrap(a_8),(wrap(a_9),a_10)))))))),(<br/>
+pk(sk_3),a_4))),hash_length)))))),a_12,sk_3))))))</TD></TR></TABLE>>]Abbrev -> P__0 [style = invisible, weight =100]}

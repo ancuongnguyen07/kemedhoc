@@ -1,0 +1,102 @@
+[
+  "c4df062ec345d76a29a7da0f8767dea3",
+  [
+    [
+      "Vale.Transformers.BoundedInstructionEffects.rw_set",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "Prims_interpretation_Tm_arrow_2eaa01e78f73e9bab5d0955fc1a662da",
+        "Vale.Transformers.BoundedInstructionEffects_interpretation_Tm_arrow_e620a04edac012a53c47403a0ec32e8b",
+        "assumption_Prims.dtuple2__uu___haseq",
+        "assumption_Prims.list__uu___haseq", "equation_Prims.eqtype",
+        "equation_Vale.Transformers.BoundedInstructionEffects.location_with_value",
+        "equation_Vale.Transformers.BoundedInstructionEffects.locations_with_values",
+        "equation_Vale.Transformers.Locations.location_eq",
+        "function_token_typing_Vale.Transformers.BoundedInstructionEffects.location_with_value",
+        "haseqTm_refine_6c73d5b1afd9626f040a85793e804088",
+        "interpretation_Tm_abs_452830438df0c858dc7aff64408b4299",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_interpretation_Tm_refine_6c73d5b1afd9626f040a85793e804088",
+        "refinement_kinding_Tm_refine_6c73d5b1afd9626f040a85793e804088",
+        "typing_Tm_abs_452830438df0c858dc7aff64408b4299",
+        "typing_Vale.Transformers.Locations.location",
+        "typing_Vale.Transformers.Locations.location_val_eqt"
+      ],
+      0,
+      "17e1cbd3c99751e9ebd19c4d4f1aaaed"
+    ],
+    [
+      "Vale.Transformers.BoundedInstructionEffects.unchanged_at",
+      1,
+      1,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_b026a6fd173d309d0f119212ecf58b64_0",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "fuel_guarded_inversion_Prims.list", "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "99d412bb3def0d1a87ed433ee3ac287e"
+    ],
+    [
+      "Vale.Transformers.BoundedInstructionEffects.constant_on_execution",
+      1,
+      1,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "binder_x_01ff889393c4884064895df8d812ac8f_0",
+        "disc_equation_Prims.Cons", "disc_equation_Prims.Nil",
+        "equation_Vale.Transformers.BoundedInstructionEffects.location_with_value",
+        "equation_Vale.Transformers.BoundedInstructionEffects.locations_with_values",
+        "fuel_guarded_inversion_Prims.list", "subterm_ordering_Prims.Cons"
+      ],
+      0,
+      "4987492420a2c7a8187f90b047228152"
+    ],
+    [
+      "Vale.Transformers.BoundedInstructionEffects.bounded_effects",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "Prims_interpretation_Tm_arrow_2eaa01e78f73e9bab5d0955fc1a662da",
+        "Vale.Transformers.BoundedInstructionEffects_interpretation_Tm_arrow_e620a04edac012a53c47403a0ec32e8b",
+        "assumption_Prims.dtuple2__uu___haseq", "equation_Prims.eqtype",
+        "equation_Vale.Transformers.BoundedInstructionEffects.location_with_value",
+        "equation_Vale.Transformers.Locations.location_eq",
+        "haseqTm_refine_6c73d5b1afd9626f040a85793e804088",
+        "interpretation_Tm_abs_452830438df0c858dc7aff64408b4299",
+        "refinement_interpretation_Tm_refine_414d0a9f578ab0048252f8c8f552b99f",
+        "refinement_interpretation_Tm_refine_6c73d5b1afd9626f040a85793e804088",
+        "refinement_kinding_Tm_refine_6c73d5b1afd9626f040a85793e804088",
+        "typing_Tm_abs_452830438df0c858dc7aff64408b4299",
+        "typing_Vale.Transformers.Locations.location",
+        "typing_Vale.Transformers.Locations.location_val_eqt"
+      ],
+      0,
+      "a841c5f70553ecf999b6d0760a899a57"
+    ],
+    [
+      "Vale.Transformers.BoundedInstructionEffects.lemma_machine_eval_code_Ins_bounded_effects",
+      1,
+      1,
+      0,
+      [
+        "@query", "constructor_distinct_FStar.Pervasives.Native.Some",
+        "disc_equation_FStar.Pervasives.Native.Some",
+        "equation_Vale.X64.Machine_Semantics_s.machine_eval_code_ins_def",
+        "projection_inverse_BoxBool_proj_0",
+        "projection_inverse_FStar.Pervasives.Native.Some_a",
+        "projection_inverse_FStar.Pervasives.Native.Some_v"
+      ],
+      0,
+      "cd25a873517fe3fe6d0cef1f51e3da67"
+    ]
+  ]
+]

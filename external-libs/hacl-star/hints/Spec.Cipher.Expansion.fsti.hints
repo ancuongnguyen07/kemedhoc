@@ -1,0 +1,20 @@
+[
+  "df4a70d3b53c17339e0449128000b7e2",
+  [
+    [
+      "Spec.Cipher.Expansion.cipher_alg_of_impl",
+      1,
+      2,
+      1,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "disc_equation_Spec.Cipher.Expansion.Hacl_CHACHA20",
+        "disc_equation_Spec.Cipher.Expansion.Vale_AES128",
+        "disc_equation_Spec.Cipher.Expansion.Vale_AES256",
+        "fuel_guarded_inversion_Spec.Cipher.Expansion.impl"
+      ],
+      0,
+      "9488658c56c4aba8e11a1e822cb530d8"
+    ]
+  ]
+]

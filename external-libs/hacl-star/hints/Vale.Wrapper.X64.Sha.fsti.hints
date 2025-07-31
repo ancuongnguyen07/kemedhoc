@@ -1,0 +1,27 @@
+[
+  "d3fa42bb556a700381fe5fd6d8b0d598",
+  [
+    [
+      "Vale.Wrapper.X64.Sha.sha256_update",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query", "equation_Lib.IntTypes.uint32",
+        "equation_Lib.IntTypes.uint8", "equation_LowStar.Buffer.buffer",
+        "equation_LowStar.Buffer.trivial_preorder",
+        "equation_Vale.SHA.SHA_helpers.block_length",
+        "equation_Vale.SHA.SHA_helpers.byte",
+        "equation_Vale.SHA.SHA_helpers.size_block_w_256",
+        "function_token_typing_Lib.IntTypes.uint32",
+        "function_token_typing_Lib.IntTypes.uint8",
+        "lemma_LowStar.Monotonic.Buffer.length_as_seq",
+        "projection_inverse_BoxInt_proj_0",
+        "refinement_interpretation_Tm_refine_01dcf0288fdef2604902000932630d2f",
+        "typing_LowStar.Buffer.trivial_preorder"
+      ],
+      0,
+      "18ee746994ba8373fad578f4c23fcb0b"
+    ]
+  ]
+]

@@ -1,0 +1,64 @@
+[
+  "961ce28823f43bb639076819f5f19ec0",
+  [
+    [
+      "Vale.SHA.PPC64LE.va_ens_Sha_update_bytes_main",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query", "equation_Prims.l_and",
+        "equation_Prims.squash", "equation_Prims.subtype_of",
+        "equation_Vale.PPC64LE.Decls.va_state_eq",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.block_length",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.byte",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.size_block_w_256",
+        "fuel_guarded_inversion_Vale.PPC64LE.Machine_s.state",
+        "projection_inverse_BoxInt_proj_0",
+        "refinement_interpretation_Tm_refine_2de20c066034c13bf76e9c0b94f4806c"
+      ],
+      0,
+      "1b8cc0262cc8183f11106bec13d9015f"
+    ],
+    [
+      "Vale.SHA.PPC64LE.va_lemma_Sha_update_bytes_main",
+      1,
+      1,
+      0,
+      [
+        "@query", "equation_Vale.SHA.PPC64LE.SHA_helpers.block_length",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.byte",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.size_block_w_256",
+        "projection_inverse_BoxInt_proj_0"
+      ],
+      0,
+      "5aa27f60892b2fa17450f0168409f05f"
+    ],
+    [
+      "Vale.SHA.PPC64LE.va_wp_Sha_update_bytes_main",
+      1,
+      1,
+      0,
+      [
+        "@query", "equation_Vale.SHA.PPC64LE.SHA_helpers.block_length",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.byte",
+        "equation_Vale.SHA.PPC64LE.SHA_helpers.size_block_w_256",
+        "projection_inverse_BoxInt_proj_0"
+      ],
+      0,
+      "da79b9a535cd9ab1a9b11ddae122dcf1"
+    ],
+    [
+      "Vale.SHA.PPC64LE.va_quick_Sha_update_bytes_main",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "6d157a313a07dab1eb3017bb671760a5"
+    ]
+  ]
+]

@@ -1,0 +1,58 @@
+# This Makefile can be included by client projects; it exports the set of
+# include directories relative to HACL_HOME and exports the set of needed
+# karamel flags to successfully extract Vale.
+VALE_BUNDLES=\
+  -bundle 'Vale.Stdcalls.*,Vale.Interop,Vale.Interop.*,Vale.Wrapper.X64.*[rename=Vale]' \
+  -bundle 'Vale.Inline.X64.*[rename=Vale_Inline]' \
+  -bundle Vale.*[rename=Unused2]
+
+# NOTE: Please keep this list of directories in sync with
+# Hacl.fst.config.json and vale/Hacl.Vale.fst.config.json so the vscode
+# extension works seamlessly.
+
+# TODO: no more separate variable definitions?
+LIB_DIR		= $(HACL_HOME)/lib
+SPECS_DIR 	= $(HACL_HOME)/specs $(addprefix $(HACL_HOME)/specs/,lemmas tests drbg frodo tests/p256)
+CODE_DIRS	= $(addprefix $(HACL_HOME)/code/,hash hmac hkdf drbg hpke sha3 sha2-mb ecdsap256 poly1305 streaming \
+  blake2 chacha20 chacha20poly1305 curve25519 tests ed25519 salsa20 nacl-box meta frodo fallback bignum rsapss ffdhe k256)
+EVERCRYPT_DIRS  = $(addprefix $(HACL_HOME)/providers/,evercrypt evercrypt/fst test test/vectors)
+# Vale dirs also include directories that only contain .vaf files
+# (for a in $(find vale -iname '*.fst' -or -iname '*.fsti' -or -iname '*.vaf'); do dirname $a; done) | sort | uniq
+VALE_DIRS	= \
+  $(HACL_HOME)/vale/code/arch \
+  $(HACL_HOME)/vale/code/arch/x64 \
+  $(HACL_HOME)/vale/code/arch/x64/interop \
+  $(HACL_HOME)/vale/code/arch/ppc64le \
+  $(HACL_HOME)/vale/code/crypto/aes \
+  $(HACL_HOME)/vale/code/crypto/aes/x64 \
+  $(HACL_HOME)/vale/code/crypto/aes/ppc64le \
+  $(HACL_HOME)/vale/code/crypto/bignum \
+  $(HACL_HOME)/vale/code/crypto/ecc/curve25519 \
+  $(HACL_HOME)/vale/code/crypto/poly1305 \
+  $(HACL_HOME)/vale/code/crypto/poly1305/x64 \
+  $(HACL_HOME)/vale/code/crypto/sha \
+  $(HACL_HOME)/vale/code/lib/collections \
+  $(HACL_HOME)/vale/code/lib/math \
+  $(HACL_HOME)/vale/code/lib/util \
+  $(HACL_HOME)/vale/code/lib/util/x64 \
+  $(HACL_HOME)/vale/code/lib/util/x64/stdcalls \
+  $(HACL_HOME)/vale/code/lib/transformers \
+  $(HACL_HOME)/vale/code/test \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/Intel/aes/x64 \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/OpenSSL/aes \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/OpenSSL/poly1305/x64 \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/OpenSSL/sha \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/rfc7748/curve25519/x64 \
+  $(HACL_HOME)/vale/code/thirdPartyPorts/SymCrypt/bignum \
+  $(HACL_HOME)/vale/specs/crypto \
+  $(HACL_HOME)/vale/specs/defs \
+  $(HACL_HOME)/vale/specs/hardware \
+  $(HACL_HOME)/vale/specs/interop \
+  $(HACL_HOME)/vale/specs/math
+
+ALL_HACL_SOURCE_DIRS = \
+  $(LIB_DIR) $(SPECS_DIR) $(CODE_DIRS) $(VALE_DIRS) \
+  $(EVERCRYPT_DIRS) \
+  $(KRML_HOME)/runtime
+
+ALL_HACL_DIRS	?= $(ALL_HACL_SOURCE_DIRS) $(HACL_HOME)/obj

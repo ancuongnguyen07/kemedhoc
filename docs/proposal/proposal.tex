@@ -1,0 +1,140 @@
+%The paper size, font size and document type are defined in the following
+\documentclass[a4paper,12pt]{article}
+
+%Uncomment the following line, if you write in Finnish (special characters)
+%\usepackage[utf8]{inputenc}
+
+%\usepackage[finnish]{babel}
+\usepackage[english]{babel}
+
+\usepackage{graphicx}
+\usepackage[parfill]{parskip}
+
+%useful special symbols:
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage[toc,page]{appendix}
+
+%a useful package if you write url addresses:
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{cleveref}
+% \def\chapterautorefname{Chapter}
+% \def\sectionautorefname{Section}
+% \renewcommand{\sectionautorefname}{Section}
+
+%a package for figures:
+% \usepackage[dvips]{color}
+\usepackage{epsfig}
+
+%a package for rotated figures and tables:
+\usepackage{rotating}
+
+\usepackage{biblatex}
+\addbibresource{references.bib}
+
+\usepackage{listings} % For including code
+\usepackage{xcolor}   % For defining code colors
+
+\usepackage{float} % For forcing figure position
+
+\usepackage{csquotes}
+
+%% Define custom colors for the code
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+% Define Python code style
+% \lstdefinestyle{mystyle}{
+%     backgroundcolor=\color{backcolour},   
+%     commentstyle=\color{codegreen},
+%     keywordstyle=\color{magenta},
+%     numberstyle=\tiny\color{codegray},
+%     stringstyle=\color{codepurple},
+%     basicstyle=\ttfamily\footnotesize,
+%     breakatwhitespace=false,         
+%     breaklines=true,                 
+%     captionpos=b,                    
+%     keepspaces=true,                 
+%     numbers=left,                    
+%     numbersep=5pt,                  
+%     showspaces=false,                
+%     showstringspaces=false,
+%     showtabs=false,                  
+%     tabsize=4
+% }
+
+% Apply the style to Python listings
+% \lstset{style=mystyle}
+
+\graphicspath{ {./figures/} }
+
+%if you want smaller page margins, uncomment and adjust the following
+%\textheight=24.3cm
+%\topmargin=-1.8cm
+%\textwidth=16.7cm
+%\oddsidemargin=-0.3cm
+%\evensidemargin=0.0cm
+
+
+%Create your own environments
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{theorem}{Theorem}
+
+
+%and useful macrosfor faster writing (benefit: you can change the notations 
+%later, e.g., two possible notations for your vector x)
+\newcommand{\Mmatr}{\ensuremath{\mathbf{M}}}
+\newcommand{\xvec}{\ensuremath{\overline{x}}}
+\newcommand{\xvecII}{\ensuremath{\mathbf{x}}} %alternative def
+\newcommand{\Xset}{\ensuremath{\mathbf{X}}}
+\newcommand{\fr}{\ensuremath{\mathit{fr}}} %just neater typing
+
+%If you want to remove the space before paragraphs uncomment the following.
+%Remember then to leave an empty line between paragraphs! 
+%\setlength{\parindent}{0pt}
+
+
+\title{Master's thesis proposal: Post-quantum Key Exchange Over COSE}
+\author{Cuong Nguyen \\ \href{mailto:cuong.c.nguyen@aalto.fi}{cuong.c.nguyen@aalto.fi}
+    \and Advisor: Sampo Sovio \\ \href{mailto:sampo.sovio@huawei.com}{sampo.sovio@huawei.com}
+}
+
+%Uncomment the following, if you don't want the date to be printed
+%\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% \listoffigures
+% \newpage
+
+% include tex files of sections here, e.g.
+% \input{section1.tex}
+% \input{section2.tex}
+\input{content.tex}
+
+%Bibliography style. The alpha style generates references with 
+%first letters and year. If you prefer numbers, use style plain.
+% \bibliographystyle{alpha}
+% \bibliographystyle{plain}
+% \bibliography{ref}
+
+\printbibliography{}
+
+% Demo for adding appendices
+% \begin{appendices}
+%     \input{tex/appendices.tex}
+% \end{appendices}
+
+
+\end{document}

@@ -1,0 +1,17 @@
+*.native
+*.byte
+_build
+/krml
+tags
+*.checked
+*.checked.lax
+*~
+book/_build
+fstar-mode.el
+.#*
+lib/Version.ml
+*.runlim
+karamel-nofstar.opam
+lib/AutoConfig.ml
+*.orig
+.exrc

@@ -1,0 +1,535 @@
+@online{nike-group-discussion,
+  author = {John Mattsson et al.},
+  title = {Non-Interactive Key Exchange, CSIDH, and Swoosh},
+  year = {2025},
+  url = {https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/y_nQ3xMDRy8/m/uI1nU5iuAAAJ},
+  urldate = {2025-02-10}
+}
+
+@techreport{eu-quantum-migration,
+  author = {Olejnik, Lukasz and Riemann, Robert and Zerdick, Thomas},
+  institution = {Technology and Privacy understandingnit of the European Data Protection Supervisor (EDPS)},
+  title = {EDPS TechDispatch on Quantum Computing and Cryptography},
+  year = {2020},
+  url = {https://www.edps.europa.eu/sites/default/files/publication/06-08-2020_techdispatch_quantum_computing_en.pdf},
+}
+
+@misc{crqc,
+  title={Identifying Research Challenges in Post Quantum Cryptography Migration and Cryptographic Agility}, 
+  author={David Ott and Christopher Peikert and other workshop participants},
+  year={2019},
+  eprint={1909.07353},
+  archivePrefix={arXiv},
+  primaryClass={cs.CY},
+  url={https://arxiv.org/abs/1909.07353}, 
+}
+
+@inproceedings{edhoc-sec-analysis-draft-12,
+author = {Charlie Jacomme and Elise Klein and Steve Kremer and Ma{\"\i}wenn Racouchot},
+title = {A comprehensive, formal and automated analysis of the {EDHOC} protocol},
+booktitle = {32nd USENIX Security Symposium (USENIX Security 23)},
+year = {2023},
+isbn = {978-1-939133-37-3},
+address = {Anaheim, CA},
+pages = {5881--5898},
+url = {https://www.usenix.org/conference/usenixsecurity23/presentation/jacomme},
+publisher = {USENIX Association},
+month = aug
+}
+
+@inproceedings{edhoc-sec-analysis-draft-15,
+author={Cottier, Baptiste
+and Pointcheval, David},
+editor={Jourdan, Guy-Vincent
+and Mounier, Laurent
+and Adams, Carlisle
+and S{\`e}des, Florence
+and Garcia-Alfaro, Joaquin},
+title={Security Analysis of Improved EDHOC Protocol},
+booktitle={Foundations and Practice of Security},
+year={2023},
+publisher={Springer Nature Switzerland},
+address={Cham},
+pages={3-18},
+isbn={978-3-031-30122-3}
+}
+
+@inproceedings{edhoc-sec-analysis-draft-17,
+  author={Günther, Felix and Tshibumbu Mukendi, Marc Ilunga},
+  booktitle={2023 IEEE 8th European Symposium on Security and Privacy (EuroS\&P)}, 
+  title={Careful with MAc-then-SIGn: A Computational Analysis of the EDHOC Lightweight Authenticated Key Exchange Protocol}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={773-796},
+  keywords={Analytical models;Protocols;Buildings;Authentication;Registers;Cryptography},
+  doi={10.1109/EuroSP57164.2023.00051}
+}
+
+
+@inproceedings{edhoc-sec-analysis-draft-23,
+author={Ferreira, Lo{\"i}c},
+editor={Oswald, Elisabeth},
+title={Computational Security Analysis of the Full EDHOC Protocol},
+booktitle={Topics in Cryptology -- CT-RSA 2024},
+year={2024},
+publisher={Springer Nature Switzerland},
+address={Cham},
+pages={25-48},
+abstract={Ephemeral Diffie-Hellman Over COSE (EDHOC) is designed to be a compact and lightweight authenticated key exchange protocol, providing mutual authentication, forward secrecy, and identity protection. EDHOC aims at being suitable for low-power networks such as cellular IoT, 6TiSCH, and LoRaWAN. In this paper, we perform a security analysis of the last draft of EDHOC (draft {\$}{\$}23{\$}{\$}23). We analyse the full protocol including its four different authentication methods. Our results show that the security of the authenticated key exchange in EDHOC depends essentially on that of the authenticated encryption algorithm used during that phase. Finally, we provide more precise estimates of the computational security bounds for all authentication methods in EDHOC so that meaningful choices of quantitative parameters can be done to instantiate the protocol securely.},
+isbn={978-3-031-58868-6}
+}
+
+
+
+@misc{edhoc-rfc,
+    series =    {Request for Comments},
+    number =    9528,
+    howpublished =  {RFC 9528},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC9528},
+    url =       {https://www.rfc-editor.org/info/rfc9528},
+    author =    {Göran Selander and John Preuß Mattsson and Francesca Palombini},
+    title =     {{Ephemeral Diffie-Hellman Over COSE (EDHOC)}},
+    pagetotal = 82,
+    year =      2024,
+    month =     mar,
+}
+
+@article{edhoc-ecosystem-overview,
+  author={Höglund, Rikard and Tiloca, Marco and Selander, Göran and Mattsson, John Preuß and Vučinić, Mališa and Watteyne, Thomas},
+  journal={IEEE Access}, 
+  title={Secure Communication for the IoT: EDHOC and (Group) OSCORE Protocols}, 
+  year={2024},
+  volume={12},
+  number={},
+  pages={49865-49877},
+  keywords={Protocols;Authentication;Security;Encoding;Internet of Things;Internet;Protection;Communication system security;IETF;standardization;security;Internet of Things;CoAP;EDHOC;OSCORE},
+  doi={10.1109/ACCESS.2024.3384095}
+}
+
+@article{edhoc-security-overview,
+  author={Pérez, Elsa López and Selander, Göran and Mattsson, John Preuß and Watteyne, Thomas and Vučinić, Mališa},
+  journal={Computer}, 
+  title={EDHOC Is a New Security Handshake Standard: An Overview of Security Analysis}, 
+  year={2024},
+  volume={57},
+  number={9},
+  pages={101-110},
+  keywords={Protocols;Computer security;Standards},
+  doi={10.1109/MC.2024.3415908}
+}
+
+
+@inproceedings{swoosh,
+author = {Phillip Gajland and Bor de Kock and Miguel Quaresma and Giulio Malavolta and Peter Schwabe},
+title = {{SWOOSH}: Efficient {Lattice-Based} {Non-Interactive} Key Exchange},
+booktitle = {33rd USENIX Security Symposium (USENIX Security 24)},
+year = {2024},
+isbn = {978-1-939133-44-1},
+address = {Philadelphia, PA},
+pages = {487--504},
+url = {https://www.usenix.org/conference/usenixsecurity24/presentation/gajland},
+publisher = {USENIX Association},
+month = aug
+}
+
+@article{split-keys-sts,
+AUTHOR = {Gizem Akman and Mohamed Taoufiq Damir and Philip Ginzboorg and Sampo Sovio and Valtteri Niemi},
+TITLE = {Split keys for station-to-station (STS) protocols},
+JOURNAL = {Journal of Surveillance, Security and Safety},
+VOLUME = {4},
+YEAR = {2023},
+NUMBER = {3},
+ARTICLE-NUMBER = {62-93},
+URL = {https://www.oaepublish.com/articles/jsss.2023.16},
+ISSN = {2694-1015},
+DOI = {10.20517/jsss.2023.16}
+}
+
+@inproceedings{kem-design,
+author="Dent, Alexander W.",
+editor="Paterson, Kenneth G.",
+title="A Designer's Guide to KEMs",
+booktitle="Cryptography and Coding",
+year="2003",
+publisher="Springer Berlin Heidelberg",
+address="Berlin, Heidelberg",
+pages="133--151",
+isbn="978-3-540-40974-8"
+}
+
+@article{kem-definition,
+author = {Cramer, Ronald and Shoup, Victor},
+title = {Design and Analysis of Practical Public-Key Encryption Schemes Secure against Adaptive Chosen Ciphertext Attack},
+journal = {SIAM Journal on Computing},
+volume = {33},
+number = {1},
+pages = {167-226},
+year = {2003},
+doi = {10.1137/S0097539702403773},
+URL = {https://doi.org/10.1137/S0097539702403773},
+eprint = {https://doi.org/10.1137/S0097539702403773}
+}
+
+@inproceedings{nike-abstract,
+author={Cash, David
+and Kiltz, Eike
+and Shoup, Victor},
+editor={Smart, Nigel},
+title={The Twin Diffie-Hellman Problem and Applications},
+booktitle={Advances in Cryptology -- EUROCRYPT 2008},
+year={2008},
+publisher={Springer Berlin Heidelberg},
+address={Berlin, Heidelberg},
+pages={127-145},
+isbn={978-3-540-78967-3}
+}
+
+@inproceedings{nike-definition,
+author={Freire, Eduarda S. V.
+and Hofheinz, Dennis
+and Kiltz, Eike
+and Paterson, Kenneth G.},
+editor={Kurosawa, Kaoru
+and Hanaoka, Goichiro},
+title={Non-Interactive Key Exchange},
+booktitle={Public-Key Cryptography -- PKC 2013},
+year={2013},
+publisher={Springer Berlin Heidelberg},
+address={Berlin, Heidelberg},
+pages={254-271},
+isbn={978-3-642-36362-7}
+}
+
+
+
+@inproceedings{kemtls,
+  author = {Schwabe, Peter and Stebila, Douglas and Wiggers, Thom},
+  title = {Post-Quantum {TLS} Without Handshake Signatures},
+  year = {2020},
+  isbn = {9781450370899},
+  publisher = {Association for Computing Machinery},
+  address = {New York, {NY}, {USA}},
+  url = {https://kemtls.org/publication/kemtls/},
+  doi = {10.1145/3372297.3423350},
+  booktitle = {Proceedings of the 2020 {ACM} {SIGSAC} Conference on Computer and Communications Security},
+  pages = {1461–1480},
+  numpages = {20},
+  keywords = {transport layer security, key-encapsulation mechanism, {NIST PQC}, post-quantum cryptography},
+  location = {Virtual Event, {USA}},
+  series = {{CCS '20}}
+}
+
+@inproceedings{optls,
+  author={Krawczyk, Hugo and Wee, Hoeteck},
+  booktitle={2016 IEEE European Symposium on Security and Privacy (EuroS\&P)}, 
+  title={The OPTLS Protocol and TLS 1.3}, 
+  year={2016},
+  volume={},
+  number={},
+  pages={81-96},
+  keywords={Protocols;Servers;Cryptography;Authentication;DH-HEMTs;Analytical models},
+  doi={10.1109/EuroSP.2016.18}
+}
+
+
+@inproceedings{pqc-wireguard,
+  author={Hülsing, Andreas and Ning, Kai-Chun and Schwabe, Peter and Weber, Fiona Johanna and Zimmermann, Philip R.},
+  booktitle={2021 IEEE Symposium on Security and Privacy (SP)}, 
+  title={Post-quantum WireGuard}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={304-321},
+  keywords={Adaptation models;Privacy;Protocols;Authentication;Virtual private networks;Security;Standards},
+  doi={10.1109/SP40001.2021.00030}
+}
+
+@inproceedings{pqc-noise,
+  author = {Angel, Yawning and Dowling, Benjamin and H\"{u}lsing, Andreas and Schwabe, Peter and Weber, Florian},
+  title = {Post Quantum Noise},
+  year = {2022},
+  isbn = {9781450394505},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3548606.3560577},
+  doi = {10.1145/3548606.3560577},
+  abstract = {We introduce PQNoise, a post-quantum variant of the Noise framework. We demonstrate that it is possible to replace the Diffie-Hellman key-exchanges in Noise with KEMs in a secure way. A challenge is the inability to combine key pairs of KEMs, which can be resolved by certain forms of randomness-hardening for which we introduce a formal abstraction. We provide a generic recipe to turn classical Noise patterns into PQNoise patterns. We prove that the resulting PQNoise patterns achieve confidentiality and authenticity in the fACCE model. Moreover we show that for those classical Noise-patterns that have been conjectured or proven secure in the fACCE model our matching PQNoise patterns eventually achieve the same security. Our security proof is generic and applies to any valid PQNoise pattern. This is made possible by another abstraction, called a hash-object, which hides the exact workings of how keying material is processed in an abstract stateful object that outputs pseudorandom keys under different corruption patterns. We also show that the hash chains used in Noise are a secure hash-object. Finally, we demonstrate the practicality of PQNoise delivering benchmarks for several base patterns.},
+  booktitle = {Proceedings of the 2022 ACM SIGSAC Conference on Computer and Communications Security},
+  pages = {97–109},
+  numpages = {13},
+  keywords = {noise, post-quantum cryptography, pqnoise, protocol, provable security},
+  location = {Los Angeles, CA, USA},
+  series = {CCS '22}
+}
+
+@article{ctidh,
+  author={Banegas, Gustavo and Bernstein, Daniel J. and Campos, Fabio and Chou, Tung and Lange, Tanja and Meyer, Michael and Smith, Benjamin and Sot{\' a}kov{\' a}, Jana},
+  title={{CTIDH}: faster constant-time {CSIDH}},
+  journal={IACR Transactions on Cryptographic Hardware and Embedded Systems},
+  volume={2021},
+  number={4},
+  pages={351--387},
+  year=2021,
+  month=aug,
+  doi={10.46586/tches.v2021.i4.351-387},
+  note={Artifact available at \url{https://artifacts.iacr.org/tches/2021/a20}}
+}
+
+@misc{dctidh,
+  author = {Fabio Campos and Andreas Hellenbrand and Michael Meyer and Krijn Reijnders},
+  title = {{dCTIDH}: Fast \& Deterministic {CTIDH}},
+  howpublished = {Cryptology {ePrint} Archive, Paper 2025/107},
+  year = {2025},
+  url = {https://eprint.iacr.org/2025/107}
+}
+
+@inproceedings{csidh,
+  title={CSIDH: An Efficient Post-Quantum Commutative Group Action},
+  booktitle={Advances in Cryptology – ASIACRYPT 2018},
+  series={Lecture Notes in Computer Science},
+  publisher={Springer},
+  volume={11274},
+  pages={395-427},
+  doi={10.1007/978-3-030-03332-3_15},
+  author={Wouter Castryck and Tanja Lange and Chloe Martindale and Lorenz Panny and Joost Renes},
+  year=2018
+}
+
+@inproceedings{csidh-fault-injection,
+  author={Campos, Fabio and Kannwischer, Matthias J. and Meyer, Michael and Onuki, Hiroshi and Stöttinger, Marc},
+  booktitle={2020 Workshop on Fault Detection and Tolerance in Cryptography (FDTC)}, 
+  title={Trouble at the CSIDH: Protecting CSIDH with Dummy-Operations Against Fault Injection Attacks}, 
+  year={2020},
+  volume={},
+  number={},
+  pages={57-65},
+  keywords={Kernel;Computational modeling;Resistance;Public key;Protocols;Optimization;Erbium;Isogeny-based Cryptography;CSIDH;Fault Injection Attack;Fault Resistant Implementation},
+  doi={10.1109/FDTC51366.2020.00015}
+}
+
+@inproceedings{csidh-fault-injection-2,
+author = {Campos, Fabio and Kr\"{a}mer, Juliane and M\"{u}ller, Marcel},
+title = {Safe-Error Attacks on\&nbsp;SIKE and\&nbsp;CSIDH},
+year = {2021},
+isbn = {978-3-030-95084-2},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+url = {https://doi.org/10.1007/978-3-030-95085-9_6},
+doi = {10.1007/978-3-030-95085-9_6},
+abstract = {The isogeny-based post-quantum schemes SIKE (NIST PQC round 3 alternate candidate) and CSIDH (Asiacrypt 2018) have received only little attention with respect to their fault attack resilience so far. We aim to fill this gap and provide a better understanding of their vulnerability by analyzing their resistance towards safe-error attacks. We present four safe-error attacks, two against SIKE and two against a constant-time implementation of CSIDH that uses dummy isogenies. The attacks use targeted bitflips during the respective isogeny-graph traversals. All four attacks lead to full key recovery. By using voltage and clock glitching, we physically carried out two of the attacks - one against each scheme -, thus demonstrate that full key recovery is also possible in practice.},
+booktitle = {Security, Privacy, and Applied Cryptography Engineering: 11th International Conference, SPACE 2021, Kolkata, India, December 10–13, 2021, Proceedings},
+pages = {104–125},
+numpages = {22},
+keywords = {Fault attacks, Isogeny-based cryptography, Post-quantum cryptography},
+location = {Kolkata, India}
+}
+
+@misc{cbor,
+    series =    {Request for Comments},
+    number =    8949,
+    howpublished =  {RFC 8949},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC8949},
+    url =       {https://www.rfc-editor.org/info/rfc8949},
+    author =    {Carsten Bormann and Paul E. Hoffman},
+    title =     {{Concise Binary Object Representation (CBOR)}},
+    pagetotal = 66,
+    year =      2020,
+    month =     dec,
+}
+
+@misc{cose,
+    series =    {Request for Comments},
+    number =    9052,
+    howpublished =  {RFC 9052},
+    publisher = {RFC Editor},
+    doi =       {10.17487/RFC9052},
+    url =       {https://www.rfc-editor.org/info/rfc9052},
+    author =    {Jim Schaad},
+    title =     {{CBOR Object Signing and Encryption (COSE): Structures and Process}},
+    pagetotal = 66,
+    year =      2022,
+    month =     aug,
+}
+
+
+@techreport{FIPS203,
+  author = {National Institute of Standards and Technology},
+  institution = {U.S. Department of Commerce},
+  title = {Module-Lattice-Based Key-Encapsulation Mechanism Standard},
+  address = {Washington, D.C.},
+  doi = {10.6028/NIST.FIPS.203},
+  url = {https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.203.pdf},
+  year = {2024}
+}
+
+@inproceedings{crystal-kyber,
+  author={Bos, Joppe and Ducas, Leo and Kiltz, Eike and Lepoint, T and Lyubashevsky, Vadim and Schanck, John M. and Schwabe, Peter and Seiler, Gregor and Stehle, Damien},
+  booktitle={2018 IEEE European Symposium on Security and Privacy (EuroS\&P)}, 
+  title={CRYSTALS - Kyber: A CCA-Secure Module-Lattice-Based KEM}, 
+  year={2018},
+  volume={},
+  number={},
+  pages={353-367},
+  keywords={Encryption;Lattices;Electronic mail;Protocols;Public key;post quantum cryptography;key encapsulation;module lattices;learning with errors},
+  doi={10.1109/EuroSP.2018.00032}
+}
+
+@article{Fujisaki2013,
+    author={Fujisaki, Eiichiro
+    and Okamoto, Tatsuaki},
+    title={Secure Integration of Asymmetric and Symmetric Encryption Schemes},
+    journal={Journal of Cryptology},
+    year={2013},
+    month={Jan},
+    day={01},
+    volume={26},
+    number={1},
+    pages={80-101},
+    abstract={This paper presents a generic conversion from weak asymmetric and symmetric encryption schemes to an asymmetric encryption scheme that is chosen-ciphertext secure in the random oracle model. Our conversion is the first generic transformation from an arbitrary one-way asymmetric encryption scheme to a chosen-ciphertext secure asymmetric encryption scheme in the random oracle model.},
+    issn={1432-1378},
+    doi={10.1007/s00145-011-9114-1},
+    url={https://doi.org/10.1007/s00145-011-9114-1}
+}
+
+@inproceedings{lwe,
+author = {Regev, Oded},
+title = {On lattices, learning with errors, random linear codes, and cryptography},
+year = {2005},
+isbn = {1581139608},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1060590.1060603},
+doi = {10.1145/1060590.1060603},
+abstract = {Our main result is a reduction from worst-case lattice problems such as SVP and SIVP to a certain learning problem. This learning problem is a natural extension of the 'learning from parity with error' problem to higher moduli. It can also be viewed as the problem of decoding from a random linear code. This, we believe, gives a strong indication that these problems are hard. Our reduction, however, is quantum. Hence, an efficient solution to the learning problem implies a quantum algorithm for SVP and SIVP. A main open question is whether this reduction can be made classical.Using the main result, we obtain a public-key cryptosystem whose hardness is based on the worst-case quantum hardness of SVP and SIVP. Previous lattice-based public-key cryptosystems such as the one by Ajtai and Dwork were only based on unique-SVP, a special case of SVP. The new cryptosystem is much more efficient than previous cryptosystems: the public key is of size \~{O}(n2) and encrypting a message increases its size by \~{O}(n)(in previous cryptosystems these values are \~{O}(n4) and \~{O}(n2), respectively). In fact, under the assumption that all parties share a random bit string of length \~{O}(n2), the size of the public key can be reduced to \~{O}(n).},
+booktitle = {Proceedings of the Thirty-Seventh Annual ACM Symposium on Theory of Computing},
+pages = {84–93},
+numpages = {10},
+keywords = {statistical queries, quantum computing, public key encryption, lattices, cryptography, computational learning theory},
+location = {Baltimore, MD, USA},
+series = {STOC '05}
+}
+
+@article{mlwe,
+author={Langlois, Adeline
+and Stehl{\'e}, Damien},
+title={Worst-case to average-case reductions for module lattices},
+journal={Designs, Codes and Cryptography},
+year={2015},
+month={06},
+day={01},
+volume={75},
+number={3},
+pages={565-599},
+abstract={Most lattice-based cryptographic schemes are built upon the assumed hardness of the Short Integer Solution (SIS) and Learning With Errors (LWE) problems. Their efficiencies can be drastically improved by switching the hardness assumptions to the more compact Ring-SIS and Ring-LWE problems. However, this change of hardness assumptions comes along with a possible security weakening: SIS and LWE are known to be at least as hard as standard (worst-case) problems on euclidean lattices, whereas Ring-SIS and Ring-LWE are only known to be as hard as their restrictions to special classes of ideal lattices, corresponding to ideals of some polynomial rings. In this work, we define the Module-SIS and Module-LWE problems, which bridge SIS with Ring-SIS, and LWE with Ring-LWE, respectively. We prove that these average-case problems are at least as hard as standard lattice problems restricted to module lattices (which themselves bridge arbitrary and ideal lattices). As these new problems enlarge the toolbox of the lattice-based cryptographer, they could prove useful for designing new schemes. Importantly, the worst-case to average-case reductions for the module problems are (qualitatively) sharp, in the sense that there exist converse reductions. This property is not known to hold in the context of Ring-SIS/Ring-LWE: Ideal lattice problems could reveal easy without impacting the hardness of Ring-SIS/Ring-LWE.},
+issn={1573-7586},
+doi={10.1007/s10623-014-9938-4},
+url={https://doi.org/10.1007/s10623-014-9938-4}
+}
+
+
+@misc{ml-kem-ind-cca,
+    author = {José Bacelar Almeida and Santiago Arranz Olmos and Manuel Barbosa and Gilles Barthe and François Dupressoir and Benjamin Grégoire and Vincent Laporte and Jean-Christophe Léchenet and Cameron Low and Tiago Oliveira and Hugo Pacheco and Miguel Quaresma and Peter Schwabe and Pierre-Yves Strub},
+    title = {Formally verifying Kyber Episode V: Machine-checked {IND}-{CCA} security and correctness of {ML}-{KEM} in {EasyCrypt}},
+    howpublished = {Cryptology {ePrint} Archive, Paper 2024/843},
+    year = {2024},
+    url = {https://eprint.iacr.org/2024/843}
+}
+
+@article{lwe-nike-threshold,
+author={Guo, Siyao
+and Kamath, Pritish
+and Rosen, Alon
+and Sotiraki, Katerina},
+title={Limits on the Efficiency of (Ring) LWE-Based Non-interactive Key Exchange},
+journal={Journal of Cryptology},
+year={2021},
+month={10},
+day={25},
+volume={35},
+number={1},
+pages={1},
+abstract={{\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-based key-exchange protocols lie at the heart of post-quantum public-key cryptography. However, all existing protocols either lack the non-interactive nature of Diffie--Hellman key exchange or polynomial {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-modulus, resulting in unwanted efficiency overhead. We study the possibility of designing non-interactive {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-based protocols with polynomial {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-modulus. To this end, we identify and formalize simple non-interactive and polynomial {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-modulus variants of the existing protocols, where Alice and Bob simultaneously exchange one or more (ring) {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}samples with polynomial {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-modulus and then run individual key reconciliation functions to obtain the shared key. We point out central barriers and show that such non-interactive key-exchange protocols are impossible in either of the following cases: (1) the reconciliation functions first compute the inner product of the received {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}sample with their private {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}secret. This impossibility is information theoretic. (2) One of the reconciliation functions does not depend on the error of the transmitted {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}sample. This impossibility assumes hardness of {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}. We show that progress toward either a polynomial {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-modulus {\$}{\$}{\backslash}text {\{}NIKE{\}}{\$}{\$}construction or a general impossibility result has implications to the current understanding of lattice-based cryptographic constructions. Overall, our results show possibilities and challenges in designing simple (ring) {\$}{\$}{\backslash}mathsf {\{}LWE{\}}{\$}{\$}-based non-interactive key-exchange protocols.},
+issn={1432-1378},
+doi={10.1007/s00145-021-09406-y},
+url={https://doi.org/10.1007/s00145-021-09406-y}
+}
+
+
+@inproceedings{oscore-tee-performance,
+author = {Hristozov, Stefan and Huber, Manuel and Xu, Lei and Fietz, Jaro and Liess, Marco and Sigl, Georg},
+title = {The Cost of OSCORE and EDHOC for Constrained Devices},
+year = {2021},
+isbn = {9781450381437},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3422337.3447834},
+doi = {10.1145/3422337.3447834},
+booktitle = {Proceedings of the Eleventh ACM Conference on Data and Application Security and Privacy},
+pages = {245–250},
+numpages = {6},
+keywords = {coap security, edhoc, ietf, iot, oscore},
+location = {Virtual Event, USA},
+series = {CODASPY '21}
+}
+
+@article{oscore-iot-performance,
+author = {Gunnarsson, Martin and Malarski, Krzysztof Mateusz and H\"{o}glund, Rikard and Tiloca, Marco},
+title = {Performance Evaluation of Group OSCORE for Secure Group Communication in the Internet of Things},
+year = {2022},
+issue_date = {August 2022},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {3},
+number = {3},
+url = {https://doi.org/10.1145/3523064},
+doi = {10.1145/3523064},
+abstract = {The Constrained Application Protocol (CoAP) is a major application-layer protocol for the Internet of Things (IoT). The recently standardized security protocol Object Security for Constrained RESTful Environments (OSCORE) efficiently provides end-to-end security of CoAP messages at the application layer, also in the presence of untrusted intermediaries. At the same time, CoAP supports one-to-many communication, targeting use cases such as smart lighting and building automation, firmware update, or emergency broadcast. Securing group communication for CoAP has additional challenges. It can be done using the novel Group Object Security for Constrained RESTful Environments (Group OSCORE) security protocol, which fulfills the same security requirements of OSCORE in group communication environments. While evaluations of OSCORE are available, no studies exist on the performance of Group OSCORE on resource-constrained IoT devices.This article presents the results of our extensive performance evaluation of Group OSCORE over two popular constrained IoT platforms, namely Zolertia Zoul and TI Simplelink. We have implemented Group OSCORE for the Contiki-NG operating system and made our implementation available as open source software. We compared Group OSCORE against unprotected CoAP as well as OSCORE. To the best of our knowledge, this is the first comprehensive and experimental evaluation of Group OSCORE over real constrained IoT devices.},
+journal = {ACM Trans. Internet Things},
+month = jul,
+articleno = {19},
+numpages = {31},
+keywords = {End-to-end security, Group OSCORE, Internet of Things, group communication, Contiki-NG}
+}
+
+@inproceedings{edhoc-dtls-performance-comparison,
+  author={Fedrecheski, Geovane and Vučinić, Mališa and Watteyne, Thomas},
+  booktitle={2024 IEEE Wireless Communications and Networking Conference (WCNC)}, 
+  title={Performance Comparison of EDHOC and DTLS 1.3 in Internet-of-Things Environments}, 
+  year={2024},
+  pages={1-6},
+  doi={10.1109/WCNC57260.2024.10570830}
+}
+
+
+@inproceedings{tee-mobile,
+author = {Ekberg, Jan-Erik and Kostiainen, Kari and Asokan, N.},
+title = {Trusted execution environments on mobile devices},
+year = {2013},
+isbn = {9781450324779},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/2508859.2516758},
+doi = {10.1145/2508859.2516758},
+abstract = {A trusted execution environment (TEE) is a secure processing environment that is isolated from the normal processing environment where the device operating system and applications run. The first mobile phones with hardware-based TEEs appeared almost a decade ago, and today almost every smartphone and tablet contains a TEE like ARM TrustZone. Despite such a large-scale deployment, the use of TEE functionality has been limited for developers. With emerging standardization this situation is about to change. In this tutorial, we explain the security features provided by mobile TEEs and describe On-board Credentials (ObC) system that enables third-party TEE development. We discuss ongoing TEE standardization activities, including the recent Global Platform standards and the Trusted Platform Module (TPM) 2.0 specification, and identify open problems for the near future of mobile hardware security.},
+booktitle = {Proceedings of the 2013 ACM SIGSAC Conference on Computer \& Communications Security},
+pages = {1497–1498},
+numpages = {2},
+keywords = {trusted execution environments, mobile devices},
+location = {Berlin, Germany},
+series = {CCS '13}
+}
+
+@inproceedings{tee-overview,
+  author={Sabt, Mohamed and Achemlal, Mohammed and Bouabdallah, Abdelmadjid},
+  booktitle={2015 IEEE Trustcom/BigDataSE/ISPA}, 
+  title={Trusted Execution Environment: What It is, and What It is Not}, 
+  year={2015},
+  volume={1},
+  number={},
+  pages={57-64},
+  keywords={Security;Kernel;Hardware;Runtime;Secure storage;Context;survey;TEE;TrustZone;DRTM;secure boot;secure scheduling;trusted UI},
+  doi={10.1109/Trustcom.2015.357}
+}

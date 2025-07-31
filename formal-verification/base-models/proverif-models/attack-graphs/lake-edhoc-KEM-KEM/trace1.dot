@@ -1,0 +1,86 @@
+digraph {
+graph [ordering = out]
+edge [arrowhead = none, penwidth = 1.6, fontsize = 30]
+node [shape = point, width = 0, height = 0, fontsize = 30]
+Trace [label = <A trace has been found.<br/>
+>, shape = plaintext]
+P0__0 [label = "Honest Process", shape = plaintext]
+P__0 [label = "Attacker", shape = plaintext]
+Trace -> P0__0 [label = "", style = invisible, weight = 100]{rank = same; P0__0 P__0}
+P0__0 -> P0__1 [label = <>, weight = 100]
+P0__1 [label = "!", shape = ellipse]
+P0_0__1 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0__1 -> P0_0__1 [label = <>, weight = 100]
+P0_0__1 -> P0_0__2 [label = <>, weight = 100]
+P0_0__2 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{2}</FONT><FONT COLOR="blue">new </FONT>computerId</TD></TR><TR><TD><FONT COLOR="darkgreen">{3}</FONT><FONT COLOR="blue">new </FONT>sk</TD></TR><TR><TD><FONT COLOR="darkgreen">{4}</FONT><FONT COLOR="blue">new </FONT>sk_auth_kem</TD></TR><TR><TD><FONT COLOR="darkgreen">{5}</FONT><FONT COLOR="blue">new </FONT>ltdh</TD></TR></TABLE>>]
+P0_0__2 -> P0_0__3 [label = <>, weight = 100]
+P0_0__3 -> P0_0__4 [label = <>, weight = 100]
+P__0 -> P__1 [label = <>, weight = 100]
+{rank = same; P__1 P0_0__4}
+P0_0__4 -> P0_0__5 [label = <>, weight = 100]
+P__1 -> P__2 [label = <>, weight = 100]
+{rank = same; P__2 P0_0__5}
+P0_0__5 -> P__2 [label = <(~M,(~M_1,~M_2,~M_3)) = (id(pk(sk),ltdh,kempk(<br/>
+sk_auth_kem)),(pk(sk),ltdh,kempk(sk_auth_kem)))>, arrowhead = normal]
+P0_0__5 -> P0_0__6 [label = <>, weight = 100]
+P__2 -> P__3 [label = <>, weight = 100]
+{rank = same; P__3 P0_0__6}
+P0_0__6 -> P0_0__7 [label = <>, weight = 100]
+P0_0__7 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{8}</FONT><FONT COLOR="blue">event</FONT> eShareLT(ltdh)</TD></TR><TR><TD><FONT COLOR="darkgreen">{9}</FONT><FONT COLOR="blue">event</FONT> eHonest(pk(sk))</TD></TR><TR><TD><FONT COLOR="darkgreen">{10}</FONT><FONT COLOR="blue">event</FONT> eHonest(kempk(sk_auth_kem))</TD></TR><TR><TD><FONT COLOR="darkgreen">{11}</FONT><FONT COLOR="blue">new </FONT>sk_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{12}</FONT><FONT COLOR="blue">new </FONT>sk_auth_kem_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{13}</FONT><FONT COLOR="blue">new </FONT>ltdh_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{14}</FONT><FONT COLOR="blue">new </FONT>computerId_3</TD></TR></TABLE>>]
+P0_0__7 -> P0_0__8 [label = <>, weight = 100]
+P0_0__8 -> P0_0__9 [label = <>, weight = 100]
+P__3 -> P__4 [label = <>, weight = 100]
+{rank = same; P__4 P0_0__9}
+P0_0__9 -> P0_0__10 [label = <>, weight = 100]
+P__4 -> P__5 [label = <>, weight = 100]
+{rank = same; P__5 P0_0__10}
+P0_0__10 -> P__5 [label = <(~M_4,(~M_5,~M_6,~M_7)) = (id(pk(sk_3),ltdh_3,<br/>
+kempk(sk_auth_kem_3)),(pk(sk_3),ltdh_3,kempk(sk_auth_kem_3)))>, arrowhead = normal]
+P0_0__10 -> P0_0__11 [label = <>, weight = 100]
+P__5 -> P__6 [label = <>, weight = 100]
+{rank = same; P__6 P0_0__11}
+P0_0__11 -> P0_0__12 [label = <>, weight = 100]
+P0_0__12 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{17}</FONT><FONT COLOR="blue">event</FONT> eShareLT(ltdh_3)</TD></TR><TR><TD><FONT COLOR="darkgreen">{18}</FONT><FONT COLOR="blue">event</FONT> eHonest(pk(sk_3))</TD></TR><TR><TD><FONT COLOR="darkgreen">{19}</FONT><FONT COLOR="blue">event</FONT> eHonest(kempk(sk_auth_kem_3))</TD></TR></TABLE>>]
+P0_0__12 -> P0_0__13 [label = <>, weight = 100]
+/*RPar */
+P0_0__13 -> P0_0_5__13 [label = <>]
+P0_0__13 -> P0_0_4__13 [label = <>]
+P0_0__13 -> P0_0_3__13 [label = <>]
+P0_0__13 -> P0_0_2__13 [label = <>]
+P0_0__13 -> P0_0_1__13 [label = <>]
+P0_0__13 -> P0_0_0__13 [label = <>]
+P0_0__13 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+{rank = same; P0_0_0__13 P0_0_1__13 P0_0_2__13 P0_0_3__13 P0_0_4__13 P0_0_5__13}
+P0_0_1__13 [label = "!", shape = ellipse]
+P0_0_1_0__13 [label = "", fixedsize = false, width = 0, height = 0, shape = none]
+P0_0_1__13 -> P0_0_1_0__13 [label = <>, weight = 100]
+P0_0_1_0__13 -> P0_0_1_0__14 [label = <>, weight = 100]
+P0_0_1_0__14 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD>Beginning of process <FONT COLOR="darkgreen">I</FONT></TD></TR></TABLE>>]
+P0_0_1_0__14 -> P0_0_1_0__15 [label = <>, weight = 100]
+P0_0_2__13 [label = "!", shape = ellipse]
+P0_0_3__13 [label = "!", shape = ellipse]
+P0_0_4__13 [label = "!", shape = ellipse]
+P0_0_5__13 [label = "!", shape = ellipse]
+P0_0_1_0__15 -> P0_0_1_0__16 [label = <>, weight = 100]
+P0_0_0__13 -> P0_0_0__14 [label = <>, weight = 100]
+P__6 -> P__7 [label = <>, weight = 100]
+{rank = same; P__7 P0_0_0__14 P0_0_1_0__16}
+P0_0_1_0__16 -> P0_0_1_0__17 [label = <>, weight = 100]
+P__7 -> P__8 [label = <>, weight = 100]
+{rank = same; P__8 P0_0_1_0__17}
+P0_0_1_0__17 -> P__8 [label = <(a_1,(a_2,(a_3,a_4)))>, dir = back, arrowhead = normal]
+P0_0_1_0__17 -> P0_0_1_0__18 [label = <>, weight = 100]
+P0_0_0__14 -> P0_0_0__15 [label = <>, weight = 100]
+P__8 -> P__9 [label = <>, weight = 100]
+{rank = same; P__9 P0_0_0__15 P0_0_1_0__18}
+P0_0_1_0__18 -> P0_0_1_0__19 [label = <>, weight = 100]
+P0_0_1_0__19 [shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{292}</FONT><FONT COLOR="blue">event</FONT> eMethodOk(a_1)</TD></TR><TR><TD><FONT COLOR="darkgreen">{293}</FONT><FONT COLOR="blue">new </FONT>X_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{294}</FONT><FONT COLOR="blue">new </FONT>random_authR_3</TD></TR><TR><TD><FONT COLOR="darkgreen">{295}</FONT><FONT COLOR="blue">new </FONT>EAD</TD></TR><TR><TD><FONT COLOR="darkgreen">{296}</FONT><FONT COLOR="blue">event</FONT> eShare(X_3)</TD></TR></TABLE>>]
+P0_0_1_0__19 -> P0_0_1_0__20 [label = <>, weight = 100]
+P0_0_1_0__20 -> P0_0_1_0__21 [label = <>, weight = 100]
+P0_0_1_0__21 [color = red, shape = plaintext, label = <<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="4"> <TR><TD><FONT COLOR="darkgreen">{300}</FONT><FONT COLOR="blue">if</FONT> (<FONT COLOR="blue">choice</FONT>[id(pk(sk),ltdh,kempk(sk_auth_kem)),<br/>
+id(pk(sk_3),ltdh_3,kempk(sk_auth_kem_3))] &ne;<br/>
+id(pk(sk_3),ltdh_3,kempk(sk_auth_kem_3)))<br/>
+This process performs a test that may succeed on<br/>
+one side and not on the other.</TD></TR></TABLE>>]
+P0_0_1_0__21 -> P0_0_1_0__22 [label = <>, weight = 100]
+}

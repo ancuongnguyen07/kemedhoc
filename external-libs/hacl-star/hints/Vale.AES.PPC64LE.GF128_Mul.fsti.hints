@@ -1,0 +1,65 @@
+[
+  "f92258105a7181e43758200835b7a9cb",
+  [
+    [
+      "Vale.AES.PPC64LE.GF128_Mul.va_quick_ShiftLeft128_1",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "6e0893ab2d14a2e31803840d3aff0db3"
+    ],
+    [
+      "Vale.AES.PPC64LE.GF128_Mul.va_quick_High64ToLow",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "f9988ae3db70d35ca86f961837a926cd"
+    ],
+    [
+      "Vale.AES.PPC64LE.GF128_Mul.va_quick_Low64ToHigh",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "6729ed57924090071d7f61ce1743522a"
+    ],
+    [
+      "Vale.AES.PPC64LE.GF128_Mul.va_quick_ReduceMulRev128",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "a5876e6d92bf634e57c0d8f94ae726ab"
+    ],
+    [
+      "Vale.AES.PPC64LE.GF128_Mul.va_quick_Gf128MulRev128",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
+      ],
+      0,
+      "6a8944702cecc4f3ec9dc178693b5806"
+    ]
+  ]
+]

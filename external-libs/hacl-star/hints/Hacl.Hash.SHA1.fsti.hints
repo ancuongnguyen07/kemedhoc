@@ -1,0 +1,19 @@
+[
+  "e949b4acc025958bccc4d6f42a60140d",
+  [
+    [
+      "Hacl.Hash.SHA1.hash_oneshot",
+      1,
+      2,
+      1,
+      [
+        "@query", "constructor_distinct_Spec.Hash.Definitions.SHA1",
+        "equality_tok_Spec.Hash.Definitions.SHA1@tok",
+        "equation_Spec.Hash.Definitions.is_shake",
+        "projection_inverse_BoxBool_proj_0"
+      ],
+      0,
+      "3187259a0288f82e766dfe18a20d92c7"
+    ]
+  ]
+]

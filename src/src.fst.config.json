@@ -1,0 +1,6 @@
+{
+    "fstar_exe":"fstar.exe",
+    "options":["--cache_checked_modules", "--z3rlimit_factor 16"],
+    "include_dirs":["../external-libs/karamel/krmllib", "../external-libs/hacl-star/specs",
+                    "../external-libs/hacl-star/specs/lemmas", "../external-libs/hacl-star/lib"]
+}

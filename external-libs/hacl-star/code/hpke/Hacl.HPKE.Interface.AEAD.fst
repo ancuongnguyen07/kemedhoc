@@ -1,0 +1,60 @@
+module Hacl.HPKE.Interface.AEAD
+
+open FStar.HyperStack
+open FStar.HyperStack.All
+
+open Lib.Buffer
+
+friend Spec.Agile.AEAD
+
+/// These two functions will never be extracted, they are only an interface
+/// boundary for the tactic performing instantiations.
+/// In other files, it is exposed as an assume val, but for AEAD, we need an fsti
+/// since we need to friend Spec.Agile.AEAD to perform the instantiations below,
+/// and assume val are forbidden in interface files
+let aead_encrypt #cs = admit()
+let aead_decrypt #cs = admit()
+
+#set-options "--z3rlimit 60 --fuel 0 --ifuel 0"
+
+inline_for_extraction noextract
+let aead_encrypt_cp32 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_32.encrypt cipher tag input len aad alen key nonce
+
+inline_for_extraction noextract
+let aead_decrypt_cp32 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_32.decrypt input cipher len aad alen key nonce tag
+
+inline_for_extraction noextract
+let aead_encrypt_cp128 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_128.encrypt cipher tag input len aad alen key nonce
+
+inline_for_extraction noextract
+let aead_decrypt_cp128 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_128.decrypt input cipher len aad alen key nonce tag
+
+inline_for_extraction noextract
+let aead_encrypt_cp256 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_256.encrypt cipher tag input len aad alen key nonce
+
+inline_for_extraction noextract
+let aead_decrypt_cp256 =
+  fun _ key nonce alen aad len input output ->
+    let cipher = sub output 0ul len in
+    let tag = sub output len 16ul in
+    Hacl.Chacha20Poly1305_256.decrypt input cipher len aad alen key nonce tag

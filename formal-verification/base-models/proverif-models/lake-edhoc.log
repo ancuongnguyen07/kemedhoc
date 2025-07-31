@@ -1,0 +1,1200 @@
+Linear part:
+exp(exp(g,a),b) = exp(exp(g,b),a)
+Completing equations...
+Completed equations:
+exp(exp(g,a),b) = exp(exp(g,b),a)
+Convergent part:
+fst((x_1,x_2)) = x_1
+snd((x_1,x_2)) = x_2
+Completing equations...
+Completed equations:
+snd((x_1,x_2)) = x_2
+fst((x_1,x_2)) = x_1
+Process 0 (that is, the initial process):
+(
+    {1}!
+    0
+) | (
+    {2}!
+    0
+) | (
+    {3}!
+    0
+) | (
+    {4}!
+    {5}new sk_2: bitstring;
+    {6}new ltdh_2: bitstring;
+    {7}new computerId_2: bitstring;
+    {8}let idd_2: bitstring = id(pk(sk_2),exp(g,ltdh_2)) in
+    {9}out(att, (idd_2,(pk(sk_2),exp(g,ltdh_2))));
+    {10}event eShareLT(ltdh_2);
+    {11}event eHonest(pk(sk_2));
+    {12}event eHonest(exp(g,ltdh_2));
+    (
+        {13}!
+        {14}in(att, cred_2: bitstring);
+        {15}let cid_2: bitstring = computerId_2 in
+        {16}let skI_2: bitstring = sk_2 in
+        {17}let I_2: bitstring = ltdh_2 in
+        {18}in(att, (method_2: bitstring,(suitesI_2: bitstring,(C_I_2: bitstring,EAD_1_2: bitstring))));
+        {19}event eMethodOk(method_2);
+        {20}new X_2: bitstring;
+        {21}new EAD_3_2: bitstring;
+        {22}event eShare(X_2);
+        (
+            {23}let s_2: bitstring = X_2 in
+            {24}event eLeakShare(s_2);
+            {25}event eLeakShare(exp(g,s_2));
+            {26}out(att, s_2)
+        ) | (
+            {27}let CRED_I_2: bitstring = pk(skI_2) in
+            {28}let ID_CRED_I_2: bitstring = id(CRED_I_2,exp(g,I_2)) in
+            {29}let G_X_2: bitstring = exp(g,X_2) in
+            {30}let G_I_2: bitstring = exp(g,I_2) in
+            {31}let m1_2: bitstring = (method_2,(suitesI_2,(G_X_2,(C_I_2,EAD_1_2)))) in
+            {32}out(att, m1_2);
+            {33}in(att, m2_2: bitstring);
+            {34}let (G_Y_2: bitstring,CIPHERTEXT_2_2: bitstring) = m2_2 in
+            {35}let TH_1_2: bitstring = hash((wrap(method_2),(wrap(suitesI_2),(wrap(G_X_2),(wrap(C_I_2),EAD_1_2))))) in
+            {36}let TH_2_2: bitstring = hash((wrap(G_Y_2),wrap(TH_1_2))) in
+            {37}let G_YX_2: bitstring = exp(G_Y_2,X_2) in
+            {38}let PRK_2e_2: bitstring = hkdfextract(TH_2_2,G_YX_2) in
+            {39}let KEYSTREAM_2_2: bitstring = edhoc_kdf(PRK_2e_2,stzero,TH_2_2,plaintext_length) in
+            {40}let plaintext_2_2: bitstring = decxor(CIPHERTEXT_2_2,KEYSTREAM_2_2) in
+            {41}let (C_R_2: bitstring,(=cred_2,(SIGNATURE_or_MAC_2_2: bitstring,EAD_2_2: bitstring))) = plaintext_2_2 in
+            {42}if (check_grp(G_Y_2) = grpid) then
+                0
+            else
+                {43}if (ID_CRED_I_2 = check_cred(cred_2)) then
+                    0
+                else
+                    {44}if (method_2 = method_zero) then
+                    (
+                        {45}let pkR_5: bitstring = get_sig_cred(cred_2) in
+                        {46}let pkI_5: bitstring = get_sig_cred(ID_CRED_I_2) in
+                        {47}let PRK_3e2m_5: bitstring = PRK_2e_2 in
+                        {48}event eDerivedIShared(pkI_5,G_YX_2);
+                        {49}let MAC_2_5: bitstring = edhoc_kdf(PRK_3e2m_5,stwo,(cred_2,(TH_2_2,(pkR_5,EAD_2_2))),hash_length) in
+                        {50}if (verify(SIGNATURE_or_MAC_2_2,(sSignature1,(cred_2,(TH_2_2,(pkR_5,(EAD_2_2,MAC_2_5))))),pkR_5) = sigtrue) then
+                        {51}let TH_3_5: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_5))) in
+                        {52}event eTHIShared(pkI_5,TH_3_5);
+                        {53}let PRK_4e3m_5: bitstring = PRK_3e2m_5 in
+                        {54}let MAC_3_5: bitstring = edhoc_kdf(PRK_4e3m_5,ssix,(ID_CRED_I_2,(TH_3_5,(pkI_5,EAD_3_2))),hash_length) in
+                        {55}let SIGNATURE_or_MAC_3_5: bitstring = sign((sSignature2,(ID_CRED_I_2,(TH_3_5,(pkI_5,(EAD_3_2,MAC_3_5))))),srep,skI_2) in
+                        {56}let K_3_5: bitstring = edhoc_kdf(PRK_3e2m_5,sthree,TH_3_5,key_length) in
+                        {57}let IV_3_5: bitstring = edhoc_kdf(PRK_3e2m_5,sfour,TH_3_5,iv_length) in
+                        {58}let plaintext_3_5: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_5,EAD_3_2)) in
+                        {59}let m3_5: bitstring = aeadenc(plaintext_3_5,srep,K_3_5,IV_3_5) in
+                        {60}let TH_4_5: bitstring = hash((wrap(TH_3_5),(plaintext_3_5,pkI_5))) in
+                        {61}let PRK_out_5: bitstring = edhoc_kdf(PRK_4e3m_5,sseven,TH_4_5,hash_length) in
+                        {62}event eAcceptI(cid_2,method_zero,pkI_5,pkR_5,PRK_3e2m_5,PRK_4e3m_5,PRK_out_5,X_2,G_Y_2);
+                        {63}event eSecretsI(cid_2,method_zero,pkI_5,pkR_5,PRK_2e_2,PRK_3e2m_5,PRK_4e3m_5,PRK_out_5,KEYSTREAM_2_2,K_3_5,IV_3_5,X_2,G_Y_2);
+                        {64}event eAcceptIData(PRK_out_5,method_zero,pkI_5,pkR_5,X_2,G_Y_2,(TH_2_2,(TH_3_5,(TH_4_5,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_5))))))))));
+                        {65}out(att, m3_5);
+                        (
+                            0
+                        ) | (
+                            {66}event eLeakSessionKey(PRK_out_5);
+                            {67}out(att, PRK_out_5)
+                        )
+                    )
+                    else
+                        {68}if (method_2 = method_one) then
+                        (
+                            {69}let pkR_6: bitstring = get_DH_cred(cred_2) in
+                            {70}let pkI_6: bitstring = get_sig_cred(ID_CRED_I_2) in
+                            {71}let pkRX_3: bitstring = exp(pkR_6,X_2) in
+                            {72}let SALT_3e2m_3: bitstring = edhoc_kdf(PRK_2e_2,stone,TH_2_2,hash_length) in
+                            {73}let PRK_3e2m_6: bitstring = hkdfextract(SALT_3e2m_3,pkRX_3) in
+                            {74}event eDerivedIShared(pkI_6,G_YX_2);
+                            {75}let MAC_2_6: bitstring = edhoc_kdf(PRK_3e2m_6,stwo,(cred_2,(TH_2_2,(pkR_6,EAD_2_2))),hash_length) in
+                            {76}if (SIGNATURE_or_MAC_2_2 = MAC_2_6) then
+                            {77}let TH_3_6: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_6))) in
+                            {78}event eTHIShared(pkI_6,TH_3_6);
+                            {79}let PRK_4e3m_6: bitstring = PRK_3e2m_6 in
+                            {80}let MAC_3_6: bitstring = edhoc_kdf(PRK_4e3m_6,ssix,(ID_CRED_I_2,(TH_3_6,(pkI_6,EAD_3_2))),hash_length) in
+                            {81}let SIGNATURE_or_MAC_3_6: bitstring = sign((sSignature2,(ID_CRED_I_2,(TH_3_6,(pkI_6,(EAD_3_2,MAC_3_6))))),srep,skI_2) in
+                            {82}let K_3_6: bitstring = edhoc_kdf(PRK_3e2m_6,sthree,TH_3_6,key_length) in
+                            {83}let IV_3_6: bitstring = edhoc_kdf(PRK_3e2m_6,sfour,TH_3_6,iv_length) in
+                            {84}let plaintext_3_6: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_6,EAD_3_2)) in
+                            {85}let m3_6: bitstring = aeadenc(plaintext_3_6,srep,K_3_6,IV_3_6) in
+                            {86}let TH_4_6: bitstring = hash((wrap(TH_3_6),(plaintext_3_6,pkI_6))) in
+                            {87}let PRK_out_6: bitstring = edhoc_kdf(PRK_4e3m_6,sseven,TH_4_6,hash_length) in
+                            {88}event eAcceptI(cid_2,method_one,pkI_6,pkR_6,PRK_3e2m_6,PRK_4e3m_6,PRK_out_6,X_2,G_Y_2);
+                            {89}event eSecretsI(cid_2,method_one,pkI_6,pkR_6,PRK_2e_2,PRK_3e2m_6,PRK_4e3m_6,PRK_out_6,KEYSTREAM_2_2,K_3_6,IV_3_6,X_2,G_Y_2);
+                            {90}event eAcceptIData(PRK_out_6,method_one,pkI_6,pkR_6,X_2,G_Y_2,(TH_2_2,(TH_3_6,(TH_4_6,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_6))))))))));
+                            {91}out(att, m3_6);
+                            (
+                                0
+                            ) | (
+                                {92}event eLeakSessionKey(PRK_out_6);
+                                {93}out(att, PRK_out_6)
+                            )
+                        )
+                        else
+                            {94}if (method_2 = method_two) then
+                            (
+                                {95}let pkR_7: bitstring = get_sig_cred(cred_2) in
+                                {96}let pkI_7: bitstring = get_DH_cred(ID_CRED_I_2) in
+                                {97}let PRK_3e2m_7: bitstring = PRK_2e_2 in
+                                {98}event eDerivedIShared(pkI_7,G_YX_2);
+                                {99}let MAC_2_7: bitstring = edhoc_kdf(PRK_3e2m_7,stwo,(cred_2,(TH_2_2,(pkR_7,EAD_2_2))),hash_length) in
+                                {100}if (verify(SIGNATURE_or_MAC_2_2,(sSignature1,(cred_2,(TH_2_2,(pkR_7,(EAD_2_2,MAC_2_7))))),pkR_7) = sigtrue) then
+                                {101}let TH_3_7: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_7))) in
+                                {102}event eTHIShared(pkI_7,TH_3_7);
+                                {103}let G_YI_3: bitstring = exp(G_Y_2,I_2) in
+                                {104}let SALT_4e3m_3: bitstring = edhoc_kdf(PRK_3e2m_7,sfive,TH_3_7,hash_length) in
+                                {105}let PRK_4e3m_7: bitstring = hkdfextract(SALT_4e3m_3,G_YI_3) in
+                                {106}let MAC_3_7: bitstring = edhoc_kdf(PRK_4e3m_7,ssix,(ID_CRED_I_2,(TH_3_7,(pkI_7,EAD_3_2))),hash_length) in
+                                {107}let SIGNATURE_or_MAC_3_7: bitstring = MAC_3_7 in
+                                {108}let K_3_7: bitstring = edhoc_kdf(PRK_3e2m_7,sthree,TH_3_7,key_length) in
+                                {109}let IV_3_7: bitstring = edhoc_kdf(PRK_3e2m_7,sfour,TH_3_7,iv_length) in
+                                {110}let plaintext_3_7: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_7,EAD_3_2)) in
+                                {111}let m3_7: bitstring = aeadenc(plaintext_3_7,srep,K_3_7,IV_3_7) in
+                                {112}let TH_4_7: bitstring = hash((wrap(TH_3_7),(plaintext_3_7,pkI_7))) in
+                                {113}let PRK_out_7: bitstring = edhoc_kdf(PRK_4e3m_7,sseven,TH_4_7,hash_length) in
+                                {114}event eAcceptI(cid_2,method_two,pkI_7,pkR_7,PRK_3e2m_7,PRK_4e3m_7,PRK_out_7,X_2,G_Y_2);
+                                {115}event eSecretsI(cid_2,method_two,pkI_7,pkR_7,PRK_2e_2,PRK_3e2m_7,PRK_4e3m_7,PRK_out_7,KEYSTREAM_2_2,K_3_7,IV_3_7,X_2,G_Y_2);
+                                {116}event eAcceptIData(PRK_out_7,method_two,pkI_7,pkR_7,X_2,G_Y_2,(TH_2_2,(TH_3_7,(TH_4_7,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_7))))))))));
+                                {117}out(att, m3_7);
+                                (
+                                    0
+                                ) | (
+                                    {118}event eLeakSessionKey(PRK_out_7);
+                                    {119}out(att, PRK_out_7)
+                                )
+                            )
+                            else
+                                {120}if (method_2 = method_three) then
+                                {121}let pkR_8: bitstring = get_DH_cred(cred_2) in
+                                {122}let pkI_8: bitstring = get_DH_cred(ID_CRED_I_2) in
+                                {123}let pkRX_4: bitstring = exp(pkR_8,X_2) in
+                                {124}let SALT_3e2m_4: bitstring = edhoc_kdf(PRK_2e_2,stone,TH_2_2,hash_length) in
+                                {125}let PRK_3e2m_8: bitstring = hkdfextract(SALT_3e2m_4,pkRX_4) in
+                                {126}event eDerivedIShared(pkI_8,G_YX_2);
+                                {127}let MAC_2_8: bitstring = edhoc_kdf(PRK_3e2m_8,stwo,(cred_2,(TH_2_2,(pkR_8,EAD_2_2))),hash_length) in
+                                {128}if (SIGNATURE_or_MAC_2_2 = MAC_2_8) then
+                                {129}let TH_3_8: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_8))) in
+                                {130}event eTHIShared(pkI_8,TH_3_8);
+                                {131}let G_YI_4: bitstring = exp(G_Y_2,I_2) in
+                                {132}let SALT_4e3m_4: bitstring = edhoc_kdf(PRK_3e2m_8,sfive,TH_3_8,hash_length) in
+                                {133}let PRK_4e3m_8: bitstring = hkdfextract(SALT_4e3m_4,G_YI_4) in
+                                {134}let MAC_3_8: bitstring = edhoc_kdf(PRK_4e3m_8,ssix,(ID_CRED_I_2,(TH_3_8,(pkI_8,EAD_3_2))),hash_length) in
+                                {135}let SIGNATURE_or_MAC_3_8: bitstring = MAC_3_8 in
+                                {136}let K_3_8: bitstring = edhoc_kdf(PRK_3e2m_8,sthree,TH_3_8,key_length) in
+                                {137}let IV_3_8: bitstring = edhoc_kdf(PRK_3e2m_8,sfour,TH_3_8,iv_length) in
+                                {138}let plaintext_3_8: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_8,EAD_3_2)) in
+                                {139}let m3_8: bitstring = aeadenc(plaintext_3_8,srep,K_3_8,IV_3_8) in
+                                {140}let TH_4_8: bitstring = hash((wrap(TH_3_8),(plaintext_3_8,pkI_8))) in
+                                {141}let PRK_out_8: bitstring = edhoc_kdf(PRK_4e3m_8,sseven,TH_4_8,hash_length) in
+                                {142}event eAcceptI(cid_2,method_three,pkI_8,pkR_8,PRK_3e2m_8,PRK_4e3m_8,PRK_out_8,X_2,G_Y_2);
+                                {143}event eSecretsI(cid_2,method_three,pkI_8,pkR_8,PRK_2e_2,PRK_3e2m_8,PRK_4e3m_8,PRK_out_8,KEYSTREAM_2_2,K_3_8,IV_3_8,X_2,G_Y_2);
+                                {144}event eAcceptIData(PRK_out_8,method_three,pkI_8,pkR_8,X_2,G_Y_2,(TH_2_2,(TH_3_8,(TH_4_8,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_8))))))))));
+                                {145}out(att, m3_8);
+                                (
+                                    0
+                                ) | (
+                                    {146}event eLeakSessionKey(PRK_out_8);
+                                    {147}out(att, PRK_out_8)
+                                )
+        )
+    ) | (
+        {148}!
+        {149}let cid: bitstring = computerId_2 in
+        {150}let skR_2: bitstring = sk_2 in
+        {151}let R_2: bitstring = ltdh_2 in
+        {152}in(att, (C_R: bitstring,(EAD_2: bitstring,suitesR_2: bitstring)));
+        {153}in(att, (method: bitstring,(suitesI: bitstring,(G_X: bitstring,(C_I: bitstring,EAD_1: bitstring)))));
+        {154}event eMethodOk(method);
+        {155}let m1: bitstring = (method,(suitesI,(G_X,(C_I,EAD_1)))) in
+        {156}new Y_2: bitstring;
+        {157}event eShare(Y_2);
+        {158}let G_R_2: bitstring = exp(g,R_2) in
+        {159}let G_Y: bitstring = exp(g,Y_2) in
+        {160}let G_XY_2: bitstring = exp(G_X,Y_2) in
+        (
+            {161}let s: bitstring = Y_2 in
+            {162}event eLeakShare(s);
+            {163}event eLeakShare(exp(g,s));
+            {164}out(att, s)
+        ) | (
+            {165}let CRED_R_2: bitstring = pk(skR_2) in
+            {166}let ID_CRED_R_2: bitstring = id(CRED_R_2,G_R_2) in
+            {167}let TH_1: bitstring = hash((wrap(method),(wrap(suitesI),(wrap(G_X),(wrap(C_I),EAD_1))))) in
+            {168}let TH_2: bitstring = hash((wrap(G_Y),wrap(TH_1))) in
+            {169}let PRK_2e: bitstring = hkdfextract(TH_2,G_XY_2) in
+            {170}if (check_grp(G_X) = grpid) then
+                0
+            else
+                {171}if (method = method_zero) then
+                (
+                    {172}let pkR: bitstring = get_sig_cred(ID_CRED_R_2) in
+                    {173}let PRK_3e2m: bitstring = PRK_2e in
+                    {174}let MAC_2: bitstring = edhoc_kdf(PRK_3e2m,stwo,(ID_CRED_R_2,(TH_2,(pkR,EAD_2))),hash_length) in
+                    {175}let SIGNATURE_or_MAC_2_5: bitstring = sign((sSignature1,(ID_CRED_R_2,(TH_2,(pkR,(EAD_2,MAC_2))))),srep,skR_2) in
+                    {176}let plaintext_2_5: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_5,EAD_2))) in
+                    {177}let KEYSTREAM_2_5: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                    {178}event eDerivedR(cid,pkR,PRK_3e2m,Y_2,G_X);
+                    {179}event eTHRShared(pkR,TH_2);
+                    {180}event eDerivedRShared(pkR,G_XY_2);
+                    {181}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m);
+                    {182}let m2_5: bitstring = (G_Y,(encxor(plaintext_2_5,KEYSTREAM_2_5),C_R)) in
+                    {183}event eSendRData(method_zero,pkR,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_5))))));
+                    {184}out(att, m2_5);
+                    {185}in(att, CIPHERTEXT_3_5: bitstring);
+                    {186}let TH_3: bitstring = hash((wrap(TH_2),(plaintext_2_5,pkR))) in
+                    {187}let K_3: bitstring = edhoc_kdf(PRK_3e2m,sthree,TH_3,key_length) in
+                    {188}let IV_3: bitstring = edhoc_kdf(PRK_3e2m,sfour,TH_3,iv_length) in
+                    {189}let plaintext_3: bitstring = aeaddec(CIPHERTEXT_3_5,K_3,IV_3) in
+                    {190}let (ID_CRED_I_5: bitstring,(SIGNATURE_or_MAC_3: bitstring,EAD_3_5: bitstring)) = plaintext_3 in
+                    {191}let pkI: bitstring = get_sig_cred(ID_CRED_I_5) in
+                    {192}let TH_4: bitstring = hash((wrap(TH_3),(plaintext_3,pkI))) in
+                    {193}let PRK_4e3m: bitstring = PRK_3e2m in
+                    {194}let MAC_3: bitstring = edhoc_kdf(PRK_4e3m,ssix,(ID_CRED_I_5,(TH_3,(pkI,EAD_3_5))),hash_length) in
+                    {195}if (verify(SIGNATURE_or_MAC_3,(sSignature2,(ID_CRED_I_5,(TH_3,(pkI,(EAD_3_5,MAC_3))))),pkI) = sigtrue) then
+                    {196}if (ID_CRED_R_2 = check_cred(ID_CRED_I_5)) then
+                        0
+                    else
+                        {197}let PRK_out: bitstring = edhoc_kdf(PRK_4e3m,sseven,TH_4,hash_length) in
+                        {198}event eAcceptR(cid,method_zero,pkI,pkR,PRK_4e3m,PRK_out,Y_2,G_X);
+                        {199}event eSecretsR(cid,method_zero,pkI,pkR,PRK_2e,PRK_3e2m,PRK_4e3m,PRK_out,KEYSTREAM_2_5,K_3,IV_3,Y_2,G_X);
+                        {200}event eAcceptRData(PRK_out,method_zero,pkI,pkR,Y_2,G_X,(TH_2,(TH_3,(TH_4,(suitesI,(EAD_1,(EAD_2,(EAD_3_5,(m1,(plaintext_2_5,plaintext_3))))))))));
+                        (
+                            0
+                        ) | (
+                            {201}event eLeakSessionKey(PRK_out);
+                            {202}out(att, PRK_out)
+                        )
+                )
+                else
+                    {203}if (method = method_one) then
+                    (
+                        {204}let pkR_1: bitstring = get_DH_cred(ID_CRED_R_2) in
+                        {205}let G_XR_3: bitstring = exp(G_X,R_2) in
+                        {206}let SALT_3e2m: bitstring = edhoc_kdf(PRK_2e,stone,TH_2,hash_length) in
+                        {207}let PRK_3e2m_1: bitstring = hkdfextract(SALT_3e2m,G_XR_3) in
+                        {208}let MAC_2_1: bitstring = edhoc_kdf(PRK_3e2m_1,stwo,(ID_CRED_R_2,(TH_2,(pkR_1,EAD_2))),hash_length) in
+                        {209}let SIGNATURE_or_MAC_2_6: bitstring = MAC_2_1 in
+                        {210}let plaintext_2_6: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_6,EAD_2))) in
+                        {211}let KEYSTREAM_2_6: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                        {212}event eDerivedR(cid,pkR_1,PRK_3e2m_1,Y_2,G_X);
+                        {213}event eTHRShared(pkR_1,TH_2);
+                        {214}event eDerivedRShared(pkR_1,G_XY_2);
+                        {215}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_1);
+                        {216}let m2_6: bitstring = (G_Y,(encxor(plaintext_2_6,KEYSTREAM_2_6),C_R)) in
+                        {217}event eSendRData(method_one,pkR_1,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_6))))));
+                        {218}out(att, m2_6);
+                        {219}in(att, CIPHERTEXT_3_6: bitstring);
+                        {220}let TH_3_1: bitstring = hash((wrap(TH_2),(plaintext_2_6,pkR_1))) in
+                        {221}let K_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sthree,TH_3_1,key_length) in
+                        {222}let IV_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfour,TH_3_1,iv_length) in
+                        {223}let plaintext_3_1: bitstring = aeaddec(CIPHERTEXT_3_6,K_3_1,IV_3_1) in
+                        {224}let (ID_CRED_I_6: bitstring,(SIGNATURE_or_MAC_3_1: bitstring,EAD_3_6: bitstring)) = plaintext_3_1 in
+                        {225}let pkI_1: bitstring = get_sig_cred(ID_CRED_I_6) in
+                        {226}let TH_4_1: bitstring = hash((wrap(TH_3_1),(plaintext_3_1,pkI_1))) in
+                        {227}let PRK_4e3m_1: bitstring = PRK_3e2m_1 in
+                        {228}let MAC_3_1: bitstring = edhoc_kdf(PRK_4e3m_1,ssix,(ID_CRED_I_6,(TH_3_1,(pkI_1,EAD_3_6))),hash_length) in
+                        {229}if (verify(SIGNATURE_or_MAC_3_1,(sSignature2,(ID_CRED_I_6,(TH_3_1,(pkI_1,(EAD_3_6,MAC_3_1))))),pkI_1) = sigtrue) then
+                        {230}if (ID_CRED_R_2 = check_cred(ID_CRED_I_6)) then
+                            0
+                        else
+                            {231}let PRK_out_1: bitstring = edhoc_kdf(PRK_4e3m_1,sseven,TH_4_1,hash_length) in
+                            {232}event eAcceptR(cid,method_one,pkI_1,pkR_1,PRK_4e3m_1,PRK_out_1,Y_2,G_X);
+                            {233}event eSecretsR(cid,method_one,pkI_1,pkR_1,PRK_2e,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,KEYSTREAM_2_6,K_3_1,IV_3_1,Y_2,G_X);
+                            {234}event eAcceptRData(PRK_out_1,method_one,pkI_1,pkR_1,Y_2,G_X,(TH_2,(TH_3_1,(TH_4_1,(suitesI,(EAD_1,(EAD_2,(EAD_3_6,(m1,(plaintext_2_6,plaintext_3_1))))))))));
+                            (
+                                0
+                            ) | (
+                                {235}event eLeakSessionKey(PRK_out_1);
+                                {236}out(att, PRK_out_1)
+                            )
+                    )
+                    else
+                        {237}if (method = method_two) then
+                        (
+                            {238}let pkR_2: bitstring = get_sig_cred(ID_CRED_R_2) in
+                            {239}let PRK_3e2m_2: bitstring = PRK_2e in
+                            {240}let MAC_2_2: bitstring = edhoc_kdf(PRK_3e2m_2,stwo,(ID_CRED_R_2,(TH_2,(pkR_2,EAD_2))),hash_length) in
+                            {241}let SIGNATURE_or_MAC_2_7: bitstring = sign((sSignature1,(ID_CRED_R_2,(TH_2,(pkR_2,(EAD_2,MAC_2_2))))),srep,skR_2) in
+                            {242}let plaintext_2_7: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_7,EAD_2))) in
+                            {243}let KEYSTREAM_2_7: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                            {244}event eDerivedR(cid,pkR_2,PRK_3e2m_2,Y_2,G_X);
+                            {245}event eTHRShared(pkR_2,TH_2);
+                            {246}event eDerivedRShared(pkR_2,G_XY_2);
+                            {247}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_2);
+                            {248}let m2_7: bitstring = (G_Y,(encxor(plaintext_2_7,KEYSTREAM_2_7),C_R)) in
+                            {249}event eSendRData(method_two,pkR_2,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_7))))));
+                            {250}out(att, m2_7);
+                            {251}in(att, CIPHERTEXT_3_7: bitstring);
+                            {252}let TH_3_2: bitstring = hash((wrap(TH_2),(plaintext_2_7,pkR_2))) in
+                            {253}let K_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sthree,TH_3_2,key_length) in
+                            {254}let IV_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfour,TH_3_2,iv_length) in
+                            {255}let plaintext_3_2: bitstring = aeaddec(CIPHERTEXT_3_7,K_3_2,IV_3_2) in
+                            {256}let (ID_CRED_I_7: bitstring,(SIGNATURE_or_MAC_3_2: bitstring,EAD_3_7: bitstring)) = plaintext_3_2 in
+                            {257}let pkI_2: bitstring = get_DH_cred(ID_CRED_I_7) in
+                            {258}let TH_4_2: bitstring = hash((wrap(TH_3_2),(plaintext_3_2,pkI_2))) in
+                            {259}let pkIY_3: bitstring = exp(pkI_2,Y_2) in
+                            {260}let SALT_4e3m: bitstring = edhoc_kdf(PRK_3e2m_2,sfive,TH_3_2,hash_length) in
+                            {261}let PRK_4e3m_2: bitstring = hkdfextract(SALT_4e3m,pkIY_3) in
+                            {262}let MAC_3_2: bitstring = edhoc_kdf(PRK_4e3m_2,ssix,(ID_CRED_I_7,(TH_3_2,(pkI_2,EAD_3_7))),hash_length) in
+                            {263}if (SIGNATURE_or_MAC_3_2 = MAC_3_2) then
+                            {264}if (ID_CRED_R_2 = check_cred(ID_CRED_I_7)) then
+                                0
+                            else
+                                {265}let PRK_out_2: bitstring = edhoc_kdf(PRK_4e3m_2,sseven,TH_4_2,hash_length) in
+                                {266}event eAcceptR(cid,method_two,pkI_2,pkR_2,PRK_4e3m_2,PRK_out_2,Y_2,G_X);
+                                {267}event eSecretsR(cid,method_two,pkI_2,pkR_2,PRK_2e,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,KEYSTREAM_2_7,K_3_2,IV_3_2,Y_2,G_X);
+                                {268}event eAcceptRData(PRK_out_2,method_two,pkI_2,pkR_2,Y_2,G_X,(TH_2,(TH_3_2,(TH_4_2,(suitesI,(EAD_1,(EAD_2,(EAD_3_7,(m1,(plaintext_2_7,plaintext_3_2))))))))));
+                                (
+                                    0
+                                ) | (
+                                    {269}event eLeakSessionKey(PRK_out_2);
+                                    {270}out(att, PRK_out_2)
+                                )
+                        )
+                        else
+                            {271}if (method = method_three) then
+                            {272}let pkR_3: bitstring = get_DH_cred(ID_CRED_R_2) in
+                            {273}let G_XR_4: bitstring = exp(G_X,R_2) in
+                            {274}let SALT_3e2m_1: bitstring = edhoc_kdf(PRK_2e,stone,TH_2,hash_length) in
+                            {275}let PRK_3e2m_3: bitstring = hkdfextract(SALT_3e2m_1,G_XR_4) in
+                            {276}let MAC_2_3: bitstring = edhoc_kdf(PRK_3e2m_3,stwo,(ID_CRED_R_2,(TH_2,(pkR_3,EAD_2))),hash_length) in
+                            {277}let SIGNATURE_or_MAC_2_8: bitstring = MAC_2_3 in
+                            {278}let plaintext_2_8: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_8,EAD_2))) in
+                            {279}let KEYSTREAM_2_8: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                            {280}event eDerivedR(cid,pkR_3,PRK_3e2m_3,Y_2,G_X);
+                            {281}event eTHRShared(pkR_3,TH_2);
+                            {282}event eDerivedRShared(pkR_3,G_XY_2);
+                            {283}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_3);
+                            {284}let m2_8: bitstring = (G_Y,(encxor(plaintext_2_8,KEYSTREAM_2_8),C_R)) in
+                            {285}event eSendRData(method_three,pkR_3,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_8))))));
+                            {286}out(att, m2_8);
+                            {287}in(att, CIPHERTEXT_3_8: bitstring);
+                            {288}let TH_3_3: bitstring = hash((wrap(TH_2),(plaintext_2_8,pkR_3))) in
+                            {289}let K_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sthree,TH_3_3,key_length) in
+                            {290}let IV_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfour,TH_3_3,iv_length) in
+                            {291}let plaintext_3_3: bitstring = aeaddec(CIPHERTEXT_3_8,K_3_3,IV_3_3) in
+                            {292}let (ID_CRED_I_8: bitstring,(SIGNATURE_or_MAC_3_3: bitstring,EAD_3_8: bitstring)) = plaintext_3_3 in
+                            {293}let pkI_3: bitstring = get_DH_cred(ID_CRED_I_8) in
+                            {294}let TH_4_3: bitstring = hash((wrap(TH_3_3),(plaintext_3_3,pkI_3))) in
+                            {295}let pkIY_4: bitstring = exp(pkI_3,Y_2) in
+                            {296}let SALT_4e3m_1: bitstring = edhoc_kdf(PRK_3e2m_3,sfive,TH_3_3,hash_length) in
+                            {297}let PRK_4e3m_3: bitstring = hkdfextract(SALT_4e3m_1,pkIY_4) in
+                            {298}let MAC_3_3: bitstring = edhoc_kdf(PRK_4e3m_3,ssix,(ID_CRED_I_8,(TH_3_3,(pkI_3,EAD_3_8))),hash_length) in
+                            {299}if (SIGNATURE_or_MAC_3_3 = MAC_3_3) then
+                            {300}if (ID_CRED_R_2 = check_cred(ID_CRED_I_8)) then
+                                0
+                            else
+                                {301}let PRK_out_3: bitstring = edhoc_kdf(PRK_4e3m_3,sseven,TH_4_3,hash_length) in
+                                {302}event eAcceptR(cid,method_three,pkI_3,pkR_3,PRK_4e3m_3,PRK_out_3,Y_2,G_X);
+                                {303}event eSecretsR(cid,method_three,pkI_3,pkR_3,PRK_2e,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,KEYSTREAM_2_8,K_3_3,IV_3_3,Y_2,G_X);
+                                {304}event eAcceptRData(PRK_out_3,method_three,pkI_3,pkR_3,Y_2,G_X,(TH_2,(TH_3_3,(TH_4_3,(suitesI,(EAD_1,(EAD_2,(EAD_3_8,(m1,(plaintext_2_8,plaintext_3_3))))))))));
+                                (
+                                    0
+                                ) | (
+                                    {305}event eLeakSessionKey(PRK_out_3);
+                                    {306}out(att, PRK_out_3)
+                                )
+        )
+    ) | (
+        {307}let sk: bitstring = sk_2 in
+        {308}in(att, =sComp);
+        {309}event eCompromise(pk(sk));
+        {310}out(att, sk)
+    ) | (
+        {311}let k_2: bitstring = ltdh_2 in
+        {312}in(att, =sComp);
+        {313}event eCompromise(exp(g,k_2));
+        {314}event eLeak(k_2);
+        {315}out(att, k_2)
+    )
+)
+
+--  Process 1 (that is, process 0, with let moved downwards):
+(
+    {1}!
+    0
+) | (
+    {2}!
+    0
+) | (
+    {3}!
+    0
+) | (
+    {4}!
+    {5}new sk_2: bitstring;
+    {6}new ltdh_2: bitstring;
+    {7}new computerId_2: bitstring;
+    {8}let idd_2: bitstring = id(pk(sk_2),exp(g,ltdh_2)) in
+    {9}out(att, (idd_2,(pk(sk_2),exp(g,ltdh_2))));
+    {10}event eShareLT(ltdh_2);
+    {11}event eHonest(pk(sk_2));
+    {12}event eHonest(exp(g,ltdh_2));
+    (
+        {13}!
+        {14}in(att, cred_2: bitstring);
+        {18}in(att, (method_2: bitstring,(suitesI_2: bitstring,(C_I_2: bitstring,EAD_1_2: bitstring))));
+        {19}event eMethodOk(method_2);
+        {20}new X_2: bitstring;
+        {21}new EAD_3_2: bitstring;
+        {22}event eShare(X_2);
+        (
+            {23}let s_2: bitstring = X_2 in
+            {24}event eLeakShare(s_2);
+            {25}event eLeakShare(exp(g,s_2));
+            {26}out(att, s_2)
+        ) | (
+            {29}let G_X_2: bitstring = exp(g,X_2) in
+            {31}let m1_2: bitstring = (method_2,(suitesI_2,(G_X_2,(C_I_2,EAD_1_2)))) in
+            {32}out(att, m1_2);
+            {33}in(att, m2_2: bitstring);
+            {34}let (G_Y_2: bitstring,CIPHERTEXT_2_2: bitstring) = m2_2 in
+            {37}let G_YX_2: bitstring = exp(G_Y_2,X_2) in
+            {35}let TH_1_2: bitstring = hash((wrap(method_2),(wrap(suitesI_2),(wrap(G_X_2),(wrap(C_I_2),EAD_1_2))))) in
+            {36}let TH_2_2: bitstring = hash((wrap(G_Y_2),wrap(TH_1_2))) in
+            {38}let PRK_2e_2: bitstring = hkdfextract(TH_2_2,G_YX_2) in
+            {39}let KEYSTREAM_2_2: bitstring = edhoc_kdf(PRK_2e_2,stzero,TH_2_2,plaintext_length) in
+            {40}let plaintext_2_2: bitstring = decxor(CIPHERTEXT_2_2,KEYSTREAM_2_2) in
+            {41}let (C_R_2: bitstring,(=cred_2,(SIGNATURE_or_MAC_2_2: bitstring,EAD_2_2: bitstring))) = plaintext_2_2 in
+            {42}if (check_grp(G_Y_2) = grpid) then
+                0
+            else
+                {16}let skI_2: bitstring = sk_2 in
+                {27}let CRED_I_2: bitstring = pk(skI_2) in
+                {17}let I_2: bitstring = ltdh_2 in
+                {28}let ID_CRED_I_2: bitstring = id(CRED_I_2,exp(g,I_2)) in
+                {43}if (ID_CRED_I_2 = check_cred(cred_2)) then
+                    0
+                else
+                    {15}let cid_2: bitstring = computerId_2 in
+                    {44}if (method_2 = method_zero) then
+                    (
+                        {45}let pkR_5: bitstring = get_sig_cred(cred_2) in
+                        {46}let pkI_5: bitstring = get_sig_cred(ID_CRED_I_2) in
+                        {48}event eDerivedIShared(pkI_5,G_YX_2);
+                        {47}let PRK_3e2m_5: bitstring = PRK_2e_2 in
+                        {49}let MAC_2_5: bitstring = edhoc_kdf(PRK_3e2m_5,stwo,(cred_2,(TH_2_2,(pkR_5,EAD_2_2))),hash_length) in
+                        {50}if (verify(SIGNATURE_or_MAC_2_2,(sSignature1,(cred_2,(TH_2_2,(pkR_5,(EAD_2_2,MAC_2_5))))),pkR_5) = sigtrue) then
+                        {51}let TH_3_5: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_5))) in
+                        {52}event eTHIShared(pkI_5,TH_3_5);
+                        {53}let PRK_4e3m_5: bitstring = PRK_3e2m_5 in
+                        {54}let MAC_3_5: bitstring = edhoc_kdf(PRK_4e3m_5,ssix,(ID_CRED_I_2,(TH_3_5,(pkI_5,EAD_3_2))),hash_length) in
+                        {55}let SIGNATURE_or_MAC_3_5: bitstring = sign((sSignature2,(ID_CRED_I_2,(TH_3_5,(pkI_5,(EAD_3_2,MAC_3_5))))),srep,skI_2) in
+                        {58}let plaintext_3_5: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_5,EAD_3_2)) in
+                        {60}let TH_4_5: bitstring = hash((wrap(TH_3_5),(plaintext_3_5,pkI_5))) in
+                        {61}let PRK_out_5: bitstring = edhoc_kdf(PRK_4e3m_5,sseven,TH_4_5,hash_length) in
+                        {62}event eAcceptI(cid_2,method_zero,pkI_5,pkR_5,PRK_3e2m_5,PRK_4e3m_5,PRK_out_5,X_2,G_Y_2);
+                        {57}let IV_3_5: bitstring = edhoc_kdf(PRK_3e2m_5,sfour,TH_3_5,iv_length) in
+                        {56}let K_3_5: bitstring = edhoc_kdf(PRK_3e2m_5,sthree,TH_3_5,key_length) in
+                        {63}event eSecretsI(cid_2,method_zero,pkI_5,pkR_5,PRK_2e_2,PRK_3e2m_5,PRK_4e3m_5,PRK_out_5,KEYSTREAM_2_2,K_3_5,IV_3_5,X_2,G_Y_2);
+                        {64}event eAcceptIData(PRK_out_5,method_zero,pkI_5,pkR_5,X_2,G_Y_2,(TH_2_2,(TH_3_5,(TH_4_5,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_5))))))))));
+                        {59}let m3_5: bitstring = aeadenc(plaintext_3_5,srep,K_3_5,IV_3_5) in
+                        {65}out(att, m3_5);
+                        (
+                            0
+                        ) | (
+                            {66}event eLeakSessionKey(PRK_out_5);
+                            {67}out(att, PRK_out_5)
+                        )
+                    )
+                    else
+                        {68}if (method_2 = method_one) then
+                        (
+                            {69}let pkR_6: bitstring = get_DH_cred(cred_2) in
+                            {70}let pkI_6: bitstring = get_sig_cred(ID_CRED_I_2) in
+                            {74}event eDerivedIShared(pkI_6,G_YX_2);
+                            {72}let SALT_3e2m_3: bitstring = edhoc_kdf(PRK_2e_2,stone,TH_2_2,hash_length) in
+                            {71}let pkRX_3: bitstring = exp(pkR_6,X_2) in
+                            {73}let PRK_3e2m_6: bitstring = hkdfextract(SALT_3e2m_3,pkRX_3) in
+                            {75}let MAC_2_6: bitstring = edhoc_kdf(PRK_3e2m_6,stwo,(cred_2,(TH_2_2,(pkR_6,EAD_2_2))),hash_length) in
+                            {76}if (SIGNATURE_or_MAC_2_2 = MAC_2_6) then
+                            {77}let TH_3_6: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_6))) in
+                            {78}event eTHIShared(pkI_6,TH_3_6);
+                            {79}let PRK_4e3m_6: bitstring = PRK_3e2m_6 in
+                            {80}let MAC_3_6: bitstring = edhoc_kdf(PRK_4e3m_6,ssix,(ID_CRED_I_2,(TH_3_6,(pkI_6,EAD_3_2))),hash_length) in
+                            {81}let SIGNATURE_or_MAC_3_6: bitstring = sign((sSignature2,(ID_CRED_I_2,(TH_3_6,(pkI_6,(EAD_3_2,MAC_3_6))))),srep,skI_2) in
+                            {84}let plaintext_3_6: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_6,EAD_3_2)) in
+                            {86}let TH_4_6: bitstring = hash((wrap(TH_3_6),(plaintext_3_6,pkI_6))) in
+                            {87}let PRK_out_6: bitstring = edhoc_kdf(PRK_4e3m_6,sseven,TH_4_6,hash_length) in
+                            {88}event eAcceptI(cid_2,method_one,pkI_6,pkR_6,PRK_3e2m_6,PRK_4e3m_6,PRK_out_6,X_2,G_Y_2);
+                            {83}let IV_3_6: bitstring = edhoc_kdf(PRK_3e2m_6,sfour,TH_3_6,iv_length) in
+                            {82}let K_3_6: bitstring = edhoc_kdf(PRK_3e2m_6,sthree,TH_3_6,key_length) in
+                            {89}event eSecretsI(cid_2,method_one,pkI_6,pkR_6,PRK_2e_2,PRK_3e2m_6,PRK_4e3m_6,PRK_out_6,KEYSTREAM_2_2,K_3_6,IV_3_6,X_2,G_Y_2);
+                            {90}event eAcceptIData(PRK_out_6,method_one,pkI_6,pkR_6,X_2,G_Y_2,(TH_2_2,(TH_3_6,(TH_4_6,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_6))))))))));
+                            {85}let m3_6: bitstring = aeadenc(plaintext_3_6,srep,K_3_6,IV_3_6) in
+                            {91}out(att, m3_6);
+                            (
+                                0
+                            ) | (
+                                {92}event eLeakSessionKey(PRK_out_6);
+                                {93}out(att, PRK_out_6)
+                            )
+                        )
+                        else
+                            {94}if (method_2 = method_two) then
+                            (
+                                {95}let pkR_7: bitstring = get_sig_cred(cred_2) in
+                                {96}let pkI_7: bitstring = get_DH_cred(ID_CRED_I_2) in
+                                {98}event eDerivedIShared(pkI_7,G_YX_2);
+                                {97}let PRK_3e2m_7: bitstring = PRK_2e_2 in
+                                {99}let MAC_2_7: bitstring = edhoc_kdf(PRK_3e2m_7,stwo,(cred_2,(TH_2_2,(pkR_7,EAD_2_2))),hash_length) in
+                                {100}if (verify(SIGNATURE_or_MAC_2_2,(sSignature1,(cred_2,(TH_2_2,(pkR_7,(EAD_2_2,MAC_2_7))))),pkR_7) = sigtrue) then
+                                {101}let TH_3_7: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_7))) in
+                                {102}event eTHIShared(pkI_7,TH_3_7);
+                                {104}let SALT_4e3m_3: bitstring = edhoc_kdf(PRK_3e2m_7,sfive,TH_3_7,hash_length) in
+                                {103}let G_YI_3: bitstring = exp(G_Y_2,I_2) in
+                                {105}let PRK_4e3m_7: bitstring = hkdfextract(SALT_4e3m_3,G_YI_3) in
+                                {106}let MAC_3_7: bitstring = edhoc_kdf(PRK_4e3m_7,ssix,(ID_CRED_I_2,(TH_3_7,(pkI_7,EAD_3_2))),hash_length) in
+                                {107}let SIGNATURE_or_MAC_3_7: bitstring = MAC_3_7 in
+                                {110}let plaintext_3_7: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_7,EAD_3_2)) in
+                                {112}let TH_4_7: bitstring = hash((wrap(TH_3_7),(plaintext_3_7,pkI_7))) in
+                                {113}let PRK_out_7: bitstring = edhoc_kdf(PRK_4e3m_7,sseven,TH_4_7,hash_length) in
+                                {114}event eAcceptI(cid_2,method_two,pkI_7,pkR_7,PRK_3e2m_7,PRK_4e3m_7,PRK_out_7,X_2,G_Y_2);
+                                {109}let IV_3_7: bitstring = edhoc_kdf(PRK_3e2m_7,sfour,TH_3_7,iv_length) in
+                                {108}let K_3_7: bitstring = edhoc_kdf(PRK_3e2m_7,sthree,TH_3_7,key_length) in
+                                {115}event eSecretsI(cid_2,method_two,pkI_7,pkR_7,PRK_2e_2,PRK_3e2m_7,PRK_4e3m_7,PRK_out_7,KEYSTREAM_2_2,K_3_7,IV_3_7,X_2,G_Y_2);
+                                {116}event eAcceptIData(PRK_out_7,method_two,pkI_7,pkR_7,X_2,G_Y_2,(TH_2_2,(TH_3_7,(TH_4_7,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_7))))))))));
+                                {111}let m3_7: bitstring = aeadenc(plaintext_3_7,srep,K_3_7,IV_3_7) in
+                                {117}out(att, m3_7);
+                                (
+                                    0
+                                ) | (
+                                    {118}event eLeakSessionKey(PRK_out_7);
+                                    {119}out(att, PRK_out_7)
+                                )
+                            )
+                            else
+                                {120}if (method_2 = method_three) then
+                                {121}let pkR_8: bitstring = get_DH_cred(cred_2) in
+                                {122}let pkI_8: bitstring = get_DH_cred(ID_CRED_I_2) in
+                                {126}event eDerivedIShared(pkI_8,G_YX_2);
+                                {124}let SALT_3e2m_4: bitstring = edhoc_kdf(PRK_2e_2,stone,TH_2_2,hash_length) in
+                                {123}let pkRX_4: bitstring = exp(pkR_8,X_2) in
+                                {125}let PRK_3e2m_8: bitstring = hkdfextract(SALT_3e2m_4,pkRX_4) in
+                                {127}let MAC_2_8: bitstring = edhoc_kdf(PRK_3e2m_8,stwo,(cred_2,(TH_2_2,(pkR_8,EAD_2_2))),hash_length) in
+                                {128}if (SIGNATURE_or_MAC_2_2 = MAC_2_8) then
+                                {129}let TH_3_8: bitstring = hash((wrap(TH_2_2),(plaintext_2_2,pkR_8))) in
+                                {130}event eTHIShared(pkI_8,TH_3_8);
+                                {132}let SALT_4e3m_4: bitstring = edhoc_kdf(PRK_3e2m_8,sfive,TH_3_8,hash_length) in
+                                {131}let G_YI_4: bitstring = exp(G_Y_2,I_2) in
+                                {133}let PRK_4e3m_8: bitstring = hkdfextract(SALT_4e3m_4,G_YI_4) in
+                                {134}let MAC_3_8: bitstring = edhoc_kdf(PRK_4e3m_8,ssix,(ID_CRED_I_2,(TH_3_8,(pkI_8,EAD_3_2))),hash_length) in
+                                {135}let SIGNATURE_or_MAC_3_8: bitstring = MAC_3_8 in
+                                {138}let plaintext_3_8: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_8,EAD_3_2)) in
+                                {140}let TH_4_8: bitstring = hash((wrap(TH_3_8),(plaintext_3_8,pkI_8))) in
+                                {141}let PRK_out_8: bitstring = edhoc_kdf(PRK_4e3m_8,sseven,TH_4_8,hash_length) in
+                                {142}event eAcceptI(cid_2,method_three,pkI_8,pkR_8,PRK_3e2m_8,PRK_4e3m_8,PRK_out_8,X_2,G_Y_2);
+                                {137}let IV_3_8: bitstring = edhoc_kdf(PRK_3e2m_8,sfour,TH_3_8,iv_length) in
+                                {136}let K_3_8: bitstring = edhoc_kdf(PRK_3e2m_8,sthree,TH_3_8,key_length) in
+                                {143}event eSecretsI(cid_2,method_three,pkI_8,pkR_8,PRK_2e_2,PRK_3e2m_8,PRK_4e3m_8,PRK_out_8,KEYSTREAM_2_2,K_3_8,IV_3_8,X_2,G_Y_2);
+                                {144}event eAcceptIData(PRK_out_8,method_three,pkI_8,pkR_8,X_2,G_Y_2,(TH_2_2,(TH_3_8,(TH_4_8,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_2_2,plaintext_3_8))))))))));
+                                {139}let m3_8: bitstring = aeadenc(plaintext_3_8,srep,K_3_8,IV_3_8) in
+                                {145}out(att, m3_8);
+                                (
+                                    0
+                                ) | (
+                                    {146}event eLeakSessionKey(PRK_out_8);
+                                    {147}out(att, PRK_out_8)
+                                )
+        )
+    ) | (
+        {148}!
+        {152}in(att, (C_R: bitstring,(EAD_2: bitstring,suitesR_2: bitstring)));
+        {153}in(att, (method: bitstring,(suitesI: bitstring,(G_X: bitstring,(C_I: bitstring,EAD_1: bitstring)))));
+        {154}event eMethodOk(method);
+        {156}new Y_2: bitstring;
+        {157}event eShare(Y_2);
+        (
+            {161}let s: bitstring = Y_2 in
+            {162}event eLeakShare(s);
+            {163}event eLeakShare(exp(g,s));
+            {164}out(att, s)
+        ) | (
+            {170}if (check_grp(G_X) = grpid) then
+                0
+            else
+                {167}let TH_1: bitstring = hash((wrap(method),(wrap(suitesI),(wrap(G_X),(wrap(C_I),EAD_1))))) in
+                {159}let G_Y: bitstring = exp(g,Y_2) in
+                {168}let TH_2: bitstring = hash((wrap(G_Y),wrap(TH_1))) in
+                {160}let G_XY_2: bitstring = exp(G_X,Y_2) in
+                {169}let PRK_2e: bitstring = hkdfextract(TH_2,G_XY_2) in
+                {150}let skR_2: bitstring = sk_2 in
+                {165}let CRED_R_2: bitstring = pk(skR_2) in
+                {151}let R_2: bitstring = ltdh_2 in
+                {158}let G_R_2: bitstring = exp(g,R_2) in
+                {166}let ID_CRED_R_2: bitstring = id(CRED_R_2,G_R_2) in
+                {155}let m1: bitstring = (method,(suitesI,(G_X,(C_I,EAD_1)))) in
+                {149}let cid: bitstring = computerId_2 in
+                {171}if (method = method_zero) then
+                (
+                    {172}let pkR: bitstring = get_sig_cred(ID_CRED_R_2) in
+                    {173}let PRK_3e2m: bitstring = PRK_2e in
+                    {178}event eDerivedR(cid,pkR,PRK_3e2m,Y_2,G_X);
+                    {179}event eTHRShared(pkR,TH_2);
+                    {180}event eDerivedRShared(pkR,G_XY_2);
+                    {181}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m);
+                    {174}let MAC_2: bitstring = edhoc_kdf(PRK_3e2m,stwo,(ID_CRED_R_2,(TH_2,(pkR,EAD_2))),hash_length) in
+                    {175}let SIGNATURE_or_MAC_2_5: bitstring = sign((sSignature1,(ID_CRED_R_2,(TH_2,(pkR,(EAD_2,MAC_2))))),srep,skR_2) in
+                    {176}let plaintext_2_5: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_5,EAD_2))) in
+                    {183}event eSendRData(method_zero,pkR,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_5))))));
+                    {177}let KEYSTREAM_2_5: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                    {182}let m2_5: bitstring = (G_Y,(encxor(plaintext_2_5,KEYSTREAM_2_5),C_R)) in
+                    {184}out(att, m2_5);
+                    {185}in(att, CIPHERTEXT_3_5: bitstring);
+                    {186}let TH_3: bitstring = hash((wrap(TH_2),(plaintext_2_5,pkR))) in
+                    {188}let IV_3: bitstring = edhoc_kdf(PRK_3e2m,sfour,TH_3,iv_length) in
+                    {187}let K_3: bitstring = edhoc_kdf(PRK_3e2m,sthree,TH_3,key_length) in
+                    {189}let plaintext_3: bitstring = aeaddec(CIPHERTEXT_3_5,K_3,IV_3) in
+                    {190}let (ID_CRED_I_5: bitstring,(SIGNATURE_or_MAC_3: bitstring,EAD_3_5: bitstring)) = plaintext_3 in
+                    {191}let pkI: bitstring = get_sig_cred(ID_CRED_I_5) in
+                    {193}let PRK_4e3m: bitstring = PRK_3e2m in
+                    {194}let MAC_3: bitstring = edhoc_kdf(PRK_4e3m,ssix,(ID_CRED_I_5,(TH_3,(pkI,EAD_3_5))),hash_length) in
+                    {195}if (verify(SIGNATURE_or_MAC_3,(sSignature2,(ID_CRED_I_5,(TH_3,(pkI,(EAD_3_5,MAC_3))))),pkI) = sigtrue) then
+                    {196}if (ID_CRED_R_2 = check_cred(ID_CRED_I_5)) then
+                        0
+                    else
+                        {192}let TH_4: bitstring = hash((wrap(TH_3),(plaintext_3,pkI))) in
+                        {197}let PRK_out: bitstring = edhoc_kdf(PRK_4e3m,sseven,TH_4,hash_length) in
+                        {198}event eAcceptR(cid,method_zero,pkI,pkR,PRK_4e3m,PRK_out,Y_2,G_X);
+                        {199}event eSecretsR(cid,method_zero,pkI,pkR,PRK_2e,PRK_3e2m,PRK_4e3m,PRK_out,KEYSTREAM_2_5,K_3,IV_3,Y_2,G_X);
+                        {200}event eAcceptRData(PRK_out,method_zero,pkI,pkR,Y_2,G_X,(TH_2,(TH_3,(TH_4,(suitesI,(EAD_1,(EAD_2,(EAD_3_5,(m1,(plaintext_2_5,plaintext_3))))))))));
+                        (
+                            0
+                        ) | (
+                            {201}event eLeakSessionKey(PRK_out);
+                            {202}out(att, PRK_out)
+                        )
+                )
+                else
+                    {203}if (method = method_one) then
+                    (
+                        {204}let pkR_1: bitstring = get_DH_cred(ID_CRED_R_2) in
+                        {206}let SALT_3e2m: bitstring = edhoc_kdf(PRK_2e,stone,TH_2,hash_length) in
+                        {205}let G_XR_3: bitstring = exp(G_X,R_2) in
+                        {207}let PRK_3e2m_1: bitstring = hkdfextract(SALT_3e2m,G_XR_3) in
+                        {212}event eDerivedR(cid,pkR_1,PRK_3e2m_1,Y_2,G_X);
+                        {213}event eTHRShared(pkR_1,TH_2);
+                        {214}event eDerivedRShared(pkR_1,G_XY_2);
+                        {215}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_1);
+                        {208}let MAC_2_1: bitstring = edhoc_kdf(PRK_3e2m_1,stwo,(ID_CRED_R_2,(TH_2,(pkR_1,EAD_2))),hash_length) in
+                        {209}let SIGNATURE_or_MAC_2_6: bitstring = MAC_2_1 in
+                        {210}let plaintext_2_6: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_6,EAD_2))) in
+                        {217}event eSendRData(method_one,pkR_1,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_6))))));
+                        {211}let KEYSTREAM_2_6: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                        {216}let m2_6: bitstring = (G_Y,(encxor(plaintext_2_6,KEYSTREAM_2_6),C_R)) in
+                        {218}out(att, m2_6);
+                        {219}in(att, CIPHERTEXT_3_6: bitstring);
+                        {220}let TH_3_1: bitstring = hash((wrap(TH_2),(plaintext_2_6,pkR_1))) in
+                        {222}let IV_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfour,TH_3_1,iv_length) in
+                        {221}let K_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sthree,TH_3_1,key_length) in
+                        {223}let plaintext_3_1: bitstring = aeaddec(CIPHERTEXT_3_6,K_3_1,IV_3_1) in
+                        {224}let (ID_CRED_I_6: bitstring,(SIGNATURE_or_MAC_3_1: bitstring,EAD_3_6: bitstring)) = plaintext_3_1 in
+                        {225}let pkI_1: bitstring = get_sig_cred(ID_CRED_I_6) in
+                        {227}let PRK_4e3m_1: bitstring = PRK_3e2m_1 in
+                        {228}let MAC_3_1: bitstring = edhoc_kdf(PRK_4e3m_1,ssix,(ID_CRED_I_6,(TH_3_1,(pkI_1,EAD_3_6))),hash_length) in
+                        {229}if (verify(SIGNATURE_or_MAC_3_1,(sSignature2,(ID_CRED_I_6,(TH_3_1,(pkI_1,(EAD_3_6,MAC_3_1))))),pkI_1) = sigtrue) then
+                        {230}if (ID_CRED_R_2 = check_cred(ID_CRED_I_6)) then
+                            0
+                        else
+                            {226}let TH_4_1: bitstring = hash((wrap(TH_3_1),(plaintext_3_1,pkI_1))) in
+                            {231}let PRK_out_1: bitstring = edhoc_kdf(PRK_4e3m_1,sseven,TH_4_1,hash_length) in
+                            {232}event eAcceptR(cid,method_one,pkI_1,pkR_1,PRK_4e3m_1,PRK_out_1,Y_2,G_X);
+                            {233}event eSecretsR(cid,method_one,pkI_1,pkR_1,PRK_2e,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,KEYSTREAM_2_6,K_3_1,IV_3_1,Y_2,G_X);
+                            {234}event eAcceptRData(PRK_out_1,method_one,pkI_1,pkR_1,Y_2,G_X,(TH_2,(TH_3_1,(TH_4_1,(suitesI,(EAD_1,(EAD_2,(EAD_3_6,(m1,(plaintext_2_6,plaintext_3_1))))))))));
+                            (
+                                0
+                            ) | (
+                                {235}event eLeakSessionKey(PRK_out_1);
+                                {236}out(att, PRK_out_1)
+                            )
+                    )
+                    else
+                        {237}if (method = method_two) then
+                        (
+                            {238}let pkR_2: bitstring = get_sig_cred(ID_CRED_R_2) in
+                            {239}let PRK_3e2m_2: bitstring = PRK_2e in
+                            {244}event eDerivedR(cid,pkR_2,PRK_3e2m_2,Y_2,G_X);
+                            {245}event eTHRShared(pkR_2,TH_2);
+                            {246}event eDerivedRShared(pkR_2,G_XY_2);
+                            {247}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_2);
+                            {240}let MAC_2_2: bitstring = edhoc_kdf(PRK_3e2m_2,stwo,(ID_CRED_R_2,(TH_2,(pkR_2,EAD_2))),hash_length) in
+                            {241}let SIGNATURE_or_MAC_2_7: bitstring = sign((sSignature1,(ID_CRED_R_2,(TH_2,(pkR_2,(EAD_2,MAC_2_2))))),srep,skR_2) in
+                            {242}let plaintext_2_7: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_7,EAD_2))) in
+                            {249}event eSendRData(method_two,pkR_2,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_7))))));
+                            {243}let KEYSTREAM_2_7: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                            {248}let m2_7: bitstring = (G_Y,(encxor(plaintext_2_7,KEYSTREAM_2_7),C_R)) in
+                            {250}out(att, m2_7);
+                            {251}in(att, CIPHERTEXT_3_7: bitstring);
+                            {252}let TH_3_2: bitstring = hash((wrap(TH_2),(plaintext_2_7,pkR_2))) in
+                            {254}let IV_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfour,TH_3_2,iv_length) in
+                            {253}let K_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sthree,TH_3_2,key_length) in
+                            {255}let plaintext_3_2: bitstring = aeaddec(CIPHERTEXT_3_7,K_3_2,IV_3_2) in
+                            {256}let (ID_CRED_I_7: bitstring,(SIGNATURE_or_MAC_3_2: bitstring,EAD_3_7: bitstring)) = plaintext_3_2 in
+                            {257}let pkI_2: bitstring = get_DH_cred(ID_CRED_I_7) in
+                            {260}let SALT_4e3m: bitstring = edhoc_kdf(PRK_3e2m_2,sfive,TH_3_2,hash_length) in
+                            {259}let pkIY_3: bitstring = exp(pkI_2,Y_2) in
+                            {261}let PRK_4e3m_2: bitstring = hkdfextract(SALT_4e3m,pkIY_3) in
+                            {262}let MAC_3_2: bitstring = edhoc_kdf(PRK_4e3m_2,ssix,(ID_CRED_I_7,(TH_3_2,(pkI_2,EAD_3_7))),hash_length) in
+                            {263}if (SIGNATURE_or_MAC_3_2 = MAC_3_2) then
+                            {264}if (ID_CRED_R_2 = check_cred(ID_CRED_I_7)) then
+                                0
+                            else
+                                {258}let TH_4_2: bitstring = hash((wrap(TH_3_2),(plaintext_3_2,pkI_2))) in
+                                {265}let PRK_out_2: bitstring = edhoc_kdf(PRK_4e3m_2,sseven,TH_4_2,hash_length) in
+                                {266}event eAcceptR(cid,method_two,pkI_2,pkR_2,PRK_4e3m_2,PRK_out_2,Y_2,G_X);
+                                {267}event eSecretsR(cid,method_two,pkI_2,pkR_2,PRK_2e,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,KEYSTREAM_2_7,K_3_2,IV_3_2,Y_2,G_X);
+                                {268}event eAcceptRData(PRK_out_2,method_two,pkI_2,pkR_2,Y_2,G_X,(TH_2,(TH_3_2,(TH_4_2,(suitesI,(EAD_1,(EAD_2,(EAD_3_7,(m1,(plaintext_2_7,plaintext_3_2))))))))));
+                                (
+                                    0
+                                ) | (
+                                    {269}event eLeakSessionKey(PRK_out_2);
+                                    {270}out(att, PRK_out_2)
+                                )
+                        )
+                        else
+                            {271}if (method = method_three) then
+                            {272}let pkR_3: bitstring = get_DH_cred(ID_CRED_R_2) in
+                            {274}let SALT_3e2m_1: bitstring = edhoc_kdf(PRK_2e,stone,TH_2,hash_length) in
+                            {273}let G_XR_4: bitstring = exp(G_X,R_2) in
+                            {275}let PRK_3e2m_3: bitstring = hkdfextract(SALT_3e2m_1,G_XR_4) in
+                            {280}event eDerivedR(cid,pkR_3,PRK_3e2m_3,Y_2,G_X);
+                            {281}event eTHRShared(pkR_3,TH_2);
+                            {282}event eDerivedRShared(pkR_3,G_XY_2);
+                            {283}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m_3);
+                            {276}let MAC_2_3: bitstring = edhoc_kdf(PRK_3e2m_3,stwo,(ID_CRED_R_2,(TH_2,(pkR_3,EAD_2))),hash_length) in
+                            {277}let SIGNATURE_or_MAC_2_8: bitstring = MAC_2_3 in
+                            {278}let plaintext_2_8: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2_8,EAD_2))) in
+                            {285}event eSendRData(method_three,pkR_3,(TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_2_8))))));
+                            {279}let KEYSTREAM_2_8: bitstring = edhoc_kdf(PRK_2e,stzero,TH_2,plaintext_length) in
+                            {284}let m2_8: bitstring = (G_Y,(encxor(plaintext_2_8,KEYSTREAM_2_8),C_R)) in
+                            {286}out(att, m2_8);
+                            {287}in(att, CIPHERTEXT_3_8: bitstring);
+                            {288}let TH_3_3: bitstring = hash((wrap(TH_2),(plaintext_2_8,pkR_3))) in
+                            {290}let IV_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfour,TH_3_3,iv_length) in
+                            {289}let K_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sthree,TH_3_3,key_length) in
+                            {291}let plaintext_3_3: bitstring = aeaddec(CIPHERTEXT_3_8,K_3_3,IV_3_3) in
+                            {292}let (ID_CRED_I_8: bitstring,(SIGNATURE_or_MAC_3_3: bitstring,EAD_3_8: bitstring)) = plaintext_3_3 in
+                            {293}let pkI_3: bitstring = get_DH_cred(ID_CRED_I_8) in
+                            {296}let SALT_4e3m_1: bitstring = edhoc_kdf(PRK_3e2m_3,sfive,TH_3_3,hash_length) in
+                            {295}let pkIY_4: bitstring = exp(pkI_3,Y_2) in
+                            {297}let PRK_4e3m_3: bitstring = hkdfextract(SALT_4e3m_1,pkIY_4) in
+                            {298}let MAC_3_3: bitstring = edhoc_kdf(PRK_4e3m_3,ssix,(ID_CRED_I_8,(TH_3_3,(pkI_3,EAD_3_8))),hash_length) in
+                            {299}if (SIGNATURE_or_MAC_3_3 = MAC_3_3) then
+                            {300}if (ID_CRED_R_2 = check_cred(ID_CRED_I_8)) then
+                                0
+                            else
+                                {294}let TH_4_3: bitstring = hash((wrap(TH_3_3),(plaintext_3_3,pkI_3))) in
+                                {301}let PRK_out_3: bitstring = edhoc_kdf(PRK_4e3m_3,sseven,TH_4_3,hash_length) in
+                                {302}event eAcceptR(cid,method_three,pkI_3,pkR_3,PRK_4e3m_3,PRK_out_3,Y_2,G_X);
+                                {303}event eSecretsR(cid,method_three,pkI_3,pkR_3,PRK_2e,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,KEYSTREAM_2_8,K_3_3,IV_3_3,Y_2,G_X);
+                                {304}event eAcceptRData(PRK_out_3,method_three,pkI_3,pkR_3,Y_2,G_X,(TH_2,(TH_3_3,(TH_4_3,(suitesI,(EAD_1,(EAD_2,(EAD_3_8,(m1,(plaintext_2_8,plaintext_3_3))))))))));
+                                (
+                                    0
+                                ) | (
+                                    {305}event eLeakSessionKey(PRK_out_3);
+                                    {306}out(att, PRK_out_3)
+                                )
+        )
+    ) | (
+        {308}in(att, =sComp);
+        {307}let sk: bitstring = sk_2 in
+        {309}event eCompromise(pk(sk));
+        {310}out(att, sk)
+    ) | (
+        {312}in(att, =sComp);
+        {311}let k_2: bitstring = ltdh_2 in
+        {313}event eCompromise(exp(g,k_2));
+        {314}event eLeak(k_2);
+        {315}out(att, k_2)
+    )
+)
+
+-- Axiom event(eShare(k)) && attacker(k) ==> event(eLeakShare(k)) in process 1.
+-- Axiom event(eShareLT(k)) && attacker(k) ==> event(eLeak(k)) in process 1.
+-- Query event(eAcceptR(cid_1,m,pkI_4,pkR_4,k4,ko,y,gx))@i && event(eHonest(pkI_4))@k && attacker(ko)@j ==> (event(eCompromise(pkI_4))@t && i > t) || event(eLeakSessionKey(ko))@t || event(eLeakShare(y))@t || event(eLeakShare(gx))@t encoded as event(eAcceptR(cid_1,m,pkI_4,pkR_4,k4,ko,y,gx))@i && event(eHonest(pkI_4)) && attacker(ko) ==> (event(eCompromise(pkI_4))@i_1 && i > i_1) || event(eLeakSessionKey(ko)) || event(eLeakShare(y)) || event(eLeakShare(gx)) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (78 with conclusion selected). Queue: 148 rules.
+400 rules inserted. Base: 388 rules (138 with conclusion selected). Queue: 184 rules.
+600 rules inserted. Base: 510 rules (138 with conclusion selected). Queue: 170 rules.
+800 rules inserted. Base: 612 rules (146 with conclusion selected). Queue: 170 rules.
+1000 rules inserted. Base: 784 rules (174 with conclusion selected). Queue: 186 rules.
+1200 rules inserted. Base: 962 rules (174 with conclusion selected). Queue: 192 rules.
+1400 rules inserted. Base: 1106 rules (182 with conclusion selected). Queue: 224 rules.
+1600 rules inserted. Base: 1286 rules (192 with conclusion selected). Queue: 308 rules.
+1800 rules inserted. Base: 1350 rules (192 with conclusion selected). Queue: 511 rules.
+2000 rules inserted. Base: 1414 rules (192 with conclusion selected). Queue: 590 rules.
+2200 rules inserted. Base: 1584 rules (192 with conclusion selected). Queue: 584 rules.
+2400 rules inserted. Base: 1722 rules (192 with conclusion selected). Queue: 582 rules.
+2600 rules inserted. Base: 1774 rules (192 with conclusion selected). Queue: 592 rules.
+2800 rules inserted. Base: 1679 rules (196 with conclusion selected). Queue: 604 rules.
+3000 rules inserted. Base: 1539 rules (196 with conclusion selected). Queue: 612 rules.
+3200 rules inserted. Base: 1543 rules (196 with conclusion selected). Queue: 642 rules.
+3400 rules inserted. Base: 1693 rules (200 with conclusion selected). Queue: 644 rules.
+3600 rules inserted. Base: 1834 rules (200 with conclusion selected). Queue: 648 rules.
+3800 rules inserted. Base: 1953 rules (200 with conclusion selected). Queue: 674 rules.
+4000 rules inserted. Base: 2004 rules (208 with conclusion selected). Queue: 792 rules.
+4200 rules inserted. Base: 2080 rules (208 with conclusion selected). Queue: 826 rules.
+4400 rules inserted. Base: 2176 rules (208 with conclusion selected). Queue: 868 rules.
+4600 rules inserted. Base: 2312 rules (215 with conclusion selected). Queue: 1002 rules.
+4800 rules inserted. Base: 2414 rules (224 with conclusion selected). Queue: 1087 rules.
+5000 rules inserted. Base: 2484 rules (224 with conclusion selected). Queue: 1093 rules.
+5200 rules inserted. Base: 2540 rules (224 with conclusion selected). Queue: 1099 rules.
+5400 rules inserted. Base: 2634 rules (235 with conclusion selected). Queue: 1247 rules.
+5600 rules inserted. Base: 2793 rules (258 with conclusion selected). Queue: 1389 rules.
+5800 rules inserted. Base: 2917 rules (278 with conclusion selected). Queue: 1522 rules.
+6000 rules inserted. Base: 2966 rules (278 with conclusion selected). Queue: 1542 rules.
+6200 rules inserted. Base: 3018 rules (278 with conclusion selected). Queue: 1554 rules.
+6400 rules inserted. Base: 3058 rules (282 with conclusion selected). Queue: 1562 rules.
+6600 rules inserted. Base: 3203 rules (289 with conclusion selected). Queue: 1727 rules.
+6800 rules inserted. Base: 3318 rules (290 with conclusion selected). Queue: 1712 rules.
+7000 rules inserted. Base: 3465 rules (302 with conclusion selected). Queue: 1733 rules.
+7200 rules inserted. Base: 3522 rules (304 with conclusion selected). Queue: 1783 rules.
+7400 rules inserted. Base: 3581 rules (310 with conclusion selected). Queue: 1765 rules.
+7600 rules inserted. Base: 3588 rules (310 with conclusion selected). Queue: 1759 rules.
+7800 rules inserted. Base: 3596 rules (314 with conclusion selected). Queue: 1754 rules.
+8000 rules inserted. Base: 3654 rules (334 with conclusion selected). Queue: 1841 rules.
+8200 rules inserted. Base: 3826 rules (334 with conclusion selected). Queue: 1817 rules.
+8400 rules inserted. Base: 3837 rules (334 with conclusion selected). Queue: 1804 rules.
+8600 rules inserted. Base: 3947 rules (334 with conclusion selected). Queue: 1759 rules.
+8800 rules inserted. Base: 3997 rules (334 with conclusion selected). Queue: 1755 rules.
+9000 rules inserted. Base: 4065 rules (334 with conclusion selected). Queue: 1745 rules.
+9200 rules inserted. Base: 4077 rules (334 with conclusion selected). Queue: 1731 rules.
+9400 rules inserted. Base: 4140 rules (366 with conclusion selected). Queue: 1751 rules.
+9600 rules inserted. Base: 4172 rules (382 with conclusion selected). Queue: 1765 rules.
+9800 rules inserted. Base: 4230 rules (413 with conclusion selected). Queue: 1776 rules.
+10000 rules inserted. Base: 4159 rules (422 with conclusion selected). Queue: 1773 rules.
+10200 rules inserted. Base: 4141 rules (422 with conclusion selected). Queue: 1740 rules.
+10400 rules inserted. Base: 4210 rules (422 with conclusion selected). Queue: 1757 rules.
+10600 rules inserted. Base: 4231 rules (422 with conclusion selected). Queue: 1762 rules.
+10800 rules inserted. Base: 4299 rules (422 with conclusion selected). Queue: 1759 rules.
+11000 rules inserted. Base: 4303 rules (425 with conclusion selected). Queue: 1758 rules.
+11200 rules inserted. Base: 4385 rules (483 with conclusion selected). Queue: 1744 rules.
+11400 rules inserted. Base: 4431 rules (513 with conclusion selected). Queue: 1744 rules.
+11600 rules inserted. Base: 4553 rules (586 with conclusion selected). Queue: 1741 rules.
+11800 rules inserted. Base: 4651 rules (586 with conclusion selected). Queue: 1745 rules.
+12000 rules inserted. Base: 4766 rules (586 with conclusion selected). Queue: 1731 rules.
+12200 rules inserted. Base: 4806 rules (586 with conclusion selected). Queue: 1771 rules.
+12400 rules inserted. Base: 4869 rules (586 with conclusion selected). Queue: 1788 rules.
+12600 rules inserted. Base: 4976 rules (637 with conclusion selected). Queue: 1882 rules.
+12800 rules inserted. Base: 5174 rules (817 with conclusion selected). Queue: 1782 rules.
+13000 rules inserted. Base: 5352 rules (957 with conclusion selected). Queue: 1770 rules.
+13200 rules inserted. Base: 5532 rules (1086 with conclusion selected). Queue: 1768 rules.
+13400 rules inserted. Base: 5690 rules (1106 with conclusion selected). Queue: 1794 rules.
+13600 rules inserted. Base: 5875 rules (1106 with conclusion selected). Queue: 1887 rules.
+13800 rules inserted. Base: 5909 rules (1106 with conclusion selected). Queue: 1896 rules.
+14000 rules inserted. Base: 5923 rules (1106 with conclusion selected). Queue: 1908 rules.
+14200 rules inserted. Base: 5969 rules (1108 with conclusion selected). Queue: 1890 rules.
+14400 rules inserted. Base: 6048 rules (1110 with conclusion selected). Queue: 1902 rules.
+14600 rules inserted. Base: 6209 rules (1110 with conclusion selected). Queue: 1906 rules.
+14800 rules inserted. Base: 6373 rules (1110 with conclusion selected). Queue: 1912 rules.
+15000 rules inserted. Base: 6523 rules (1110 with conclusion selected). Queue: 1916 rules.
+15200 rules inserted. Base: 6603 rules (1110 with conclusion selected). Queue: 1932 rules.
+15400 rules inserted. Base: 6656 rules (1110 with conclusion selected). Queue: 1933 rules.
+15600 rules inserted. Base: 6686 rules (1110 with conclusion selected). Queue: 1931 rules.
+15800 rules inserted. Base: 6707 rules (1113 with conclusion selected). Queue: 1971 rules.
+16000 rules inserted. Base: 6741 rules (1127 with conclusion selected). Queue: 1952 rules.
+16200 rules inserted. Base: 6799 rules (1143 with conclusion selected). Queue: 1927 rules.
+16400 rules inserted. Base: 6821 rules (1147 with conclusion selected). Queue: 1927 rules.
+16600 rules inserted. Base: 6888 rules (1147 with conclusion selected). Queue: 1939 rules.
+16800 rules inserted. Base: 6956 rules (1147 with conclusion selected). Queue: 1947 rules.
+17000 rules inserted. Base: 7099 rules (1147 with conclusion selected). Queue: 1987 rules.
+17200 rules inserted. Base: 7209 rules (1147 with conclusion selected). Queue: 2003 rules.
+17400 rules inserted. Base: 7277 rules (1147 with conclusion selected). Queue: 2014 rules.
+17600 rules inserted. Base: 7276 rules (1147 with conclusion selected). Queue: 2061 rules.
+17800 rules inserted. Base: 7323 rules (1154 with conclusion selected). Queue: 2055 rules.
+18000 rules inserted. Base: 7382 rules (1200 with conclusion selected). Queue: 2026 rules.
+18200 rules inserted. Base: 7495 rules (1220 with conclusion selected). Queue: 2025 rules.
+18400 rules inserted. Base: 7670 rules (1220 with conclusion selected). Queue: 2061 rules.
+18600 rules inserted. Base: 7850 rules (1220 with conclusion selected). Queue: 2085 rules.
+18800 rules inserted. Base: 8032 rules (1220 with conclusion selected). Queue: 2117 rules.
+19000 rules inserted. Base: 8138 rules (1220 with conclusion selected). Queue: 2128 rules.
+19200 rules inserted. Base: 8187 rules (1220 with conclusion selected). Queue: 2069 rules.
+19400 rules inserted. Base: 8250 rules (1216 with conclusion selected). Queue: 2100 rules.
+19600 rules inserted. Base: 8326 rules (1216 with conclusion selected). Queue: 2140 rules.
+19800 rules inserted. Base: 8458 rules (1230 with conclusion selected). Queue: 2106 rules.
+20000 rules inserted. Base: 8591 rules (1255 with conclusion selected). Queue: 2097 rules.
+20200 rules inserted. Base: 8785 rules (1262 with conclusion selected). Queue: 2109 rules.
+20400 rules inserted. Base: 8934 rules (1262 with conclusion selected). Queue: 2137 rules.
+20600 rules inserted. Base: 9100 rules (1262 with conclusion selected). Queue: 2163 rules.
+20800 rules inserted. Base: 9266 rules (1262 with conclusion selected). Queue: 2187 rules.
+21000 rules inserted. Base: 9358 rules (1262 with conclusion selected). Queue: 2201 rules.
+21200 rules inserted. Base: 9366 rules (1262 with conclusion selected). Queue: 2169 rules.
+21400 rules inserted. Base: 9368 rules (1270 with conclusion selected). Queue: 2153 rules.
+21600 rules inserted. Base: 9355 rules (1268 with conclusion selected). Queue: 2154 rules.
+21800 rules inserted. Base: 9454 rules (1351 with conclusion selected). Queue: 2083 rules.
+22000 rules inserted. Base: 9544 rules (1422 with conclusion selected). Queue: 2009 rules.
+22200 rules inserted. Base: 9718 rules (1440 with conclusion selected). Queue: 1982 rules.
+22400 rules inserted. Base: 9865 rules (1440 with conclusion selected). Queue: 1972 rules.
+22600 rules inserted. Base: 10041 rules (1440 with conclusion selected). Queue: 1964 rules.
+22800 rules inserted. Base: 10203 rules (1440 with conclusion selected). Queue: 1962 rules.
+23000 rules inserted. Base: 10334 rules (1440 with conclusion selected). Queue: 1944 rules.
+23200 rules inserted. Base: 10376 rules (1440 with conclusion selected). Queue: 1942 rules.
+23400 rules inserted. Base: 10408 rules (1438 with conclusion selected). Queue: 1972 rules.
+23600 rules inserted. Base: 10412 rules (1420 with conclusion selected). Queue: 1972 rules.
+23800 rules inserted. Base: 10430 rules (1417 with conclusion selected). Queue: 1987 rules.
+24000 rules inserted. Base: 10483 rules (1418 with conclusion selected). Queue: 1995 rules.
+24200 rules inserted. Base: 10656 rules (1418 with conclusion selected). Queue: 2007 rules.
+24400 rules inserted. Base: 10787 rules (1418 with conclusion selected). Queue: 1995 rules.
+24600 rules inserted. Base: 10957 rules (1418 with conclusion selected). Queue: 1983 rules.
+24800 rules inserted. Base: 11133 rules (1418 with conclusion selected). Queue: 1969 rules.
+25000 rules inserted. Base: 11249 rules (1418 with conclusion selected). Queue: 1961 rules.
+25200 rules inserted. Base: 11252 rules (1418 with conclusion selected). Queue: 1961 rules.
+25400 rules inserted. Base: 11198 rules (1388 with conclusion selected). Queue: 1957 rules.
+25600 rules inserted. Base: 11253 rules (1408 with conclusion selected). Queue: 1923 rules.
+25800 rules inserted. Base: 11269 rules (1405 with conclusion selected). Queue: 1894 rules.
+26000 rules inserted. Base: 11205 rules (1370 with conclusion selected). Queue: 1897 rules.
+26200 rules inserted. Base: 11379 rules (1370 with conclusion selected). Queue: 1915 rules.
+26400 rules inserted. Base: 11512 rules (1370 with conclusion selected). Queue: 1909 rules.
+26600 rules inserted. Base: 11666 rules (1370 with conclusion selected). Queue: 1905 rules.
+26800 rules inserted. Base: 11817 rules (1370 with conclusion selected). Queue: 1898 rules.
+27000 rules inserted. Base: 11906 rules (1370 with conclusion selected). Queue: 1880 rules.
+27200 rules inserted. Base: 12048 rules (1372 with conclusion selected). Queue: 1878 rules.
+27400 rules inserted. Base: 12166 rules (1416 with conclusion selected). Queue: 1837 rules.
+27600 rules inserted. Base: 12281 rules (1425 with conclusion selected). Queue: 1832 rules.
+27800 rules inserted. Base: 12349 rules (1470 with conclusion selected). Queue: 1794 rules.
+28000 rules inserted. Base: 12408 rules (1517 with conclusion selected). Queue: 1760 rules.
+28200 rules inserted. Base: 12451 rules (1517 with conclusion selected). Queue: 1757 rules.
+28400 rules inserted. Base: 12479 rules (1517 with conclusion selected). Queue: 1751 rules.
+28600 rules inserted. Base: 12519 rules (1517 with conclusion selected). Queue: 1745 rules.
+28800 rules inserted. Base: 12614 rules (1517 with conclusion selected). Queue: 1732 rules.
+29000 rules inserted. Base: 12628 rules (1524 with conclusion selected). Queue: 1709 rules.
+29200 rules inserted. Base: 12649 rules (1542 with conclusion selected). Queue: 1693 rules.
+29400 rules inserted. Base: 12684 rules (1569 with conclusion selected). Queue: 1677 rules.
+29600 rules inserted. Base: 12773 rules (1610 with conclusion selected). Queue: 1642 rules.
+29800 rules inserted. Base: 12950 rules (1615 with conclusion selected). Queue: 1639 rules.
+30000 rules inserted. Base: 13087 rules (1615 with conclusion selected). Queue: 1624 rules.
+30200 rules inserted. Base: 13245 rules (1615 with conclusion selected). Queue: 1614 rules.
+30400 rules inserted. Base: 13420 rules (1615 with conclusion selected). Queue: 1614 rules.
+30600 rules inserted. Base: 13456 rules (1627 with conclusion selected). Queue: 1588 rules.
+30800 rules inserted. Base: 13480 rules (1673 with conclusion selected). Queue: 1547 rules.
+31000 rules inserted. Base: 13514 rules (1743 with conclusion selected). Queue: 1496 rules.
+31200 rules inserted. Base: 13590 rules (1821 with conclusion selected). Queue: 1427 rules.
+31400 rules inserted. Base: 13729 rules (1828 with conclusion selected). Queue: 1419 rules.
+31600 rules inserted. Base: 13862 rules (1828 with conclusion selected). Queue: 1407 rules.
+31800 rules inserted. Base: 14016 rules (1828 with conclusion selected). Queue: 1399 rules.
+32000 rules inserted. Base: 14185 rules (1828 with conclusion selected). Queue: 1407 rules.
+32200 rules inserted. Base: 14268 rules (1889 with conclusion selected). Queue: 1324 rules.
+32400 rules inserted. Base: 14453 rules (2058 with conclusion selected). Queue: 1166 rules.
+32600 rules inserted. Base: 14611 rules (2175 with conclusion selected). Queue: 1072 rules.
+32800 rules inserted. Base: 14788 rules (2176 with conclusion selected). Queue: 1087 rules.
+33000 rules inserted. Base: 14907 rules (2182 with conclusion selected). Queue: 1079 rules.
+33200 rules inserted. Base: 15053 rules (2186 with conclusion selected). Queue: 1079 rules.
+33400 rules inserted. Base: 15202 rules (2190 with conclusion selected). Queue: 1074 rules.
+33600 rules inserted. Base: 15238 rules (2196 with conclusion selected). Queue: 1065 rules.
+33800 rules inserted. Base: 15340 rules (2198 with conclusion selected). Queue: 1122 rules.
+34000 rules inserted. Base: 15473 rules (2202 with conclusion selected). Queue: 1197 rules.
+34200 rules inserted. Base: 15617 rules (2205 with conclusion selected). Queue: 1297 rules.
+34400 rules inserted. Base: 15764 rules (2212 with conclusion selected). Queue: 1386 rules.
+34600 rules inserted. Base: 15788 rules (2228 with conclusion selected). Queue: 1397 rules.
+34800 rules inserted. Base: 15786 rules (2234 with conclusion selected). Queue: 1375 rules.
+35000 rules inserted. Base: 15876 rules (2234 with conclusion selected). Queue: 1289 rules.
+35200 rules inserted. Base: 15932 rules (2236 with conclusion selected). Queue: 1235 rules.
+35400 rules inserted. Base: 16016 rules (2237 with conclusion selected). Queue: 1155 rules.
+35600 rules inserted. Base: 16089 rules (2243 with conclusion selected). Queue: 1106 rules.
+35800 rules inserted. Base: 16148 rules (2243 with conclusion selected). Queue: 1050 rules.
+36000 rules inserted. Base: 16137 rules (2260 with conclusion selected). Queue: 1021 rules.
+36200 rules inserted. Base: 16161 rules (2264 with conclusion selected). Queue: 1019 rules.
+36400 rules inserted. Base: 16264 rules (2264 with conclusion selected). Queue: 1019 rules.
+36600 rules inserted. Base: 16357 rules (2268 with conclusion selected). Queue: 1015 rules.
+36800 rules inserted. Base: 16400 rules (2273 with conclusion selected). Queue: 963 rules.
+37000 rules inserted. Base: 16392 rules (2285 with conclusion selected). Queue: 938 rules.
+37200 rules inserted. Base: 16319 rules (2278 with conclusion selected). Queue: 899 rules.
+37400 rules inserted. Base: 16195 rules (2278 with conclusion selected). Queue: 899 rules.
+37600 rules inserted. Base: 16065 rules (2278 with conclusion selected). Queue: 899 rules.
+37800 rules inserted. Base: 15907 rules (2282 with conclusion selected). Queue: 887 rules.
+38000 rules inserted. Base: 15834 rules (2293 with conclusion selected). Queue: 863 rules.
+38200 rules inserted. Base: 15571 rules (2294 with conclusion selected). Queue: 850 rules.
+38400 rules inserted. Base: 15345 rules (2294 with conclusion selected). Queue: 846 rules.
+38600 rules inserted. Base: 15166 rules (2294 with conclusion selected). Queue: 836 rules.
+38800 rules inserted. Base: 15161 rules (2296 with conclusion selected). Queue: 823 rules.
+39000 rules inserted. Base: 15251 rules (2300 with conclusion selected). Queue: 810 rules.
+39200 rules inserted. Base: 15152 rules (2303 with conclusion selected). Queue: 809 rules.
+39400 rules inserted. Base: 15088 rules (2305 with conclusion selected). Queue: 810 rules.
+39600 rules inserted. Base: 14928 rules (2324 with conclusion selected). Queue: 789 rules.
+39800 rules inserted. Base: 14981 rules (2331 with conclusion selected). Queue: 772 rules.
+40000 rules inserted. Base: 14953 rules (2334 with conclusion selected). Queue: 765 rules.
+40200 rules inserted. Base: 14934 rules (2338 with conclusion selected). Queue: 763 rules.
+40400 rules inserted. Base: 14904 rules (2357 with conclusion selected). Queue: 743 rules.
+40600 rules inserted. Base: 14879 rules (2364 with conclusion selected). Queue: 751 rules.
+40800 rules inserted. Base: 14768 rules (2385 with conclusion selected). Queue: 732 rules.
+41000 rules inserted. Base: 14683 rules (2401 with conclusion selected). Queue: 725 rules.
+41200 rules inserted. Base: 14736 rules (2428 with conclusion selected). Queue: 715 rules.
+41400 rules inserted. Base: 14577 rules (2428 with conclusion selected). Queue: 713 rules.
+41600 rules inserted. Base: 14204 rules (2428 with conclusion selected). Queue: 707 rules.
+41800 rules inserted. Base: 13605 rules (2448 with conclusion selected). Queue: 688 rules.
+42000 rules inserted. Base: 13672 rules (2450 with conclusion selected). Queue: 692 rules.
+42200 rules inserted. Base: 13719 rules (2495 with conclusion selected). Queue: 653 rules.
+42400 rules inserted. Base: 13769 rules (2540 with conclusion selected). Queue: 639 rules.
+42600 rules inserted. Base: 13902 rules (2584 with conclusion selected). Queue: 608 rules.
+42800 rules inserted. Base: 12090 rules (2584 with conclusion selected). Queue: 608 rules.
+43000 rules inserted. Base: 10709 rules (2614 with conclusion selected). Queue: 587 rules.
+43200 rules inserted. Base: 10252 rules (2636 with conclusion selected). Queue: 569 rules.
+43400 rules inserted. Base: 10437 rules (2826 with conclusion selected). Queue: 382 rules.
+43600 rules inserted. Base: 10626 rules (3000 with conclusion selected). Queue: 341 rules.
+43800 rules inserted. Base: 10734 rules (3050 with conclusion selected). Queue: 296 rules.
+44000 rules inserted. Base: 10906 rules (3178 with conclusion selected). Queue: 180 rules.
+44200 rules inserted. Base: 10971 rules (3178 with conclusion selected). Queue: 198 rules.
+44400 rules inserted. Base: 11063 rules (3178 with conclusion selected). Queue: 179 rules.
+44600 rules inserted. Base: 11098 rules (3178 with conclusion selected). Queue: 155 rules.
+44800 rules inserted. Base: 11175 rules (3178 with conclusion selected). Queue: 129 rules.
+45000 rules inserted. Base: 11220 rules (3184 with conclusion selected). Queue: 107 rules.
+45200 rules inserted. Base: 11104 rules (3197 with conclusion selected). Queue: 84 rules.
+45400 rules inserted. Base: 11145 rules (3245 with conclusion selected). Queue: 38 rules.
+45600 rules inserted. Base: 11174 rules (3250 with conclusion selected). Queue: 19 rules.
+Starting query event(eAcceptR(cid_1,m,pkI_4,pkR_4,k4,ko,y,gx))@i && event(eHonest(pkI_4))@k && attacker(ko)@j ==> (event(eCompromise(pkI_4))@t && i > t) || event(eLeakSessionKey(ko))@t || event(eLeakShare(y))@t || event(eLeakShare(gx))@t
+200 rules inserted. Base: 200 rules (0 with conclusion selected). Queue: 2483 rules.
+400 rules inserted. Base: 400 rules (0 with conclusion selected). Queue: 3635 rules.
+600 rules inserted. Base: 564 rules (0 with conclusion selected). Queue: 4156 rules.
+800 rules inserted. Base: 726 rules (0 with conclusion selected). Queue: 4135 rules.
+1000 rules inserted. Base: 914 rules (0 with conclusion selected). Queue: 4049 rules.
+1200 rules inserted. Base: 1114 rules (0 with conclusion selected). Queue: 3986 rules.
+1400 rules inserted. Base: 1314 rules (0 with conclusion selected). Queue: 3876 rules.
+1600 rules inserted. Base: 1514 rules (0 with conclusion selected). Queue: 3736 rules.
+1800 rules inserted. Base: 1713 rules (0 with conclusion selected). Queue: 3588 rules.
+2000 rules inserted. Base: 1913 rules (0 with conclusion selected). Queue: 3467 rules.
+2200 rules inserted. Base: 2113 rules (0 with conclusion selected). Queue: 3289 rules.
+2400 rules inserted. Base: 2313 rules (0 with conclusion selected). Queue: 3118 rules.
+2600 rules inserted. Base: 2513 rules (0 with conclusion selected). Queue: 2950 rules.
+2800 rules inserted. Base: 2713 rules (0 with conclusion selected). Queue: 2839 rules.
+3000 rules inserted. Base: 2913 rules (0 with conclusion selected). Queue: 2761 rules.
+3200 rules inserted. Base: 3113 rules (0 with conclusion selected). Queue: 2718 rules.
+3400 rules inserted. Base: 3313 rules (0 with conclusion selected). Queue: 2642 rules.
+3600 rules inserted. Base: 3513 rules (0 with conclusion selected). Queue: 2550 rules.
+3800 rules inserted. Base: 3713 rules (0 with conclusion selected). Queue: 2419 rules.
+4000 rules inserted. Base: 3913 rules (0 with conclusion selected). Queue: 2250 rules.
+4200 rules inserted. Base: 4113 rules (0 with conclusion selected). Queue: 2168 rules.
+4400 rules inserted. Base: 4298 rules (0 with conclusion selected). Queue: 2112 rules.
+4600 rules inserted. Base: 4471 rules (0 with conclusion selected). Queue: 2066 rules.
+4800 rules inserted. Base: 4654 rules (0 with conclusion selected). Queue: 2090 rules.
+5000 rules inserted. Base: 4787 rules (25 with conclusion selected). Queue: 2128 rules.
+5200 rules inserted. Base: 4899 rules (36 with conclusion selected). Queue: 2199 rules.
+5400 rules inserted. Base: 5007 rules (36 with conclusion selected). Queue: 2250 rules.
+5600 rules inserted. Base: 5198 rules (53 with conclusion selected). Queue: 2247 rules.
+5800 rules inserted. Base: 5374 rules (101 with conclusion selected). Queue: 2298 rules.
+6000 rules inserted. Base: 5554 rules (143 with conclusion selected). Queue: 2284 rules.
+6200 rules inserted. Base: 5688 rules (160 with conclusion selected). Queue: 2345 rules.
+6400 rules inserted. Base: 5867 rules (202 with conclusion selected). Queue: 2343 rules.
+6600 rules inserted. Base: 5993 rules (217 with conclusion selected). Queue: 2407 rules.
+6800 rules inserted. Base: 6151 rules (246 with conclusion selected). Queue: 2378 rules.
+7000 rules inserted. Base: 6316 rules (278 with conclusion selected). Queue: 2336 rules.
+7200 rules inserted. Base: 6475 rules (304 with conclusion selected). Queue: 2338 rules.
+7400 rules inserted. Base: 6618 rules (352 with conclusion selected). Queue: 2293 rules.
+7600 rules inserted. Base: 6812 rules (361 with conclusion selected). Queue: 2278 rules.
+7800 rules inserted. Base: 6996 rules (397 with conclusion selected). Queue: 2233 rules.
+8000 rules inserted. Base: 7194 rules (433 with conclusion selected). Queue: 2190 rules.
+8200 rules inserted. Base: 7380 rules (510 with conclusion selected). Queue: 2103 rules.
+8400 rules inserted. Base: 7580 rules (562 with conclusion selected). Queue: 2049 rules.
+8600 rules inserted. Base: 7766 rules (580 with conclusion selected). Queue: 2029 rules.
+8800 rules inserted. Base: 7952 rules (603 with conclusion selected). Queue: 2000 rules.
+9000 rules inserted. Base: 8108 rules (622 with conclusion selected). Queue: 1971 rules.
+9200 rules inserted. Base: 8217 rules (660 with conclusion selected). Queue: 1924 rules.
+9400 rules inserted. Base: 8233 rules (680 with conclusion selected). Queue: 1864 rules.
+9600 rules inserted. Base: 8276 rules (732 with conclusion selected). Queue: 1792 rules.
+9800 rules inserted. Base: 8476 rules (786 with conclusion selected). Queue: 1681 rules.
+10000 rules inserted. Base: 8672 rules (800 with conclusion selected). Queue: 1639 rules.
+10200 rules inserted. Base: 8872 rules (830 with conclusion selected). Queue: 1502 rules.
+10400 rules inserted. Base: 9072 rules (863 with conclusion selected). Queue: 1368 rules.
+10600 rules inserted. Base: 9268 rules (883 with conclusion selected). Queue: 1298 rules.
+10800 rules inserted. Base: 9458 rules (906 with conclusion selected). Queue: 1178 rules.
+11000 rules inserted. Base: 9510 rules (941 with conclusion selected). Queue: 1112 rules.
+11200 rules inserted. Base: 9620 rules (961 with conclusion selected). Queue: 1125 rules.
+11400 rules inserted. Base: 9779 rules (990 with conclusion selected). Queue: 1126 rules.
+11600 rules inserted. Base: 9830 rules (1027 with conclusion selected). Queue: 1075 rules.
+11800 rules inserted. Base: 9859 rules (1042 with conclusion selected). Queue: 1052 rules.
+12000 rules inserted. Base: 9941 rules (1079 with conclusion selected). Queue: 993 rules.
+12200 rules inserted. Base: 10109 rules (1087 with conclusion selected). Queue: 1042 rules.
+12400 rules inserted. Base: 10309 rules (1087 with conclusion selected). Queue: 1134 rules.
+12600 rules inserted. Base: 10509 rules (1099 with conclusion selected). Queue: 1165 rules.
+12800 rules inserted. Base: 10709 rules (1099 with conclusion selected). Queue: 1165 rules.
+13000 rules inserted. Base: 10909 rules (1111 with conclusion selected). Queue: 1181 rules.
+13200 rules inserted. Base: 11109 rules (1111 with conclusion selected). Queue: 1313 rules.
+13400 rules inserted. Base: 11309 rules (1111 with conclusion selected). Queue: 1313 rules.
+13600 rules inserted. Base: 11509 rules (1111 with conclusion selected). Queue: 1313 rules.
+13800 rules inserted. Base: 11709 rules (1111 with conclusion selected). Queue: 1643 rules.
+14000 rules inserted. Base: 11903 rules (1111 with conclusion selected). Queue: 2110 rules.
+14200 rules inserted. Base: 12087 rules (1111 with conclusion selected). Queue: 2417 rules.
+14400 rules inserted. Base: 12252 rules (1111 with conclusion selected). Queue: 2500 rules.
+14600 rules inserted. Base: 12439 rules (1111 with conclusion selected). Queue: 2505 rules.
+14800 rules inserted. Base: 12639 rules (1111 with conclusion selected). Queue: 2437 rules.
+15000 rules inserted. Base: 12839 rules (1111 with conclusion selected). Queue: 2382 rules.
+15200 rules inserted. Base: 13039 rules (1111 with conclusion selected). Queue: 2382 rules.
+15400 rules inserted. Base: 13239 rules (1111 with conclusion selected). Queue: 2382 rules.
+15600 rules inserted. Base: 13439 rules (1111 with conclusion selected). Queue: 2382 rules.
+15800 rules inserted. Base: 13639 rules (1111 with conclusion selected). Queue: 2382 rules.
+16000 rules inserted. Base: 13839 rules (1111 with conclusion selected). Queue: 2382 rules.
+16200 rules inserted. Base: 14013 rules (1111 with conclusion selected). Queue: 2382 rules.
+16400 rules inserted. Base: 14153 rules (1111 with conclusion selected). Queue: 2382 rules.
+16600 rules inserted. Base: 14286 rules (1111 with conclusion selected). Queue: 2376 rules.
+16800 rules inserted. Base: 14419 rules (1111 with conclusion selected). Queue: 2372 rules.
+17000 rules inserted. Base: 14570 rules (1111 with conclusion selected). Queue: 2372 rules.
+17200 rules inserted. Base: 14763 rules (1111 with conclusion selected). Queue: 2410 rules.
+17400 rules inserted. Base: 14963 rules (1111 with conclusion selected). Queue: 2442 rules.
+17600 rules inserted. Base: 15163 rules (1111 with conclusion selected). Queue: 2301 rules.
+17800 rules inserted. Base: 15363 rules (1111 with conclusion selected). Queue: 2151 rules.
+18000 rules inserted. Base: 15563 rules (1111 with conclusion selected). Queue: 2006 rules.
+18200 rules inserted. Base: 15763 rules (1111 with conclusion selected). Queue: 1869 rules.
+18400 rules inserted. Base: 15963 rules (1111 with conclusion selected). Queue: 1724 rules.
+18600 rules inserted. Base: 16074 rules (1111 with conclusion selected). Queue: 1674 rules.
+18800 rules inserted. Base: 16136 rules (1111 with conclusion selected). Queue: 1674 rules.
+19000 rules inserted. Base: 16206 rules (1111 with conclusion selected). Queue: 1652 rules.
+19200 rules inserted. Base: 16305 rules (1111 with conclusion selected). Queue: 1611 rules.
+19400 rules inserted. Base: 16427 rules (1111 with conclusion selected). Queue: 1586 rules.
+19600 rules inserted. Base: 16589 rules (1111 with conclusion selected). Queue: 1640 rules.
+19800 rules inserted. Base: 16768 rules (1111 with conclusion selected). Queue: 1683 rules.
+20000 rules inserted. Base: 16960 rules (1111 with conclusion selected). Queue: 1683 rules.
+20200 rules inserted. Base: 17095 rules (1111 with conclusion selected). Queue: 1683 rules.
+20400 rules inserted. Base: 17095 rules (1111 with conclusion selected). Queue: 1683 rules.
+20600 rules inserted. Base: 17136 rules (1111 with conclusion selected). Queue: 1690 rules.
+20800 rules inserted. Base: 17275 rules (1111 with conclusion selected). Queue: 1736 rules.
+21000 rules inserted. Base: 17384 rules (1111 with conclusion selected). Queue: 1735 rules.
+21200 rules inserted. Base: 17584 rules (1111 with conclusion selected). Queue: 1735 rules.
+21400 rules inserted. Base: 17784 rules (1111 with conclusion selected). Queue: 1735 rules.
+21600 rules inserted. Base: 17883 rules (1111 with conclusion selected). Queue: 1735 rules.
+21800 rules inserted. Base: 17883 rules (1111 with conclusion selected). Queue: 1735 rules.
+22000 rules inserted. Base: 18062 rules (1111 with conclusion selected). Queue: 1929 rules.
+22200 rules inserted. Base: 18254 rules (1111 with conclusion selected). Queue: 2119 rules.
+22400 rules inserted. Base: 18308 rules (1111 with conclusion selected). Queue: 2085 rules.
+22600 rules inserted. Base: 18316 rules (1111 with conclusion selected). Queue: 2043 rules.
+22800 rules inserted. Base: 18461 rules (1111 with conclusion selected). Queue: 2029 rules.
+23000 rules inserted. Base: 18649 rules (1111 with conclusion selected). Queue: 2029 rules.
+23200 rules inserted. Base: 18828 rules (1111 with conclusion selected). Queue: 2039 rules.
+23400 rules inserted. Base: 19028 rules (1111 with conclusion selected). Queue: 2039 rules.
+23600 rules inserted. Base: 19193 rules (1111 with conclusion selected). Queue: 2034 rules.
+23800 rules inserted. Base: 19343 rules (1111 with conclusion selected). Queue: 2206 rules.
+24000 rules inserted. Base: 19479 rules (1111 with conclusion selected). Queue: 2285 rules.
+24200 rules inserted. Base: 19599 rules (1111 with conclusion selected). Queue: 2288 rules.
+24400 rules inserted. Base: 19680 rules (1111 with conclusion selected). Queue: 2246 rules.
+24600 rules inserted. Base: 19671 rules (1111 with conclusion selected). Queue: 2189 rules.
+24800 rules inserted. Base: 19680 rules (1111 with conclusion selected). Queue: 2163 rules.
+25000 rules inserted. Base: 19732 rules (1111 with conclusion selected). Queue: 2154 rules.
+25200 rules inserted. Base: 19765 rules (1111 with conclusion selected). Queue: 2146 rules.
+25400 rules inserted. Base: 19938 rules (1111 with conclusion selected). Queue: 2147 rules.
+25600 rules inserted. Base: 20112 rules (1111 with conclusion selected). Queue: 2206 rules.
+25800 rules inserted. Base: 20230 rules (1111 with conclusion selected). Queue: 2221 rules.
+26000 rules inserted. Base: 20397 rules (1111 with conclusion selected). Queue: 2154 rules.
+26200 rules inserted. Base: 20563 rules (1111 with conclusion selected). Queue: 2087 rules.
+26400 rules inserted. Base: 20698 rules (1111 with conclusion selected). Queue: 2046 rules.
+26600 rules inserted. Base: 20832 rules (1111 with conclusion selected). Queue: 1998 rules.
+26800 rules inserted. Base: 20931 rules (1111 with conclusion selected). Queue: 1957 rules.
+27000 rules inserted. Base: 20967 rules (1111 with conclusion selected). Queue: 2009 rules.
+27200 rules inserted. Base: 20985 rules (1111 with conclusion selected). Queue: 2082 rules.
+27400 rules inserted. Base: 21050 rules (1111 with conclusion selected). Queue: 2118 rules.
+27600 rules inserted. Base: 21250 rules (1111 with conclusion selected). Queue: 2118 rules.
+27800 rules inserted. Base: 21416 rules (1111 with conclusion selected). Queue: 2129 rules.
+28000 rules inserted. Base: 21494 rules (1111 with conclusion selected). Queue: 2115 rules.
+28200 rules inserted. Base: 21564 rules (1111 with conclusion selected). Queue: 2129 rules.
+28400 rules inserted. Base: 21631 rules (1111 with conclusion selected). Queue: 2148 rules.
+28600 rules inserted. Base: 21681 rules (1111 with conclusion selected). Queue: 2190 rules.
+28800 rules inserted. Base: 21751 rules (1111 with conclusion selected). Queue: 2172 rules.
+29000 rules inserted. Base: 21899 rules (1111 with conclusion selected). Queue: 2164 rules.
+29200 rules inserted. Base: 22037 rules (1111 with conclusion selected). Queue: 2156 rules.
+29400 rules inserted. Base: 22175 rules (1111 with conclusion selected). Queue: 2134 rules.
+29600 rules inserted. Base: 22340 rules (1111 with conclusion selected). Queue: 2341 rules.
+29800 rules inserted. Base: 22540 rules (1111 with conclusion selected). Queue: 2597 rules.
+30000 rules inserted. Base: 22600 rules (1111 with conclusion selected). Queue: 2608 rules.
+30200 rules inserted. Base: 22735 rules (1111 with conclusion selected). Queue: 2648 rules.
+30400 rules inserted. Base: 22890 rules (1111 with conclusion selected). Queue: 2612 rules.
+30600 rules inserted. Base: 23000 rules (1111 with conclusion selected). Queue: 2587 rules.
+30800 rules inserted. Base: 23082 rules (1108 with conclusion selected). Queue: 2588 rules.
+31000 rules inserted. Base: 23113 rules (1112 with conclusion selected). Queue: 2603 rules.

@@ -1,0 +1,85 @@
+## KEMEDHOC*
+- [x] Design-level verification of KEMEDHOC: ProVerif model ready
+- [x] FStar specification of EDHOC: high-level FStar specification ready
+  - [x] Crypto Primitives (wrapper of HACL*)
+  - [x] Key Schedule
+  - [x] Protocol Run
+  - [x] Sanity Check
+- [x] LowStar implementation of EDHOC:
+  - [x] Crypto Primitives (wrapper of HACL*)
+  - [**x**] Key Schedule 
+  - [x] Protocol Run
+  - [x] Sanity Check
+- [x] FStar specification of KEMEDHOC
+  - [x] Crypto Primitives (wrapper of Hax ML-KEM)
+  - [x] Key Schedule
+  - [x] Protocol Run
+  - [x] Sanity Check
+- [ ] LowStar implementation of KEMEDHOC (converted to C)
+  - [ ] Crypto Primitives **Hax ML-KEM does not support Low* model**
+  - [ ] Key Schedule
+  - [ ] Protocol Run
+  - [ ] Sanity Check
+
+## Thesis Writting
+- Issues:
+  - Inconsistence in fonts
+  - [x] Intro should cover more general fields for broader audiences:
+    - Types of protocol: AKE. Build up information for any CS students can understand.
+    - Purpose for EDHOC, why it is needed? Point out OSCORE roles
+  - [x] EDHOC message flows, get rid of big indention of `description` environment
+  - [x] Make section 3 as known as the preliminary.
+  - Explitly point out research gaps which are correspondingly resolved by the mentioned contributions (bullet points).
+  - [x] EDHOC and DTLS is a weird paragraph title: make it into a separate subsection
+  - Figure 4 and 6, 8 too big, do not auto scalling: redraw figure 4-6 to make their fonts consistent to the text in thesis.
+  - [x] Line numbers of code snippets should be within margin. Try to avoid splitting code listing in several pages.
+  - Limitations could be placed after `Contributions`.
+  - [x] **Fix the KEMEDHOC protocol**: missing `ct_auth_I` in msg2, change `ptx1` into `(C_I,ID_CRED_I,EAD_1)`. Fix `ptx2` and `ptx3` using `()` instead of `||`
+  - [ ] Table 14: Comparision to EDHOC's properties and other competitors.
+  - [ ] Code listings: resize, make text smaller.
+  - [ ] Listing 15: caption, ending is too short.
+  - [ ] Ending at some paragraphs are too short.
+  - [ ] Thesis Title: `Lightweight KEX` should be included.
+- [ ] Introduction:
+  - [x] `Contribution` should be 2x-3x longer.
+  - [x] Approach
+  - [x] Contributions
+  - [x] Related Work
+  - [ ] peer-reviewed
+- [x] Premilinaries: `$\mathtt{ID}\_\mathtt{CRED}_R$` for distinct fonts from normal text. Splitting long paragraph into small chunks. 
+  - [x] EDHOC:
+    - [x] Protocol Overview: remove indention
+    - [x] Key Schedule
+    - [x] Security Properties
+  - [x] KEM:
+    - [x] ML-KEM  
+  - [ ] peer-reviewed (has pinged Prof. Russell for comments)
+- [ ] Formal Verification for Cryptographic Protocols
+  - [x] draft: still working on the following subsections `ProVerif`, `Implementation-level Verification`, `FStar`, `LowStar and KaRaMel`
+  - [x] Design-level Verification:
+    - [x] Symbolic Model
+    - [x] Computational Model
+  - [x] ProVerif:
+    - [x] ProVerif as a go-to tool for design-level verification
+    - [x] ProVerif Toy example
+  - [x] Implementation-level Verification
+    - [x] Properties to prove
+    - [x] Satisfiability Modulo Theories (SMT)
+    - [x] Floyd-Hoare logic and weakest precondition logic
+  - [x] F*
+    - [x] F* example
+  - [x] Low*
+    - [x] Low* example
+  - [x] KaRaMel  
+  - [ ] peer-reviewed (has pinged Prof. Russell for comments)
+- [x] KEMEDHOC design (ongoing)
+  - [x] Overview
+  - [x] Key Schedule
+  - [x] Security Properties 
+- [ ] Security Analysis
+  - [x] Design-level
+  - [~x] Implementaion-level 
+- [ ] Evaluation
+- [ ] Conclusion
+- [ ] Reference:
+  - [x] use `alpha` reference style 

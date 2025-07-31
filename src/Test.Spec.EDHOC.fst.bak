@@ -1,0 +1,157 @@
+module Test.Spec.EDHOC
+
+open FStar.All
+module IO = FStar.IO
+module List = FStar.List
+
+open Spec.EDHOC.Core
+open Spec.EDHOC.Base.Definitions
+open Spec.EDHOC.CryptoPrimitives
+open Spec.EDHOC.KeySchedule
+
+(*------------------------------ Utilities*)
+let generate_random_credential
+  :cred_i_bytes
+  = HACLRandom.unsound_crypto_random2 (cred_size)
+
+(*------------------------------ Set up*)
+let set_up_random_local_vals
+  (cs:supported_cipherSuite)
+  :eresult (supported_cipherSuite_label & ec_keypair cs & ec_signature_keypair cs & cred_i_bytes)
+  = let random_cred_i = generate_random_credential in
+  match (generate_ec_signature_keypair cs) with
+    | None -> Fail InvalidECPoint
+    | Some random_signature_keypair -> (
+      match (generate_ec_keypair cs) with
+        | None -> Fail InvalidECPoint
+        | Some (random_static_dh_keypair, entr1) -> (
+          // let supported_suites:list supported_cipherSuite_label = [(get_supportedCipherSuite_label cs)] in
+          let supported_suites = get_supportedCipherSuite_label cs in
+          Res (supported_suites, random_static_dh_keypair, random_signature_keypair, random_cred_i)
+        )
+    )
+
+let set_up_random_party_states cs
+  =
+  match (set_up_random_local_vals cs) with
+    | Fail e -> Fail e
+    | Res (suites_i, static_dh_pair_i, signature_key_pair_i, cred_i) -> (
+      match (set_up_random_local_vals cs) with
+        | Fail e -> Fail e
+        | Res (suites_r, static_dh_pair_r, signature_key_pair_r, cred_r) -> (
+          let initiator_state:party_state = {
+            // local party's values: Initiator (I)
+            suites = suites_i;
+            static_dh = static_dh_pair_i;
+            signature_key = signature_key_pair_i;
+            id_cred = cred_i;
+            eph_ec_keypair = None;
+
+            // other party's values: Responder (R)
+            remote_static_pub_key = static_dh_pair_r.pub;
+            remote_signature_pub_key = signature_key_pair_r.pub;
+            remote_id_cred = cred_r;
+          } in
+
+          let responder_state:party_state = {
+            // local party's values: Responder (R)
+            suites = suites_r;
+            static_dh = static_dh_pair_r;
+            signature_key = signature_key_pair_r;
+            id_cred = cred_r;
+            eph_ec_keypair = None;
+
+            // other party's values: Initiator (I)
+            remote_static_pub_key = static_dh_pair_i.pub;
+            remote_signature_pub_key = signature_key_pair_i.pub;
+            remote_id_cred = cred_i;
+          } in
+
+          Res (initiator_state, responder_state)
+        )
+    )
+
+let lemma_set_up_random_party_states_equiv cs
+  = ()
+
+(*------------------------------ Sanity check*)
+#push-options "--max_fuel 16 --max_ifuel 8 --z3rlimit 15"
+// let check_protocol_run_SigSig
+//   :eresult bool
+//   = let method = SigSig in
+//   let cs_label = 6 in
+//   let cs = get_cipherSuite cs_label in
+
+
+//   match (set_up_random_party_states cs) with
+//     | Fail e -> Fail e
+//     | Res (is, rs) -> (
+//       // lemma_integration_msg1_msg2_consistence is rs method;
+//       match (initiator_send_msg1 cs method is) with
+//         | Fail e -> Fail e
+//         | Res (msg1, is', hs_i') -> (
+//           // assert (normalize_term msg1 == normalize_term (Some?.v hs_i'.msg1));
+
+//           match (responder_process_msg1 rs msg1) with
+//             | Fail e -> Fail e
+//             | Res (hs_r') -> (
+//               assert (hs_r'.method = msg1.method);
+//               assert (hs_i'.method = method);
+//               assert (hs_r'.suite_i = msg1.suite_i);
+//               assert (get_auth_material Responder hs_r'.method == Signature);
+//               assert (get_auth_material Initiator hs_i'.method == Signature);
+              
+//               // assert (normalize_term msg1 == normalize_term (Some?.v hs_r'.msg1));
+
+//               match (responder_send_msg2 #cs rs hs_r') with
+//                 | Fail e -> Fail e
+//                 | Res (ptx2_r, msg2, rs', hs_r'') -> (
+//                   match (initiator_process_msg2 #cs is' hs_i' msg2) with
+//                     | Fail e -> Fail e
+//                     | Res (ptx2_i, hs_i'') -> (
+//                       assert (hs_i''.method == method);
+//                       assert (get_auth_material Initiator hs_i''.method == Signature);
+//                       assert (get_auth_material Responder hs_r''.method == Signature);
+
+//                       // assert (unequal_lbytes_eq (Some?.v hs_i''.g_xy) (Some?.v hs_r''.g_xy));
+//                       // assert (normalize_term (Some?.v hs_i''.msg1) == normalize_term (Some?.v hs_r''.msg1));
+//                       assert (lbytes_eq (Some?.v hs_i''.th2) (Some?.v hs_r''.th2));
+                      
+//                       // let prk2e = extract_prk2e (Some?.v hs_i''.th2) (Some?.v hs_i''.g_xy) in
+//                       // assert (lbytes_eq (Some?.v hs_i''.prk2e) prk2e);
+//                       // assert (lbytes_eq (Some?.v hs_i''.prk2e) (Some?.v hs_r''.prk2e));
+//                       // assert (Some?.v hs_i''.prk3e2m == Some?.v hs_r''.prk3e2m);
+
+//                       Res true
+//                     )
+//                 )
+//             )
+//         )
+//     )
+#pop-options
+
+
+// #set-options "--admit_smt_queries true"
+
+/// Source: https://github.com/Inria-Prosecco/libsignal-protocol-wasm-fstar/blob/master/fstar/Test.Spec.Signal.fst
+// let test_compare_buffers (msg:string) (expected:seq uint8) (computed:seq uint8)
+//   :bool =
+//   IO.print_string "\n";
+//   IO.print_string msg;
+//   IO.print_string "\nexpected (";
+//   IO.print_uint32_dec (UInt32.uint_to_t (length expected));
+//   IO.print_string "):\n";
+//   List.iter (fun a -> IO.print_uint8_hex_pad (u8_to_UInt8 a)) (to_list expected);
+//   IO.print_string "\n";
+//   IO.print_string "computed (";
+//   IO.print_uint32_dec (UInt32.uint_to_t (length computed));
+//   IO.print_string "):\n";
+//   List.iter (fun a -> IO.print_uint8_hex_pad (u8_to_UInt8 a)) (to_list computed);
+//   IO.print_string "\n";
+//   let result =
+//     for_all2 #uint8 #uint8 #(length computed) (fun x y -> uint_to_nat #U8 x = uint_to_nat #U8 y)
+//       computed expected
+//   in
+//   if result then IO.print_string "\nSuccess !\n"
+//   else IO.print_string "\nFailed !\n";
+//   result

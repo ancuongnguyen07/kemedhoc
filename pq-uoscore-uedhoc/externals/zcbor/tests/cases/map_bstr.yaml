@@ -1,0 +1,10 @@
+test:
+  zcbor_bstr: "1234abcd"
+test2:
+  zcbor_tag: 1234
+  zcbor_tag_val:
+    zcbor_bstr: "1a2b3c4d"
+zcbor_keyval0:
+  key: ["test3"]
+  val:
+    zcbor_bstr: 1234

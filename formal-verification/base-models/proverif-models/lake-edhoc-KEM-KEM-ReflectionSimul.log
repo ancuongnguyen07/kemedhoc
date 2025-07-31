@@ -1,0 +1,787 @@
+File "lake-edhoc-KEM-KEM-ReflectionSimul.pv", line 581, characters 19-23:
+Warning: identifier pkI_2 rebound.
+Linear part: No equation.
+Convergent part:
+kemdecap(kemcipher(kemencap(r,kempk(sk))),sk) = kemkey(kemencap(r,kempk(sk)))
+fst((x_1,x_2)) = x_1
+snd((x_1,x_2)) = x_2
+Completing equations...
+Completed equations:
+snd((x_1,x_2)) = x_2
+fst((x_1,x_2)) = x_1
+kemdecap(kemcipher(kemencap(r,kempk(sk))),sk) = kemkey(kemencap(r,kempk(sk)))
+Process 0 (that is, the initial process):
+{1}new computerId_1: bitstring;
+{2}new sk_1: bitstring;
+{3}new sk_auth_kem_1: bitstring;
+{4}new ltdh_1: bitstring;
+{5}let idd_1: bitstring = id(pk(sk_1),ltdh_1,kempk(sk_auth_kem_1)) in
+{6}out(att, (idd_1,(pk(sk_1),ltdh_1,kempk(sk_auth_kem_1))));
+{7}event eShareLT(ltdh_1);
+{8}event eHonest(pk(sk_1));
+{9}event eHonest(kempk(sk_auth_kem_1));
+{10}new sk_2: bitstring;
+{11}new sk_auth_kem_2: bitstring;
+{12}new ltdh_2: bitstring;
+{13}new computerId_2: bitstring;
+{14}let idd_2: bitstring = id(pk(sk_2),ltdh_2,kempk(sk_auth_kem_2)) in
+{15}out(att, (idd_2,(pk(sk_2),ltdh_2,kempk(sk_auth_kem_2))));
+{16}event eShareLT(ltdh_2);
+{17}event eHonest(pk(sk_2));
+{18}event eHonest(kempk(sk_auth_kem_2));
+(
+    {19}!
+    {20}let cid_2: bitstring = computerId_1 in
+    {21}let skI_2: bitstring = sk_1 in
+    {22}let I_2: bitstring = ltdh_1 in
+    {23}let sk_kem_authI: bitstring = sk_auth_kem_1 in
+    {24}in(att, (method_2: bitstring,(suitesI_2: bitstring,(C_I_2: bitstring,EAD_1_2: bitstring))));
+    {25}event eMethodOk(method_2);
+    {26}new X_2: bitstring;
+    {27}new random_authR: bitstring;
+    {28}new EAD_3_2: bitstring;
+    {29}event eShare(X_2);
+    {30}let CRED_I_2: bitstring = pk(skI_2) in
+    {31}let KEM_CRED_I_2: bitstring = kempk(sk_kem_authI) in
+    {32}let ID_CRED_I_2: bitstring = id(CRED_I_2,I_2,KEM_CRED_I_2) in
+    {33}if (ID_CRED_I_2 ≠ check_cred(idd_2)) then
+    {34}if (method_2 = method_four) then
+    {35}let pkR_2: bitstring = get_kem_auth(idd_2) in
+    {36}let encap_auth_R_2: bitstring = kemencap(random_authR,pkR_2) in
+    {37}let K_AUTH_R_2: bitstring = kemkey(encap_auth_R_2) in
+    {38}let CT_AUTH_R_2: bitstring = kemcipher(encap_auth_R_2) in
+    {39}let plaintext_1_2: bitstring = ID_CRED_I_2 in
+    {40}let G_X_2: bitstring = kempk(X_2) in
+    {41}let TH_1_2: bitstring = hash((G_X_2,CT_AUTH_R_2)) in
+    {42}let PRK_1e_2: bitstring = hkdfextract(TH_1_2,K_AUTH_R_2) in
+    {43}let K_1_2: bitstring = edhoc_kdf(PRK_1e_2,szero,TH_1_2,key_length) in
+    {44}let IV_1_2: bitstring = edhoc_kdf(PRK_1e_2,sone,TH_1_2,iv_length) in
+    {45}let CIPHERTEXT_1_2: bitstring = aeadenc(plaintext_1_2,srep,K_1_2,IV_1_2) in
+    {46}let m1_2: bitstring = (method_2,suitesI_2,G_X_2,C_I_2,EAD_1_2) in
+    {47}out(att, m1_2);
+    {48}in(att, m2_2: bitstring);
+    {49}let (G_Y_2: bitstring,CIPHERTEXT_2_2: bitstring,CT_AUTH_I_2: bitstring) = m2_2 in
+    {50}let mess_1_hash_2: bitstring = hash(m1_2) in
+    {51}let TH_2_2: bitstring = hash((G_Y_2,mess_1_hash_2)) in
+    {52}let G_YX_2: bitstring = kemdecap(G_Y_2,X_2) in
+    {53}let PRK_2e_2: bitstring = hkdfextract(TH_2_2,G_YX_2) in
+    {54}let KEYSTREAM_2_2: bitstring = edhoc_kdf(PRK_2e_2,stwo,TH_2_2,plaintext_length) in
+    {55}let plaintext_2_2: bitstring = decxor(CIPHERTEXT_2_2,KEYSTREAM_2_2) in
+    {56}let (C_R_2: bitstring,=idd_2,SIGNATURE_or_MAC_2_2: bitstring,EAD_2_2: bitstring) = plaintext_2_2 in
+    {57}let pkI_2: bitstring = get_kem_auth(ID_CRED_I_2) in
+    {58}let SALT_3e2m_2: bitstring = edhoc_kdf(PRK_2e_2,sthree,TH_2_2,hash_length) in
+    {59}let PRK_3e2m_2: bitstring = hkdfextract(SALT_3e2m_2,K_AUTH_R_2) in
+    {60}event eDerivedIShared(pkI_2,G_YX_2);
+    {61}let MAC_2_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfour,(idd_2,TH_2_2,pkR_2,EAD_2_2),hash_length) in
+    {62}if (SIGNATURE_or_MAC_2_2 = MAC_2_2) then
+    {63}event eCheckedMAC2(ID_CRED_I_2,MAC_2_2);
+    {64}let TH_3_2: bitstring = hash((TH_2_2,(plaintext_2_2,pkR_2))) in
+    {65}event eTHIShared(pkI_2,TH_3_2);
+    {66}let K_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfive,TH_3_2,key_length) in
+    {67}let IV_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,ssix,TH_3_2,iv_length) in
+    {68}let SALT_4e3m_2: bitstring = edhoc_kdf(PRK_3e2m_2,sseven,TH_3_2,hash_length) in
+    {69}let K_AUTH_I_2: bitstring = kemdecap(CT_AUTH_I_2,sk_kem_authI) in
+    {70}let PRK_4e3m_2: bitstring = hkdfextract(SALT_4e3m_2,K_AUTH_I_2) in
+    {71}let MAC_3_2: bitstring = edhoc_kdf(PRK_4e3m_2,seight,(ID_CRED_I_2,TH_3_2,pkI_2,EAD_3_2),hash_length) in
+    {72}let SIGNATURE_or_MAC_3_2: bitstring = MAC_3_2 in
+    {73}let plaintext_3_2: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_2,EAD_3_2)) in
+    {74}let m3_2: bitstring = aeadenc(plaintext_3_2,srep,K_3_2,IV_3_2) in
+    {75}let TH_4_2: bitstring = hash((TH_3_2,(plaintext_3_2,pkI_2))) in
+    {76}let PRK_out_2: bitstring = edhoc_kdf(PRK_4e3m_2,snine,TH_4_2,hash_length) in
+    {77}event eAcceptI(cid_2,method_four,pkI_2,pkR_2,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,X_2,G_Y_2);
+    {78}event eSecretsI(cid_2,method_four,pkI_2,pkR_2,PRK_2e_2,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,KEYSTREAM_2_2,K_3_2,IV_3_2,X_2,G_Y_2);
+    {79}event eAcceptIData(PRK_out_2,method_four,pkI_2,pkR_2,X_2,G_Y_2,(TH_1_2,TH_2_2,(TH_3_2,(TH_4_2,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_1_2,plaintext_2_2,plaintext_3_2))))))))));
+    (
+        {80}out(att, m3_2)
+    ) | (
+        {81}event eLeakSessionKey(PRK_out_2);
+        {82}out(att, PRK_out_2)
+    )
+) | (
+    {83}!
+    {84}let cid: bitstring = computerId_2 in
+    {85}let skR_2: bitstring = sk_2 in
+    {86}let R_2: bitstring = ltdh_2 in
+    {87}let sk_kem_authR_2: bitstring = sk_auth_kem_2 in
+    {88}in(att, (C_R: bitstring,(EAD_2: bitstring,suitesR_2: bitstring)));
+    {89}in(att, m1: bitstring);
+    {90}let (method: bitstring,suitesI: bitstring,G_X: bitstring,C_I: bitstring,CT_AUTH_R: bitstring,CIPHERTEXT_1: bitstring,EAD_1: bitstring) = m1 in
+    {91}event eMethodOk(method);
+    {92}new Y_2: bitstring;
+    {93}event eShare(Y_2);
+    {94}let G_R_2: bitstring = R_2 in
+    {95}let encapsulation: bitstring = kemencap(Y_2,G_X) in
+    {96}let G_Y: bitstring = kemcipher(encapsulation) in
+    {97}let G_XY_2: bitstring = kemkey(encapsulation) in
+    {98}let CRED_R_2: bitstring = pk(skR_2) in
+    {99}let KEM_CRED_R_2: bitstring = kempk(sk_kem_authR_2) in
+    {100}let ID_CRED_R_2: bitstring = id(CRED_R_2,G_R_2,KEM_CRED_R_2) in
+    {101}if (method = method_four) then
+    {102}let K_AUTH_R: bitstring = kemdecap(CT_AUTH_R,sk_kem_authR_2) in
+    {103}let TH_1: bitstring = hash((G_X,CT_AUTH_R)) in
+    {104}let PRK_1e: bitstring = hkdfextract(TH_1,K_AUTH_R) in
+    {105}let K_1: bitstring = edhoc_kdf(PRK_1e,szero,TH_1,key_length) in
+    {106}let IV_1: bitstring = edhoc_kdf(PRK_1e,sone,TH_1,iv_length) in
+    {107}let plaintext_1: bitstring = aeaddec(CIPHERTEXT_1,K_1,IV_1) in
+    {108}let ID_CRED_I: bitstring = plaintext_1 in
+    {109}if (ID_CRED_R_2 ≠ check_cred(ID_CRED_I)) then
+    {110}let mess_1_hash: bitstring = hash(m1) in
+    {111}let TH_2: bitstring = hash((G_Y,mess_1_hash)) in
+    {112}let PRK_2e: bitstring = hkdfextract(TH_2,G_XY_2) in
+    {113}let pkR: bitstring = get_kem_auth(ID_CRED_R_2) in
+    {114}let pkI: bitstring = get_kem_auth(ID_CRED_I) in
+    {115}let KEYSTREAM_2: bitstring = edhoc_kdf(PRK_2e,stwo,TH_2,plaintext_length) in
+    {116}let SALT_3e2m: bitstring = edhoc_kdf(PRK_2e,sthree,TH_2,hash_length) in
+    {117}let PRK_3e2m: bitstring = hkdfextract(SALT_3e2m,K_AUTH_R) in
+    {118}let MAC_2: bitstring = edhoc_kdf(PRK_3e2m,sfour,(ID_CRED_R_2,TH_2,pkR,EAD_2),hash_length) in
+    {119}let SIGNATURE_or_MAC_2: bitstring = MAC_2 in
+    {120}let plaintext_2: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2,EAD_2))) in
+    {121}event eDerivedR(cid,pkR,PRK_3e2m,Y_2,G_X);
+    {122}event eTHRShared(pkR,TH_2);
+    {123}event eDerivedRShared(pkR,G_XY_2);
+    {124}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m);
+    {125}new encap_auth_random_seed: bitstring;
+    {126}let encap_auth_I_2: bitstring = kemencap(encap_auth_random_seed,pkI) in
+    {127}let K_AUTH_I: bitstring = kemkey(encap_auth_I_2) in
+    {128}let CT_AUTH_I: bitstring = kemcipher(encap_auth_I_2) in
+    {129}let m2: bitstring = (G_Y,encxor(plaintext_2,KEYSTREAM_2)) in
+    {130}event eSendRData(method_four,pkR,(TH_1,TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_1,plaintext_2))))));
+    {131}out(att, m2);
+    {132}in(att, CIPHERTEXT_3_2: bitstring);
+    {133}let TH_3: bitstring = hash((TH_2,(plaintext_2,pkR))) in
+    {134}let K_3: bitstring = edhoc_kdf(PRK_3e2m,sfive,TH_3,key_length) in
+    {135}let IV_3: bitstring = edhoc_kdf(PRK_3e2m,ssix,TH_3,iv_length) in
+    {136}let SALT_4e3m: bitstring = edhoc_kdf(PRK_3e2m,sseven,TH_3,hash_length) in
+    {137}let PRK_4e3m: bitstring = hkdfextract(SALT_4e3m,K_AUTH_I) in
+    {138}let plaintext_3: bitstring = aeaddec(CIPHERTEXT_3_2,K_3,IV_3) in
+    {139}let (=ID_CRED_I,(SIGNATURE_or_MAC_3: bitstring,EAD_3: bitstring)) = plaintext_3 in
+    {140}let pkI_1: bitstring = get_kem_auth(ID_CRED_I) in
+    {141}let MAC_3: bitstring = edhoc_kdf(PRK_4e3m,seight,(ID_CRED_I,TH_3,pkI_1,EAD_3),hash_length) in
+    {142}if (SIGNATURE_or_MAC_3 = MAC_3) then
+    {143}event eCheckedMAC3(ID_CRED_R_2,MAC_3);
+    {144}let TH_4: bitstring = hash((TH_3,(plaintext_3,pkI_1))) in
+    {145}let PRK_out: bitstring = edhoc_kdf(PRK_4e3m,snine,TH_4,hash_length) in
+    {146}event eAcceptR(cid,method_four,pkI_1,pkR,PRK_3e2m,PRK_4e3m,PRK_out,Y_2,G_X);
+    {147}event eSecretsR(cid,method_four,pkI_1,pkR,PRK_2e,PRK_3e2m,PRK_4e3m,PRK_out,KEYSTREAM_2,K_3,IV_3,Y_2,G_X);
+    (
+        {148}event eAcceptRData(PRK_out,method_four,pkI_1,pkR,Y_2,G_X,(TH_1,TH_2,(TH_3,(TH_4,(suitesI,(EAD_1,(EAD_2,(EAD_3,(m1,(plaintext_1,plaintext_2,plaintext_3))))))))))
+    ) | (
+        {149}event eLeakSessionKey(PRK_out);
+        {150}out(att, PRK_out)
+    )
+) | (
+    {151}!
+    {152}let cid_1: bitstring = computerId_2 in
+    {153}let skI: bitstring = sk_2 in
+    {154}let I_1: bitstring = ltdh_2 in
+    {155}let sk_kem_authI_1: bitstring = sk_auth_kem_2 in
+    {156}in(att, (method_1: bitstring,(suitesI_1: bitstring,(C_I_1: bitstring,EAD_1_1: bitstring))));
+    {157}event eMethodOk(method_1);
+    {158}new X: bitstring;
+    {159}new random_authR_1: bitstring;
+    {160}new EAD_3_1: bitstring;
+    {161}event eShare(X);
+    {162}let CRED_I: bitstring = pk(skI) in
+    {163}let KEM_CRED_I: bitstring = kempk(sk_kem_authI_1) in
+    {164}let ID_CRED_I_1: bitstring = id(CRED_I,I_1,KEM_CRED_I) in
+    {165}if (ID_CRED_I_1 ≠ check_cred(idd_1)) then
+    {166}if (method_1 = method_four) then
+    {167}let pkR_1: bitstring = get_kem_auth(idd_1) in
+    {168}let encap_auth_R: bitstring = kemencap(random_authR_1,pkR_1) in
+    {169}let K_AUTH_R_1: bitstring = kemkey(encap_auth_R) in
+    {170}let CT_AUTH_R_1: bitstring = kemcipher(encap_auth_R) in
+    {171}let plaintext_1_1: bitstring = ID_CRED_I_1 in
+    {172}let G_X_1: bitstring = kempk(X) in
+    {173}let TH_1_1: bitstring = hash((G_X_1,CT_AUTH_R_1)) in
+    {174}let PRK_1e_1: bitstring = hkdfextract(TH_1_1,K_AUTH_R_1) in
+    {175}let K_1_1: bitstring = edhoc_kdf(PRK_1e_1,szero,TH_1_1,key_length) in
+    {176}let IV_1_1: bitstring = edhoc_kdf(PRK_1e_1,sone,TH_1_1,iv_length) in
+    {177}let CIPHERTEXT_1_1: bitstring = aeadenc(plaintext_1_1,srep,K_1_1,IV_1_1) in
+    {178}let m1_1: bitstring = (method_1,suitesI_1,G_X_1,C_I_1,EAD_1_1) in
+    {179}out(att, m1_1);
+    {180}in(att, m2_1: bitstring);
+    {181}let (G_Y_1: bitstring,CIPHERTEXT_2: bitstring,CT_AUTH_I_1: bitstring) = m2_1 in
+    {182}let mess_1_hash_1: bitstring = hash(m1_1) in
+    {183}let TH_2_1: bitstring = hash((G_Y_1,mess_1_hash_1)) in
+    {184}let G_YX: bitstring = kemdecap(G_Y_1,X) in
+    {185}let PRK_2e_1: bitstring = hkdfextract(TH_2_1,G_YX) in
+    {186}let KEYSTREAM_2_1: bitstring = edhoc_kdf(PRK_2e_1,stwo,TH_2_1,plaintext_length) in
+    {187}let plaintext_2_1: bitstring = decxor(CIPHERTEXT_2,KEYSTREAM_2_1) in
+    {188}let (C_R_1: bitstring,=idd_1,SIGNATURE_or_MAC_2_1: bitstring,EAD_2_1: bitstring) = plaintext_2_1 in
+    {189}let pkI_3: bitstring = get_kem_auth(ID_CRED_I_1) in
+    {190}let SALT_3e2m_1: bitstring = edhoc_kdf(PRK_2e_1,sthree,TH_2_1,hash_length) in
+    {191}let PRK_3e2m_1: bitstring = hkdfextract(SALT_3e2m_1,K_AUTH_R_1) in
+    {192}event eDerivedIShared(pkI_3,G_YX);
+    {193}let MAC_2_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfour,(idd_1,TH_2_1,pkR_1,EAD_2_1),hash_length) in
+    {194}if (SIGNATURE_or_MAC_2_1 = MAC_2_1) then
+    {195}event eCheckedMAC2(ID_CRED_I_1,MAC_2_1);
+    {196}let TH_3_1: bitstring = hash((TH_2_1,(plaintext_2_1,pkR_1))) in
+    {197}event eTHIShared(pkI_3,TH_3_1);
+    {198}let K_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfive,TH_3_1,key_length) in
+    {199}let IV_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,ssix,TH_3_1,iv_length) in
+    {200}let SALT_4e3m_1: bitstring = edhoc_kdf(PRK_3e2m_1,sseven,TH_3_1,hash_length) in
+    {201}let K_AUTH_I_1: bitstring = kemdecap(CT_AUTH_I_1,sk_kem_authI_1) in
+    {202}let PRK_4e3m_1: bitstring = hkdfextract(SALT_4e3m_1,K_AUTH_I_1) in
+    {203}let MAC_3_1: bitstring = edhoc_kdf(PRK_4e3m_1,seight,(ID_CRED_I_1,TH_3_1,pkI_3,EAD_3_1),hash_length) in
+    {204}let SIGNATURE_or_MAC_3_1: bitstring = MAC_3_1 in
+    {205}let plaintext_3_1: bitstring = (ID_CRED_I_1,(SIGNATURE_or_MAC_3_1,EAD_3_1)) in
+    {206}let m3: bitstring = aeadenc(plaintext_3_1,srep,K_3_1,IV_3_1) in
+    {207}let TH_4_1: bitstring = hash((TH_3_1,(plaintext_3_1,pkI_3))) in
+    {208}let PRK_out_1: bitstring = edhoc_kdf(PRK_4e3m_1,snine,TH_4_1,hash_length) in
+    {209}event eAcceptI(cid_1,method_four,pkI_3,pkR_1,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,X,G_Y_1);
+    {210}event eSecretsI(cid_1,method_four,pkI_3,pkR_1,PRK_2e_1,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,KEYSTREAM_2_1,K_3_1,IV_3_1,X,G_Y_1);
+    {211}event eAcceptIData(PRK_out_1,method_four,pkI_3,pkR_1,X,G_Y_1,(TH_1_1,TH_2_1,(TH_3_1,(TH_4_1,(suitesI_1,(EAD_1_1,(EAD_2_1,(EAD_3_1,(m1_1,(plaintext_1_1,plaintext_2_1,plaintext_3_1))))))))));
+    (
+        {212}out(att, m3)
+    ) | (
+        {213}event eLeakSessionKey(PRK_out_1);
+        {214}out(att, PRK_out_1)
+    )
+) | (
+    {215}!
+    {216}let cid_3: bitstring = computerId_1 in
+    {217}let skR: bitstring = sk_1 in
+    {218}let R_1: bitstring = ltdh_1 in
+    {219}let sk_kem_authR: bitstring = sk_auth_kem_1 in
+    {220}in(att, (C_R_3: bitstring,(EAD_2_3: bitstring,suitesR: bitstring)));
+    {221}in(att, m1_3: bitstring);
+    {222}let (method_3: bitstring,suitesI_3: bitstring,G_X_3: bitstring,C_I_3: bitstring,CT_AUTH_R_3: bitstring,CIPHERTEXT_1_3: bitstring,EAD_1_3: bitstring) = m1_3 in
+    {223}event eMethodOk(method_3);
+    {224}new Y: bitstring;
+    {225}event eShare(Y);
+    {226}let G_R: bitstring = R_1 in
+    {227}let encapsulation_1: bitstring = kemencap(Y,G_X_3) in
+    {228}let G_Y_3: bitstring = kemcipher(encapsulation_1) in
+    {229}let G_XY: bitstring = kemkey(encapsulation_1) in
+    {230}let CRED_R: bitstring = pk(skR) in
+    {231}let KEM_CRED_R: bitstring = kempk(sk_kem_authR) in
+    {232}let ID_CRED_R: bitstring = id(CRED_R,G_R,KEM_CRED_R) in
+    {233}if (method_3 = method_four) then
+    {234}let K_AUTH_R_3: bitstring = kemdecap(CT_AUTH_R_3,sk_kem_authR) in
+    {235}let TH_1_3: bitstring = hash((G_X_3,CT_AUTH_R_3)) in
+    {236}let PRK_1e_3: bitstring = hkdfextract(TH_1_3,K_AUTH_R_3) in
+    {237}let K_1_3: bitstring = edhoc_kdf(PRK_1e_3,szero,TH_1_3,key_length) in
+    {238}let IV_1_3: bitstring = edhoc_kdf(PRK_1e_3,sone,TH_1_3,iv_length) in
+    {239}let plaintext_1_3: bitstring = aeaddec(CIPHERTEXT_1_3,K_1_3,IV_1_3) in
+    {240}let ID_CRED_I_3: bitstring = plaintext_1_3 in
+    {241}if (ID_CRED_R ≠ check_cred(ID_CRED_I_3)) then
+    {242}let mess_1_hash_3: bitstring = hash(m1_3) in
+    {243}let TH_2_3: bitstring = hash((G_Y_3,mess_1_hash_3)) in
+    {244}let PRK_2e_3: bitstring = hkdfextract(TH_2_3,G_XY) in
+    {245}let pkR_3: bitstring = get_kem_auth(ID_CRED_R) in
+    {246}let pkI_4: bitstring = get_kem_auth(ID_CRED_I_3) in
+    {247}let KEYSTREAM_2_3: bitstring = edhoc_kdf(PRK_2e_3,stwo,TH_2_3,plaintext_length) in
+    {248}let SALT_3e2m_3: bitstring = edhoc_kdf(PRK_2e_3,sthree,TH_2_3,hash_length) in
+    {249}let PRK_3e2m_3: bitstring = hkdfextract(SALT_3e2m_3,K_AUTH_R_3) in
+    {250}let MAC_2_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfour,(ID_CRED_R,TH_2_3,pkR_3,EAD_2_3),hash_length) in
+    {251}let SIGNATURE_or_MAC_2_3: bitstring = MAC_2_3 in
+    {252}let plaintext_2_3: bitstring = (C_R_3,(ID_CRED_R,(SIGNATURE_or_MAC_2_3,EAD_2_3))) in
+    {253}event eDerivedR(cid_3,pkR_3,PRK_3e2m_3,Y,G_X_3);
+    {254}event eTHRShared(pkR_3,TH_2_3);
+    {255}event eDerivedRShared(pkR_3,G_XY);
+    {256}event eDerivedIdR(ID_CRED_R,PRK_3e2m_3);
+    {257}new encap_auth_random_seed_1: bitstring;
+    {258}let encap_auth_I: bitstring = kemencap(encap_auth_random_seed_1,pkI_4) in
+    {259}let K_AUTH_I_3: bitstring = kemkey(encap_auth_I) in
+    {260}let CT_AUTH_I_3: bitstring = kemcipher(encap_auth_I) in
+    {261}let m2_3: bitstring = (G_Y_3,encxor(plaintext_2_3,KEYSTREAM_2_3)) in
+    {262}event eSendRData(method_four,pkR_3,(TH_1_3,TH_2_3,(suitesI_3,(EAD_1_3,(EAD_2_3,(m1_3,plaintext_1_3,plaintext_2_3))))));
+    {263}out(att, m2_3);
+    {264}in(att, CIPHERTEXT_3: bitstring);
+    {265}let TH_3_3: bitstring = hash((TH_2_3,(plaintext_2_3,pkR_3))) in
+    {266}let K_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfive,TH_3_3,key_length) in
+    {267}let IV_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,ssix,TH_3_3,iv_length) in
+    {268}let SALT_4e3m_3: bitstring = edhoc_kdf(PRK_3e2m_3,sseven,TH_3_3,hash_length) in
+    {269}let PRK_4e3m_3: bitstring = hkdfextract(SALT_4e3m_3,K_AUTH_I_3) in
+    {270}let plaintext_3_3: bitstring = aeaddec(CIPHERTEXT_3,K_3_3,IV_3_3) in
+    {271}let (=ID_CRED_I_3,(SIGNATURE_or_MAC_3_3: bitstring,EAD_3_3: bitstring)) = plaintext_3_3 in
+    {272}let pkI_5: bitstring = get_kem_auth(ID_CRED_I_3) in
+    {273}let MAC_3_3: bitstring = edhoc_kdf(PRK_4e3m_3,seight,(ID_CRED_I_3,TH_3_3,pkI_5,EAD_3_3),hash_length) in
+    {274}if (SIGNATURE_or_MAC_3_3 = MAC_3_3) then
+    {275}event eCheckedMAC3(ID_CRED_R,MAC_3_3);
+    {276}let TH_4_3: bitstring = hash((TH_3_3,(plaintext_3_3,pkI_5))) in
+    {277}let PRK_out_3: bitstring = edhoc_kdf(PRK_4e3m_3,snine,TH_4_3,hash_length) in
+    {278}event eAcceptR(cid_3,method_four,pkI_5,pkR_3,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,Y,G_X_3);
+    {279}event eSecretsR(cid_3,method_four,pkI_5,pkR_3,PRK_2e_3,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,KEYSTREAM_2_3,K_3_3,IV_3_3,Y,G_X_3);
+    (
+        {280}event eAcceptRData(PRK_out_3,method_four,pkI_5,pkR_3,Y,G_X_3,(TH_1_3,TH_2_3,(TH_3_3,(TH_4_3,(suitesI_3,(EAD_1_3,(EAD_2_3,(EAD_3_3,(m1_3,(plaintext_1_3,plaintext_2_3,plaintext_3_3))))))))))
+    ) | (
+        {281}event eLeakSessionKey(PRK_out_3);
+        {282}out(att, PRK_out_3)
+    )
+) | (
+    {283}phase 1;
+    {284}event eCompromise(kempk(sk_auth_kem_1));
+    {285}event eCompromise(kempk(sk_auth_kem_2));
+    {286}out(att, sk_auth_kem_1);
+    {287}out(att, sk_auth_kem_2)
+)
+
+--  Process 1 (that is, process 0, with let moved downwards):
+{1}new computerId_1: bitstring;
+{2}new sk_1: bitstring;
+{3}new sk_auth_kem_1: bitstring;
+{4}new ltdh_1: bitstring;
+{5}let idd_1: bitstring = id(pk(sk_1),ltdh_1,kempk(sk_auth_kem_1)) in
+{6}out(att, (idd_1,(pk(sk_1),ltdh_1,kempk(sk_auth_kem_1))));
+{7}event eShareLT(ltdh_1);
+{8}event eHonest(pk(sk_1));
+{9}event eHonest(kempk(sk_auth_kem_1));
+{10}new sk_2: bitstring;
+{11}new sk_auth_kem_2: bitstring;
+{12}new ltdh_2: bitstring;
+{13}new computerId_2: bitstring;
+{14}let idd_2: bitstring = id(pk(sk_2),ltdh_2,kempk(sk_auth_kem_2)) in
+{15}out(att, (idd_2,(pk(sk_2),ltdh_2,kempk(sk_auth_kem_2))));
+{16}event eShareLT(ltdh_2);
+{17}event eHonest(pk(sk_2));
+{18}event eHonest(kempk(sk_auth_kem_2));
+(
+    {19}!
+    {24}in(att, (method_2: bitstring,(suitesI_2: bitstring,(C_I_2: bitstring,EAD_1_2: bitstring))));
+    {25}event eMethodOk(method_2);
+    {26}new X_2: bitstring;
+    {27}new random_authR: bitstring;
+    {28}new EAD_3_2: bitstring;
+    {29}event eShare(X_2);
+    {23}let sk_kem_authI: bitstring = sk_auth_kem_1 in
+    {31}let KEM_CRED_I_2: bitstring = kempk(sk_kem_authI) in
+    {21}let skI_2: bitstring = sk_1 in
+    {30}let CRED_I_2: bitstring = pk(skI_2) in
+    {22}let I_2: bitstring = ltdh_1 in
+    {32}let ID_CRED_I_2: bitstring = id(CRED_I_2,I_2,KEM_CRED_I_2) in
+    {33}if (ID_CRED_I_2 ≠ check_cred(idd_2)) then
+    {34}if (method_2 = method_four) then
+    {35}let pkR_2: bitstring = get_kem_auth(idd_2) in
+    {40}let G_X_2: bitstring = kempk(X_2) in
+    {46}let m1_2: bitstring = (method_2,suitesI_2,G_X_2,C_I_2,EAD_1_2) in
+    {47}out(att, m1_2);
+    {48}in(att, m2_2: bitstring);
+    {49}let (G_Y_2: bitstring,CIPHERTEXT_2_2: bitstring,CT_AUTH_I_2: bitstring) = m2_2 in
+    {52}let G_YX_2: bitstring = kemdecap(G_Y_2,X_2) in
+    {50}let mess_1_hash_2: bitstring = hash(m1_2) in
+    {51}let TH_2_2: bitstring = hash((G_Y_2,mess_1_hash_2)) in
+    {53}let PRK_2e_2: bitstring = hkdfextract(TH_2_2,G_YX_2) in
+    {54}let KEYSTREAM_2_2: bitstring = edhoc_kdf(PRK_2e_2,stwo,TH_2_2,plaintext_length) in
+    {55}let plaintext_2_2: bitstring = decxor(CIPHERTEXT_2_2,KEYSTREAM_2_2) in
+    {56}let (C_R_2: bitstring,=idd_2,SIGNATURE_or_MAC_2_2: bitstring,EAD_2_2: bitstring) = plaintext_2_2 in
+    {57}let pkI_2: bitstring = get_kem_auth(ID_CRED_I_2) in
+    {60}event eDerivedIShared(pkI_2,G_YX_2);
+    {58}let SALT_3e2m_2: bitstring = edhoc_kdf(PRK_2e_2,sthree,TH_2_2,hash_length) in
+    {36}let encap_auth_R_2: bitstring = kemencap(random_authR,pkR_2) in
+    {37}let K_AUTH_R_2: bitstring = kemkey(encap_auth_R_2) in
+    {59}let PRK_3e2m_2: bitstring = hkdfextract(SALT_3e2m_2,K_AUTH_R_2) in
+    {61}let MAC_2_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfour,(idd_2,TH_2_2,pkR_2,EAD_2_2),hash_length) in
+    {62}if (SIGNATURE_or_MAC_2_2 = MAC_2_2) then
+    {63}event eCheckedMAC2(ID_CRED_I_2,MAC_2_2);
+    {64}let TH_3_2: bitstring = hash((TH_2_2,(plaintext_2_2,pkR_2))) in
+    {65}event eTHIShared(pkI_2,TH_3_2);
+    {69}let K_AUTH_I_2: bitstring = kemdecap(CT_AUTH_I_2,sk_kem_authI) in
+    {68}let SALT_4e3m_2: bitstring = edhoc_kdf(PRK_3e2m_2,sseven,TH_3_2,hash_length) in
+    {70}let PRK_4e3m_2: bitstring = hkdfextract(SALT_4e3m_2,K_AUTH_I_2) in
+    {71}let MAC_3_2: bitstring = edhoc_kdf(PRK_4e3m_2,seight,(ID_CRED_I_2,TH_3_2,pkI_2,EAD_3_2),hash_length) in
+    {72}let SIGNATURE_or_MAC_3_2: bitstring = MAC_3_2 in
+    {73}let plaintext_3_2: bitstring = (ID_CRED_I_2,(SIGNATURE_or_MAC_3_2,EAD_3_2)) in
+    {75}let TH_4_2: bitstring = hash((TH_3_2,(plaintext_3_2,pkI_2))) in
+    {76}let PRK_out_2: bitstring = edhoc_kdf(PRK_4e3m_2,snine,TH_4_2,hash_length) in
+    {20}let cid_2: bitstring = computerId_1 in
+    {77}event eAcceptI(cid_2,method_four,pkI_2,pkR_2,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,X_2,G_Y_2);
+    {67}let IV_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,ssix,TH_3_2,iv_length) in
+    {66}let K_3_2: bitstring = edhoc_kdf(PRK_3e2m_2,sfive,TH_3_2,key_length) in
+    {78}event eSecretsI(cid_2,method_four,pkI_2,pkR_2,PRK_2e_2,PRK_3e2m_2,PRK_4e3m_2,PRK_out_2,KEYSTREAM_2_2,K_3_2,IV_3_2,X_2,G_Y_2);
+    {38}let CT_AUTH_R_2: bitstring = kemcipher(encap_auth_R_2) in
+    {41}let TH_1_2: bitstring = hash((G_X_2,CT_AUTH_R_2)) in
+    {39}let plaintext_1_2: bitstring = ID_CRED_I_2 in
+    {79}event eAcceptIData(PRK_out_2,method_four,pkI_2,pkR_2,X_2,G_Y_2,(TH_1_2,TH_2_2,(TH_3_2,(TH_4_2,(suitesI_2,(EAD_1_2,(EAD_2_2,(EAD_3_2,(m1_2,(plaintext_1_2,plaintext_2_2,plaintext_3_2))))))))));
+    (
+        {74}let m3_2: bitstring = aeadenc(plaintext_3_2,srep,K_3_2,IV_3_2) in
+        {80}out(att, m3_2)
+    ) | (
+        {81}event eLeakSessionKey(PRK_out_2);
+        {82}out(att, PRK_out_2)
+    )
+) | (
+    {83}!
+    {88}in(att, (C_R: bitstring,(EAD_2: bitstring,suitesR_2: bitstring)));
+    {89}in(att, m1: bitstring);
+    {90}let (method: bitstring,suitesI: bitstring,G_X: bitstring,C_I: bitstring,CT_AUTH_R: bitstring,CIPHERTEXT_1: bitstring,EAD_1: bitstring) = m1 in
+    {91}event eMethodOk(method);
+    {92}new Y_2: bitstring;
+    {93}event eShare(Y_2);
+    {101}if (method = method_four) then
+    {103}let TH_1: bitstring = hash((G_X,CT_AUTH_R)) in
+    {87}let sk_kem_authR_2: bitstring = sk_auth_kem_2 in
+    {102}let K_AUTH_R: bitstring = kemdecap(CT_AUTH_R,sk_kem_authR_2) in
+    {104}let PRK_1e: bitstring = hkdfextract(TH_1,K_AUTH_R) in
+    {106}let IV_1: bitstring = edhoc_kdf(PRK_1e,sone,TH_1,iv_length) in
+    {105}let K_1: bitstring = edhoc_kdf(PRK_1e,szero,TH_1,key_length) in
+    {107}let plaintext_1: bitstring = aeaddec(CIPHERTEXT_1,K_1,IV_1) in
+    {108}let ID_CRED_I: bitstring = plaintext_1 in
+    {99}let KEM_CRED_R_2: bitstring = kempk(sk_kem_authR_2) in
+    {85}let skR_2: bitstring = sk_2 in
+    {98}let CRED_R_2: bitstring = pk(skR_2) in
+    {86}let R_2: bitstring = ltdh_2 in
+    {94}let G_R_2: bitstring = R_2 in
+    {100}let ID_CRED_R_2: bitstring = id(CRED_R_2,G_R_2,KEM_CRED_R_2) in
+    {109}if (ID_CRED_R_2 ≠ check_cred(ID_CRED_I)) then
+    {113}let pkR: bitstring = get_kem_auth(ID_CRED_R_2) in
+    {114}let pkI: bitstring = get_kem_auth(ID_CRED_I) in
+    {110}let mess_1_hash: bitstring = hash(m1) in
+    {95}let encapsulation: bitstring = kemencap(Y_2,G_X) in
+    {96}let G_Y: bitstring = kemcipher(encapsulation) in
+    {111}let TH_2: bitstring = hash((G_Y,mess_1_hash)) in
+    {97}let G_XY_2: bitstring = kemkey(encapsulation) in
+    {112}let PRK_2e: bitstring = hkdfextract(TH_2,G_XY_2) in
+    {116}let SALT_3e2m: bitstring = edhoc_kdf(PRK_2e,sthree,TH_2,hash_length) in
+    {117}let PRK_3e2m: bitstring = hkdfextract(SALT_3e2m,K_AUTH_R) in
+    {84}let cid: bitstring = computerId_2 in
+    {121}event eDerivedR(cid,pkR,PRK_3e2m,Y_2,G_X);
+    {122}event eTHRShared(pkR,TH_2);
+    {123}event eDerivedRShared(pkR,G_XY_2);
+    {124}event eDerivedIdR(ID_CRED_R_2,PRK_3e2m);
+    {125}new encap_auth_random_seed: bitstring;
+    {118}let MAC_2: bitstring = edhoc_kdf(PRK_3e2m,sfour,(ID_CRED_R_2,TH_2,pkR,EAD_2),hash_length) in
+    {119}let SIGNATURE_or_MAC_2: bitstring = MAC_2 in
+    {120}let plaintext_2: bitstring = (C_R,(ID_CRED_R_2,(SIGNATURE_or_MAC_2,EAD_2))) in
+    {130}event eSendRData(method_four,pkR,(TH_1,TH_2,(suitesI,(EAD_1,(EAD_2,(m1,plaintext_1,plaintext_2))))));
+    {115}let KEYSTREAM_2: bitstring = edhoc_kdf(PRK_2e,stwo,TH_2,plaintext_length) in
+    {129}let m2: bitstring = (G_Y,encxor(plaintext_2,KEYSTREAM_2)) in
+    {131}out(att, m2);
+    {132}in(att, CIPHERTEXT_3_2: bitstring);
+    {133}let TH_3: bitstring = hash((TH_2,(plaintext_2,pkR))) in
+    {135}let IV_3: bitstring = edhoc_kdf(PRK_3e2m,ssix,TH_3,iv_length) in
+    {134}let K_3: bitstring = edhoc_kdf(PRK_3e2m,sfive,TH_3,key_length) in
+    {138}let plaintext_3: bitstring = aeaddec(CIPHERTEXT_3_2,K_3,IV_3) in
+    {139}let (=ID_CRED_I,(SIGNATURE_or_MAC_3: bitstring,EAD_3: bitstring)) = plaintext_3 in
+    {140}let pkI_1: bitstring = get_kem_auth(ID_CRED_I) in
+    {136}let SALT_4e3m: bitstring = edhoc_kdf(PRK_3e2m,sseven,TH_3,hash_length) in
+    {126}let encap_auth_I_2: bitstring = kemencap(encap_auth_random_seed,pkI) in
+    {127}let K_AUTH_I: bitstring = kemkey(encap_auth_I_2) in
+    {137}let PRK_4e3m: bitstring = hkdfextract(SALT_4e3m,K_AUTH_I) in
+    {141}let MAC_3: bitstring = edhoc_kdf(PRK_4e3m,seight,(ID_CRED_I,TH_3,pkI_1,EAD_3),hash_length) in
+    {142}if (SIGNATURE_or_MAC_3 = MAC_3) then
+    {143}event eCheckedMAC3(ID_CRED_R_2,MAC_3);
+    {144}let TH_4: bitstring = hash((TH_3,(plaintext_3,pkI_1))) in
+    {145}let PRK_out: bitstring = edhoc_kdf(PRK_4e3m,snine,TH_4,hash_length) in
+    {146}event eAcceptR(cid,method_four,pkI_1,pkR,PRK_3e2m,PRK_4e3m,PRK_out,Y_2,G_X);
+    {147}event eSecretsR(cid,method_four,pkI_1,pkR,PRK_2e,PRK_3e2m,PRK_4e3m,PRK_out,KEYSTREAM_2,K_3,IV_3,Y_2,G_X);
+    (
+        {148}event eAcceptRData(PRK_out,method_four,pkI_1,pkR,Y_2,G_X,(TH_1,TH_2,(TH_3,(TH_4,(suitesI,(EAD_1,(EAD_2,(EAD_3,(m1,(plaintext_1,plaintext_2,plaintext_3))))))))))
+    ) | (
+        {149}event eLeakSessionKey(PRK_out);
+        {150}out(att, PRK_out)
+    )
+) | (
+    {151}!
+    {156}in(att, (method_1: bitstring,(suitesI_1: bitstring,(C_I_1: bitstring,EAD_1_1: bitstring))));
+    {157}event eMethodOk(method_1);
+    {158}new X: bitstring;
+    {159}new random_authR_1: bitstring;
+    {160}new EAD_3_1: bitstring;
+    {161}event eShare(X);
+    {155}let sk_kem_authI_1: bitstring = sk_auth_kem_2 in
+    {163}let KEM_CRED_I: bitstring = kempk(sk_kem_authI_1) in
+    {153}let skI: bitstring = sk_2 in
+    {162}let CRED_I: bitstring = pk(skI) in
+    {154}let I_1: bitstring = ltdh_2 in
+    {164}let ID_CRED_I_1: bitstring = id(CRED_I,I_1,KEM_CRED_I) in
+    {165}if (ID_CRED_I_1 ≠ check_cred(idd_1)) then
+    {166}if (method_1 = method_four) then
+    {167}let pkR_1: bitstring = get_kem_auth(idd_1) in
+    {172}let G_X_1: bitstring = kempk(X) in
+    {178}let m1_1: bitstring = (method_1,suitesI_1,G_X_1,C_I_1,EAD_1_1) in
+    {179}out(att, m1_1);
+    {180}in(att, m2_1: bitstring);
+    {181}let (G_Y_1: bitstring,CIPHERTEXT_2: bitstring,CT_AUTH_I_1: bitstring) = m2_1 in
+    {184}let G_YX: bitstring = kemdecap(G_Y_1,X) in
+    {182}let mess_1_hash_1: bitstring = hash(m1_1) in
+    {183}let TH_2_1: bitstring = hash((G_Y_1,mess_1_hash_1)) in
+    {185}let PRK_2e_1: bitstring = hkdfextract(TH_2_1,G_YX) in
+    {186}let KEYSTREAM_2_1: bitstring = edhoc_kdf(PRK_2e_1,stwo,TH_2_1,plaintext_length) in
+    {187}let plaintext_2_1: bitstring = decxor(CIPHERTEXT_2,KEYSTREAM_2_1) in
+    {188}let (C_R_1: bitstring,=idd_1,SIGNATURE_or_MAC_2_1: bitstring,EAD_2_1: bitstring) = plaintext_2_1 in
+    {189}let pkI_3: bitstring = get_kem_auth(ID_CRED_I_1) in
+    {192}event eDerivedIShared(pkI_3,G_YX);
+    {190}let SALT_3e2m_1: bitstring = edhoc_kdf(PRK_2e_1,sthree,TH_2_1,hash_length) in
+    {168}let encap_auth_R: bitstring = kemencap(random_authR_1,pkR_1) in
+    {169}let K_AUTH_R_1: bitstring = kemkey(encap_auth_R) in
+    {191}let PRK_3e2m_1: bitstring = hkdfextract(SALT_3e2m_1,K_AUTH_R_1) in
+    {193}let MAC_2_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfour,(idd_1,TH_2_1,pkR_1,EAD_2_1),hash_length) in
+    {194}if (SIGNATURE_or_MAC_2_1 = MAC_2_1) then
+    {195}event eCheckedMAC2(ID_CRED_I_1,MAC_2_1);
+    {196}let TH_3_1: bitstring = hash((TH_2_1,(plaintext_2_1,pkR_1))) in
+    {197}event eTHIShared(pkI_3,TH_3_1);
+    {201}let K_AUTH_I_1: bitstring = kemdecap(CT_AUTH_I_1,sk_kem_authI_1) in
+    {200}let SALT_4e3m_1: bitstring = edhoc_kdf(PRK_3e2m_1,sseven,TH_3_1,hash_length) in
+    {202}let PRK_4e3m_1: bitstring = hkdfextract(SALT_4e3m_1,K_AUTH_I_1) in
+    {203}let MAC_3_1: bitstring = edhoc_kdf(PRK_4e3m_1,seight,(ID_CRED_I_1,TH_3_1,pkI_3,EAD_3_1),hash_length) in
+    {204}let SIGNATURE_or_MAC_3_1: bitstring = MAC_3_1 in
+    {205}let plaintext_3_1: bitstring = (ID_CRED_I_1,(SIGNATURE_or_MAC_3_1,EAD_3_1)) in
+    {207}let TH_4_1: bitstring = hash((TH_3_1,(plaintext_3_1,pkI_3))) in
+    {208}let PRK_out_1: bitstring = edhoc_kdf(PRK_4e3m_1,snine,TH_4_1,hash_length) in
+    {152}let cid_1: bitstring = computerId_2 in
+    {209}event eAcceptI(cid_1,method_four,pkI_3,pkR_1,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,X,G_Y_1);
+    {199}let IV_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,ssix,TH_3_1,iv_length) in
+    {198}let K_3_1: bitstring = edhoc_kdf(PRK_3e2m_1,sfive,TH_3_1,key_length) in
+    {210}event eSecretsI(cid_1,method_four,pkI_3,pkR_1,PRK_2e_1,PRK_3e2m_1,PRK_4e3m_1,PRK_out_1,KEYSTREAM_2_1,K_3_1,IV_3_1,X,G_Y_1);
+    {170}let CT_AUTH_R_1: bitstring = kemcipher(encap_auth_R) in
+    {173}let TH_1_1: bitstring = hash((G_X_1,CT_AUTH_R_1)) in
+    {171}let plaintext_1_1: bitstring = ID_CRED_I_1 in
+    {211}event eAcceptIData(PRK_out_1,method_four,pkI_3,pkR_1,X,G_Y_1,(TH_1_1,TH_2_1,(TH_3_1,(TH_4_1,(suitesI_1,(EAD_1_1,(EAD_2_1,(EAD_3_1,(m1_1,(plaintext_1_1,plaintext_2_1,plaintext_3_1))))))))));
+    (
+        {206}let m3: bitstring = aeadenc(plaintext_3_1,srep,K_3_1,IV_3_1) in
+        {212}out(att, m3)
+    ) | (
+        {213}event eLeakSessionKey(PRK_out_1);
+        {214}out(att, PRK_out_1)
+    )
+) | (
+    {215}!
+    {220}in(att, (C_R_3: bitstring,(EAD_2_3: bitstring,suitesR: bitstring)));
+    {221}in(att, m1_3: bitstring);
+    {222}let (method_3: bitstring,suitesI_3: bitstring,G_X_3: bitstring,C_I_3: bitstring,CT_AUTH_R_3: bitstring,CIPHERTEXT_1_3: bitstring,EAD_1_3: bitstring) = m1_3 in
+    {223}event eMethodOk(method_3);
+    {224}new Y: bitstring;
+    {225}event eShare(Y);
+    {233}if (method_3 = method_four) then
+    {235}let TH_1_3: bitstring = hash((G_X_3,CT_AUTH_R_3)) in
+    {219}let sk_kem_authR: bitstring = sk_auth_kem_1 in
+    {234}let K_AUTH_R_3: bitstring = kemdecap(CT_AUTH_R_3,sk_kem_authR) in
+    {236}let PRK_1e_3: bitstring = hkdfextract(TH_1_3,K_AUTH_R_3) in
+    {238}let IV_1_3: bitstring = edhoc_kdf(PRK_1e_3,sone,TH_1_3,iv_length) in
+    {237}let K_1_3: bitstring = edhoc_kdf(PRK_1e_3,szero,TH_1_3,key_length) in
+    {239}let plaintext_1_3: bitstring = aeaddec(CIPHERTEXT_1_3,K_1_3,IV_1_3) in
+    {240}let ID_CRED_I_3: bitstring = plaintext_1_3 in
+    {231}let KEM_CRED_R: bitstring = kempk(sk_kem_authR) in
+    {217}let skR: bitstring = sk_1 in
+    {230}let CRED_R: bitstring = pk(skR) in
+    {218}let R_1: bitstring = ltdh_1 in
+    {226}let G_R: bitstring = R_1 in
+    {232}let ID_CRED_R: bitstring = id(CRED_R,G_R,KEM_CRED_R) in
+    {241}if (ID_CRED_R ≠ check_cred(ID_CRED_I_3)) then
+    {245}let pkR_3: bitstring = get_kem_auth(ID_CRED_R) in
+    {246}let pkI_4: bitstring = get_kem_auth(ID_CRED_I_3) in
+    {242}let mess_1_hash_3: bitstring = hash(m1_3) in
+    {227}let encapsulation_1: bitstring = kemencap(Y,G_X_3) in
+    {228}let G_Y_3: bitstring = kemcipher(encapsulation_1) in
+    {243}let TH_2_3: bitstring = hash((G_Y_3,mess_1_hash_3)) in
+    {229}let G_XY: bitstring = kemkey(encapsulation_1) in
+    {244}let PRK_2e_3: bitstring = hkdfextract(TH_2_3,G_XY) in
+    {248}let SALT_3e2m_3: bitstring = edhoc_kdf(PRK_2e_3,sthree,TH_2_3,hash_length) in
+    {249}let PRK_3e2m_3: bitstring = hkdfextract(SALT_3e2m_3,K_AUTH_R_3) in
+    {216}let cid_3: bitstring = computerId_1 in
+    {253}event eDerivedR(cid_3,pkR_3,PRK_3e2m_3,Y,G_X_3);
+    {254}event eTHRShared(pkR_3,TH_2_3);
+    {255}event eDerivedRShared(pkR_3,G_XY);
+    {256}event eDerivedIdR(ID_CRED_R,PRK_3e2m_3);
+    {257}new encap_auth_random_seed_1: bitstring;
+    {250}let MAC_2_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfour,(ID_CRED_R,TH_2_3,pkR_3,EAD_2_3),hash_length) in
+    {251}let SIGNATURE_or_MAC_2_3: bitstring = MAC_2_3 in
+    {252}let plaintext_2_3: bitstring = (C_R_3,(ID_CRED_R,(SIGNATURE_or_MAC_2_3,EAD_2_3))) in
+    {262}event eSendRData(method_four,pkR_3,(TH_1_3,TH_2_3,(suitesI_3,(EAD_1_3,(EAD_2_3,(m1_3,plaintext_1_3,plaintext_2_3))))));
+    {247}let KEYSTREAM_2_3: bitstring = edhoc_kdf(PRK_2e_3,stwo,TH_2_3,plaintext_length) in
+    {261}let m2_3: bitstring = (G_Y_3,encxor(plaintext_2_3,KEYSTREAM_2_3)) in
+    {263}out(att, m2_3);
+    {264}in(att, CIPHERTEXT_3: bitstring);
+    {265}let TH_3_3: bitstring = hash((TH_2_3,(plaintext_2_3,pkR_3))) in
+    {267}let IV_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,ssix,TH_3_3,iv_length) in
+    {266}let K_3_3: bitstring = edhoc_kdf(PRK_3e2m_3,sfive,TH_3_3,key_length) in
+    {270}let plaintext_3_3: bitstring = aeaddec(CIPHERTEXT_3,K_3_3,IV_3_3) in
+    {271}let (=ID_CRED_I_3,(SIGNATURE_or_MAC_3_3: bitstring,EAD_3_3: bitstring)) = plaintext_3_3 in
+    {272}let pkI_5: bitstring = get_kem_auth(ID_CRED_I_3) in
+    {268}let SALT_4e3m_3: bitstring = edhoc_kdf(PRK_3e2m_3,sseven,TH_3_3,hash_length) in
+    {258}let encap_auth_I: bitstring = kemencap(encap_auth_random_seed_1,pkI_4) in
+    {259}let K_AUTH_I_3: bitstring = kemkey(encap_auth_I) in
+    {269}let PRK_4e3m_3: bitstring = hkdfextract(SALT_4e3m_3,K_AUTH_I_3) in
+    {273}let MAC_3_3: bitstring = edhoc_kdf(PRK_4e3m_3,seight,(ID_CRED_I_3,TH_3_3,pkI_5,EAD_3_3),hash_length) in
+    {274}if (SIGNATURE_or_MAC_3_3 = MAC_3_3) then
+    {275}event eCheckedMAC3(ID_CRED_R,MAC_3_3);
+    {276}let TH_4_3: bitstring = hash((TH_3_3,(plaintext_3_3,pkI_5))) in
+    {277}let PRK_out_3: bitstring = edhoc_kdf(PRK_4e3m_3,snine,TH_4_3,hash_length) in
+    {278}event eAcceptR(cid_3,method_four,pkI_5,pkR_3,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,Y,G_X_3);
+    {279}event eSecretsR(cid_3,method_four,pkI_5,pkR_3,PRK_2e_3,PRK_3e2m_3,PRK_4e3m_3,PRK_out_3,KEYSTREAM_2_3,K_3_3,IV_3_3,Y,G_X_3);
+    (
+        {280}event eAcceptRData(PRK_out_3,method_four,pkI_5,pkR_3,Y,G_X_3,(TH_1_3,TH_2_3,(TH_3_3,(TH_4_3,(suitesI_3,(EAD_1_3,(EAD_2_3,(EAD_3_3,(m1_3,(plaintext_1_3,plaintext_2_3,plaintext_3_3))))))))))
+    ) | (
+        {281}event eLeakSessionKey(PRK_out_3);
+        {282}out(att, PRK_out_3)
+    )
+) | (
+    {283}phase 1;
+    {284}event eCompromise(kempk(sk_auth_kem_1));
+    {285}event eCompromise(kempk(sk_auth_kem_2));
+    {286}out(att, sk_auth_kem_1);
+    {287}out(att, sk_auth_kem_2)
+)
+
+-- Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkI_6))@t && i > t) || event(eLeakSessionKey(prk_out))@t encoded as event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6)) && attacker_p1(prk_out) ==> (event(eCompromise(pkI_6))@i_1 && i > i_1) || event(eLeakSessionKey(prk_out)) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 43 rules.
+400 rules inserted. Base: 349 rules (132 with conclusion selected). Queue: 32 rules.
+600 rules inserted. Base: 502 rules (136 with conclusion selected). Queue: 44 rules.
+800 rules inserted. Base: 636 rules (144 with conclusion selected). Queue: 91 rules.
+1000 rules inserted. Base: 753 rules (144 with conclusion selected). Queue: 82 rules.
+1200 rules inserted. Base: 904 rules (144 with conclusion selected). Queue: 58 rules.
+1400 rules inserted. Base: 987 rules (144 with conclusion selected). Queue: 86 rules.
+1600 rules inserted. Base: 1083 rules (144 with conclusion selected). Queue: 122 rules.
+1800 rules inserted. Base: 1027 rules (144 with conclusion selected). Queue: 66 rules.
+Starting query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkI_6))@t && i > t) || event(eLeakSessionKey(prk_out))@t
+RESULT event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkI_6))@t && i > t) || event(eLeakSessionKey(prk_out))@t is true.
+-- Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkR_4))@t && i > t) || event(eLeakSessionKey(prk_out))@t encoded as event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4)) && attacker_p1(prk_out) ==> (event(eCompromise(pkR_4))@i_1 && i > i_1) || event(eLeakSessionKey(prk_out)) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 47 rules.
+400 rules inserted. Base: 353 rules (132 with conclusion selected). Queue: 40 rules.
+600 rules inserted. Base: 505 rules (134 with conclusion selected). Queue: 41 rules.
+800 rules inserted. Base: 646 rules (144 with conclusion selected). Queue: 81 rules.
+1000 rules inserted. Base: 742 rules (144 with conclusion selected). Queue: 116 rules.
+1200 rules inserted. Base: 885 rules (144 with conclusion selected). Queue: 47 rules.
+1400 rules inserted. Base: 1020 rules (144 with conclusion selected). Queue: 69 rules.
+1600 rules inserted. Base: 1112 rules (144 with conclusion selected). Queue: 118 rules.
+1800 rules inserted. Base: 1147 rules (144 with conclusion selected). Queue: 108 rules.
+2000 rules inserted. Base: 914 rules (145 with conclusion selected). Queue: 19 rules.
+Starting query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkR_4))@t && i > t) || event(eLeakSessionKey(prk_out))@t
+RESULT event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkR_4))@t && i > t) || event(eLeakSessionKey(prk_out))@t is true.
+-- Query inj-event(eAcceptR(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptI(cid2,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) encoded as inj-event(eAcceptR(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6)) ==> (inj-event(eAcceptI(cid2,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i_1 && i > i_1) || (event(eCompromise(pkI_6))@i_2 && i > i_2) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 43 rules.
+400 rules inserted. Base: 349 rules (132 with conclusion selected). Queue: 32 rules.
+600 rules inserted. Base: 502 rules (136 with conclusion selected). Queue: 44 rules.
+800 rules inserted. Base: 636 rules (144 with conclusion selected). Queue: 91 rules.
+1000 rules inserted. Base: 753 rules (144 with conclusion selected). Queue: 82 rules.
+1200 rules inserted. Base: 904 rules (144 with conclusion selected). Queue: 58 rules.
+1400 rules inserted. Base: 987 rules (144 with conclusion selected). Queue: 86 rules.
+1600 rules inserted. Base: 1083 rules (144 with conclusion selected). Queue: 122 rules.
+1800 rules inserted. Base: 1027 rules (144 with conclusion selected). Queue: 66 rules.
+Starting query inj-event(eAcceptR(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptI(cid2,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t)
+RESULT inj-event(eAcceptR(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptI(cid2,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) is true.
+-- Query inj-event(eAcceptI(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@k ==> (inj-event(eDerivedR(cid2,pkR_4,prk3e2m,y,g_x))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) encoded as inj-event(eAcceptI(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4)) ==> (inj-event(eDerivedR(cid2,pkR_4,prk3e2m,y,g_x))@i_1 && i > i_1) || (event(eCompromise(pkR_4))@i_2 && i > i_2) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 47 rules.
+400 rules inserted. Base: 353 rules (132 with conclusion selected). Queue: 40 rules.
+600 rules inserted. Base: 505 rules (134 with conclusion selected). Queue: 41 rules.
+800 rules inserted. Base: 646 rules (144 with conclusion selected). Queue: 81 rules.
+1000 rules inserted. Base: 742 rules (144 with conclusion selected). Queue: 116 rules.
+1200 rules inserted. Base: 885 rules (144 with conclusion selected). Queue: 47 rules.
+1400 rules inserted. Base: 1020 rules (144 with conclusion selected). Queue: 69 rules.
+1600 rules inserted. Base: 1112 rules (144 with conclusion selected). Queue: 118 rules.
+1800 rules inserted. Base: 1147 rules (144 with conclusion selected). Queue: 108 rules.
+2000 rules inserted. Base: 914 rules (145 with conclusion selected). Queue: 19 rules.
+Starting query inj-event(eAcceptI(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@k ==> (inj-event(eDerivedR(cid2,pkR_4,prk3e2m,y,g_x))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t)
+RESULT inj-event(eAcceptI(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@k ==> (inj-event(eDerivedR(cid2,pkR_4,prk3e2m,y,g_x))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) is true.
+-- Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@j && event(eHonest(pkI_6))@k ==> event(eCompromise(pkI_6))@t || (event(eHonest(pkI_6))@t && i = j) encoded as event(v,eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x)) && event(v_1,eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x)) && event(eHonest(pkI_6)) ==> event(eCompromise(pkI_6)) || (event(eHonest(pkI_6)) && v_1 = v) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 43 rules.
+400 rules inserted. Base: 349 rules (132 with conclusion selected). Queue: 32 rules.
+600 rules inserted. Base: 502 rules (136 with conclusion selected). Queue: 44 rules.
+800 rules inserted. Base: 636 rules (144 with conclusion selected). Queue: 91 rules.
+1000 rules inserted. Base: 753 rules (144 with conclusion selected). Queue: 82 rules.
+1200 rules inserted. Base: 904 rules (144 with conclusion selected). Queue: 58 rules.
+1400 rules inserted. Base: 987 rules (144 with conclusion selected). Queue: 86 rules.
+1600 rules inserted. Base: 1083 rules (144 with conclusion selected). Queue: 122 rules.
+1800 rules inserted. Base: 1027 rules (144 with conclusion selected). Queue: 66 rules.
+Starting query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@j && event(eHonest(pkI_6))@k ==> event(eCompromise(pkI_6))@t || (event(eHonest(pkI_6))@t && i = j)
+RESULT event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@j && event(eHonest(pkI_6))@k ==> event(eCompromise(pkI_6))@t || (event(eHonest(pkI_6))@t && i = j) is true.
+-- Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@j && event(eHonest(pkR_4))@k ==> event(eCompromise(pkR_4))@t || (event(eHonest(pkR_4))@t && i = j) encoded as event(v,eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y)) && event(v_1,eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y)) && event(eHonest(pkR_4)) ==> event(eCompromise(pkR_4)) || (event(eHonest(pkR_4)) && v_1 = v) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 47 rules.
+400 rules inserted. Base: 353 rules (132 with conclusion selected). Queue: 40 rules.
+600 rules inserted. Base: 505 rules (134 with conclusion selected). Queue: 41 rules.
+800 rules inserted. Base: 646 rules (144 with conclusion selected). Queue: 81 rules.
+1000 rules inserted. Base: 742 rules (144 with conclusion selected). Queue: 116 rules.
+1200 rules inserted. Base: 885 rules (144 with conclusion selected). Queue: 47 rules.
+1400 rules inserted. Base: 1020 rules (144 with conclusion selected). Queue: 69 rules.
+1600 rules inserted. Base: 1112 rules (144 with conclusion selected). Queue: 118 rules.
+1800 rules inserted. Base: 1147 rules (144 with conclusion selected). Queue: 108 rules.
+2000 rules inserted. Base: 914 rules (145 with conclusion selected). Queue: 19 rules.
+Starting query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@j && event(eHonest(pkR_4))@k ==> event(eCompromise(pkR_4))@t || (event(eHonest(pkR_4))@t && i = j)
+RESULT event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@j && event(eHonest(pkR_4))@k ==> event(eCompromise(pkR_4))@t || (event(eHonest(pkR_4))@t && i = j) is true.
+-- Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x1,g_y1))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x2,g_y2))@j ==> i = j encoded as event(v,eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x1,g_y1)) && event(v_1,eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x2,g_y2)) ==> v_1 = v in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (125 with conclusion selected). Queue: 47 rules.
+400 rules inserted. Base: 349 rules (128 with conclusion selected). Queue: 36 rules.
+600 rules inserted. Base: 501 rules (130 with conclusion selected). Queue: 39 rules.
+800 rules inserted. Base: 631 rules (140 with conclusion selected). Queue: 81 rules.
+1000 rules inserted. Base: 731 rules (140 with conclusion selected). Queue: 125 rules.
+1200 rules inserted. Base: 876 rules (140 with conclusion selected). Queue: 46 rules.
+1400 rules inserted. Base: 1008 rules (140 with conclusion selected). Queue: 71 rules.
+1600 rules inserted. Base: 1105 rules (140 with conclusion selected). Queue: 106 rules.
+1800 rules inserted. Base: 1105 rules (140 with conclusion selected). Queue: 62 rules.
+Starting query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x1,g_y1))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x2,g_y2))@j ==> i = j
+RESULT event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x1,g_y1))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x2,g_y2))@j ==> i = j is true.
+-- Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y1,g_x1))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y2,g_x2))@j ==> i = j encoded as event(v,eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y1,g_x1)) && event(v_1,eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y2,g_x2)) ==> v_1 = v in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (125 with conclusion selected). Queue: 43 rules.
+400 rules inserted. Base: 347 rules (128 with conclusion selected). Queue: 32 rules.
+600 rules inserted. Base: 500 rules (132 with conclusion selected). Queue: 52 rules.
+800 rules inserted. Base: 621 rules (140 with conclusion selected). Queue: 99 rules.
+1000 rules inserted. Base: 747 rules (140 with conclusion selected). Queue: 72 rules.
+1200 rules inserted. Base: 891 rules (140 with conclusion selected). Queue: 59 rules.
+1400 rules inserted. Base: 981 rules (140 with conclusion selected). Queue: 89 rules.
+1600 rules inserted. Base: 1062 rules (140 with conclusion selected). Queue: 90 rules.
+1800 rules inserted. Base: 803 rules (142 with conclusion selected). Queue: 10 rules.
+Starting query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y1,g_x1))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y2,g_x2))@j ==> i = j
+RESULT event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y1,g_x1))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y2,g_x2))@j ==> i = j is true.
+-- Query inj-event(eAcceptRData(prk_out,method_4,pkI_6,pkR_4,y,g_x,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) encoded as inj-event(eAcceptRData(prk_out,method_4,pkI_6,pkR_4,y,g_x,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkI_6)) ==> (inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i_1 && i > i_1) || (event(eCompromise(pkI_6))@i_2 && i > i_2) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 43 rules.
+400 rules inserted. Base: 349 rules (132 with conclusion selected). Queue: 32 rules.
+600 rules inserted. Base: 502 rules (136 with conclusion selected). Queue: 44 rules.
+800 rules inserted. Base: 636 rules (144 with conclusion selected). Queue: 91 rules.
+1000 rules inserted. Base: 753 rules (144 with conclusion selected). Queue: 82 rules.
+1200 rules inserted. Base: 904 rules (144 with conclusion selected). Queue: 58 rules.
+1400 rules inserted. Base: 987 rules (144 with conclusion selected). Queue: 86 rules.
+1600 rules inserted. Base: 1083 rules (144 with conclusion selected). Queue: 122 rules.
+1800 rules inserted. Base: 1027 rules (144 with conclusion selected). Queue: 66 rules.
+Starting query inj-event(eAcceptRData(prk_out,method_4,pkI_6,pkR_4,y,g_x,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t)
+RESULT inj-event(eAcceptRData(prk_out,method_4,pkI_6,pkR_4,y,g_x,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) is true.
+-- Query inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkR_4))@k ==> (inj-event(eSendRData(method_4,pkR_4,(th1,th2,(suiteI,(ead1,(ead2,(m1_4,plaintext1,plaintext2)))))))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) encoded as inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkR_4)) ==> (inj-event(eSendRData(method_4,pkR_4,(th1,th2,(suiteI,(ead1,(ead2,(m1_4,plaintext1,plaintext2)))))))@i_1 && i > i_1) || (event(eCompromise(pkR_4))@i_2 && i > i_2) in process 1.
+Translating the process into Horn clauses...
+Completing...
+200 rules inserted. Base: 200 rules (129 with conclusion selected). Queue: 47 rules.
+400 rules inserted. Base: 353 rules (132 with conclusion selected). Queue: 40 rules.
+600 rules inserted. Base: 505 rules (134 with conclusion selected). Queue: 41 rules.
+800 rules inserted. Base: 646 rules (144 with conclusion selected). Queue: 81 rules.
+1000 rules inserted. Base: 742 rules (144 with conclusion selected). Queue: 116 rules.
+1200 rules inserted. Base: 885 rules (144 with conclusion selected). Queue: 47 rules.
+1400 rules inserted. Base: 1020 rules (144 with conclusion selected). Queue: 69 rules.
+1600 rules inserted. Base: 1112 rules (144 with conclusion selected). Queue: 118 rules.
+1800 rules inserted. Base: 1147 rules (144 with conclusion selected). Queue: 108 rules.
+2000 rules inserted. Base: 914 rules (145 with conclusion selected). Queue: 19 rules.
+Starting query inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkR_4))@k ==> (inj-event(eSendRData(method_4,pkR_4,(th1,th2,(suiteI,(ead1,(ead2,(m1_4,plaintext1,plaintext2)))))))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t)
+RESULT inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkR_4))@k ==> (inj-event(eSendRData(method_4,pkR_4,(th1,th2,(suiteI,(ead1,(ead2,(m1_4,plaintext1,plaintext2)))))))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) is true.
+
+--------------------------------------------------------------
+Verification summary:
+
+Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkI_6))@t && i > t) || event(eLeakSessionKey(prk_out))@t is true.
+
+Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@j && attacker_p1(prk_out)@k ==> (event(eCompromise(pkR_4))@t && i > t) || event(eLeakSessionKey(prk_out))@t is true.
+
+Query inj-event(eAcceptR(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptI(cid2,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) is true.
+
+Query inj-event(eAcceptI(cid1,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eHonest(pkR_4))@k ==> (inj-event(eDerivedR(cid2,pkR_4,prk3e2m,y,g_x))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) is true.
+
+Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y,g_x))@j && event(eHonest(pkI_6))@k ==> event(eCompromise(pkI_6))@t || (event(eHonest(pkI_6))@t && i = j) is true.
+
+Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x,g_y))@j && event(eHonest(pkR_4))@k ==> event(eCompromise(pkR_4))@t || (event(eHonest(pkR_4))@t && i = j) is true.
+
+Query event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x1,g_y1))@i && event(eAcceptI(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,x2,g_y2))@j ==> i = j is true.
+
+Query event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y1,g_x1))@i && event(eAcceptR(cid_4,method_4,pkI_6,pkR_4,prk3e2m,prk4e3m,prk_out,y2,g_x2))@j ==> i = j is true.
+
+Query inj-event(eAcceptRData(prk_out,method_4,pkI_6,pkR_4,y,g_x,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkI_6))@k ==> (inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@t && i > t) || (event(eCompromise(pkI_6))@t && i > t) is true.
+
+Query inj-event(eAcceptIData(prk_out,method_4,pkI_6,pkR_4,x,g_y,(th1,th2,(th3,(th4,(suiteI,(ead1,(ead2,(ead3,(m1_4,(plaintext1,plaintext2,plaintext3)))))))))))@i && event(eHonest(pkR_4))@k ==> (inj-event(eSendRData(method_4,pkR_4,(th1,th2,(suiteI,(ead1,(ead2,(m1_4,plaintext1,plaintext2)))))))@t && i > t) || (event(eCompromise(pkR_4))@t && i > t) is true.
+
+--------------------------------------------------------------
+
+// 7 minutes

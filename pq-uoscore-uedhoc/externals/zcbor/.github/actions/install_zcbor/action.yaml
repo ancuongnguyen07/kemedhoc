@@ -1,0 +1,37 @@
+inputs:
+  zcbor_package:
+    description: 'How to install zcbor'
+    required: false
+    default: 'bdist_wheel'
+runs:
+  using: 'composite'
+  steps:
+
+    - name: Install west and dependencies
+      shell: sh
+      run: |
+        pip3 install -U pip
+        pip3 install -U build
+        pip3 install -U -r scripts/requirements.txt
+
+    - name: Install zcbor package
+      if: ${{ inputs.zcbor_package == 'bdist_wheel' }}
+      shell: sh
+      run: |
+        set -e
+        python3 -m build
+        pip3 install dist/zcbor-*.tar.gz
+        pip3 uninstall -y zcbor
+        pip3 install dist/zcbor-*.whl
+
+    - name: Install zcbor package
+      if: ${{ inputs.zcbor_package == 'setup_install' }}
+      shell: sh
+      run: |
+        pip3 install .
+
+    - name: Install zcbor package
+      if: ${{ inputs.zcbor_package == 'setup_develop' }}
+      shell: sh
+      run: |
+        pip3 install -e .

@@ -1,0 +1,2 @@
+File "lake-edhoc-Sig.pv", line 262, characters 8-13:
+Error: function verify expects 3 arguments of types bitstring, bitstring, bitstring but is here given 5 arguments of types bitstring, bitstring, bitstring, bitstring, bitstring.

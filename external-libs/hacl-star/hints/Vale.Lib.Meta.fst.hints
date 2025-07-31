@@ -1,0 +1,31 @@
+[
+  "08dc75b0f53a5784e47c99ad713d8f76",
+  [
+    [
+      "Vale.Lib.Meta.generic_injective_proof",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query", "primitive_Prims.op_Equality",
+        "primitive_Prims.op_Negation", "projection_inverse_BoxBool_proj_0",
+        "unit_inversion", "unit_typing"
+      ],
+      0,
+      "f36d77e0368749d4154573330a077a2b"
+    ],
+    [
+      "Vale.Lib.Meta.exists_elim2",
+      1,
+      1,
+      0,
+      [
+        "@MaxIFuel_assumption", "@query",
+        "refinement_interpretation_Tm_refine_12fc703673e1232435ec7d8432df068a",
+        "refinement_interpretation_Tm_refine_44642e3a180510ae019bc79a1726fc14"
+      ],
+      0,
+      "9911658beac22f123a962775009f1dec"
+    ]
+  ]
+]

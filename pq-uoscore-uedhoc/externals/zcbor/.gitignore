@@ -1,0 +1,8 @@
+**/build*/
+**/__pycache__/
+*.egg*
+playground*
+types_playground*
+dist/
+twister-out*
+**/twister-out*
