@@ -51,7 +51,7 @@
         "typing_LowStar.Monotonic.Buffer.len"
       ],
       0,
-      "9b7de4f69cc7d8030dc974725bf91296"
+      "06144f95ad0134b2765c935f34393649"
     ],
     [
       "Hacl.Impl.Ed25519.Pow2_252m2.crecip_1",
@@ -177,7 +177,7 @@
         "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "46dbfe2ce15433311ae8f64a687e9a92"
+      "2c8127173add9845d2b08007e4fbc156"
     ],
     [
       "Hacl.Impl.Ed25519.Pow2_252m2.crecip_2",
@@ -220,7 +220,7 @@
         "typing_LowStar.Monotonic.Buffer.len"
       ],
       0,
-      "6ac756665186c42e8d2077f7eebc158e"
+      "4fae73eee138d1432c150194e38c56fd"
     ],
     [
       "Hacl.Impl.Ed25519.Pow2_252m2.crecip_2",
@@ -332,7 +332,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "f17476c8c8a6e7acea84a9e1ec1e07cc"
+      "5989c035595b8ee8d96d25f5b05cb0eb"
     ],
     [
       "Hacl.Impl.Ed25519.Pow2_252m2.pow2_252m2",
@@ -349,7 +349,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "9a6daa87bc0975f88c5036382f90e637"
+      "377eb566880f8bc62bb89b3b7d2fa2aa"
     ],
     [
       "Hacl.Impl.Ed25519.Pow2_252m2.pow2_252m2",
@@ -512,7 +512,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "41c4359f181f5d8004cb2f3fb314d23e"
+      "154abfe7730a17e4dc0e48f074ffe6fe"
     ]
   ]
 ]

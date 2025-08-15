@@ -24,7 +24,7 @@
         "typing_Vale.Lib.Map16.sel16", "typing_Vale.X64.Machine_s.n_regs"
       ],
       0,
-      "5afdf1526f265847d18d3c5064568e8b"
+      "36036463299dfbbd21469da18369b25a"
     ],
     [
       "Vale.X64.Regs.upd",
@@ -42,7 +42,7 @@
         "typing_Vale.X64.Machine_s.n_regs"
       ],
       0,
-      "c42e66249f806e3c96003b0d52f1a936"
+      "f32b7c145d1058833865b0f39323c226"
     ],
     [
       "Vale.X64.Regs.eta",
@@ -78,7 +78,7 @@
         "refinement_interpretation_Tm_refine_fe479871b3967d0c9b8d8614ccf88035"
       ],
       0,
-      "52df5b8491ec349a469a3a46fbec1710"
+      "57de7fddafa65c17bc9a09165e522316"
     ],
     [
       "Vale.X64.Regs.of_fun",
@@ -115,7 +115,7 @@
         "typing_Vale.X64.Machine_s.n_regs"
       ],
       0,
-      "e783899d4b96a6dba388d3fb113055e1"
+      "c1e33cc5084cb1122b8739240c4dc03a"
     ],
     [
       "Vale.X64.Regs.lemma_upd_eq",
@@ -149,7 +149,7 @@
         "typing_Vale.X64.Machine_s.__proj__Reg__item__rf"
       ],
       0,
-      "5aaa103ba8f07d13205e39eae44f40e7"
+      "6389a70c8fd6a21d5f211c93b1221bbb"
     ],
     [
       "Vale.X64.Regs.lemma_upd_ne",
@@ -188,7 +188,7 @@
         "typing_Vale.X64.Machine_s.n_regs"
       ],
       0,
-      "04e9042657931d03222f0b38e18d6050"
+      "b6039c1b1df05f36f5f8a43617fef7ac"
     ],
     [
       "Vale.X64.Regs.lemma_equal_intro",
@@ -221,7 +221,7 @@
         "refinement_interpretation_Tm_refine_d9979b96a3f2b18961b3dd63a2783b64"
       ],
       0,
-      "14c4f2f94bc4647d4832347fe9cedfdc"
+      "23ad8bb01799173a25b07a33ed7735b8"
     ],
     [
       "Vale.X64.Regs.lemma_equal_elim",
@@ -230,7 +230,7 @@
       0,
       [ "@query", "eq2-interp", "equation_Vale.X64.Regs.equal" ],
       0,
-      "50e41313203a77eae9842a64085cb474"
+      "1c9a79850f11117529524ed060bd5e59"
     ],
     [
       "Vale.X64.Regs.lemma_eta",
@@ -275,7 +275,7 @@
         "typing_Vale.X64.Regs.eta", "typing_Vale.X64.Regs.eta_sel"
       ],
       0,
-      "92ad5eb1429a71adcb45f0a8d0d63f1b"
+      "0c52609fb24c632933e234bae2d26483"
     ]
   ]
 ]

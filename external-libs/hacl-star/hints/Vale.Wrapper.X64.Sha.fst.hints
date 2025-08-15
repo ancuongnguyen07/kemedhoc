@@ -11,7 +11,7 @@
         "primitive_Prims.op_Multiply", "projection_inverse_BoxInt_proj_0"
       ],
       0,
-      "c981b7bc62465bb074eb0a7276d3eae0"
+      "2c471006d265d9b406fe690d01cf51d4"
     ],
     [
       "Vale.Wrapper.X64.Sha.lemma_k_reqs_equiv",
@@ -62,7 +62,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt32@tok"
       ],
       0,
-      "e91f554d1c5061020bea96af80ee80fd"
+      "f3c1e7ffd0cdf7d4bd34ce9dd596330c"
     ],
     [
       "Vale.Wrapper.X64.Sha.lemma_k_reqs_equiv",
@@ -246,7 +246,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt32@tok"
       ],
       0,
-      "84b54fbfb2fb2c63870c4627c17c49c0"
+      "2cb721c65cf45c7b72c3b8bc43cdd388"
     ],
     [
       "Vale.Wrapper.X64.Sha.simplify_le_bytes_to_hash_uint32",
@@ -296,7 +296,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt32@tok"
       ],
       0,
-      "1492a732a9e1d4ea4ec0692f459e6165"
+      "b6cd58c7b4d2bdf8c173ba7a2e4085b5"
     ],
     [
       "Vale.Wrapper.X64.Sha.simplify_le_bytes_to_hash_uint32",
@@ -490,7 +490,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt32@tok"
       ],
       0,
-      "9490692e719481cdb1cc9536361442a7"
+      "128039279d2119ec4327233372a8da9c"
     ],
     [
       "Vale.Wrapper.X64.Sha.sha256_update",
@@ -513,7 +513,7 @@
         "typing_LowStar.Buffer.trivial_preorder"
       ],
       0,
-      "e8ed2894411802e38e93e0d860def7c8"
+      "899225494b96d5899c1ba305732a823d"
     ],
     [
       "Vale.Wrapper.X64.Sha.sha256_update",
@@ -730,7 +730,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt8@tok"
       ],
       0,
-      "ace8504761a67a175ba324eb22dba266"
+      "635c242e993333715389e643a30a762c"
     ]
   ]
 ]

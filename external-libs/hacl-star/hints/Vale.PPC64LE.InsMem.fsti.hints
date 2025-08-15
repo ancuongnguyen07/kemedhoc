@@ -8,7 +8,7 @@
       0,
       [ "@query" ],
       0,
-      "72567675f46021dae93a11d821d2b688"
+      "3a70a8c700ce49690d0093a1ca5cd603"
     ],
     [
       "Vale.PPC64LE.InsMem.create_post",
@@ -17,7 +17,7 @@
       0,
       [ "@query", "assumption_Vale.Arch.HeapImpl.mutability__uu___haseq" ],
       0,
-      "491a800fbb7d24e3c786c433ffe8b230"
+      "823506e309edecdfea807a392f53893a"
     ],
     [
       "Vale.PPC64LE.InsMem.va_lemma_CreateHeaplets",
@@ -33,7 +33,7 @@
         "typing_Vale.Lib.Seqs.list_to_seq"
       ],
       0,
-      "352ac8e69a984cb866b3a92bc34dd81d"
+      "0b557b527bec7774ed12df6aeff8e63b"
     ],
     [
       "Vale.PPC64LE.InsMem.va_wp_CreateHeaplets",
@@ -47,7 +47,7 @@
         "typing_FStar.Seq.Base.length"
       ],
       0,
-      "d1e2ca3e2248f4aa3d8fae2a146b2157"
+      "4690a4f21c14c71584b539f3dcc21968"
     ],
     [
       "Vale.PPC64LE.InsMem.va_quick_CreateHeaplets",
@@ -59,7 +59,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "efef6a224a03d5a7afce6fbe20236238"
+      "ec4c5f059896a81519aa0e1d724bc878"
     ],
     [
       "Vale.PPC64LE.InsMem.va_quick_DestroyHeaplets",
@@ -71,7 +71,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "4cef9b7421af7a917c705f424bb59090"
+      "d3202a5006693282f92d8fdac99e50cd"
     ],
     [
       "Vale.PPC64LE.InsMem.va_quick_MemLoad64",
@@ -83,7 +83,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "bd15c3792e3acee97f54844b2b6b5df6"
+      "7004b2575356499810220626fabb7320"
     ],
     [
       "Vale.PPC64LE.InsMem.va_lemma_MemStore64",
@@ -98,7 +98,7 @@
         "refinement_interpretation_Tm_refine_3ee4decd46ad253d54e2217b49d002fe"
       ],
       0,
-      "e7fb462c3514bf0f645c0092c4d19523"
+      "a89d926a5696d8e81934bc6542395cf0"
     ],
     [
       "Vale.PPC64LE.InsMem.va_wp_MemStore64",
@@ -112,7 +112,7 @@
         "equation_Vale.PPC64LE.Memory.valid_buffer_write", "int_inversion"
       ],
       0,
-      "9e4bc85e28b75e86ee6da27960385e16"
+      "cc13d7e9a3aab38a1d0fe767ea46b228"
     ],
     [
       "Vale.PPC64LE.InsMem.va_quick_MemStore64",
@@ -124,7 +124,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "dac7b15ea41fd9895207f4381a8ac737"
+      "924bc45c9ad72cc74c448332bce6ee16"
     ]
   ]
 ]

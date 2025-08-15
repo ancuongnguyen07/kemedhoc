@@ -13,7 +13,7 @@
         "typing_Hacl.Spec.Ed25519.PrecompTable.pow51"
       ],
       0,
-      "772c76c42e3f3088b6aba20e89b7240c"
+      "a7c8236af4e34c0ca1db2d4660e61232"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.pow153",
@@ -27,7 +27,7 @@
         "typing_Hacl.Spec.Ed25519.PrecompTable.pow51"
       ],
       0,
-      "9af36772e2df2c9000eb2304e0804cdf"
+      "a33014f8fb352e3797af9a58b94afab4"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.pow204",
@@ -41,7 +41,7 @@
         "typing_Hacl.Spec.Ed25519.PrecompTable.pow51"
       ],
       0,
-      "7a20d1eeef70c7668cfb2c0b5f3de494"
+      "5fe1a9e8984190bf399d379f340fbe67"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.felem_to_list",
@@ -75,7 +75,7 @@
         "refinement_interpretation_Tm_refine_fd395a7c68ba47ba743b0f42bf0c166a"
       ],
       0,
-      "20f5b2231c3e8da4e6af8a52477280c9"
+      "d2c0679ae1ba32ab7a7633902d14ea7f"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.ext_point_to_list",
@@ -99,7 +99,7 @@
         "typing_Hacl.Spec.Ed25519.PrecompTable.felem_to_list"
       ],
       0,
-      "672fc4736b00ef14e5c52544b430fa19"
+      "3dd97703c951d496924b6e8a46e1edcc"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.point_inv_list",
@@ -116,7 +116,7 @@
         "refinement_interpretation_Tm_refine_b649465cfac1e38030620c104602064d"
       ],
       0,
-      "e2243c10a2d12913b47232761d6d07ee"
+      "7044ad8eef436444653af3966fb17eea"
     ],
     [
       "Hacl.Spec.Ed25519.PrecompTable.point_eval_list",
@@ -133,7 +133,7 @@
         "refinement_interpretation_Tm_refine_b649465cfac1e38030620c104602064d"
       ],
       0,
-      "3bd09943093e7beaf1ef3d79ba1ab79b"
+      "8e62c1a2cb2d6869cd514a18494df76a"
     ]
   ]
 ]

@@ -32,7 +32,7 @@
         "typing_tok_Hacl.Agile.Hash.MD5@tok"
       ],
       0,
-      "913738956b38c457fc0101caa26f7de3"
+      "6eae8a4280ab0ee514490c553c0f05d3"
     ],
     [
       "Hacl.Streaming.HMAC.hmac",
@@ -334,7 +334,7 @@
         "typing_tok_Lib.IntTypes.U8@tok", "unit_typing"
       ],
       0,
-      "9335aa7fafcaed2e3ddad4a3fb4905f3"
+      "79a4f367b33311315b85e28b1272740e"
     ],
     [
       "Hacl.Streaming.HMAC.agile_state",
@@ -363,7 +363,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "2b5022cbd300aa3c79ea37441623dde3"
+      "fbde9fe1a0a300b6f71a81d2b6610a7d"
     ],
     [
       "Hacl.Streaming.HMAC.alloca",
@@ -392,7 +392,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "b36857de0ddccd3208afb50089472206"
+      "4d333639c5ede751b9b91e134808fa53"
     ],
     [
       "Hacl.Streaming.HMAC.malloc_internal",
@@ -421,7 +421,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "046f9190e927d783638221a807af67a5"
+      "559cc3fe7f137b0d16c8a02a432d4101"
     ],
     [
       "Hacl.Streaming.HMAC.malloc_",
@@ -469,7 +469,7 @@
         "typing_tok_Hacl.Agile.Hash.MD5@tok"
       ],
       0,
-      "88fc18dc4d80c5f95a6e23af2abb6dba"
+      "d5ebb525e7671ecfedff19c1933c5e92"
     ],
     [
       "Hacl.Streaming.HMAC.malloc_",
@@ -625,7 +625,7 @@
         "typing_tok_Hacl.Streaming.Types.Success@tok"
       ],
       0,
-      "21041a3a7e0e0a0f8a3b298dd8a567f8"
+      "a1aef941007d68e95cc67f2fe848ac0f"
     ],
     [
       "Hacl.Streaming.HMAC.malloc_",
@@ -663,7 +663,7 @@
         "typing_LowStar.Monotonic.Buffer.len"
       ],
       0,
-      "21c3c603f30a26cee11716b3747d2a48"
+      "03bbf8e2fc85149da21d9fbbde38d558"
     ],
     [
       "Hacl.Streaming.HMAC.reset",
@@ -705,7 +705,7 @@
         "typing_FStar.UInt32.t"
       ],
       0,
-      "676f3f89b91da6e8a75f2283bf601199"
+      "f3196e372a95fd0f14bdd422d7e5cc73"
     ],
     [
       "Hacl.Streaming.HMAC.get_impl",
@@ -732,7 +732,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "d7f3a9684c36f0a2473270e89b813e51"
+      "05b8adf03ea26ab6ff205c93c69dddd2"
     ],
     [
       "Hacl.Streaming.HMAC.reset_internal",
@@ -759,7 +759,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "d28851567f0666a35affd65dc5d359f1"
+      "c4328f345fcbc70e3a4b5a30df92e7df"
     ],
     [
       "Hacl.Streaming.HMAC.reset",
@@ -810,7 +810,7 @@
         "typing_tok_Hacl.Streaming.Types.Success@tok"
       ],
       0,
-      "80104f6a697e772c579aa03d376015eb"
+      "b6e891f5801686a3888b498cd22ec84a"
     ],
     [
       "Hacl.Streaming.HMAC.reset",
@@ -841,7 +841,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "042dfdce96018b5ee61d09512ca92e58"
+      "999d14dc6fc018759d450c5c56a14cb7"
     ],
     [
       "Hacl.Streaming.HMAC.update",
@@ -868,7 +868,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "5f2512504967d6e17cdc52ae4f68728e"
+      "5a8857918c547611411ae51d56217472"
     ],
     [
       "Hacl.Streaming.HMAC.digest",
@@ -895,7 +895,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "74a1e1158504bea80a6c2fe475d72889"
+      "75d9b66ee099a5b7581f20e1cfa190f5"
     ],
     [
       "Hacl.Streaming.HMAC.free",
@@ -922,7 +922,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "eb0dc72d87e1639deceec124a9940e34"
+      "465863fe2735f4042bebe1a76a147f59"
     ],
     [
       "Hacl.Streaming.HMAC.copy",
@@ -949,7 +949,7 @@
         "token_correspondence_Hacl.Streaming.Interface.__proj__Stateful__item__t"
       ],
       0,
-      "5f41beabfb3773e566115b2a51590a14"
+      "04b33aebf50c26f6f1a8dd50725cba7e"
     ]
   ]
 ]

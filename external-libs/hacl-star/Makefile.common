@@ -139,8 +139,9 @@ FSTAR = $(FSTAR_NO_FLAGS) $(OTHERFLAGS)
 
 # 2. KaRaMeL
 
-KRML := $(KRML_HOME)/krml
-$(call mustexist, KRML)
+# KRML := $(KRML_HOME)/krml
+KRML := krml
+# $(call mustexist, KRML)
 
 BASE_FLAGS = \
   -no-prefix 'Hacl.Frodo.Random' \

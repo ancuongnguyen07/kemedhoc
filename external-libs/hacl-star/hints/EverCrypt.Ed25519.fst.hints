@@ -44,7 +44,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "0b675be7d9ae352f07e362d2c6e83f02"
+      "9d6570cc93242a2014a55cdc59e48745"
     ],
     [
       "EverCrypt.Ed25519.expand_keys",
@@ -103,7 +103,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "93085f304542e05810c06f41fc4a30a9"
+      "248f30c30e5269afc880f4a44544d692"
     ],
     [
       "EverCrypt.Ed25519.sign_expanded",
@@ -156,7 +156,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e6fb2ee10634b60a73e7b46453716c9f"
+      "dfd934786b5f8a6d921a240fb1ee776d"
     ],
     [
       "EverCrypt.Ed25519.sign",
@@ -197,7 +197,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "4c19f9aafb55f68e269fc45dbdcf3a29"
+      "adb46458d3bbb96127d2386eb73b9e87"
     ],
     [
       "EverCrypt.Ed25519.verify",
@@ -234,7 +234,7 @@
         "typing_LowStar.Monotonic.Buffer.len"
       ],
       0,
-      "573213f1e43533385fc19c5ff5c3a226"
+      "b2e442885c8a25d676c22e50ee9e883a"
     ]
   ]
 ]

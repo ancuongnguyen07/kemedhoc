@@ -16,7 +16,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "15a5a45a662561b932c920431834fa2d"
+      "a64621981d3083f9c4f0a936485afcff"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_sha",
@@ -33,7 +33,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "a9bd40966f6d17134de165f9eccdc35c"
+      "03bc1e8b6e03ed6ad82c70085df0ee8c"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_adx_bmi2",
@@ -50,7 +50,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "096aa88770d5c06fc7cc1341a44a948d"
+      "041d51417dbb088e69f15ea701653ceb"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_avx",
@@ -67,7 +67,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "c7ac7c594dc88be7dda29214271440ca"
+      "88dba7fa79fe8934cb2688da3dc9def2"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_avx2",
@@ -84,7 +84,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "ca77214c839d7b29a3b95b070e52b0ed"
+      "1cb5b5d544bc23306af721f004702a57"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_movbe",
@@ -101,7 +101,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "cffa9d7991a8b79e30abe268b2de00fe"
+      "c9cbeb568ae6366eb3701e739a747d6b"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_sse",
@@ -118,7 +118,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "64e1e1d8ca730f67767b88d149ded490"
+      "dee3061a97a9668c12d1a34bd12765b7"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_rdrand",
@@ -135,7 +135,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "bd969e9a82a53470747dbe3c398fca4c"
+      "f44e4f83fc124d3ebce2d87514f90028"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_avx512",
@@ -152,7 +152,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "e96e71a851f6a0dbe5879eeaf3cb1927"
+      "2c1862c8ca922979511b010d156eb0f4"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_osxsave",
@@ -169,7 +169,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "bddd3a9088153eba77388b43f86b1706"
+      "fd3b2c8f7c11c3a5bbb63fc98c2dd1dc"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_avx_xcr0",
@@ -187,7 +187,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "ef92095a1c9166d972f4cff0faa7671b"
+      "f45a1d1852f009a035bebea995fc3765"
     ],
     [
       "Vale.Wrapper.X64.Cpuid.check_avx512_xcr0",
@@ -205,7 +205,7 @@
         "typing_Vale.Interop.Assumptions.win"
       ],
       0,
-      "92fea9c964b750a82db14d096f52cc57"
+      "a5eebc385fc7b079c9e152015903882c"
     ]
   ]
 ]

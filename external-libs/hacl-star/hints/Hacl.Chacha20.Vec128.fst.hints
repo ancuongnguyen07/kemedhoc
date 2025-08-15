@@ -25,7 +25,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "00c1efc66502191a3e5d4883ab569851"
+      "1597c47b82b89f6c71e8b35108169eaa"
     ],
     [
       "Hacl.Chacha20.Vec128.chacha20_core_128",
@@ -51,7 +51,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "98cd974633b7dfdca2a932ff82f3cca8"
+      "2c2c1260c2f14de188cb8603b78e65b0"
     ],
     [
       "Hacl.Chacha20.Vec128.chacha20_init_128",
@@ -77,7 +77,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "697a011ccee1350bae75d6da6c984ef2"
+      "cd7cbfc79abd01e8d24d87ab8d63a565"
     ],
     [
       "Hacl.Chacha20.Vec128.chacha20_encrypt_128",
@@ -103,7 +103,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "934ee076e9a59f33de03a4902df3a194"
+      "f4a6dc7f312a86bd7cbd4e90eb4834b6"
     ],
     [
       "Hacl.Chacha20.Vec128.chacha20_decrypt_128",
@@ -129,7 +129,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "fe23db71d921b5e1e88b877c1e9e02a8"
+      "cbacc7ec5060182333014d272fdc349e"
     ]
   ]
 ]

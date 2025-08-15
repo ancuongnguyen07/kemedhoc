@@ -57,7 +57,7 @@
         "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "66bfaab8651189fef382b91dd6d1599b"
+      "0d663dba1189caaed8c97ac831fd8bcc"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.wide_as_nat",
@@ -116,7 +116,7 @@
         "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "d7a7c71b70673d3686f3b3fb8e0dc556"
+      "bb65c749bc87b5481da905dcd8aa181d"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.qelem_fits",
@@ -174,7 +174,7 @@
         "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "bb99b9d52fe356dbf850f5f0a1046af2"
+      "df78a7fd9f0ca724e93902d56fe91f3c"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.qelem_wide_fits",
@@ -233,7 +233,7 @@
         "typing_tok_Lib.IntTypes.U64@tok"
       ],
       0,
-      "6cae6880d4201d27727e5920eabad610"
+      "6d6156380e9b7b3ad9bc38132d867ecb"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.barrett_reduction",
@@ -283,7 +283,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "f9b40e1c3225620d58afc33c60fd4019"
+      "b07bbd54d79795d57831ffd982e4f693"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.barrett_reduction",
@@ -354,7 +354,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "afed2cad06f29bc4a161558ce315a060"
+      "9cff206adbcb8d403f71ee526e8a383c"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.mul_modq",
@@ -406,7 +406,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "4b763b35469f702fddcaa3819cf55364"
+      "27cfd1047e87e40f5de9dd2dd3c42dd1"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.mul_modq",
@@ -571,7 +571,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "46b7d42a907f5b372e1c0fc1a0710262"
+      "6c8e19345689d7dae384bf6918f1c7cf"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.add_modq",
@@ -623,7 +623,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "5ad6ceaecca5b7805eb90b8c01fa4778"
+      "da2b6dd1247b9e97f5f969176c0ec39b"
     ],
     [
       "Hacl.Impl.BignumQ.Mul.add_modq",
@@ -689,7 +689,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "f2f985d69635f3fbc5416ab7695b4072"
+      "7a9d2c657769ab9c69ffd956b988fe31"
     ]
   ]
 ]

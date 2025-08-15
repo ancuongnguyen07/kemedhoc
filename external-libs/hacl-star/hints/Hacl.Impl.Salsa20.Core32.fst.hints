@@ -52,7 +52,7 @@
         "typing_Spec.Salsa20.size_key", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "d37bfac66e866fdb029e387313dd4f90"
+      "f464c14120fc1ff050d28692fa9b462b"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.create_state",
@@ -98,7 +98,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e58a448ca3e0cf3809b7a738ad663978"
+      "4a07b4a4f943e0668d54e5329d455b21"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.load_state",
@@ -154,7 +154,7 @@
         "typing_Spec.Salsa20.size_key", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "e32d4c065890d6c432dac6af3e932c36"
+      "0d3d840608cfe6b409424839cf42917d"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.load_state",
@@ -228,7 +228,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "4c96e40ac5ed0de95c97f68d97a215f5"
+      "48af96718dce0533de518f2eed4ef578"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.store_state",
@@ -291,7 +291,7 @@
         "typing_Spec.Salsa20.size_key", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "f38bb49a43e61bf56acb8a754b1abf81"
+      "a218290e2a0a4fa196086b878ee45630"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.store_state",
@@ -370,7 +370,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "60548036570167bf520a8c4abe1fec61"
+      "ee09a165b520509800fbee2cd5bd18e6"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.set_counter",
@@ -427,7 +427,7 @@
         "typing_LowStar.Monotonic.Buffer.len", "typing_Spec.Salsa20.size_key"
       ],
       0,
-      "12beb22dd4b7695fcbc2a9ff29f8ab58"
+      "6a99e81dcaba12c8ba9a0cee02858d6f"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.set_counter",
@@ -502,7 +502,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "c0e105e737b619dfab839840a8c30611"
+      "1ea9fb3601b7643954f19c5940fc48e5"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.copy_state",
@@ -540,7 +540,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "2c9be35e57d9adc18a684b312333d68c"
+      "33657ec77c4c315c2734925f1f47ef0f"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.copy_state",
@@ -605,7 +605,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "fe564dd562c269f4356f76055e9f9d6a"
+      "df01a71b5fbe13f098ea003a4cadabe9"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.sum_state",
@@ -641,7 +641,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "0cfcddc0c2e0fce1166527d15121541a"
+      "b413fcee0229fb7ce2190e07c0ef24f8"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.sum_state",
@@ -704,7 +704,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "25e068d3256dd0acfe6709c63246a8c8"
+      "da2536819b14bd524a2d282e0a82c9b5"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.xor_block",
@@ -772,7 +772,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "0ed992e76091f4d657cf957b793983f2"
+      "812d81b334a833d6c146a246eb1f997f"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.xor_block",
@@ -917,7 +917,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "67b92a1074d11d58936643b9324d4c23"
+      "41fe70c3071dab1fec5209e1253a382b"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.line",
@@ -976,7 +976,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "89c211b95aa590d1684cb8b7e4c9606e"
+      "2c66c7d6632b2ae2a5fa054ada27202a"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.line",
@@ -1044,7 +1044,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "ae5a2062bf0c3a471706133b23851f91"
+      "018c6cc2696100f793c3498eb18e396d"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.quarter_round",
@@ -1102,7 +1102,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "d46a40bcda23319a280680c39af25a85"
+      "9ff231573d66d717fd8da661f32c5b50"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.quarter_round",
@@ -1180,7 +1180,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "8decb57d2ea9c0c0d4a5eab3caca5f83"
+      "9a277729916063fd0944fae4f275d789"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.double_round",
@@ -1233,7 +1233,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "6e57ff3e944b2987868fc9f226894089"
+      "4339507539e3d57b339e839b0213b1d8"
     ],
     [
       "Hacl.Impl.Salsa20.Core32.double_round",
@@ -1319,7 +1319,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "053b159644f5b76b30ba642999a9f9e6"
+      "269606b264b4393b07b0f95f952bfc71"
     ]
   ]
 ]

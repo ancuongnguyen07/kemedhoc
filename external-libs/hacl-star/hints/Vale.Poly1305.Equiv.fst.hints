@@ -43,7 +43,7 @@
         "typing_Spec.Poly1305.size_key", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "c561c57f7a86a1add1b36ee1d359ef00"
+      "943eb2664685fb6dcae48376f7881977"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv_rec",
@@ -110,7 +110,7 @@
         "well-founded-ordering-on-nat"
       ],
       0,
-      "6857b727fefe192dd241853822056c9b"
+      "47f9e4625012d9041c8641183b52aa62"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv_rec",
@@ -176,7 +176,7 @@
         "well-founded-ordering-on-nat"
       ],
       0,
-      "79f548923e5fd86ac29ea704ccdde903"
+      "fe65682d296e10c3acf60d46adbdf34a"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv_last",
@@ -228,7 +228,7 @@
         "typing_Spec.Poly1305.size_block", "typing_Spec.Poly1305.size_key"
       ],
       0,
-      "e0e8483551d9c4b91eebfee20cca886b"
+      "37926209f441915d47ddee33b5fe1e61"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv_r",
@@ -302,7 +302,7 @@
         "typing_tok_Lib.IntTypes.U64@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "f388def7d65578e93dadb96625e4ad94"
+      "1fce9efdf088c35a226690f3dd7609b6"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv",
@@ -348,7 +348,7 @@
         "typing_tok_Lib.IntTypes.SEC@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "a7096151a24ba4c92e17c6adf2921465"
+      "74591ccbe9b23c74c5f1c497d5e43f21"
     ],
     [
       "Vale.Poly1305.Equiv.lemma_poly1305_equiv",
@@ -425,7 +425,7 @@
         "typing_tok_Lib.IntTypes.SEC@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "e668951e45af09a57e13a86d7f4ae3f2"
+      "a87c038c8a9fe925b53b1fd556699cac"
     ]
   ]
 ]

@@ -81,7 +81,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "ede142dae53fbda4d2312f23e1647e53"
+      "095458647932045b41924b83df906e62"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_all_valid_hb",
@@ -316,7 +316,7 @@
         "typing_tok_Spec.Hash.Definitions.SHA2_256@tok", "unit_typing"
       ],
       0,
-      "797531b7d913c9c31840af826c6a6fb5"
+      "67714b969c695eb892d79bd3e216a1f6"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_sb",
@@ -489,7 +489,7 @@
         "typing_tok_Spec.Hash.Definitions.SHA2_384@tok"
       ],
       0,
-      "71e091b5b61d9f1b17b60f66e67d4ccf"
+      "454a1c9b9c5286bca20f4f9b85b4ee60"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_valid_pk_rs",
@@ -590,7 +590,7 @@
         "typing_tok_Spec.Hash.Definitions.SHA2_224@tok"
       ],
       0,
-      "d9bfc0226ea2fcf0dc9d10edc9112c7a"
+      "be951e41c0120952fded2edade40e071"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_valid_pk_rs",
@@ -850,7 +850,7 @@
         "typing_tok_Spec.Hash.Definitions.SHA2_224@tok", "unit_typing"
       ],
       0,
-      "1da009b69a5c0141393c8bf28984cede"
+      "11072256b920676fd06229d3ba31f23e"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_valid_pk",
@@ -881,7 +881,7 @@
         "typing_LowStar.Monotonic.Buffer.len"
       ],
       0,
-      "57abe1ff745b6c7874807a799f8afa64"
+      "76c597af769410f556354da552006a60"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify_valid_pk",
@@ -1123,7 +1123,7 @@
         "typing_tok_Spec.Hash.Definitions.SHA2_512@tok", "unit_typing"
       ],
       0,
-      "791577999a7e439b833f37ccf819a25f"
+      "26b8eb83ec7c1bc4126725b7f13fd8de"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify",
@@ -1186,7 +1186,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "87a1d7fb4f8d6945755ce00a1d4b94a4"
+      "40fb35dfe5155316fe787608284c9cf1"
     ],
     [
       "Hacl.Impl.Ed25519.Verify.verify",
@@ -1356,7 +1356,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "4468035dcc6a364df06bdebbac47da20"
+      "8f0d08facbb60cd89355ff5f8dc5d8a7"
     ]
   ]
 ]

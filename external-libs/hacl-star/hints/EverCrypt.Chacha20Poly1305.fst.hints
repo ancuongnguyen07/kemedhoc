@@ -75,7 +75,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "d4d788ac37cf56c7cabc35d1bfa44406"
+      "4a120edfbe2e43f1782ae879c81d8739"
     ],
     [
       "EverCrypt.Chacha20Poly1305.aead_encrypt",
@@ -168,7 +168,7 @@
         "typing_tok_Lib.IntTypes.U8@tok", "unit_inversion", "unit_typing"
       ],
       0,
-      "775482ea1749eb81954ade4d517565b9"
+      "f6e1745f93a02c85acc2872edafd94d8"
     ],
     [
       "EverCrypt.Chacha20Poly1305.aead_decrypt",
@@ -214,7 +214,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "251d532079adb3173613ac8a0c33dd52"
+      "06e8872bbb755fb9d49e70e2f221924c"
     ],
     [
       "EverCrypt.Chacha20Poly1305.aead_decrypt",
@@ -305,7 +305,7 @@
         "typing_Spec.Poly1305.size_key", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "5d66fa59daa49ddc5f1a81ea32701317"
+      "ba91d00cb2248fa8a007060a9e103c6f"
     ]
   ]
 ]

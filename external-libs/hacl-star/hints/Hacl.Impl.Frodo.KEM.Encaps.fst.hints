@@ -76,7 +76,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "c9703942e5283b3e9921a8db1791df36"
+      "3da0af0d56ff1c6eb0c1256a13119d87"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sa_plus_e",
@@ -259,7 +259,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "47247fc543a57a1189a9b959d92d8852"
+      "9232183eaa5b57d9d0144c3dbbfcf090"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sa_plus_e",
@@ -447,7 +447,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "efb9611700e5022d41749e33d8f25c61"
+      "d7613b4fb91a70f3f7d16a53a4738036"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c1",
@@ -522,7 +522,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "d6c1e9f8f7ae3cf6d1465d9c7c361b42"
+      "e1606d02d81cda4f372f9864c656c3f4"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c1",
@@ -717,7 +717,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "5e71d4bc8f0bb8c63463099cddd50e2d"
+      "85a223de9012bed3b84a0c7fa0e15606"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c1",
@@ -913,7 +913,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "9e05d69689e216c16c61d687ab0b644d"
+      "c8d00f8c89a59217391a4a67beb6e14b"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e",
@@ -999,7 +999,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "47dbe5763c1861491bb83e7bed6a85ab"
+      "df2a3d14a0d9ccba439ca36e7eac64c8"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e",
@@ -1187,7 +1187,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "fd98a2639e7eab5dd5d2d45a856318f5"
+      "7219dbdd4348a5bf8d8573c45b94ac27"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e",
@@ -1375,7 +1375,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "67d35ea38bc8d99efba1a8ab0ed820b2"
+      "1c6b67ede4d2e8432484697cf74ac218"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e_plus_mu",
@@ -1479,7 +1479,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "3230f0a6cf243a725171ed228712a950"
+      "664eb7593015262c815f87277e8a8ce5"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e_plus_mu",
@@ -1693,7 +1693,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "f8c6d8a91531e9819b7cbaed6a4d3a57"
+      "b7f6b17b57c3e1d681c54b15d6ba2824"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.frodo_mul_add_sb_plus_e_plus_mu",
@@ -1900,7 +1900,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "008c6f50a3ca9fd90eed7e30a185f15e"
+      "cb71bee5132317bfd77ce678ab262d1e"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c2",
@@ -2007,7 +2007,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "9bbb367485d04f3b19216397f8adbeab"
+      "facdd54eb8dabb5db6097f014e683e8f"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c2",
@@ -2209,7 +2209,7 @@
         "typing_tok_Spec.Frodo.Params.Frodo64@tok"
       ],
       0,
-      "c7c8aee9ac70866ad4f36b07b354584d"
+      "46306f47cc17b0cd3b269dc7e9e44674"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_pack_c2",
@@ -2406,7 +2406,7 @@
         "typing_tok_Spec.Frodo.Params.Frodo64@tok"
       ],
       0,
-      "0fed5e3b2171ebcbe2cc1d901b9d851a"
+      "3502bdfc4d8ff56dc4ae44d632cc236f"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.get_sp_ep_epp_matrices",
@@ -2483,7 +2483,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "2e5923faf06cbff2f011e359eddd13d8"
+      "41413eaa333bdba1f6cebac1d2125508"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.get_sp_ep_epp_matrices",
@@ -2688,7 +2688,7 @@
         "typing_tok_Spec.Frodo.Params.Frodo64@tok"
       ],
       0,
-      "9e147e46d05610e46ff650b1d2241e7b"
+      "f5f4cb9e4924edc6036f2071cf4f8481"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.get_sp_ep_epp_matrices",
@@ -2893,7 +2893,7 @@
         "typing_tok_Spec.Frodo.Params.Frodo640@tok"
       ],
       0,
-      "67c69e071a17e064cd68e5e2be23bc07"
+      "a900be925291e2571abf256e477283a3"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct0",
@@ -3029,7 +3029,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "91de0bf11092923621b87bb3dc3db8dd"
+      "f26d5f973ab206641caeffcb603157b7"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct0",
@@ -3180,7 +3180,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "9c4f8eb934508c8c09a924a4aa0b46b1"
+      "44478f6cda2cf2f8fdbe893ccf0c5c48"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct0",
@@ -3332,7 +3332,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "2673fe01128253d6dbb288082b317864"
+      "c7602e279435cdb503b29db4f3486980"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.clear_matrix3",
@@ -3393,7 +3393,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "9e2eddc3b339a7d7b5a93c18a544fc78"
+      "2b3d215cea6b0912134af2b417775c8c"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.clear_matrix3",
@@ -3478,7 +3478,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "008d9c70b548bb6136c2b2009fe9d1c0"
+      "0016918e7f8d46aaccf76f73ee84c18c"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.clear_matrix3",
@@ -3565,7 +3565,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "6908bba0fbd9b6570ad27dcf868e0422"
+      "10fbf70f12755afb10940f780935d877"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct",
@@ -3688,7 +3688,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "23aad6e00d743a5e3ca8943ec46fe587"
+      "df474d2bbbeca8da8c1bbaed4b10bbb6"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct",
@@ -3931,7 +3931,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "3a9f041146f017d6390be8619f2957c5"
+      "5280b78f8c50e0e5a19c3b9dec7ed48b"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ss",
@@ -4051,7 +4051,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "60b3f8612975a2a58a2d5a7e3eb1876f"
+      "df342b72df6f633972f3225399205f5b"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ss",
@@ -4275,7 +4275,7 @@
         "typing_tok_Spec.Frodo.Params.Frodo976@tok"
       ],
       0,
-      "a28e13fae6d36b51a0a9c211ac71454b"
+      "db9fa1e48c1eb782246c2c622ab01b64"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_seed_se_k",
@@ -4394,7 +4394,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "cd89ef273971c2dfdf2d6c75ba112c17"
+      "be47fffda2521898398e91010944439d"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_seed_se_k",
@@ -4619,7 +4619,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "9edeb2cd669f61836576d9621a12f1ca"
+      "4643eb1a1c390f4c0f815446fc661fb8"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_seed_se_k",
@@ -4873,7 +4873,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "77373bdb0211b0362e14bf69fe618db3"
+      "f114949e254406046cf52c572bedf7a6"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_ss",
@@ -5009,7 +5009,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "140d979189f1a43a4e35bbda962b0803"
+      "781dc9ffd7410e67e4f15f4459df1487"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_ss",
@@ -5136,7 +5136,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "72e156faaa194ae156480ea3f1504574"
+      "a53eb5c79a57e4f38c10286f3a077cdb"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_ct_ss",
@@ -5267,7 +5267,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "c04db280719ce7c9d4f9a545340ac392"
+      "3749e0c0c61c5054b5617f7fef9bf247"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc0",
@@ -5398,7 +5398,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "8c175dbb91556b019b0f6f8d12413b15"
+      "f57863e2bb396e0bbf9e0de67037a0d8"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc0",
@@ -5557,7 +5557,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "5658de03c15dee9fe5c0ecb0e02925fc"
+      "9f9d657eed468da598f3ed0e13d0e7f3"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc0",
@@ -5707,7 +5707,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "b9e42354e871418a9fe6b703c9d8a29d"
+      "21bdf26345829490d52a850ef8615d6c"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_",
@@ -5844,7 +5844,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "430af502468f09ddcc7f13a99fbe2f45"
+      "6e2e13bae2f3466e7c80f5d97637a7d6"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc_",
@@ -6041,7 +6041,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "da92c9bdb4d378e7f22c937a51c6f81a"
+      "76829f2edff4af1fae382002fc0763d1"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc",
@@ -6173,7 +6173,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "61c0620c91a7f7d4ffb344a276e31d9a"
+      "0c675d95d49edad7e612fe83fecb7e24"
     ],
     [
       "Hacl.Impl.Frodo.KEM.Encaps.crypto_kem_enc",
@@ -6391,7 +6391,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "96f01003ecc1a6b21fee31c02be7f1cb"
+      "a04693a25fb25d3dd7063beb4ebcc79a"
     ]
   ]
 ]

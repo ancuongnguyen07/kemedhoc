@@ -18,7 +18,7 @@
         "typing_Vale.X64.Decls.cf", "typing_Vale.X64.Decls.overflow"
       ],
       0,
-      "2568f53da1ccf47dac2ec64c264e8c3a"
+      "11917be415234a447d31f05b159eefb1"
     ],
     [
       "Vale.Bignum.X64.lemma_add_hi_lo64",
@@ -37,7 +37,7 @@
         "typing_Vale.Bignum.Defs.add_hi"
       ],
       0,
-      "2a302530700a5335900937c1973d83c5"
+      "6353d11bbae6febf8c5bb67462f82ba1"
     ],
     [
       "Vale.Bignum.X64.va_lemma_Adcx_64",
@@ -105,7 +105,7 @@
         "typing_Vale.X64.State.eval_operand"
       ],
       0,
-      "e5ec2e39f35dbaeea87648987faa8e5d"
+      "cdf65b2a70229ba30d8f229eeb96ca77"
     ],
     [
       "Vale.Bignum.X64.va_wpProof_Adcx_64",
@@ -184,7 +184,7 @@
         "typing_tok_Vale.X64.QuickCode.Mod_None@tok", "unit_typing"
       ],
       0,
-      "670b13f8acb5e09768bd70510ad58558"
+      "6b50817736ab46e1c7963f12e2873524"
     ],
     [
       "Vale.Bignum.X64.va_quick_Adcx_64",
@@ -196,7 +196,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "901b1e3d4bb63ffee76e183dcedd5a17"
+      "8985f06af6eea145a2cf1baf1fde37da"
     ],
     [
       "Vale.Bignum.X64.va_lemma_Adox_64",
@@ -265,7 +265,7 @@
         "typing_Vale.X64.State.eval_operand"
       ],
       0,
-      "141dab0aa09bc466f9da5cdc776d597c"
+      "e8a352dd3e23b579a48ddda1a0d050f0"
     ],
     [
       "Vale.Bignum.X64.va_wpProof_Adox_64",
@@ -344,7 +344,7 @@
         "typing_tok_Vale.X64.QuickCode.Mod_None@tok", "unit_typing"
       ],
       0,
-      "6e53d0affdd95313031605d571366cce"
+      "13b317b3d37f5aabbc92158b9c218a7f"
     ],
     [
       "Vale.Bignum.X64.va_quick_Adox_64",
@@ -356,7 +356,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "7f3a85cce392b44f6522f56acd66251e"
+      "4adc84e23ff001921df6ae7fbdd71298"
     ],
     [
       "Vale.Bignum.X64.va_lemma_Mulx_64",
@@ -406,7 +406,7 @@
         "typing_Vale.X64.State.eval_operand"
       ],
       0,
-      "a02d23c14280a65fc446f3011e6fa24f"
+      "c5bec9be0c60523b0218921f757cb121"
     ]
   ]
 ]

@@ -27,7 +27,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "af48cb5767d75e160a707881658699b9"
+      "2ce4b3bfa807acfdaa6c9d95a32d32b6"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_aesni",
@@ -55,7 +55,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "f4c32bb3b4d6fe17f8c686f5deab4d72"
+      "8962e1c78cd2dcb123b781d5670288df"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_pclmulqdq",
@@ -83,7 +83,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "b9ec232c30d11a28226f8ae3aa2964ab"
+      "cff37c06267c12462dc4f23404d1fa68"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_avx2",
@@ -111,7 +111,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "bec7ae6183285c9d1fc853a265b45d19"
+      "efa97be6d939368e30d25fdbe72bcaea"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_avx",
@@ -139,7 +139,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "84af08c000b8e572afa4c347269aa5a6"
+      "ab9ad9660c259c5d7cc97c291a084696"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_bmi2",
@@ -167,7 +167,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "16afe1c7d742686eeb42a47ae607b0fc"
+      "7fdd6c8ade4380cdd3b64f4d2d35728a"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_adx",
@@ -195,7 +195,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "a73b256631891b8dc3bc1b1ece7369cd"
+      "6c06d99ef56f1d633d63ca7f69fff7c8"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_sse",
@@ -223,7 +223,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "9611fec0c517c925e639e9517a165ee4"
+      "7d662579bba4d41bc3331183d8008b5c"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_movbe",
@@ -251,7 +251,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "57e36244eb8789d71b00d08382d9b628"
+      "9c9d3738d38b92c812f744539cc5b11e"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_rdrand",
@@ -279,7 +279,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "c49c604b092c565e714eda41b174324a"
+      "becb99042372c03a3dee1d50973283f0"
     ],
     [
       "EverCrypt.AutoConfig2.cpu_has_avx512",
@@ -307,7 +307,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip"
       ],
       0,
-      "53807db0baf9e1bb7ccb460beb7fca41"
+      "6e67eb26e8de028d6d840b3aad067fa8"
     ],
     [
       "EverCrypt.AutoConfig2.mk_getter",
@@ -326,7 +326,7 @@
         "typing_LowStar.Monotonic.Buffer.loc_none"
       ],
       0,
-      "5d117ef936c0044758a3a69a38b02a05"
+      "f677331edc0080f735189222a3d9f652"
     ],
     [
       "EverCrypt.AutoConfig2.recall",
@@ -406,7 +406,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "57fc7daffc5d1db8469300eed76dc2f0"
+      "5f90fa9464cdd681b0312831a8b3e81f"
     ],
     [
       "EverCrypt.AutoConfig2.init_aesni_flags",
@@ -476,7 +476,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "ec5fe869e8d9b4be0f8726bb7ff548f8"
+      "9110adbb25a28cf723a3190da330c2c1"
     ],
     [
       "EverCrypt.AutoConfig2.init_shaext_flags",
@@ -545,7 +545,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "09d8a228c317594c32ecc29194f75099"
+      "94164ee4f4640df65416b86da9075aa7"
     ],
     [
       "EverCrypt.AutoConfig2.init_avx_flags",
@@ -619,7 +619,7 @@
         "unit_typing"
       ],
       0,
-      "022e91f45e08797fb9fe1a4460034cc5"
+      "fc997e76f4ba404e74e348b8c01a374e"
     ],
     [
       "EverCrypt.AutoConfig2.init_avx2_flags",
@@ -693,7 +693,7 @@
         "unit_typing"
       ],
       0,
-      "eb44289271a5571046a9cd726f7a0ce0"
+      "e55e6b9919695f66e3590cfa69c0a54b"
     ],
     [
       "EverCrypt.AutoConfig2.init_adx_bmi2_flags",
@@ -763,7 +763,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "84289902fe026e56072c987768de0918"
+      "c065655af93fe5010872562d9ad9f18d"
     ],
     [
       "EverCrypt.AutoConfig2.init_sse_flags",
@@ -833,7 +833,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "b347aa510535aaa63f0c0040c3782663"
+      "5448ce6976fa03f8edd9d4ad4604f629"
     ],
     [
       "EverCrypt.AutoConfig2.init_movbe_flags",
@@ -902,7 +902,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "8265bbaec571dc32c15726277633c3b9"
+      "0479d3d659ffecdac6c145b52f866821"
     ],
     [
       "EverCrypt.AutoConfig2.init_rdrand_flags",
@@ -971,7 +971,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "bd7ca017de37608eced5155d4a0e41d2"
+      "1da7196ee6f26baf095b532933cd9ce1"
     ],
     [
       "EverCrypt.AutoConfig2.init_avx512_flags",
@@ -1046,7 +1046,7 @@
         "unit_typing"
       ],
       0,
-      "8c351c02dbe621e6bbd52ea2bcd2bd01"
+      "5118c1b1c4692d4c2dfd67511b2eaa0e"
     ],
     [
       "EverCrypt.AutoConfig2.init_cpu_flags",
@@ -1073,7 +1073,7 @@
         "typing_FStar.Monotonic.HyperStack.get_hmap", "unit_typing"
       ],
       0,
-      "6bdfb14dde7b547bdd004d273cee9e63"
+      "63bf2e926f584911e910ee4387c3133a"
     ],
     [
       "EverCrypt.AutoConfig2.mk_disabler",
@@ -1102,7 +1102,7 @@
         "typing_Vale.X64.CPU_Features_s.adx_enabled", "unit_typing"
       ],
       0,
-      "9e5ed0cdb5a5b8bc5e2efeb59d36fdad"
+      "e8071e5094f7cb483243d5031e0c71fb"
     ],
     [
       "EverCrypt.AutoConfig2.disable_avx2",
@@ -1171,7 +1171,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "58aa5c78897adac8018a6e712883835a"
+      "b87ce6eebb65259933b59d4ec2e93342"
     ],
     [
       "EverCrypt.AutoConfig2.disable_avx",
@@ -1240,7 +1240,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "1b3445a9ab0b9bc93b92dbe27c4fa80c"
+      "15332892494061c99c419505ed8b9566"
     ],
     [
       "EverCrypt.AutoConfig2.disable_bmi2",
@@ -1309,7 +1309,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "4912e1b3800f06566a57f31f98a0e5a5"
+      "d23c992b7bb3d63d590ee75861971a10"
     ],
     [
       "EverCrypt.AutoConfig2.disable_adx",
@@ -1378,7 +1378,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "43d562c00a928f2bdc3d82fecc46a660"
+      "c2df7c5e2c769ddcabe81a2655f0e224"
     ],
     [
       "EverCrypt.AutoConfig2.disable_shaext",
@@ -1447,7 +1447,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "0c88a0f3e9d1bb70f2a6e545acb8892a"
+      "46b8dd418de26d6b909875e0d4a5d0a1"
     ],
     [
       "EverCrypt.AutoConfig2.disable_aesni",
@@ -1516,7 +1516,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "16fe48ef125f1249888d5f3a71213d9b"
+      "1793db7446bb3cc132e2e232fb8f18e6"
     ],
     [
       "EverCrypt.AutoConfig2.disable_pclmulqdq",
@@ -1585,7 +1585,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "55f06ffc637a77c8dcbd8792d7d60861"
+      "0bfefc0287c7a7e14490070d02c2fe45"
     ],
     [
       "EverCrypt.AutoConfig2.disable_sse",
@@ -1654,7 +1654,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "e586ce7894726d5f9c28ae59b43e087f"
+      "d9edc5c3e727ee91d154b6acdaedceaa"
     ],
     [
       "EverCrypt.AutoConfig2.disable_movbe",
@@ -1723,7 +1723,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "73be85e3153f886e56a15ea6e37070bb"
+      "26458c41aea46707b088c9336139f413"
     ],
     [
       "EverCrypt.AutoConfig2.disable_rdrand",
@@ -1792,7 +1792,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "584468c45e16fe39f28cbffc57c8bf24"
+      "1d733c43234e694db2c12984ffbcf14d"
     ],
     [
       "EverCrypt.AutoConfig2.disable_avx512",
@@ -1861,7 +1861,7 @@
         "typing_Vale.X64.CPU_Features_s.sse_enabled", "unit_typing"
       ],
       0,
-      "dc1c813bd9ae82bf46f712f7d7f16b1e"
+      "8321337079c160fc177d39531a0cc9d8"
     ],
     [
       "EverCrypt.AutoConfig2.has_vec128",
@@ -1878,7 +1878,7 @@
         "typing_LowStar.Monotonic.Buffer.loc_none"
       ],
       0,
-      "da98ae5ca5ee9ee4078c513a99b388dc"
+      "4a8f729614a25450b605371401095cd1"
     ],
     [
       "EverCrypt.AutoConfig2.has_vec256",
@@ -1895,7 +1895,7 @@
         "typing_LowStar.Monotonic.Buffer.loc_none"
       ],
       0,
-      "b6cf69c62f1e70dd8f9e36ea2049bf76"
+      "c3c0133f418c5358acd9934c02d7e859"
     ]
   ]
 ]

@@ -53,7 +53,7 @@
         "typing_Spec.Poly1305.size_key", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "28a51546b6099a797b73a5960c447210"
+      "175253bd1d8bc76b2b27f059010c7f74"
     ],
     [
       "Hacl.Impl.Poly1305.Field32xN_256.load_acc4",
@@ -248,7 +248,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "967dcb465405dde589394813a2449ab7"
+      "29c7dc2a289486a2e5f7fca4fa502878"
     ],
     [
       "Hacl.Impl.Poly1305.Field32xN_256.load_acc4",
@@ -443,7 +443,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "da0942f4f628d240874c450d1e2db816"
+      "4ee99a77af4ff5fc586ff293a6f1172a"
     ],
     [
       "Hacl.Impl.Poly1305.Field32xN_256.fmul_r4_normalize",
@@ -482,7 +482,7 @@
         "typing_FStar.Monotonic.HyperStack.get_tip", "typing_FStar.UInt.fits"
       ],
       0,
-      "34170b7239c3230a0fe08b410a4c5ee3"
+      "988e520b9deb6752185582a5c42ba41c"
     ],
     [
       "Hacl.Impl.Poly1305.Field32xN_256.fmul_r4_normalize",
@@ -611,7 +611,7 @@
         "typing_tok_Lib.IntTypes.U64@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "8f9dd933ec3ec231e9ca9c95cbf63877"
+      "359301315a49f3c62cbb396451115c61"
     ],
     [
       "Hacl.Impl.Poly1305.Field32xN_256.fmul_r4_normalize",
@@ -740,7 +740,7 @@
         "typing_tok_Lib.IntTypes.U64@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "dc1392140da6df1b253c5d0908d1fc47"
+      "95e82e9ac590eaa758d87ffb96554b99"
     ]
   ]
 ]

@@ -1,5 +1,5 @@
 [
-  "0ba72708ea10395a3ea385dd5e001f73",
+  "9adf785acc40579b513bad8c3bd18d65",
   [
     [
       "Vale.Test.X64.Args.va_lemma_Test",
@@ -111,7 +111,7 @@
         "typing_tok_Vale.Arch.HeapTypes_s.TUInt64@tok", "unit_typing"
       ],
       0,
-      "1ae7345748a993d52a0e44fa388f4799"
+      "40390c18c630b29d3258cc028ac318d5"
     ],
     [
       "Vale.Test.X64.Args.va_wpProof_Test",
@@ -223,7 +223,7 @@
         "typing_Vale.X64.State.update_reg", "unit_typing"
       ],
       0,
-      "f0177f843ebd36d31d2b0adace3d79e7"
+      "cbc48e316b031ca39f68097103529d83"
     ],
     [
       "Vale.Test.X64.Args.va_quick_Test",
@@ -235,7 +235,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "dcdf853b5d7edf0e914d4daa6d02730d"
+      "608cbc49fa3dd5f4f8a19925a3174ead"
     ]
   ]
 ]

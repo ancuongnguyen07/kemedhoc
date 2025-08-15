@@ -8,7 +8,7 @@
       0,
       [ "@query" ],
       0,
-      "9d859f40787a624aac88f5c63773733c"
+      "b1027425676ff55228e5a0d265ace86b"
     ],
     [
       "Vale.Math.Poly2.Bits.of_uint_",
@@ -21,7 +21,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "63b385821f6aa0c38a681e05546f54a8"
+      "910a315dc6a2e3facdd92f4c274ae432"
     ],
     [
       "Vale.Math.Poly2.Bits.lemma_of_nat_of_uint",
@@ -43,7 +43,7 @@
         "refinement_interpretation_Tm_refine_2de20c066034c13bf76e9c0b94f4806c"
       ],
       0,
-      "b1ff44a5cb41c94710c5b68c66fb8417"
+      "9589b5485403b6dbca071d2913f3d55e"
     ],
     [
       "Vale.Math.Poly2.Bits.poly_nat_eq_rec",
@@ -62,7 +62,7 @@
         "well-founded-ordering-on-nat"
       ],
       0,
-      "6868da2e56750d22f8407f5b448aef02"
+      "fccdab5743d9b83a425de2abc8f946b1"
     ],
     [
       "Vale.Math.Poly2.Bits.of_nat32_eq",
@@ -71,7 +71,7 @@
       0,
       [ "@query" ],
       0,
-      "cf0d7311bcbe879da0f77c26ba5444ce"
+      "e3ae52704fbc143e0cdd355558ecf3fa"
     ]
   ]
 ]

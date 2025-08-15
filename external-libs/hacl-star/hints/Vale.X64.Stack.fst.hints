@@ -1,5 +1,5 @@
 [
-  "5ab419d00b0a56281689e525a28d3c54",
+  "1113050d90f0f38f37d9b8248dbc7885",
   [
     [
       "Vale.X64.Stack.va_lemma_Callee_save_registers",
@@ -98,7 +98,7 @@
         "unit_typing"
       ],
       0,
-      "f349c31bbe7b423a8eefb699c97dab02"
+      "b71da222d80f6f3ddd89b30bd2668b99"
     ],
     [
       "Vale.X64.Stack.va_wpProof_Callee_save_registers",
@@ -180,7 +180,7 @@
         "unit_typing"
       ],
       0,
-      "ab2def55fab9768f05f88487be9f2718"
+      "f3642f1391cb1c183cefd2c540d1b6f7"
     ],
     [
       "Vale.X64.Stack.va_quick_Callee_save_registers",
@@ -192,7 +192,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "593a36b9f3b7311d1fbcd96ca2a9d89f"
+      "097efc7f215b9ddca98d8d9fa62482b5"
     ],
     [
       "Vale.X64.Stack.va_lemma_Callee_restore_registers",
@@ -297,7 +297,7 @@
         "unit_typing"
       ],
       0,
-      "dfb34b592acc2568321f966cbe3c27f2"
+      "21ece0496b9bb4250efc75204d034ac4"
     ],
     [
       "Vale.X64.Stack.va_wpProof_Callee_restore_registers",
@@ -384,7 +384,7 @@
         "typing_Vale.X64.State.update_reg", "unit_typing"
       ],
       0,
-      "708b09e1df33ccd15871aecc2abd9b1f"
+      "2ab6dab483ffc60af17387e34b402b2d"
     ],
     [
       "Vale.X64.Stack.va_quick_Callee_restore_registers",
@@ -396,7 +396,7 @@
         "fuel_guarded_inversion_FStar.Pervasives.Native.tuple3"
       ],
       0,
-      "14c9c417005cd5ac9616da20866f874a"
+      "893bb4dcb8bf276ebf077c7b4e11614f"
     ]
   ]
 ]

@@ -51,7 +51,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "ddbade9126005c99b692efbed19f95f7"
+      "bce3d6ae078140431ab0a75fd22a423a"
     ],
     [
       "Hacl.Impl.HSalsa20.hsalsa20_init",
@@ -231,7 +231,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e6b3301d1649fa14b16d2705142d6a38"
+      "4f54abf752d777d1ee9f18db3030fe40"
     ],
     [
       "Hacl.Impl.HSalsa20.hsalsa20",
@@ -268,7 +268,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "87bec00a11cfcdf0059078b5c71e279a"
+      "7ba8bd8c1fb99ac946a5292c37c417f5"
     ],
     [
       "Hacl.Impl.HSalsa20.hsalsa20",
@@ -433,7 +433,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "504a4bbe8721f6c42347694bb3f00d25"
+      "871060fd426ca5441dc47f6dab6c74d2"
     ]
   ]
 ]

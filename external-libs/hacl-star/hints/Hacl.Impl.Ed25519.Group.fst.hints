@@ -12,7 +12,7 @@
         "refinement_interpretation_Tm_refine_94731b6ed30abda0dd818e3b0948e9b4"
       ],
       0,
-      "ee6c7147a3ac298ed6588a10d733a1f3"
+      "01e7705a1a991460540fd1e32566f5ab"
     ],
     [
       "Hacl.Impl.Ed25519.Group.refl",
@@ -27,7 +27,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "587128631bb879beb41c8e2ebd4c2e92"
+      "5a90c35bb8601037c2800892986dbfea"
     ],
     [
       "Hacl.Impl.Ed25519.Group.linv_ctx",
@@ -44,7 +44,7 @@
         "typing_Prims.pow2"
       ],
       0,
-      "620434f5102ed31036c29a9da527c238"
+      "38d94986a9abf05cc6cc7aad782cd3bd"
     ],
     [
       "Hacl.Impl.Ed25519.Group.mk_to_ed25519_comm_monoid",
@@ -74,7 +74,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "3e97557fdba80cb908014c505f1eff5e"
+      "324f37fdf2b3593c1fbfb4a6f80be537"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_add",
@@ -107,7 +107,7 @@
         "typing_FStar.UInt.fits"
       ],
       0,
-      "500863779b0078460cf473e73dc8a903"
+      "5b0e496e10413e9152639bcaff05f168"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_add",
@@ -213,7 +213,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "d2c856ad7fb98dc5183effa4985719f8"
+      "f0158bbf07e94f4661030af8265e36f9"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_double",
@@ -246,7 +246,7 @@
         "typing_FStar.UInt.fits"
       ],
       0,
-      "b30c630d6841b8c2fdb19bae31d798e9"
+      "fdd26155461aeb8e9039266965c27029"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_double",
@@ -357,7 +357,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "c5841dadc4461ad5137ae0838ce157a5"
+      "646492a277c1cbf6ff377c5182a12332"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_zero",
@@ -390,7 +390,7 @@
         "typing_FStar.UInt.fits"
       ],
       0,
-      "812009b9cd3999df25cd5c08d2a53bc0"
+      "aa41e9418d70ce57b70a83cef85ea384"
     ],
     [
       "Hacl.Impl.Ed25519.Group.point_zero",
@@ -493,7 +493,7 @@
         "typing_Spec.Curve25519.zero", "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "13a66fd2fe10082501fbbfe03b3034fb"
+      "ef1f417a5088810aa9389b4995cf40b3"
     ],
     [
       "Hacl.Impl.Ed25519.Group.mk_ed25519_concrete_ops",
@@ -526,7 +526,7 @@
         "refinement_interpretation_Tm_refine_542f9d4f129664613f2483a6c88bc7c2"
       ],
       0,
-      "96bdff823ff839ba75013695a3171277"
+      "fa74f17f180401e2df72f27daac46a68"
     ]
   ]
 ]

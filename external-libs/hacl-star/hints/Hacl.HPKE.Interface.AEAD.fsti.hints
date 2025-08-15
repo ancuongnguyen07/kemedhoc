@@ -42,7 +42,7 @@
         "typing_tok_Spec.Agile.Cipher.CHACHA20@tok"
       ],
       0,
-      "06cbfc6a84a7cf4af5565fef604f6a9f"
+      "0c50295d68b7ca21d0a79727c5e5dcbf"
     ],
     [
       "Hacl.HPKE.Interface.AEAD.tag",
@@ -85,7 +85,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "936d6fb988f9210dc2e8cb0fcd0f0da1"
+      "7f4bc36f6c5e810e3034d85663707e1d"
     ],
     [
       "Hacl.HPKE.Interface.AEAD.aead_encrypt_st",
@@ -197,7 +197,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "3761b4281564acce530992efbff9f43c"
+      "115666580c1833e7535e2662502c257e"
     ],
     [
       "Hacl.HPKE.Interface.AEAD.aead_decrypt_st",
@@ -317,7 +317,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "935a10bc3021992d7f5e0a299c62f153"
+      "971c604e0addc98f7b862d4312fcf926"
     ]
   ]
 ]

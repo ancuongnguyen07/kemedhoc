@@ -75,7 +75,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "c32355a35cd24cd348c532a60d79d6b4"
+      "8bf5bd8f37d854c26ee660a9cf8efcda"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_rotc",
@@ -160,7 +160,7 @@
         "typing_tok_LowStar.ConstBuffer.IMMUTABLE@tok"
       ],
       0,
-      "c9719da00558c05fbb460ced6c3a7a4b"
+      "6c65b2daa055da3d6195f10c3abb3adf"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_piln",
@@ -244,7 +244,7 @@
         "typing_tok_LowStar.ConstBuffer.IMMUTABLE@tok"
       ],
       0,
-      "a88ba9d735533928d8dd8251c2975d52"
+      "cf21e70be7e0f3a63035440362168c23"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_rndc",
@@ -326,7 +326,7 @@
         "typing_tok_LowStar.ConstBuffer.IMMUTABLE@tok"
       ],
       0,
-      "493ab2c71edb5728a97bd40fa6703501"
+      "78a2e3db34d9268278085e9af5c7ba18"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get",
@@ -375,7 +375,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "b77d0de4eae011067fdc9b2ace1b2dce"
+      "a1d81f05ad7ffaf91cd56bb18cb3edc9"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get",
@@ -461,7 +461,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "0df7439810f71bdccbeb85551d23d4ae"
+      "c9788f908fec1d2c3853e469f4a597e2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set",
@@ -519,7 +519,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e46147900d06ffedb494e2722d1b71de"
+      "c1fb6e861802431760362b52427076ff"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set",
@@ -602,7 +602,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "2b29238177b176ee1ce9e6bd9789e208"
+      "cd438be015a371329cb914dff8287c4b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta0",
@@ -635,7 +635,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "10cc773a3522a9b1982d43dae21ba271"
+      "1eee98db2b6c4f22c3c6c4c4b6f8e7e3"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta0",
@@ -731,7 +731,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "1e309883176fad65f598889cbb612646"
+      "bf3d94352dc7532c3cc835518a0fe80a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta_inner_s",
@@ -793,7 +793,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "92148b9d837e16649d4166180e469c6d"
+      "289cee48972cfc79a253e269c7198074"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta_inner_s",
@@ -922,7 +922,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "be1ea639e580390dece42d92ea83780b"
+      "4ec491443596e78dcd24ea22889e2b9c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta1",
@@ -960,7 +960,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "c5d5909661dc65bcf056add62fc10d96"
+      "f7c2b10556d592b2cd241cea3ec49b1a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta1",
@@ -1044,7 +1044,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "3cfdfa76cfaac729316b44624ff74c2e"
+      "718eb82ce72ce64a2689abf9e6ffb294"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta",
@@ -1082,7 +1082,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "d35dc81074df36816c9fe0fa3181a2ea"
+      "eaee4684b80c4f22eff66f7f046bd30b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_theta",
@@ -1235,7 +1235,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "140b6c42425e03e5f4c5413ee4f5939f"
+      "eae8e04827ad44254c810979171ef2f4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.index_map",
@@ -1251,7 +1251,7 @@
         "@query", "lemma_FStar.List.Tot.Properties.map_lemma"
       ],
       0,
-      "79650fe4a1e30f73cd4b4bbe641fc173"
+      "9403a9ff057a07fd77d9fd3882085382"
     ],
     [
       "Hacl.Impl.SHA3.Vec.index_map",
@@ -1300,7 +1300,7 @@
         "typing_FStar.List.Tot.Base.map", "unit_inversion", "unit_typing"
       ],
       0,
-      "78bb92f30d4342b8bbcfdb67af9a0498"
+      "272ab5387f2b333e2f19864be5da31b8"
     ],
     [
       "Hacl.Impl.SHA3.Vec.index_map",
@@ -1316,7 +1316,7 @@
         "@query", "lemma_FStar.List.Tot.Properties.map_lemma"
       ],
       0,
-      "3e008b420e3c0552a2b3ebb1332a77b5"
+      "2c948e6b95e8d6f7c6d99e13639d53b4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_pi_rho_inner",
@@ -1388,7 +1388,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e1598c743a1badb43e35977980e02a87"
+      "d3fc86915e09a131aefece0df201c22e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_pi_rho_inner",
@@ -1492,7 +1492,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "361cbcfcd7407cc974aa6808747a8026"
+      "6d8985aedc87378f3dcecf7d31def813"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_pi_rho",
@@ -1530,7 +1530,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "87aac6aea11f28398930bf09e02806bb"
+      "8b402155e470d02d4d75978d30d50416"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_pi_rho",
@@ -1710,7 +1710,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "4b472f655fe8af5df33f338947f906ba"
+      "4ff2af8ed0221f0f4bcd334aebbb2b32"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_chi_inner",
@@ -1768,7 +1768,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "dec4b0aeaf6e59f2017b94728546db70"
+      "56516cee16bee748cc48d12be0d293ae"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_chi_inner",
@@ -1861,7 +1861,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "43bb3acb5534a7604fbfb8c9ca270d18"
+      "53ea6c4a1edac7caeaf3a97b52f3dfc6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_chi",
@@ -1899,7 +1899,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "2607ab8350f83c2b6b19147109b27050"
+      "56ff82af969f30c8b9a257df6eb2c299"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_chi",
@@ -1980,7 +1980,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "c8ddd83a150141a30d367eb10da66ec7"
+      "f534cfd14775e1f676dc24be7d3d74df"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_iota",
@@ -2037,7 +2037,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "62ec2b808b0eed0806b01a760220a737"
+      "d0a6eef69796c391020830507e4521fd"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_iota",
@@ -2125,7 +2125,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "1d83e4f25ce0d99a9beb2fd999fb5ac0"
+      "b7c17bc3a86fad67f6c2bac27ca33dfe"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_permute",
@@ -2163,7 +2163,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "110726eaee71672752d3ae4bdc65f0e4"
+      "206e618aa16569ced79d204ec513a3ec"
     ],
     [
       "Hacl.Impl.SHA3.Vec.state_permute",
@@ -2250,7 +2250,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "8d863425b6de21c44556e66453704b11"
+      "12bee84112498387ad936dedd1a888f2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi",
@@ -2315,7 +2315,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "453338a9bc61ace35e68881da0e24727"
+      "926668f92daee02815da64ea83685ae7"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi",
@@ -2417,7 +2417,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "292aae8937d9853d17f3de7cfee8a418"
+      "5dcb4194f08466212dec95e435825050"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi",
@@ -2426,7 +2426,7 @@
       0,
       [ "@query", "projection_inverse_BoxInt_proj_0" ],
       0,
-      "8521a0a940e15d39e22a65fd7a1b5929"
+      "08e1e8ebfa07ccf26891454882f361ae"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks_spec1",
@@ -2456,7 +2456,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "ef17c5d2e967cc02d90dea5b649fe1ff"
+      "13fa9094a8d36598832eaaab8f0e9c0e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks_spec1_lemma",
@@ -2531,7 +2531,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "a129cedb55ec4d5a2290d6d3f34ce33c"
+      "b0dda97140d87fe7b55aa5321dde9ce7"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_1_4",
@@ -2606,7 +2606,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "79c49b2cfa7b7f73fc6a9f6accd83c2a"
+      "10fed0af9daf4b9cf05f1171c1ed0e4d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_1_4",
@@ -2713,7 +2713,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "8b8ea86b345e65aa50d409c853dadd7b"
+      "c6aed566a6cdeccaf6d150cc10022271"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_1_4",
@@ -2765,7 +2765,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "ba02929b9e05d513001aee91fd3d3dc6"
+      "5fae8db93f378c2dd796d8baaca1c00b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks1",
@@ -2818,7 +2818,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "5622e36612ecc951c17bdf9f7d89d0ea"
+      "4e08d94420b3c36cf469f350ed032b13"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks1",
@@ -2949,7 +2949,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "c8052d5f2d9c37a325c5784c002ce970"
+      "01af79383166221b70ad6853d1a39ce1"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks1",
@@ -2981,7 +2981,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "4e120eb3aaea0734c2506847e875c9b2"
+      "0d2e44ce29eb5a05b578175b3d1106d0"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks_spec4",
@@ -3014,7 +3014,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "5eaeff6dab3dbfc9a16f1b8821ad3edd"
+      "474dc2d77eaed4d9da7807ea9b0bdebf"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks_spec4_lemma",
@@ -3093,7 +3093,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "7eccb0be5058f632253490866f3c6612"
+      "6fe046f97072b354b84995c9e3829ddf"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_4_4",
@@ -3165,7 +3165,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "250ebe9e3010e9f0b0127f56c73dee69"
+      "9641f84995da2e7532d84643b9e798e1"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_4_4",
@@ -3273,7 +3273,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "8d4831682b351f211f3ac6b4dcc3309e"
+      "a50ed04d6c720ed854f587064f597ef8"
     ],
     [
       "Hacl.Impl.SHA3.Vec.set_wsi_4_4",
@@ -3337,7 +3337,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "47dfa7d69433959423681e7dc784e808"
+      "4e941bae0cfb2277ca774aa44dfeab5f"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks4",
@@ -3382,7 +3382,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "43806755c403501f322c12a45d341745"
+      "080db675953ee8d57ed690bfbe40206d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks4",
@@ -3506,7 +3506,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "2ac6ddc7ad99bcb785cf1d0927207fd7"
+      "85a98240b87ade643c2869cc6af8d7d3"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks4",
@@ -3540,7 +3540,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "6e6b503b1e02d8240b63c2607fb771d8"
+      "55de2ab53d699cd5b26cb703e84b07f4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks",
@@ -3582,7 +3582,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "d2ec3e05075a5c8f2d1c1097e54cf672"
+      "ea8b918984f8b3822d002dcb9dfe6c66"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks",
@@ -3601,7 +3601,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "eb2dbe9e222cbc44f6dacad8a472209b"
+      "d5998472f093cbab30846148856e40b9"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_blocks",
@@ -3631,7 +3631,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "2e1f00d4061af0c8059e8bb98af77178"
+      "4e1b1b6d7e9efee4caab52d38fd54b85"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_ws4",
@@ -3672,7 +3672,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "80ad425e341099ea92761c62e2e4c841"
+      "8ed38c191dc4395145adf99290de1051"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_ws4",
@@ -3779,7 +3779,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "2b7137f362052946be4974f23b512d71"
+      "3d923b3bd20d7ba6aa4ce6f251bf800c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_ws",
@@ -3817,7 +3817,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "0bbdc60e770a95a9d1e83ad6ad792619"
+      "31491b85b489a18b69664974f8fe5149"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_ws",
@@ -3861,7 +3861,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "a31e7c4213178b4e1a070a11528b6486"
+      "f494622e69a710a3f39a418d9dfbb03c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_ws",
@@ -3903,7 +3903,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "7309649ec7c8026856a0e87ef6478df0"
+      "db7a640acb029936f112c0d8e8a87ed6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_ws",
@@ -3935,7 +3935,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "e273009a24fabdc8a66405005627d416"
+      "87a0594896fa7e0dd2afcdfc3e22c89a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_ws",
@@ -3965,7 +3965,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "99e8c0b9e81c47ed7e539643d4e58a3e"
+      "def508912040421d6e8d1fbd9e91eb05"
     ],
     [
       "Hacl.Impl.SHA3.Vec.loadState",
@@ -4052,7 +4052,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "837b09f67874c8740c27d4a5840bad94"
+      "3ddb8aa669dccd85acf340d8a72be69c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.loadState",
@@ -4238,7 +4238,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "0cb688c69c6020e914a205b6888f6206"
+      "3d0ee4745712f1d9030906c8f65f9e6d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.loadState",
@@ -4280,7 +4280,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "0be0cd3bd2b31a0ab44e060b886f92df"
+      "f4eece1af0daac4dbaa1c75d365f7e6e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_s_ws4",
@@ -4321,7 +4321,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "a4ccfc45d2af3c5d9c2ecd1587e2b284"
+      "2e9e8d41a15f68078f300dd506d4563b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_s_ws4",
@@ -4428,7 +4428,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "dbcb2f1a70a4f4ded514a89fa1f9bb51"
+      "ada6132cb8b03647c4e96e1b6ad69755"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_s_ws",
@@ -4466,7 +4466,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "8f2a2e82a6829904fc9d8dfcb405d39d"
+      "95a71c2c6838548377fe9d157e170f71"
     ],
     [
       "Hacl.Impl.SHA3.Vec.transpose_s_ws",
@@ -4509,7 +4509,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "e35bfcb388b28a30ad0e5d1e57ac9337"
+      "9ca95d625e898356d521c5e13cbbdf8f"
     ],
     [
       "Hacl.Impl.SHA3.Vec.storeState",
@@ -4590,7 +4590,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "3171c0837cfc468fb33acc42af9e41ec"
+      "98d62e9b362041c8453b28debd185ca3"
     ],
     [
       "Hacl.Impl.SHA3.Vec.storeState",
@@ -4774,7 +4774,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "ba2f01f7a0a52125d9114469ca597f5e"
+      "040e49db50229a398dade3745c822aed"
     ],
     [
       "Hacl.Impl.SHA3.Vec.storeState",
@@ -4842,7 +4842,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "3920a883b23f73177c1f661745672e35"
+      "46e42433c1c60ca2d0b2e7a4485c50ff"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_blocks",
@@ -4898,7 +4898,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "86ab6f8f7dd6f21c7247c36be8106940"
+      "07f7dc0398974fe8586aff026bcdf9db"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_blocks",
@@ -4974,7 +4974,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "fb796cf6960efad97a716b347759e2b2"
+      "b1593ca348015518117f10cf8ce0784e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block1",
@@ -5018,7 +5018,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "39086dafb272a7879828e27db19840ac"
+      "7e239e0be8a49c0002f921f38504a437"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block1",
@@ -5104,7 +5104,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "6ee9da944d54714771a6dc248912b607"
+      "945f8c449bd816b1781ad155948cbe81"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block1",
@@ -5133,7 +5133,7 @@
         "typing_FStar.UInt32.v"
       ],
       0,
-      "cc552aff6729cf2a591d19499abc287e"
+      "b7eec3cdbf9a095c41e7b7d97f2123af"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block4",
@@ -5175,7 +5175,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "4e647e7ebf560c4e886e8d5711f86220"
+      "1f8f6a40393f081b0ff78f22c0cd8f74"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block4",
@@ -5296,7 +5296,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "e8f7226370527428fc31ae031d2506c9"
+      "a6e11c9fa01ca25daed7e210c30459cd"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block4",
@@ -5330,7 +5330,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "04cca4aee6e87619e9282e7742588287"
+      "e1917cee16bfb11e26658db167bf22d2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block",
@@ -5371,7 +5371,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "3c3330191f5bce4594a6db26936a77bf"
+      "4d740b15d1646c5e76b8ab9df31133ef"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block",
@@ -5393,7 +5393,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "5a92ce8c4c083cfd84cafb4f3bcaa3e1"
+      "ccbcce7aeec1cca1fd8c7b71679decc1"
     ],
     [
       "Hacl.Impl.SHA3.Vec.next_block",
@@ -5435,7 +5435,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "ae3acfd8ce8ad9cc620763df06f36c54"
+      "f0a21efdd74d2dd7024a701707fd3eb2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi1",
@@ -5497,7 +5497,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "50ff82431daef3332e559b77ff5d932f"
+      "33e04c04e00f75eb9363ecc6004c4305"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi1",
@@ -5578,7 +5578,7 @@
         "typing_tok_Lib.IntTypes.SEC@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "8eb3cff1684608218add5e6cd6cf5037"
+      "10080287a96e8ef9533be969ef929acd"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi4",
@@ -5631,7 +5631,7 @@
         "typing_tok_Lib.IntTypes.SEC@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "4650efc25d44ad865ba9c55aed4053e2"
+      "9e08e8544454f5d1c728856807c40629"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi4",
@@ -5774,7 +5774,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "169d9ae468fe36b1dd955c447346ef32"
+      "3b7cab31ffac7a8c40e00f396b769fdb"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi",
@@ -5827,7 +5827,7 @@
         "typing_tok_Lib.IntTypes.SEC@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "d4192d806b333d2ffa307d161257d628"
+      "0db9602ad5f6b51946192e215d898158"
     ],
     [
       "Hacl.Impl.SHA3.Vec.alloc_multi",
@@ -5868,7 +5868,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "b13e822819223221191feb956a2c673c"
+      "736650e5e71213def4832fbbdcd79a1c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner",
@@ -5924,7 +5924,7 @@
         "typing_tok_Lib.Buffer.MUT@tok"
       ],
       0,
-      "53426aa8097a0a85b34798b91e04fed3"
+      "5b74c856197ac3629425394d6e526d11"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner",
@@ -5966,7 +5966,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "2ee531c8fd9f30f4222384022fceed69"
+      "e1a0a8c63570ba698b8b71c77ae8716b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block_t",
@@ -6014,7 +6014,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "f05cca62d11ec470c8d0b892af27de09"
+      "11d8f9a8840ad8f479b9cbd5197725dc"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_next_t",
@@ -6060,7 +6060,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "117600a2d4e3b8d981a9993045d41438"
+      "72b5f546bd2188c7d04790c3511163c6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_next",
@@ -6282,7 +6282,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "1550436f1c0e2f7da956f0fddb31ac18"
+      "67180658660a7b8a8904e4900bf75f97"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_blocks",
@@ -6323,7 +6323,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "dcdd83119488c788bf50137e1b863b1d"
+      "26bdcc89a37be0cef291e2b0f36e8c66"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_blocks",
@@ -6391,7 +6391,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "f079512c79b1fa2fd0df76bd6c188ea0"
+      "a55cc85486aee0bb3c131df79ba5f9f0"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block1",
@@ -6459,7 +6459,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "30783d5935405723f0163256e90a5ca5"
+      "3f8816c7125d8352021116e5ade08b8b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block1",
@@ -6557,7 +6557,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "714c861eef2e5d54ac8606433b7571e6"
+      "2e3933154c45936922c5bb38bafc8083"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block1",
@@ -6586,7 +6586,7 @@
         "typing_FStar.UInt32.v"
       ],
       0,
-      "5aea2b596de2fabd9c2ecff54ae391d2"
+      "4c10385d926d2d94e21b88662145636d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block4",
@@ -6660,7 +6660,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "7a6f01b5d2a443c97bf2c592fc6f28b4"
+      "0e3b262441357fb93359569a5769b57e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block4",
@@ -6794,7 +6794,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "ea98c5e53211892dfff3339b12f25eb9"
+      "f0b64285c7c344541f2d9fb6aa42f96b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block4",
@@ -6828,7 +6828,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "0761683cf660bea23a593c3ddbba4489"
+      "ca1c78b7318111085da9712911d9c064"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block",
@@ -6900,7 +6900,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "f977da9f355b3ed782ceebb7d6d88899"
+      "5bb42affe1f2013be8db90b5836f0f4d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block",
@@ -6922,7 +6922,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "0ac7a98ce6562a75caae89fb746926b9"
+      "a60474ea8aad7a2ff446a87a288c07dc"
     ],
     [
       "Hacl.Impl.SHA3.Vec.load_last_block",
@@ -6964,7 +6964,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "6512019a2211cf936f782cdcf1252074"
+      "e554c5fcfa24769520e9fcfbf67e4c6a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_last_t",
@@ -7049,7 +7049,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "d4321ded2069a8187693fa46546c2a47"
+      "77b2b2258aa387b236cb1ee89b8ec782"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_last",
@@ -7187,7 +7187,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "fc678bda0ce87032fedcf749202dfc67"
+      "8aba3930fee0a4206cf0af4122b71600"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_last",
@@ -7229,7 +7229,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "741943d323441de74511510cc812fc40"
+      "2dfccde50e23ecdf861c64c41afeea75"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock_t",
@@ -7271,7 +7271,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "29cfaff0470a3a36a7bc206c5d94c31d"
+      "e6652ef375a892ae86f32f3b188baf55"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock_1",
@@ -7388,7 +7388,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "cd4c5e07078ec3126136e1d8b01011f3"
+      "e15548c6010a088476973d6f706da665"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock_1",
@@ -7427,7 +7427,7 @@
         "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "c6aeecfc90efbd9e346748e3055b6c1d"
+      "0bcf8ed184bfb71e1139a34f54141f8b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock_4",
@@ -7581,7 +7581,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "a6a6ff3997a5cb743253e66baa16689f"
+      "3673a6bdedd881c31bb81a329f323510"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock_4",
@@ -7630,7 +7630,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "374e10a6b62ed75178a4726d2536b144"
+      "5fe6e438cd4b4a2e665e870909b74e83"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock",
@@ -7649,7 +7649,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "4ec4e1e1deb3a261a1af346fb6746f8b"
+      "ac620429e03558dd2503e27a2d3305e4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multiblock",
@@ -7684,7 +7684,7 @@
         "typing_Lib.IntTypes.bits", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "f2e3d591fe2d51c051cf112c24c5b021"
+      "d34dbb4cdd4445f48b5a231bce46bbfb"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast_t",
@@ -7725,7 +7725,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "f5effe4dab8422c0edfafd9ad976a21b"
+      "9e77be2ece32572f75836a93c2bc995e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast_1",
@@ -7847,7 +7847,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "5d3446d473895cc4ac2df1badf26fba6"
+      "085ea4e8bdfe8b4803e7311c7c1f9c36"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast_1",
@@ -7876,7 +7876,7 @@
         "typing_FStar.UInt32.v"
       ],
       0,
-      "0f07b387cbbe690c4509985b4f265721"
+      "17c2289e1bd3948c8a4536381a383ae1"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast_4",
@@ -8027,7 +8027,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "d80093226ee159320bc682175760a1a0"
+      "3ba25e9f6fdb1b740e5c683da5743849"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast_4",
@@ -8058,7 +8058,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "5e613f65f28cead0c1c821582a27a262"
+      "cd90c5d3cfa19e8fdc8311ecfd40bfc4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast",
@@ -8077,7 +8077,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "5e946c35b5468193c9735082707e1c48"
+      "8e5c199b3457814156c8227443557815"
     ],
     [
       "Hacl.Impl.SHA3.Vec.get_multilast",
@@ -8108,7 +8108,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "4c718420bafd07b9eaa780c5b83fbc43"
+      "41e54d5f0a8e8b7b02b0b2b8543bfc1d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block_core_t",
@@ -8156,7 +8156,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "438154da7c93902d75b836477c8b263d"
+      "1ac11da39f15183a32aaca9a19b0ea47"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block_core",
@@ -8289,7 +8289,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "232a6fc1fe21ef073381d11c9004661d"
+      "031c99240f8883586aad2eb286a715bb"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block_core",
@@ -8324,7 +8324,7 @@
         "typing_Lib.IntTypes.bits", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "bc5cf3414c844763eda2ed54364cf086"
+      "d8e3dc6e1f690949d105b43300d86730"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block",
@@ -8530,7 +8530,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "72f076331a38b3b329817797845d93ed"
+      "336d04457182a6e01553727925994e14"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_block",
@@ -8561,7 +8561,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "35c93227432c2d7db574324df81aae36"
+      "cc0e20eb88d1428436211a9e59e2fc9d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_nblocks_t",
@@ -8608,7 +8608,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "b15fc97128fe841b3cd18f24bf6380eb"
+      "fe02fc376d3fa4565136e26459ae39e2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_nblocks",
@@ -8718,7 +8718,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "ed65c8e0d5dfd2aed877ca36939508bf"
+      "2bc8483f2d6eba4c452a5f3f08f997dc"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_inner_nblocks",
@@ -8760,7 +8760,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "acbc15f061e1af364737e921b489ab36"
+      "396e5511a5a7215f4bcf78fdf218475f"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final_t",
@@ -8807,7 +8807,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "3693819e58430f4eb069ad35f26980b4"
+      "1ee0a1c4b7b0ff82f52f261df17a9db3"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final_core_t",
@@ -8854,7 +8854,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "eb8b38ad48f79556a4fc1303d3b65a27"
+      "4080b5caf12a50ecf61bf71aeaf4b6cb"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final_core",
@@ -8997,7 +8997,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "25f37a1f59e3d4c9ff6ba4e8e38ea566"
+      "dbc5635fb58e1db848dd0e22899efd25"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final_core",
@@ -9028,7 +9028,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "02f5ca521297ce6d36e32e99fce5fb28"
+      "6213e20d00f05758203d1bd43ff82ce7"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final",
@@ -9230,7 +9230,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "7781e9261f42bc0bd06d9927fe94edd9"
+      "8a60129bc0cc8a1c8a9591ae7d5b5c16"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_final",
@@ -9272,7 +9272,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "4467265f2e3f2cbceb288ebe96c599a3"
+      "232e1bee9eb13137a53c66d13373e4d4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb_t",
@@ -9319,7 +9319,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "dea7cdfba56c12a3522a869619adf1ee"
+      "bee09100654c93b3088bc9fed9e75009"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb",
@@ -9445,7 +9445,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "d61063562804a1424f6170b5e0781f5b"
+      "ee0647fb95b866340d32594ece79cae0"
     ],
     [
       "Hacl.Impl.SHA3.Vec.absorb",
@@ -9487,7 +9487,7 @@
         "typing_Spec.AES.gf8", "typing_Spec.GaloisField.__proj__GF__item__t"
       ],
       0,
-      "44ac8c87bcb211e1d7968918be5b9120"
+      "bf7b15de753f1d1267dda2cce7c51651"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output1",
@@ -9549,7 +9549,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "ce6a7db59f57dc99c34c661f5b94c261"
+      "c7d93a92af1dcf56991b7284e9b59ccd"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output1",
@@ -9664,7 +9664,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "b353fd6df082a80268abc904c75c3392"
+      "7378c9d3dd90f6fc59aa095909a08b33"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output1",
@@ -9717,7 +9717,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "467d955b96c76e8ec8e74cb090a40cea"
+      "b265bd9ee709cf3a31cc530c7eabe3d6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output4",
@@ -9779,7 +9779,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "b93963d432490c57d899051c6544339d"
+      "ae50b986461466c8442d0d2b76ad7df6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output4",
@@ -9926,7 +9926,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "40cb04374b765f17f2f9c4b680716aff"
+      "16dc821a7cc71f9ca08a08f3423be80e"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output4",
@@ -9979,7 +9979,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "398cba7e60b22722542b0783555e3a44"
+      "3e6db5f20f778d9afd852766d339d6cb"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output",
@@ -10039,7 +10039,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "41d81c0a0f71f50c504b092011b280f9"
+      "44ad5b2e83291a17195035f458ab01d2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output",
@@ -10058,7 +10058,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "f07d89b5623e9ad6be41cbaac6543925"
+      "8fa656011ef161038d7cd4b8dbedda42"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output",
@@ -10112,7 +10112,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "a7d6593f429a5a991154ca3d2435b482"
+      "39e9946db205163f39380f3292899881"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last1",
@@ -10175,7 +10175,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "6ab8025d1f1ccfc37dd492875270429f"
+      "6a0d08df31615d8b4ddabee23e2489d2"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last1",
@@ -10295,7 +10295,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "08e76b9c6c33c7ad0a0448fa017fff8e"
+      "4f27254086fa4cb481dff095078b58c0"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last1",
@@ -10348,7 +10348,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "c790d87d79c4e105ee71e3b3ee8d3fac"
+      "30f11371d6ced2e8434a67771508500a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last4",
@@ -10411,7 +10411,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "5f981797045d7219399706160e386bb8"
+      "f7b6a42afa50c33e879d0ebd2dbda823"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last4",
@@ -10561,7 +10561,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "6446089d7bb192a9cb72f09bc75e8320"
+      "c32ff835ec5eead9128adbd0e524b802"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last4",
@@ -10614,7 +10614,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "80d3abe48355ae422c1b3a604598a713"
+      "460e292f0e7736cd8fe199b48ec12f67"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last",
@@ -10675,7 +10675,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "4a75975e22551564191d6ab476bd85e2"
+      "059edaf7723dcd058e6d6f1cf9823372"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last",
@@ -10694,7 +10694,7 @@
         "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "564e08b94eb843341e86b5d796e86711"
+      "869bf310c38936891919da8c7e11d36b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.update_output_last",
@@ -10748,7 +10748,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "77a6b8601e8c8998b9242b43d9b22430"
+      "996d615a7aa3d7a7e1be799f6047f488"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_inner",
@@ -10810,7 +10810,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e99cc55d6a9fd7665dd02105f1e28395"
+      "f0dc2bfd11962fbe9c2576e34813c530"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_inner",
@@ -11019,7 +11019,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "a72743383a79f345a4de6639f47b3ce4"
+      "60d552a5d036bb236a78ffece877960b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_inner",
@@ -11057,7 +11057,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "ae61dad45af1537e0989e36071d244a7"
+      "cef932b11e4fe1082a5c30246762f408"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_nblocks",
@@ -11104,7 +11104,7 @@
         "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "4c4645e3d23cefd7ed99ab815f82e039"
+      "93cf3602191711d7c5ae1be544aa87c6"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_nblocks",
@@ -11227,7 +11227,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "fe50581142839f8107563b51c5d05d10"
+      "7bc4cd959f2595fade9baea2c0ec5c74"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_nblocks",
@@ -11265,7 +11265,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "e9445a3c5eca478d0bf89215dbdd15b6"
+      "f116767a9c3247122aa8ea7bf10fbf7c"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_last",
@@ -11306,7 +11306,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "aac074d1612c72ea72f736d38b8b9089"
+      "dd9303bf0877f05d553a8ccec1783f2d"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_last",
@@ -11519,7 +11519,7 @@
         "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "e78d14b7be5875d6c3e343ac757faaf0"
+      "d7c4f6257775b4dca6c90fd7886750fc"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze_last",
@@ -11557,7 +11557,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "d25569b4adb93ba95bba4236cc0e232e"
+      "073276e0de566aa1771398d4ccd42223"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze",
@@ -11598,7 +11598,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "194672b3544501cd72b5daebb7a94a38"
+      "a72916e331eeb9908a7de58f60e970f3"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze",
@@ -11686,7 +11686,7 @@
         "typing_tok_Lib.Buffer.MUT@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "36b1c59f1538e0d079804ab3e6d398e7"
+      "d1bdcb09f91c745271a9818fb5ec252b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.squeeze",
@@ -11724,7 +11724,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "20a578e844d5295fd531e8117814641b"
+      "6a48cd7facc911cfd0037ba17142b318"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_t",
@@ -11762,7 +11762,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "b87fb0ab0a44e911353999f0def021c7"
+      "3247d0b2e23e284cd9ba42d23a38af49"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_core_t",
@@ -11800,7 +11800,7 @@
         "typing_tok_Lib.IntTypes.PUB@tok", "typing_tok_Lib.IntTypes.U32@tok"
       ],
       0,
-      "b954b06bcff9b6e9eee6b82998e418d1"
+      "dc9aefb9f27c721d32b5d36cfb1e0ac4"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_core",
@@ -11918,7 +11918,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "a06924b4a9e889b9c472bc7fed21bf23"
+      "a1ade56db7512178956c05529ef7306b"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak_core",
@@ -11948,7 +11948,7 @@
         "typing_FStar.UInt32.v", "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "51bcde3538d5e9d7f9a6b68a93ade859"
+      "1e93c72e005dc01df6e3f83dc5f86e9a"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak",
@@ -12137,7 +12137,7 @@
         "typing_tok_Lib.IntTypes.U32@tok", "typing_tok_Lib.IntTypes.U8@tok"
       ],
       0,
-      "8d422b91e853f53895fdcf74b0545a10"
+      "c84a1e614f1aae4dbb25123e5fded4fc"
     ],
     [
       "Hacl.Impl.SHA3.Vec.keccak",
@@ -12167,7 +12167,7 @@
         "typing_FStar.UInt32.v", "typing_Hacl.Spec.SHA3.Vec.Common.lanes"
       ],
       0,
-      "e08c0ea986a0e2a2e2c3b47582ea2806"
+      "55caf8e4c968ca1fd59b48efc951933c"
     ]
   ]
 ]
