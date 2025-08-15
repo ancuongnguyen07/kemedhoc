@@ -19,7 +19,9 @@ SOURCE_DIRS = $(EDHOC_HOME)
 # Also note that we have our own directory on the include path for the sake of
 # the interactive mode, for finding checked files for our own F* files.
 FSTAR_INCLUDE_DIRS = \
+  $(SOURCE_DIRS) \
   $(KRML_HOME)/krmllib \
+  $(KRML_HOME)/krmllib/obj \
   $(ALL_HACL_DIRS) \
 
 
