@@ -1,7 +1,7 @@
 # === Directories ===
-OUTPUT_DIR     = .output
-HINT_DIR       = .hints
-DEP_FILE       = .depend
+OUTPUT_DIR     = output
+HINT_DIR       = hints
+DEP_FILE       = depend
 
 include Makefile.include
 
@@ -57,18 +57,13 @@ endif
 
 
 # === File Discovery ===
-FSTAR_FILES    = $(wildcard *.fst)
-CHECKED_FILES  = $(addprefix $(OUTPUT_DIR)/, $(FSTAR_FILES:.fst=.checked))
+# FSTAR_FILES    = $(wildcard *.fst) $
+# CHECKED_FILES  = $(addsuffix $(addprefix obj/, $(FSTAR_FILES)))
 
 # Main entry points (first one is default)
 
-# all: verify
-all: dist/libkemedhoc.a
-
-
-.PHONY: clean
-clean:
-	rm -f -r ./obj/* ./dist/*
+all: verify
+# all: dist/libkemedhoc.a
 
 
 # We need those flags to properly extract code which uses Vale
@@ -106,12 +101,16 @@ FSTAR_FLAGS = \
   --z3rlimit_factor 16 \
   --cache_checked_modules $(FSTAR_INCLUDES) \
   --odir obj \
-  --already_cached "* -Impl.EDHOC -Spec.EDHOC" --warn_error '+241@247+285' \
+  --warn_error '+241@247+285' \
   --cache_dir obj --hint_dir hints \
+  --already_cached 'Prims FStar LowStar C Spec.Loops'
+
 
 # Important to wildcard both fst and fsti since there are fstis without fsts.
-FSTAR_ROOTS = $(EDHOC_HOME)/*.fsti \
-  $(addsuffix /*.fst,$(SOURCE_DIRS)) \
+FSTAR_FILES = $(wildcard $(addsuffix /*.fst,$(SOURCE_DIRS)))
+FSTAR_INF_FILES = $(wildcard $(addsuffix /*.fsti,$(SOURCE_DIRS)))
+FSTAR_ROOTS = $(FSTAR_FILES) $(FSTAR_INF_FILES)
+
 
 FSTAR_COMMAND = $(FSTAR) $(FSTAR_FLAGS)
 
@@ -127,7 +126,7 @@ ifndef NODEPEND
 ifndef MAKE_RESTARTS
 .depend: .FORCE
 	$(call run-with-log,\
-	  $(FSTAR_COMMAND) --dep full $(FSTAR_ROOTS) > $@\
+	  $(FSTAR_COMMAND) --dep full $(FSTAR_ROOTS) -o $@\
 	  ,[FSTAR-DEPEND],$(call to-obj-dir,depend))
 
 .PHONY: .FORCE
@@ -136,10 +135,9 @@ endif
 endif
 
 # ifeq (,$(filter %-in,$(MAKECMDGOALS)))
-# include .depend
+# -include .depend
 # endif
 include .depend
-
 
 # Verification
 # ------------
@@ -168,7 +166,7 @@ obj:
 #
 # To avoid this unpleasant behavior, the most general pattern rule (longest
 # stem) also defines a suitable default value for FSTAR_FLAGS.
-%.checked: FSTAR_FLAGS=
+# %.checked: FSTAR_FLAGS=
 
 
 # Note: F* will not change the mtime of a checked file if it is
@@ -176,8 +174,13 @@ obj:
 # make and result in endless rebuilds. So, we touch that file.
 %.checked: | hints obj
 	$(call run-with-log, \
-	  $(FSTAR) $< $(FSTAR_FLAGS) && touch -c $@ \
+	  $(FSTAR) $< $(FSTAR_FLAGS) -c && touch -c $@ \
 	  ,[VERIFY] $(notdir $*),$(call to-obj-dir,$@))
+
+# CHECKED_FILES = $(addsuffix .checked,$(addprefix obj/,$(notdir $(FSTAR_ROOTS))))
+# # If you want to verify all files, you can do:
+# ALL_CHECKED_FILES is defined in .depend file during depenecdency analysis
+verify: $(ALL_CHECKED_FILES)
 
 # Extraction
 # ----------
@@ -224,6 +227,7 @@ EDHOC_CORE_BUNDLE = -bundle 'Impl.EDHOC.Core=Impl.EDHOC.Core.*'
 
 KRML_FLAGS += -header c/header.h
 
+# ALL_KRML_FILES is defined in .depend file during dependency analysis
 dist/Makefile.basic: $(filter-out %prims.krml,$(ALL_KRML_FILES)) $(HAND_WRITTEN_C_FILES)
 	mkdir -p $(dir $@)
 	$(KRML) -tmpdir $(dir $@) -skip-compilation \
@@ -257,3 +261,7 @@ dist/Makefile.basic: $(filter-out %prims.krml,$(ALL_KRML_FILES)) $(HAND_WRITTEN_
 
 dist/libkemedhoc.a: dist/Makefile.basic
 	$(MAKE) -C $(dir $@) -f $(notdir $<)
+
+.PHONY: clean
+clean:
+	rm -f -r ./obj/* ./dist/* ./*.krml
