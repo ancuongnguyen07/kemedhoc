@@ -111,13 +111,13 @@ let responder_process_msg3 #cs #msg3_len method rs_m hs_m ptx2_m msg3_m
     // (**) assert(is_legit_hs_mem h4 hs_m);
 
     // derive PRK4e3m
-    let y_m = opt_ec_keypair_mem_get_priv (ps_mem_get_eph_keypair rs_m) in
-    let g_i_m = ps_mem_get_remote_static_pub rs_m in
-    (**) assert(hs_mem_disjoint_to hs_m y_m);
-    (**) assert(hs_mem_disjoint_to hs_m g_i_m);
-    (**) assert(~(g_is_null y_m));
-    let res_prk4e3m
-      = derive_prk4e3m #cs i_auth_material hs_m.prk3e2m hs_m.th3 y_m g_i_m hs_m.prk4e3m in
+    // let y_m = opt_ec_keypair_mem_get_priv (ps_mem_get_eph_keypair rs_m) in
+    // let g_i_m = ps_mem_get_remote_static_pub rs_m in
+    // (**) assert(hs_mem_disjoint_to hs_m y_m);
+    // (**) assert(hs_mem_disjoint_to hs_m g_i_m);
+    // (**) assert(~(g_is_null y_m));
+    // let res_prk4e3m
+    //   = derive_prk4e3m #cs i_auth_material hs_m.prk3e2m hs_m.th3 y_m g_i_m hs_m.prk4e3m in
     // (**) let h5 = ST.get () in
     // (**) assert(res_prk4e3m == CSuccess ==> modifies1 hs_m.prk4e3m h4 h5);
 

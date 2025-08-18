@@ -71,7 +71,7 @@ let is_supported_dh_alg (a:DH.algorithm) : bool
     | _ -> false
 type dhAlg = a:DH.algorithm{is_supported_dh_alg a}
 inline_for_extraction
-type signatureAlg = dhAlg
+type signatureAlg = a:DH.algorithm{is_supported_dh_alg a}
 
 // let is_supported_signature (a:signatureAlg) : bool
 //   = match a with
@@ -416,14 +416,15 @@ val alg_aead_encrypt:
   -> msg:bytes{length msg <= alg_aead_max_input_size a}
   -> Tot (r:bytes{length r = length msg + (aead_tag_size a)})
 
-let lemma_alg_aead_encrypt_spec_aead_encrypt_equiv
-  (a:aeadAlg) (key:alg_aead_key a) (iv:aead_iv)
-  (aad:bytes{length aad <= alg_aead_max_input_size a})
-  (msg:bytes{length msg <= alg_aead_max_input_size a})
-  :Lemma (ensures alg_aead_encrypt a key iv aad msg
+val lemma_alg_aead_encrypt_spec_aead_encrypt_equiv:
+  a:aeadAlg
+  -> key:alg_aead_key a
+  -> iv:aead_iv
+  -> aad:bytes{length aad <= alg_aead_max_input_size a}
+  -> msg:bytes{length msg <= alg_aead_max_input_size a}
+  -> Lemma (ensures alg_aead_encrypt a key iv aad msg
                   == AEAD.encrypt #a key iv aad msg)
   [SMTPat (alg_aead_encrypt a key iv aad msg)]
-  = ()
 
 let aead_encrypt:
   #c:supported_cipherSuite
@@ -442,14 +443,15 @@ val alg_aead_decrypt:
   -> ciphertext:alg_aead_ciphertext_bytes a
   -> Tot (option (r:lbytes (length ciphertext - (aead_tag_size a))))
 
-let lemma_alg_aead_decrypt_spec_aead_decrypt_equiv
-  (a:aeadAlg) (key:alg_aead_key a) (iv:aead_iv)
-  (aad:bytes{length aad <= alg_aead_max_input_size a})
-  (ciphertext:alg_aead_ciphertext_bytes a)
-  :Lemma (ensures alg_aead_decrypt a key iv aad ciphertext
+val lemma_alg_aead_decrypt_spec_aead_decrypt_equiv:
+  a:aeadAlg
+  -> key:alg_aead_key a
+  -> iv:aead_iv
+  -> aad:bytes{length aad <= alg_aead_max_input_size a}
+  -> ciphertext:alg_aead_ciphertext_bytes a
+  -> Lemma (ensures alg_aead_decrypt a key iv aad ciphertext
                   == AEAD.decrypt #a key iv aad ciphertext)
   [SMTPat (alg_aead_decrypt a key iv aad ciphertext)]
-  = ()
 
 let is_valid_cipher_length (c:supported_cipherSuite)
   (ciphertext:bytes)
@@ -515,12 +517,12 @@ val alg_do_hash:
   -> input:bytes{length input <= alg_get_hash_max_input a}
   -> Tot (alg_hash_out a)
 
-let lemma_alg_do_hash_spec_hash_equiv
-  (a:hashAlg) (input:bytes)
-  : Lemma (requires length input <= alg_get_hash_max_input a)
+val lemma_alg_do_hash_spec_hash_equiv:
+  a:hashAlg
+  -> input:bytes
+  -> Lemma (requires length input <= alg_get_hash_max_input a)
   (ensures alg_do_hash a input == hash a input)
   [SMTPat (alg_do_hash a input)]
-  = ()
 
 let do_hash:
   c:supported_cipherSuite
@@ -542,16 +544,17 @@ val alg_hmac:
   ))
   (ensures fun _ -> true)
 
-let lemma_alg_hmac_spec_hmac_equiv
-  (a:hashAlg) (key:bytes) (data:bytes)
-  : Lemma (requires (
+val lemma_alg_hmac_spec_hmac_equiv:
+  a:hashAlg
+  -> key:bytes
+  -> data:bytes
+  -> Lemma (requires (
     not (is_shake a)
     /\ Seq.length key + Hash.block_length a < pow2 32
     /\ Seq.length data + Hash.block_length a < pow2 32
   ))
   (ensures alg_hmac a key data == HMACAgile.hmac a key data)
   [SMTPat (alg_hmac a key data)]
-  = ()
 
 let hmac:
   c:supported_cipherSuite
@@ -589,9 +592,12 @@ val alg_hkdf_expand:
   ))
   (ensures fun _ -> true)
 
-let lemma_alg_hkdf_expand_spec_expand_equiv
-  (a:hashAlg) (prk:bytes) (info:bytes) (len:size_nat)
-  : Lemma (requires (
+val lemma_alg_hkdf_expand_spec_expand_equiv:
+  a:hashAlg
+  -> prk:bytes
+  -> info:bytes
+  -> len:size_nat
+  -> Lemma (requires (
     not (is_shake a)
     /\ Seq.length prk = alg_hash_size a // needs to loose the restriction if possible
     /\ expand_info_length_pred a (Seq.length info)
@@ -599,7 +605,6 @@ let lemma_alg_hkdf_expand_spec_expand_equiv
   ))
   (ensures alg_hkdf_expand a prk info len == expand a prk info len)
   [SMTPat (alg_hkdf_expand a prk info len)]
-  = ()
 
 let hkdf_expand:
   c:supported_cipherSuite
@@ -632,16 +637,17 @@ val alg_hkdf_extract:
   ))
   (ensures fun _ -> true)
 
-let lemma_alg_hkdf_extract_spec_extract_equiv
-  (a:hashAlg) (salt:bytes) (ikm:bytes)
-  : Lemma (requires (
+val lemma_alg_hkdf_extract_spec_extract_equiv:
+  a:hashAlg
+  -> salt:bytes
+  -> ikm:bytes
+  -> Lemma (requires (
     not (is_shake a)
     /\ Seq.length salt = alg_hash_size a // needs to loose the restriction if possible
     /\ extract_ikm_length_pred a (Seq.length ikm)
   ))
   (ensures alg_hkdf_extract a salt ikm == extract a salt ikm)
   [SMTPat (alg_hkdf_extract a salt ikm)]
-  = ()
 
 let hkdf_extract:
   c:supported_cipherSuite
@@ -697,14 +703,15 @@ val alg_ecdsa_sign:
     match a with
       | DH_P256 -> Some? op_nonce
       | DH_Curve25519 -> not (Some? op_nonce)
-  ) 
-  )
+  ))
   (ensures fun _ -> true)
 
-let lemma_alg_ecdsa_sign_ed25519_returns_Some
-  (ha:hashAlg) (op_nonce:option (lbytes 32))
-  (msg:bytes) (priv_key:alg_ec_signature_priv_key DH_Curve25519)
-  :Lemma (requires (
+val lemma_alg_ecdsa_sign_ed25519_returns_Some:
+  ha:hashAlg
+  -> op_nonce:option (lbytes 32)
+  -> msg:bytes
+  -> priv_key:alg_ec_signature_priv_key DH_Curve25519
+  -> Lemma (requires (
     let msg_len = length msg in
     msg_len >= P256.min_input_length (P256.Hash ha)
     /\ msg_len <= max_size_t
@@ -712,15 +719,18 @@ let lemma_alg_ecdsa_sign_ed25519_returns_Some
   )
   (ensures (
     let res = (alg_ecdsa_sign DH_Curve25519 ha op_nonce msg priv_key) in
-    Some?.v res == Spec.Ed25519.sign priv_key msg
+    match res with
+      | None -> false
+      | Some v -> v == Spec.Ed25519.sign priv_key msg
   ))
   [SMTPat (alg_ecdsa_sign DH_Curve25519 ha op_nonce msg priv_key)]
-  = ()
 
-let lemma_alg_ecdsa_sign_p256_returns_option
-  (ha:hashAlg) (op_nonce:option (lbytes 32))
-  (msg:bytes) (priv_key:alg_ec_signature_priv_key DH_P256)
-  :Lemma (requires (
+val lemma_alg_ecdsa_sign_p256_returns_option:
+  ha:hashAlg
+  -> op_nonce:option (lbytes 32)
+  -> msg:bytes
+  -> priv_key:alg_ec_signature_priv_key DH_P256
+  -> Lemma (requires (
     let msg_len = length msg in
     msg_len >= P256.min_input_length (P256.Hash ha)
     /\ msg_len <= max_size_t
@@ -736,7 +746,6 @@ let lemma_alg_ecdsa_sign_p256_returns_option
       | _ -> False
   ))
   [SMTPat (alg_ecdsa_sign DH_P256 ha op_nonce msg priv_key)]
-  = ()
 
 let ecdsa_sign:
   #c:supported_cipherSuite
@@ -770,11 +779,12 @@ val alg_ecdsa_verify:
   -> signature:ecdsa_signature
   -> bool
 
-let lemma_alg_ecdsa_verify_p256_spec_equiv
-  (ha:hashAlg) (msg:bytes)
-  (pub_key:alg_ec_signature_pub_key DH_P256)
-  (signature:ecdsa_signature)
-  :Lemma (requires (
+val lemma_alg_ecdsa_verify_p256_spec_equiv:
+  ha:hashAlg
+  -> msg:bytes
+  -> pub_key:alg_ec_signature_pub_key DH_P256
+  -> signature:ecdsa_signature
+  -> Lemma (requires (
     let msg_len = length msg in
     msg_len >= P256.min_input_length (P256.Hash ha)
     /\ msg_len <= max_size_t
@@ -787,13 +797,13 @@ let lemma_alg_ecdsa_verify_p256_spec_equiv
     agile_res == spec_res
   ))
   [SMTPat (alg_ecdsa_verify DH_P256 ha msg pub_key signature)]
-  = ()
 
-let lemma_alg_ecdsa_verify_ed25519_spec_equiv
-  (ha:hashAlg) (msg:bytes)
-  (pub_key:alg_ec_signature_pub_key DH_Curve25519)
-  (signature:ecdsa_signature)
-  :Lemma (requires (
+val lemma_alg_ecdsa_verify_ed25519_spec_equiv:
+  ha:hashAlg
+  -> msg:bytes
+  -> pub_key:alg_ec_signature_pub_key DH_Curve25519
+  -> signature:ecdsa_signature
+  -> Lemma (requires (
     let msg_len = length msg in
     msg_len >= P256.min_input_length (P256.Hash ha)
     /\ msg_len <= max_size_t
@@ -804,7 +814,6 @@ let lemma_alg_ecdsa_verify_ed25519_spec_equiv
     agile_res == spec_res
   ))
   [SMTPat (alg_ecdsa_verify DH_Curve25519 ha msg pub_key signature)]
-  = ()
 
 let ecdsa_verify:
   #c:supported_cipherSuite
@@ -826,11 +835,12 @@ val xor:
   -> b2:lbytes len
   -> lbytes len
 
-let lemma_xor_map2_logxor_equiv
-  (#len:size_nat) (b1:lbytes len) (b2:lbytes len)
-  : Lemma (ensures xor b1 b2 == Seq.map2 (logxor #U8 #SEC) b1 b2)
+val lemma_xor_map2_logxor_equiv:
+  #len:size_nat
+  -> b1:lbytes len
+  -> b2:lbytes len
+  -> Lemma (ensures xor b1 b2 == Seq.map2 (logxor #U8 #SEC) b1 b2)
   [SMTPat (xor #len b1 b2)]
-  = ()
 
 let lemma_xor_interchange
   (#len:size_nat) (b1:lbytes len) (b2:lbytes len)

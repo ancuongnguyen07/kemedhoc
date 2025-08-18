@@ -39,8 +39,14 @@ friend Spec.Agile.HKDF
 let alg_aead_encrypt a k iv aad msg =
   AEAD.encrypt #a k iv aad msg
 
+let lemma_alg_aead_encrypt_spec_aead_encrypt_equiv a key iv aad msg
+  = ()
+
 let alg_aead_decrypt a k iv aad ciphertext =
   AEAD.decrypt #a k iv aad ciphertext
+
+let lemma_alg_aead_decrypt_spec_aead_decrypt_equiv a key iv aad ciphertext
+  = ()
 
 let alg_aead_correctness a k iv aad msg =
   AEAD.correctness #a k iv aad msg
@@ -55,19 +61,29 @@ let alg_do_hash a input  =
   // else Hash.hash a input
   Hash.hash a input
 
+let lemma_alg_do_hash_spec_hash_equiv a input
+  = ()
 
 (*------------------- HMAC*)
 let alg_hmac a key data =
   HMAC.hmac a key data
+
+let lemma_alg_hmac_spec_hmac_equiv a key data
+  = ()
 
 
 (*------------------- HKDF*)
 let alg_hkdf_expand a prk info len =
   HKDF.expand a prk info len
 
+let lemma_alg_hkdf_expand_spec_expand_equiv a prk info len
+  = ()
+
 let alg_hkdf_extract a salt ikm =
   HKDF.extract a salt ikm
 
+let lemma_alg_hkdf_extract_spec_extract_equiv a salt ikm
+  = ()
 
 (*------------------- ECDSA*)
 let alg_ecdsa_sign sa ha op_nonce msg priv_key =
@@ -81,6 +97,12 @@ let alg_ecdsa_sign sa ha op_nonce msg priv_key =
       Some (Ed25519.sign priv_key msg)
     )
 
+let lemma_alg_ecdsa_sign_ed25519_returns_Some ha op_nonce msg priv_key
+  = ()
+
+let lemma_alg_ecdsa_sign_p256_returns_option ha op_nonce msg priv_key
+  = ()
+
 let alg_ecdsa_verify sa ha msg pub_key signature =
   match sa with
     | DH_P256 -> (
@@ -92,12 +114,21 @@ let alg_ecdsa_verify sa ha msg pub_key signature =
       Ed25519.verify pub_key msg signature
     )
 
+let lemma_alg_ecdsa_verify_p256_spec_equiv ha msg pub_key signature
+  = ()
+
+let lemma_alg_ecdsa_verify_ed25519_spec_equiv ha msg pub_key signature
+  = ()
+
 (*----------------------- Stream Cipher XOR*)
 #push-options "--max_ifuel 8 --max_fuel 8"
 let xor #len msg key =
   // lseq type
   Seq.map2 (logxor #U8 #SEC) msg key
 #pop-options
+
+let lemma_xor_map2_logxor_equiv #len b1 b2
+  = ()
 
 /// NOTE! Needs to be explicitly proved later.
 let lemma_xor_involution msg key

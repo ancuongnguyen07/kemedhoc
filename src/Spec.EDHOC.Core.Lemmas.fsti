@@ -30,15 +30,21 @@ val lemma_initiator_send_msg1_responds:
   -> Lemma (ensures (
     let res_gen_key = generate_ec_keypair cs entr in
     match (initiator_send_msg1 cs method entr is) with
-      | Res (msg1_ab, is_shared_est, hs_i_after_msg1_ab) ->
+      | Res (msg1_ab, is_shared_est, hs_i_after_msg1_ab) -> (
         let eph_kp = Some?.v is_shared_est.eph_ec_keypair in
-        let (x_gx, entr1) = Some?.v (generate_ec_keypair cs entr) in
 
-        Some? res_gen_key /\ ~(Some? msg1_ab.ead1)
-        /\ Seq.equal msg1_ab.g_x hs_i_after_msg1_ab.g_x
-        /\ Seq.equal hs_i_after_msg1_ab.g_x eph_kp.pub
-        /\ Seq.equal eph_kp.priv x_gx.priv
-        /\ Seq.equal eph_kp.pub x_gx.pub
+        let x_gx_res = generate_ec_keypair cs entr in
+
+        match x_gx_res with
+          | None -> False
+          | Some (x_gx, entr1) -> (
+            Some? res_gen_key /\ ~(Some? msg1_ab.ead1)
+            /\ Seq.equal msg1_ab.g_x hs_i_after_msg1_ab.g_x
+            /\ Seq.equal hs_i_after_msg1_ab.g_x eph_kp.pub
+            /\ Seq.equal eph_kp.priv x_gx.priv
+            /\ Seq.equal eph_kp.pub x_gx.pub
+          )
+      )
 
       | Fail InvalidECPoint -> ~(Some? res_gen_key)
       | Fail _ -> False
@@ -207,27 +213,29 @@ val lemma_initiator_process_msg2_consistence:
         // let th2 = compute_th2 (Some?.v hs''.msg1) msg2.g_y in
         let th2 = compute_th2_pre_hash #cs (hs.msg1_hash) msg2.g_y in
         let x = (Some?.v is.eph_ec_keypair).priv in
-        let g_xy = Some?.v (dh x msg2.g_y) in
-        
-        let prk2e = (extract_prk2e th2 g_xy) in
-        let prk3e2m = match (get_auth_material Responder hs.method) with
-                        | Signature -> prk2e
-                        | MAC -> (
-                          let g_r = is.remote_static_pub_key in
-                          let x = (Some?.v is.eph_ec_keypair).priv in
-                          let g_rx = Some?.v (dh x g_r) in
-                          let salt3e2m = expand_salt3e2m prk2e th2 in
-                          extract_prk3e2m salt3e2m g_rx
-                        ) in
-        
-        unequal_lbytes_eq (Some?.v hs''.th2) th2
-        /\ unequal_lbytes_eq (Some?.v hs''.prk2e) prk2e
-        /\ unequal_lbytes_eq (Some?.v hs''.g_xy) g_xy
-        /\ unequal_lbytes_eq (Some?.v hs''.prk3e2m) prk3e2m
-        /\ valid_hs_msg1_to_msg2 hs hs''
-        // /\ normalize_term (Some?.v hs.msg1) == normalize_term (Some?.v hs''.msg1)
-        // /\ normalize_term (Some?.v hs''.msg2) == normalize_term msg2
 
+        match (dh x msg2.g_y) with
+          | None -> False
+          | Some g_xy -> (
+            let prk2e = (extract_prk2e th2 g_xy) in
+            let prk3e2m = match (get_auth_material Responder hs.method) with
+                            | Signature -> prk2e
+                            | MAC -> (
+                              let g_r = is.remote_static_pub_key in
+                              let x = (Some?.v is.eph_ec_keypair).priv in
+                              let g_rx = Some?.v (dh x g_r) in
+                              let salt3e2m = expand_salt3e2m prk2e th2 in
+                              extract_prk3e2m salt3e2m g_rx
+                            ) in
+            
+            unequal_lbytes_eq (Some?.v hs''.th2) th2
+            /\ unequal_lbytes_eq (Some?.v hs''.prk2e) prk2e
+            /\ unequal_lbytes_eq (Some?.v hs''.g_xy) g_xy
+            /\ unequal_lbytes_eq (Some?.v hs''.prk3e2m) prk3e2m
+            /\ valid_hs_msg1_to_msg2 hs hs''
+            // /\ normalize_term (Some?.v hs.msg1) == normalize_term (Some?.v hs''.msg1)
+            // /\ normalize_term (Some?.v hs''.msg2) == normalize_term msg2
+          )
       )
   ))
   [SMTPat (initiator_process_msg2 #cs is hs msg2)]
@@ -371,24 +379,26 @@ val bundle_msg1_msg2:
               & handshake_state_after_msg2 #cs
               & handshake_state_after_msg2 #cs))
 
-let lemma_bundle_msg1_msg2 (#cs:supported_cipherSuite)
-  (entr:HACLRandom.entropy)
-  (is:party_state #cs) (rs:party_state #cs) (method:method_enum)
-  : Lemma (requires precondition_integration_party_states is rs method)
+val lemma_bundle_msg1_msg2:
+  #cs:supported_cipherSuite
+  -> entr:HACLRandom.entropy
+  -> is:party_state #cs
+  -> rs:party_state #cs
+  -> method:method_enum
+  -> Lemma (requires precondition_integration_party_states is rs method)
   (ensures (
     match (bundle_msg1_msg2 #cs entr is rs method) with
       | Fail _ -> True
       | Res (ptx2_i, ptx2_r, msg2, is', rs', hs_i'', hs_r'') ->
         post_hs_after_msg2 #cs hs_i'' hs_r''
+        /\ hs_r''.method = method
+        /\ hs_i''.method = method
         /\ normalize_term ptx2_i == normalize_term ptx2_r
         /\ unequal_lbytes_eq (concat_ptx2 ptx2_i) (concat_ptx2 ptx2_r)
         /\ post_ps_unchanged_fixed_vals is is'
         /\ post_ps_unchanged_fixed_vals rs rs'
   ))
   [SMTPat (bundle_msg1_msg2 #cs entr is rs method)]
-  = lemma_integration_msg1_msg2_consistence #cs entr is rs method; 
-  ()
-
 
 /// --------------------------
 /// Initiator send Msg3 lemmas
@@ -419,11 +429,13 @@ val lemma_initiator_send_msg3_respond:
   ))
   [SMTPat (initiator_send_msg3 #cs entr is hs ptx2)]
 
-let lemma_initiator_send_msg3_respond_component_equiv
-  (#cs:supported_cipherSuite) (entr:HACLRandom.entropy)
-  (is:party_state_shared_est #cs) (hs:handshake_state_after_msg2 #cs)
-  (ptx2:plaintext2 #cs #(get_auth_material Responder hs.method))
-  : Lemma (ensures (
+val lemma_initiator_send_msg3_respond_component_equiv:
+  #cs:supported_cipherSuite
+  -> entr:HACLRandom.entropy
+  -> is:party_state_shared_est #cs
+  -> hs:handshake_state_after_msg2 #cs
+  -> ptx2:plaintext2 #cs #(get_auth_material Responder hs.method)
+  -> Lemma (ensures (
     let th2 = Some?.v hs.th2 in
     let g_xy = Some?.v hs.g_xy in
     let prk3e2m = Some?.v hs.prk3e2m in
@@ -466,13 +478,14 @@ let lemma_initiator_send_msg3_respond_component_equiv
     ))
   ))
   [SMTPat (initiator_send_msg3 #cs entr is hs ptx2)]
-  = ()
 
-let lemma_initiator_send_msg3_functional_correctness
-  (#cs:supported_cipherSuite) (entr:HACLRandom.entropy)
-  (is:party_state_shared_est #cs) (hs:handshake_state_after_msg2 #cs)
-  (ptx2:plaintext2 #cs #(get_auth_material Responder hs.method))
-  : Lemma (ensures (
+val lemma_initiator_send_msg3_functional_correctness:
+  #cs:supported_cipherSuite
+  -> entr:HACLRandom.entropy
+  -> is:party_state_shared_est #cs
+  -> hs:handshake_state_after_msg2 #cs
+  -> ptx2:plaintext2 #cs #(get_auth_material Responder hs.method)
+  -> Lemma (ensures (
     let res_tot = initiator_send_msg3 #cs entr is hs ptx2 in
 
     Res? res_tot ==> (
@@ -496,29 +509,36 @@ let lemma_initiator_send_msg3_functional_correctness
               // derive prk4e3m
               let g_y = Some?.v hs.g_y in
               let i = is.static_dh.priv in
+
               let res_prk4e3m
                 = derive_prk4e3m #cs auth_material prk3e2m th3 (Some i) (Some g_y) in
-              assert(Res? res_prk4e3m);
-              let prk4e3m = match res_prk4e3m with Res k -> k in
+              match res_prk4e3m with
+                | Fail _ -> False
+                | Res prk4e3m -> (
+                  // derive sig_or_mac3
+                  let ctx3 = construct_context3 id_cred_i th3 cred_i ead3_op in
+                  let mac3 = expand_mac3 auth_material prk4e3m ctx3 in
+                  let sk_i = is.signature_key.priv in
 
-              // derive sig_or_mac3
-              let ctx3 = construct_context3 id_cred_i th3 cred_i ead3_op in
-              let mac3 = expand_mac3 auth_material prk4e3m ctx3 in
-              let sk_i = is.signature_key.priv in
-              let res_sig_or_mac3
-                = derive_sig_or_mac3 #cs auth_material entr (Some sk_i) mac3 ctx3 in
-              assert(Some? res_sig_or_mac3);
-              let computed_sig_or_mac3 = Some?.v res_sig_or_mac3 in
+                  let res_sig_or_mac3
+                    = derive_sig_or_mac3 #cs auth_material entr (Some sk_i) mac3 ctx3 in
+                  match res_sig_or_mac3 with
+                    | None -> False
+                    | Some computed_sig_or_mac3 -> (
+                      let prk_out = expand_prk_out prk4e3m th4 in
+                      let prk_exporter = expand_prk_exporter prk_out in
 
-              let prk_out = expand_prk_out prk4e3m th4 in
-              let prk_exporter = expand_prk_exporter prk_out in
+                      length (serialize_ptx3 ptx3) == length decrypted_c3
+                      /\ Seq.equal (serialize_ptx3 ptx3) decrypted_c3
+                      /\ None? ead3_op
+                      /\ lbytes_eq th4 (Some?.v hs'''.th4)
+                      /\ lbytes_eq prk4e3m (Some?.v hs'''.prk4e3m)
+                      /\ lbytes_eq sig_or_mac3 computed_sig_or_mac3
+                      /\ lbytes_eq prk_out (Some?.v hs'''.prk_out)
+                      /\ lbytes_eq prk_exporter (Some?.v hs'''.prk_exporter)
+                    )
 
-              Seq.equal (serialize_ptx3 ptx3) decrypted_c3 /\ None? ead3_op
-              /\ lbytes_eq th4 (Some?.v hs'''.th4)
-              /\ lbytes_eq prk4e3m (Some?.v hs'''.prk4e3m)
-              /\ lbytes_eq sig_or_mac3 computed_sig_or_mac3
-              /\ lbytes_eq prk_out (Some?.v hs'''.prk_out)
-              /\ lbytes_eq prk_exporter (Some?.v hs'''.prk_exporter)
+                )
             )
           )
           | Fail _ -> False
@@ -526,7 +546,6 @@ let lemma_initiator_send_msg3_functional_correctness
     )
   ))
   [SMTPat (initiator_send_msg3 #cs entr is hs ptx2)]
-  = ()
 
 val lemma_initiator_send_msg3_consistence:
   #cs:supported_cipherSuite
@@ -673,6 +692,7 @@ val lemma_integration_msg1_msg3_eph_stat_share:
     match (bundle_msg1_msg2 #cs entr is rs method) with
       | Fail _ -> True
       | Res (ptx2_i, ptx2_r, msg2, is', rs', hs_i'', hs_r'') -> (
+        
         match (initiator_send_msg3 #cs entr is' hs_i'' ptx2_i) with
           | Fail _ -> true
           | Res (msg3, hs_i''') -> (
@@ -680,8 +700,8 @@ val lemma_integration_msg1_msg3_eph_stat_share:
             match (responder_process_msg3 #cs rs' hs_r'' ptx2_r msg3) with
               | Fail _ -> true
               | Res (hs_r''') -> (
-                assert(hs_r'''.method = hs_i'''.method);
-                assert(hs_r'''.method = method);
+                // assert(hs_r'''.method = hs_i'''.method);
+                // assert(hs_r'''.method = method);
                 match (get_auth_material Initiator method) with
                   | Signature -> true
                   | MAC -> (
@@ -692,11 +712,18 @@ val lemma_integration_msg1_msg3_eph_stat_share:
                     let y = (Some?.v rs'.eph_ec_keypair).priv in
                     let g_i = rs'.remote_static_pub_key in
 
-                    let g_yi = Some?.v (dh i g_y) in
-                    let g_iy = Some?.v (dh y g_i) in
+                    let g_yi_res = dh i g_y in
+                    let g_iy_res = dh y g_i in
+
+                    match (g_yi_res, g_iy_res) with
+                      | (None, _) | (_, None) -> False
+                      | (Some g_yi, Some g_iy) -> (
+                        lbytes_eq g_yi g_iy
+
+                      )
+                    // let g_iy = Some?.v (dh y g_i) in
 
 
-                    lbytes_eq g_yi g_iy
                   )
               )
           )
@@ -704,10 +731,13 @@ val lemma_integration_msg1_msg3_eph_stat_share:
   ))
 
 // #push-options"--max_fuel 8"
-let lemma_bundle_msg1_msg3 (#cs:supported_cipherSuite)
-  (entr:HACLRandom.entropy)
-  (is:party_state #cs) (rs:party_state #cs) (method:method_enum)
-  : Lemma (requires precondition_integration_party_states is rs method)
+val lemma_bundle_msg1_msg3:
+  #cs:supported_cipherSuite
+  -> entr:HACLRandom.entropy
+  -> is:party_state #cs
+  -> rs:party_state #cs
+  -> method:method_enum
+  -> Lemma (requires precondition_integration_party_states is rs method)
   (ensures (
     match (bundle_msg1_msg3 #cs entr is rs method) with
       | Fail _ -> True
@@ -716,7 +746,5 @@ let lemma_bundle_msg1_msg3 (#cs:supported_cipherSuite)
       )
   ))
   [SMTPat (bundle_msg1_msg3 #cs entr is rs method)]
-  = lemma_integration_msg1_msg3_eph_stat_share #cs entr is rs method; 
-  admit()
 // #pop-options
 

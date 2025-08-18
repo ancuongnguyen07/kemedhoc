@@ -16,9 +16,10 @@ module Seq = Lib.Sequence
 
 module HACL_AEAD = Spec.Agile.AEAD
 
-// friend Spec.EDHOC.Parser
-
+/// ------------
 /// Ciphertext2
+/// ------------
+
 let encrypt_plaintext2 #cs #auth_material ptx2 th2 prk2e
   = let serialized_ptx2 = serialize_ptx2 ptx2 in
   let ptx2_len = length serialized_ptx2 in
@@ -48,7 +49,10 @@ let lemma_ptx2_ciphertext2_equiv
   lemma_xor_involution serialized_ptx2 keystream2;
   assert(equal decrypted_text serialized_ptx2)
 
+/// ------------
 /// Ciphertext3
+/// ------------
+
 let encrypt_plaintext3 #cs #auth_material ptx3 th3 prk3e2m
   = let serialized_ptx3 = serialize_ptx3 ptx3 in
   // derive K3
@@ -73,7 +77,20 @@ let decrypt_ciphertext3 #cs auth_material_i ciphertext3 th3 prk3e2m
     | Some serialized_ptx3 -> (
       Res serialized_ptx3
     )
-  
+
+/// Lemmas for ciphertext3
+let lemma_decrypt_ciphertext3_valid_length
+  (#cs:supported_cipherSuite) (auth_material_i:authentication_material)
+  (ciphertext3:aead_ciphertext_bytes cs) (th3:hash_out cs) (prk3e2m:hash_out cs)
+  :Lemma (ensures (
+    match (decrypt_ciphertext3 #cs auth_material_i ciphertext3 th3 prk3e2m) with
+      | Fail DecryptionFailed -> True
+      | Res serialized_ptx3 -> length serialized_ptx3 <= max_size_t
+      | _ -> False
+  ))
+  [SMTPat (decrypt_ciphertext3 #cs auth_material_i ciphertext3 th3 prk3e2m)]
+  = ()
+
 let lemma_encrypt_decrypt_ciphertext3_equiv #cs #auth_material
   ptx3 th3 prk3e2m
   = // derive K3

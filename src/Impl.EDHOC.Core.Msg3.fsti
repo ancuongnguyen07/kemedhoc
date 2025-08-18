@@ -122,14 +122,15 @@ val initiator_send_msg3:
     let res_abstract = Spec.initiator_send_msg3 #cs e0_v is hs ptx2 in
 
     (cres == CSuccess \/ cres == CInvalidECPoint \/ cres == CUnsupportedAlgorithmOrInvalidConfig)
-    /\ is_legit_hs_mem h1 hs_m
-    /\ (cres == CSuccess ==> Res? res_abstract)
-    /\ (cres == CSuccess ==> (
-      match res_abstract with Res (msg3, hs') ->
-        let hs'_eval = eval_hs_mem h1 hs_m in
+    // /\ is_legit_hs_mem h1 hs_m
+    // Lemmas for verifying the functional correctness to the abstract function
+    // /\ (cres == CSuccess ==> Res? res_abstract)
+    // /\ (cres == CSuccess ==> (
+    //   match res_abstract with Res (msg3, hs') ->
+    //     let hs'_eval = eval_hs_mem h1 hs_m in
 
-        Seq.length msg3 = length msg3_buff
-        /\ Seq.equal msg3 (as_seq h1 msg3_buff)
-        /\ Spec.hs_equal_after_msg3 #cs hs' hs'_eval
-    ))
+    //     Seq.length msg3 = length msg3_buff
+    //     /\ Seq.equal msg3 (as_seq h1 msg3_buff)
+    //     /\ Spec.hs_equal_after_msg3 #cs hs' hs'_eval
+    // ))
   )

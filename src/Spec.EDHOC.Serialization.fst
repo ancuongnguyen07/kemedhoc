@@ -1,14 +1,3 @@
-(*
-I build a customized encoding/deconding mechanism here
-to leverage the simplicity of high-level FStar model.
-Actually, EDHOC uses CBOR under the hood, but there is no
-published verified CBOR model at this moment (EverParse is
-working on it, found a CBOR-specific branch in EverParse repo,
-but it seems way long to be released.)
-
-Several functions here are ported from libsignal
-(https://github.com/Inria-Prosecco/libsignal-protocol-wasm-fstar/tree/master)
-*)
 module Spec.EDHOC.Serialization
 
 module RIT = Lib.RawIntTypes
@@ -29,6 +18,8 @@ let ( @< ) (#len1:size_nat) (#len2:size_nat{len1 + len2 <= max_size_t})
     // `a` or `b` is  `bytes`
     Seq.concat a b
 
+let lemma_concat_alias_equiv #len1 #len2 a b
+  = ()
 
 let lemma_concat4 #a len1 s1 len2 s2 len3 s3 len4 s4 s
   = let s' = Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4 in

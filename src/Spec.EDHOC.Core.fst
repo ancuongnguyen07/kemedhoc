@@ -434,8 +434,8 @@ let initiator_send_msg3 #cs entr is hs ptx2
                                 let ptx3 = construct_ptx3 id_cred_i sig_or_mac3 ead3_op in
                                 let th4 = compute_th4 th3 ptx3 cred_i in
 
-                                Seq.equal (serialize_ptx3 ptx3) decrypted_c3 /\
-                                lbytes_eq th4 (Some?.v updated_hs.th4)
+                                Seq.equal (serialize_ptx3 ptx3) decrypted_c3
+                                /\ lbytes_eq th4 (Some?.v updated_hs.th4)
                               )
                           )
                           | Fail _ -> False

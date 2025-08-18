@@ -91,10 +91,21 @@ let bundle_msg1_msg2 #cs entr is rs method
             )
         )
 
+let lemma_bundle_msg1_msg2 #cs entr is rs method
+  = lemma_integration_msg1_msg2_consistence #cs entr is rs method; 
+  ()
+
+
 /// --------------------------
 /// Initiator send Msg3 lemmas
 /// --------------------------
 let lemma_initiator_send_msg3_respond #cs entr is hs ptx2
+  = ()
+
+let lemma_initiator_send_msg3_respond_component_equiv #cs entr is hs ptx2
+  = ()
+
+let lemma_initiator_send_msg3_functional_correctness #cs entr is hs ptx2
   = ()
 
 let lemma_initiator_send_msg3_consistence #cs entr is hs ptx2
@@ -148,3 +159,8 @@ let bundle_msg1_msg3 #cs entr is rs method
 
 let lemma_integration_msg1_msg3_eph_stat_share #cs entr is rs method
   = admit()
+
+
+let lemma_bundle_msg1_msg3 #cs entr is rs method
+  = lemma_integration_msg1_msg3_eph_stat_share #cs entr is rs method; 
+  admit()

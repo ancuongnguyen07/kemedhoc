@@ -65,16 +65,6 @@ let sig_or_mac23_get_length sig_or_mac = length sig_or_mac
 (*--------------------------------------*)
 
 /// Message 1
-let concat_msg1_get_length msg1
-  = let ead_len = match msg1.ead1 with
-          | None -> 0
-          | Some ead1 -> length ead1
-          in 
-  (FBytes.repr_bytes (method_as_nat msg1.method))
-    + (FBytes.repr_bytes msg1.suite_i)
-    + (length msg1.g_x)
-    + (length msg1.c_i)
-    + ead_len
 
 // let concat_msg1 #cs msg1
 //   = let method_lbyte:lbytes 1 = nat_to_bytes (method_as_nat msg1.method) in
@@ -89,17 +79,30 @@ let concat_msg1_get_length msg1
 //             temp @< ead1
 //           )
 
+let concat_msg1 (#cs:supported_cipherSuite) (msg1:message1 #cs)
+  : Tot (lbytes (concat_msg1_get_length msg1))
+  = let method_lbyte:lbytes 1 = nat_to_bytes (method_as_nat msg1.method) in
+  let suite_i_lbyte:lbytes 1 = nat_to_bytes msg1.suite_i in
+  let g_x_lbytes:lbytes (length msg1.g_x) = msg1.g_x in
+  let c_i_lbytes:lbytes (length msg1.c_i) = msg1.c_i in
+  let temp = method_lbyte @< suite_i_lbyte @< g_x_lbytes @< c_i_lbytes in
+  let temp_len = length temp in
+
+  let x = method_lbyte @< suite_i_lbyte in
+  let x_len = length x in
+  assert(equal method_lbyte (sub #uint8 #(x_len) x 0 1));
+
+  match msg1.ead1 with
+          | None -> temp
+          | Some ead1 -> (
+            let ead1:lbytes (length ead1) = ead1 in
+            temp @< ead1
+          )
+
+let lemma_concat_msg1_equiv #cs msg1
+  = ()
+
 /// Plaintext 2
-inline_for_extraction
-let concat_ptx2_get_length ptx2
-  = let ead_len = match ptx2.ead2 with
-          | None -> 0
-          | Some ead2 -> length ead2
-          in
-    (length ptx2.c_r) + (length ptx2.id_cred_r)
-    + (length ptx2.sig_or_mac2) + ead_len
-
-
 inline_for_extraction
 let serialize_ptx2_get_length ptx2
   = concat_ptx2_get_length ptx2
@@ -191,7 +194,21 @@ let deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2
   //     )
   // )
 
+let lemma_deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2
+  = ()
   
+let lemma_concat_ptx2_equiv #cs #auth_material ptx2
+  = ()
+
+let lemma_concat_serialize_ptx2_equiv #cs #auth_material ptx2
+  = ()
+
+let lemma_deserialize_serialize_equiv #cs #auth_material ptx2
+  = ()
+
+let lemma_deserialize_ptx2_raw_bytes_if_ead2 cs auth_material serialized_ptx2
+  = ()
+
 #pop-options
 
 /// Message 2
@@ -200,17 +217,6 @@ let deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2
 
 
 /// Plaintext 3
-let concat_ptx3_get_length #cs #auth_material ptx3
-  = let ead_len = match ptx3.ead3 with
-                  | None -> 0
-                  | Some ead3 -> length ead3
-                  in
-  assert(ead_len = 0);
-  let temp = (length ptx3.id_cred_i) + (length ptx3.sig_or_mac3)
-        + ead_len in
-  assert(is_valid_ptx3_size cs auth_material temp);
-  assert(temp = (length ptx3.id_cred_i) + (length ptx3.sig_or_mac3));
-  temp
 
 let concat_ptx3 #cs #auth_material ptx3
   =
@@ -233,10 +239,14 @@ let concat_ptx3 #cs #auth_material ptx3
       temp @< ead3
     )
 
+let lemma_concat_ptx3_equiv #cs #auth_material ptx3
+  = ()
 
 let serialize_ptx3_get_length ptx3
   = concat_ptx3_get_length ptx3
 
+let lemma_serialize_ptx3_get_length_concat_equiv #cs #auth_material ptx3
+  = ()
 
 let serialize_ptx3 #cs #auth_material ptx3
   = concat_ptx3 ptx3
@@ -312,6 +322,26 @@ let deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3
     let ead3 = sub ptx3_lbytes (id_cred_size + sig_or_mac3_len) ead_max_size in
     (id_cred_i, sig_or_mac3, Some ead3)
   )
+
+/// Lemmas for ptx3
+let lemma_deserialize_ptx3_raw_bytes_if_ead3 #cs #auth_material serialized_ptx3
+  = ()
+
+let lemma_deserialize_ptx3 #cs #auth_material serialized_ptx3
+  = ()
+
+let lemma_serialize_then_deserialize_ptx3_equiv #cs #auth_material ptx3
+  = ()
+
+// let lemma_concat_serialize_ptx3_equiv #cs #auth_material ptx3
+  // (#cs:supported_cipherSuite)
+  // (#auth_material:authentication_material)
+  // (ptx3:plaintext3 #cs #auth_material)
+  // : Lemma (ensures (
+  //   serialize_ptx3 #cs #auth_material ptx3 == concat_ptx3 #cs #auth_material ptx3
+  // ))
+  // [SMTPat (serialize_ptx3 #cs #auth_material ptx3)]
+  // = ()
 
 /// Message 3
 

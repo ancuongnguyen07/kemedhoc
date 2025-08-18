@@ -111,5 +111,5 @@ val responder_send_msg2:
   (ensures fun h0 cres h1 -> (
     // modifies clauses
     (cres == CSuccess \/ cres == CInvalidECPoint)
-    /\ ()
+    
   ))

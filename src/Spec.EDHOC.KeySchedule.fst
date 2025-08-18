@@ -16,10 +16,10 @@ let construct_info label context okm_len =
     okm_len = okm_len
   }
 
-let concat_info_get_length i
-  = (FBytes.repr_bytes i.label)
-    + (length i.context)
-    + (FBytes.repr_bytes i.okm_len)
+// let concat_info_get_length i
+//   = (FBytes.repr_bytes i.label)
+//     + (length i.context)
+//     + (FBytes.repr_bytes i.okm_len)
 
 let concat_info i
   = let label_bytes = nat_to_bytes i.label in
@@ -31,6 +31,9 @@ let concat_info i
 let construct_info_to_bytes label context okm_len
   = let info = construct_info label context okm_len in
   concat_info info
+
+let lemma_construct_info_to_bytes_equiv_concat label context okm_len
+  = ()
 
 
 let serialize_info_get_length (i:info)
@@ -54,13 +57,6 @@ let construct_context2 c_r id_cred_r th2 cred_r ead2 =
     ead2 = ead2;
   }
 
-let concat_context2_get_length #cs ctx2
-  = let ead_len = match ctx2.ead2 with
-                    | None -> 0
-                    | Some ead2 -> length ead2
-                    in 
-  (length ctx2.c_r) + (length ctx2.id_cred_r)
-  + (hash_size cs) + (length ctx2.cred_r) + ead_len
 
 let concat_context2 #cs ctx2
   = let c_r_lbytes: lbytes (length ctx2.c_r) = ctx2.c_r in
@@ -75,6 +71,10 @@ let concat_context2 #cs ctx2
 let construct_context2_to_bytes #cs c_r id_cred_r th2 cred_r ead2
   = let ctx2 = construct_context2 c_r id_cred_r th2 cred_r ead2 in
   concat_context2 ctx2
+
+let lemma_construct_context2_to_bytes_equiv_concat #cs c_r id_cred_r th2 cred_r ead2
+  = ()
+
 
 let serialize_context2_get_length #cs ctx2
   = let ead2_length_offset = match ctx2.ead2 with
@@ -106,13 +106,6 @@ let construct_context3 id_cred_i th3 cred_i ead3 =
     ead3 = ead3;
   }
 
-let concat_context3_get_length #cs ctx3
-  = let ead_len = match ctx3.ead3 with
-                    | None -> 0
-                    | Some ead3 -> length ead3
-                    in
-  (length ctx3.id_cred_i) + (hash_size cs)
-  + (length ctx3.cred_i) + ead_len
 
 let concat_context3 #cs ctx3
   = let id_cred_i_lbytes:lbytes (length ctx3.id_cred_i) = ctx3.id_cred_i in
@@ -126,6 +119,9 @@ let concat_context3 #cs ctx3
 let construct_context3_to_bytes #cs id_cred_i th3 cred_i ead3
   = let ctx3 = construct_context3 id_cred_i th3 cred_i ead3 in
   concat_context3 ctx3
+
+let lemma_construct_context3_to_bytes_equiv_concat #cs id_cred_i th3 cred_i ead3
+  = ()
 
 let serialize_context3_get_length #cs ctx3
   = let ead3_length_offset = match ctx3.ead3 with
@@ -159,6 +155,9 @@ let extract_prk2e #cs th2 g_xy
 /// OR PRK3e2m = PRK2e if signature-based authentication is used.
 let extract_prk3e2m #cs salt3e2m g_rx
   = hkdf_extract cs salt3e2m g_rx
+
+let lemma_extract_prk3e2m_equality #cs salt1 salt2 ikm1 ikm2
+  = ()
 
 /// PRK4e3m = HKDF_Extract(SALT4e3m, G_IY)
 /// OR PRK4e3m = PRK3e2m if signature-based authentication is used.

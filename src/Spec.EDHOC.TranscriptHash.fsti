@@ -19,15 +19,15 @@ val compute_th2_pre_hash:
   -> g_y:ec_pub_key cs
   -> hash_out cs
 
-let lemma_compute_th2_and_pre_hash_equiv
-  (cs:supported_cipherSuite) (msg1:message1 #cs)
-  (g_y:ec_pub_key cs)
-  : Lemma (ensures (
+val lemma_compute_th2_and_pre_hash_equiv:
+  cs:supported_cipherSuite
+  -> msg1:message1 #cs
+  -> g_y:ec_pub_key cs
+  -> Lemma (ensures (
     let msg1_hash = do_hash cs (concat_msg1 msg1) in
     Seq.equal (compute_th2 #cs msg1 g_y) (compute_th2_pre_hash #cs msg1_hash g_y)
   ))
   [SMTPat (compute_th2 #cs msg1 g_y)]
-  = ()
 
 /// Transcript Hash 3
 val compute_th3:

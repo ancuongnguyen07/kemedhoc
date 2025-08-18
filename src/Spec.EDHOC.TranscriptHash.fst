@@ -17,6 +17,9 @@ let compute_th2 #cs msg1 g_y
 let compute_th2_pre_hash #cs msg1_hash g_y
   = do_hash cs (msg1_hash @< g_y)
 
+let lemma_compute_th2_and_pre_hash_equiv cs msg1 g_y
+  = ()
+
 /// Transcript Hash 3
 let compute_th3 #cs #auth_material th2 ptx2 cred_r
   = let ptx2_lbytes = concat_ptx2 ptx2 in

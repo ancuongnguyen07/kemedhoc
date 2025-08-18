@@ -263,34 +263,32 @@ type message3 (#cs:supported_cipherSuite) = aead_ciphertext_bytes cs
 /// Message 1
 /// ------------------------
 
-val concat_msg1_get_length:
+// val concat_msg1_get_length:
+//   #cs:supported_cipherSuite
+//   -> msg1:message1 #cs
+//   -> Tot size_nat
+
+let concat_msg1_get_length (#cs:supported_cipherSuite)
+  (msg1:message1 #cs)
+  = let ead_len = match msg1.ead1 with
+          | None -> 0
+          | Some ead1 -> length ead1
+          in 
+  (FBytes.repr_bytes (method_as_nat msg1.method))
+    + (FBytes.repr_bytes msg1.suite_i)
+    + (length msg1.g_x)
+    + (length msg1.c_i)
+    + ead_len
+
+val concat_msg1:
   #cs:supported_cipherSuite
   -> msg1:message1 #cs
-  -> Tot size_nat
+  -> Tot (lbytes (concat_msg1_get_length msg1))
 
-let concat_msg1 (#cs:supported_cipherSuite) (msg1:message1 #cs)
-  : Tot (lbytes (concat_msg1_get_length msg1))
-  = let method_lbyte:lbytes 1 = nat_to_bytes (method_as_nat msg1.method) in
-  let suite_i_lbyte:lbytes 1 = nat_to_bytes msg1.suite_i in
-  let g_x_lbytes:lbytes (length msg1.g_x) = msg1.g_x in
-  let c_i_lbytes:lbytes (length msg1.c_i) = msg1.c_i in
-  let temp = method_lbyte @< suite_i_lbyte @< g_x_lbytes @< c_i_lbytes in
-  let temp_len = length temp in
-
-  let x = method_lbyte @< suite_i_lbyte in
-  let x_len = length x in
-  assert(equal method_lbyte (sub #uint8 #(x_len) x 0 1));
-
-  match msg1.ead1 with
-          | None -> temp
-          | Some ead1 -> (
-            let ead1:lbytes (length ead1) = ead1 in
-            temp @< ead1
-          )
-
-let lemma_concat_msg1_equiv
-  (#cs:supported_cipherSuite) (msg1:message1 #cs)
-  : Lemma (ensures (
+val lemma_concat_msg1_equiv:
+  #cs:supported_cipherSuite
+  -> msg1:message1 #cs
+  -> Lemma (ensures (
     let msg1_concat = concat_msg1 #cs msg1 in
     let msg1_concat:lbytes (length msg1_concat) = msg1_concat in
     let g_x_len = length msg1.g_x in
@@ -308,7 +306,6 @@ let lemma_concat_msg1_equiv
     ))
   ))
   [SMTPat (concat_msg1 #cs msg1)]
-  = ()
 
 /// ------------------------
 /// Plaintext 2
@@ -325,11 +322,14 @@ let construct_ptx2 #cs #auth_material (c_r:c_id_bytes) (id_cred_r:id_cred_i_byte
   }
 
 inline_for_extraction
-val concat_ptx2_get_length:
-  #cs:supported_cipherSuite
-  -> #auth_material:authentication_material
-  -> ptx2:plaintext2 #cs #auth_material
-  -> Tot (ptxt2_ctxt2_size cs auth_material)
+let concat_ptx2_get_length (#cs:supported_cipherSuite)
+  (#auth_material:authentication_material) (ptx2:plaintext2 #cs #auth_material)
+  = let ead_len = match ptx2.ead2 with
+          | None -> 0
+          | Some ead2 -> length ead2
+          in
+    (length ptx2.c_r) + (length ptx2.id_cred_r)
+    + (length ptx2.sig_or_mac2) + ead_len
 
 let concat_ptx2 (#cs:supported_cipherSuite)
   (#auth_material:authentication_material) (ptx2:plaintext2 #cs #auth_material)
@@ -376,10 +376,11 @@ val deserialize_ptx2_raw_bytes:
 
 /// Lemmas for ptx2
 
-let lemma_deserialize_ptx2_raw_bytes (cs:supported_cipherSuite)
-  (auth_material:authentication_material)
-  (serialized_ptx2:plaintext2_bytes cs auth_material)
-  : Lemma (ensures (
+val lemma_deserialize_ptx2_raw_bytes:
+  cs:supported_cipherSuite
+  -> auth_material:authentication_material
+  -> serialized_ptx2:plaintext2_bytes cs auth_material
+  -> Lemma (ensures (
     let ptx2:lbytes (length serialized_ptx2) = serialized_ptx2 in
     let (c_id, id_cred, sig_or_mac2, ead2_op)
       = deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2 in
@@ -397,12 +398,12 @@ let lemma_deserialize_ptx2_raw_bytes (cs:supported_cipherSuite)
     ))
   ))
   [SMTPat (deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2)]
-  = ()
 
-let lemma_concat_ptx2_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx2:plaintext2 #cs #auth_material)
-  : Lemma (ensures (
+val lemma_concat_ptx2_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> ptx2:plaintext2 #cs #auth_material
+  -> Lemma (ensures (
     let ptx2_concat = concat_ptx2 #cs #auth_material ptx2 in
     let ptx2_concat:lbytes (length ptx2_concat) = ptx2_concat in
     
@@ -420,22 +421,22 @@ let lemma_concat_ptx2_equiv
     ))
   ))
   [SMTPat (concat_ptx2 #cs #auth_material ptx2)]
-  = ()
 
-let lemma_concat_serialize_ptx2_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx2:plaintext2 #cs #auth_material)
-  :Lemma (ensures (
+val lemma_concat_serialize_ptx2_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> ptx2:plaintext2 #cs #auth_material
+  -> Lemma (ensures (
     let serialized_ptx2 = serialize_ptx2 #cs #auth_material ptx2 in
     concat_ptx2 #cs #auth_material ptx2 == serialized_ptx2
   ))
   [SMTPat (serialize_ptx2 #cs #auth_material ptx2)]
-  = ()
 
-let lemma_deserialize_serialize_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx2:plaintext2 #cs #auth_material)
-  : Lemma (ensures (
+val lemma_deserialize_serialize_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> ptx2:plaintext2 #cs #auth_material
+  -> Lemma (ensures (
     let serialized_ptx2 = serialize_ptx2 #cs #auth_material ptx2 in
     let (c_r, id_cred_r, sig_or_mac2, ead2)
       = deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2 in
@@ -456,20 +457,18 @@ let lemma_deserialize_serialize_equiv
     ))
   ))
   [SMTPat (serialize_ptx2 #cs #auth_material ptx2)]
-  = ()
 
-let lemma_deserialize_ptx2_raw_bytes_if_ead2
-  (cs:supported_cipherSuite) (auth_material:authentication_material)
-  (serialized_ptx2:plaintext2_bytes cs auth_material)
-  :Lemma
-  (ensures 
+val lemma_deserialize_ptx2_raw_bytes_if_ead2:
+  cs:supported_cipherSuite
+  -> auth_material:authentication_material
+  -> serialized_ptx2:plaintext2_bytes cs auth_material
+  -> Lemma (ensures 
     (
       let (c_id, id_cred, sig_or_mac2, ead2) = deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2 in
       (length serialized_ptx2 > min_ptx2_size cs auth_material) <==> Some? ead2
     )
   )
   [SMTPat (deserialize_ptx2_raw_bytes cs auth_material serialized_ptx2)]
-  = ()
 
 /// ------------------------
 /// Message 2
@@ -539,11 +538,25 @@ let construct_ptx3 (#cs:supported_cipherSuite) (#auth_material:authentication_ma
     }
 
 
-val concat_ptx3_get_length:
-  #cs:supported_cipherSuite
-  -> #auth_material:authentication_material
-  -> ptx3:plaintext3 #cs #auth_material
-  -> Tot (plaintext3_size cs auth_material)
+// val concat_ptx3_get_length:
+//   #cs:supported_cipherSuite
+//   -> #auth_material:authentication_material
+//   -> ptx3:plaintext3 #cs #auth_material
+//   -> Tot (plaintext3_size cs auth_material)
+
+let concat_ptx3_get_length
+  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
+  (ptx3:plaintext3 #cs #auth_material)
+  = let ead_len = match ptx3.ead3 with
+                  | None -> 0
+                  | Some ead3 -> length ead3
+                  in
+  assert(ead_len = 0);
+  let temp = (length ptx3.id_cred_i) + (length ptx3.sig_or_mac3)
+        + ead_len in
+  assert(is_valid_ptx3_size cs auth_material temp);
+  assert(temp = (length ptx3.id_cred_i) + (length ptx3.sig_or_mac3));
+  temp
 
 val concat_ptx3:
   #cs:supported_cipherSuite
@@ -551,10 +564,11 @@ val concat_ptx3:
   -> ptx3:plaintext3 #cs #auth_material
   -> Tot (lbytes (concat_ptx3_get_length ptx3))
 
-let lemma_concat_ptx3_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx3:plaintext3 #cs #auth_material)
-  : Lemma (ensures (
+val lemma_concat_ptx3_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> ptx3:plaintext3 #cs #auth_material
+  -> Lemma (ensures (
     let ptx3_concat = concat_ptx3 ptx3 in
     match ptx3.ead3 with
       | None -> equal ptx3_concat (ptx3.id_cred_i @< ptx3.sig_or_mac3)
@@ -564,7 +578,6 @@ let lemma_concat_ptx3_equiv
       )
   ))
   [SMTPat (concat_ptx3 #cs #auth_material ptx3)]
-  = ()
 
 val serialize_ptx3_get_length:
   #cs:supported_cipherSuite
@@ -572,17 +585,17 @@ val serialize_ptx3_get_length:
   -> ptx3:plaintext3 #cs #auth_material
   -> Tot (plaintext3_size cs auth_material)
 
-let lemma_serialize_ptx3_get_length_concat_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx3:plaintext3 #cs #auth_material)
-  :Lemma (ensures (
+val lemma_serialize_ptx3_get_length_concat_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> ptx3:plaintext3 #cs #auth_material
+  -> Lemma (ensures (
     let ptx3_concat_len = concat_ptx3_get_length ptx3 in
     ptx3_concat_len = serialize_ptx3_get_length ptx3
     /\ ptx3_concat_len = length ptx3.id_cred_i + length ptx3.sig_or_mac3
   ))
   [SMTPat (concat_ptx3_get_length #cs #auth_material ptx3);
   SMTPat (serialize_ptx3_get_length #cs #auth_material ptx3)]
-  = ()
 
 val serialize_ptx3:
   #cs:supported_cipherSuite
@@ -597,20 +610,22 @@ val deserialize_ptx3_raw_bytes:
   -> Tot (id_cred_i_bytes & sig_or_mac23_bytes cs auth_material & option ead_bytes)
 
 /// Lemmas for ptx3
-let lemma_deserialize_ptx3_raw_bytes_if_ead3
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (serialized_ptx3:plaintext3_bytes cs auth_material)
-  :Lemma
+val lemma_deserialize_ptx3_raw_bytes_if_ead3:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> serialized_ptx3:plaintext3_bytes cs auth_material
+  -> Lemma
   (ensures (
     let (id_cred_i, sig_or_mac3, ead3) = deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3 in
     length serialized_ptx3 > min_ptx3_size cs auth_material <==> Some? ead3
   ))
   [SMTPat (deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3)]
-  = ()
 
-let lemma_deserialize_ptx3 (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (serialized_ptx3:plaintext3_bytes cs auth_material)
-  : Lemma (ensures (
+val lemma_deserialize_ptx3:
+  #cs:supported_cipherSuite
+  -> #auth_material:authentication_material
+  -> serialized_ptx3:plaintext3_bytes cs auth_material
+  -> Lemma (ensures (
     let (id_cred_i, sig_or_mac3, ead3_op)
       = deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3 in
     let serialized_ptx3:lbytes (length serialized_ptx3) = serialized_ptx3 in
@@ -630,19 +645,19 @@ let lemma_deserialize_ptx3 (#cs:supported_cipherSuite) (#auth_material:authentic
     ))
   ))
   [SMTPat (deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3)]
-  = ()
 
-let lemma_serialize_then_deserialize_ptx3_equiv
-  (#cs:supported_cipherSuite) (#auth_material: authentication_material)
-  (ptx3:plaintext3 #cs #auth_material)
-  : Lemma (ensures (
+val lemma_serialize_then_deserialize_ptx3_equiv:
+  #cs:supported_cipherSuite
+  -> #auth_material: authentication_material
+  -> ptx3:plaintext3 #cs #auth_material
+  -> Lemma (ensures (
     let serialized_ptx3 = serialize_ptx3 ptx3 in
     let (id_cred_i, sig_or_mac3, ead3)
       = deserialize_ptx3_raw_bytes #cs #auth_material serialized_ptx3 in
 
     Seq.equal ptx3.id_cred_i id_cred_i
     /\ Seq.equal ptx3.sig_or_mac3 sig_or_mac3
-    /\ (Some? ptx3.ead3 /\ (length (Some?.v ptx3.ead3)) > 0) <==> Some? ead3
+    /\ ((Some? ptx3.ead3 /\ (length (Some?.v ptx3.ead3)) > 0) <==> Some? ead3)
     /\ (Some? ead3 ==> (
       let de_ead3 = Some?.v ead3 in
       let se_ead3 = Some?.v ptx3.ead3 in
@@ -654,16 +669,15 @@ let lemma_serialize_then_deserialize_ptx3_equiv
     ))
   ))
   [SMTPat (serialize_ptx3 #cs #auth_material ptx3)]
-  = ()
 
-let lemma_concat_serialize_ptx3_equiv
-  (#cs:supported_cipherSuite) (#auth_material:authentication_material)
-  (ptx3:plaintext3 #cs #auth_material)
-  :Lemma (ensures (
-    serialize_ptx3 #cs #auth_material ptx3 == concat_ptx3 #cs #auth_material ptx3
-  ))
-  [SMTPat (serialize_ptx3 #cs #auth_material ptx3)]
-  = ()
+// val lemma_concat_serialize_ptx3_equiv:
+//   #cs:supported_cipherSuite
+//   -> #auth_material:authentication_material
+//   -> ptx3:plaintext3 #cs #auth_material
+//   -> Lemma (ensures (
+//     serialize_ptx3 #cs #auth_material ptx3 == concat_ptx3 #cs #auth_material ptx3
+//   ))
+//   [SMTPat (serialize_ptx3 #cs #auth_material ptx3)]
 
 /// ------------------------
 /// Message 3

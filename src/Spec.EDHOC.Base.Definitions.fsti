@@ -68,14 +68,13 @@ val label_to_method:
   method_label
   -> Tot method_enum
 
-let lemma_method_as_nat_to_method_equiv
-  (m:method_enum)
-  : Lemma (ensures m == label_to_method (method_as_nat m))
+val lemma_method_as_nat_to_method_equiv:
+  m:method_enum
+  -> Lemma (ensures m == label_to_method (method_as_nat m))
   [SMTPat (method_as_nat m)]
-  = ()
 
-let lemma_label_to_method_label_equiv
-  (l:method_label)
-  : Lemma (ensures l = method_as_nat (label_to_method l))
+val lemma_label_to_method_label_equiv:
+  l:method_label
+  -> Lemma (ensures l = method_as_nat (label_to_method l))
   [SMTPat (label_to_method l)]
-  = ()
+  

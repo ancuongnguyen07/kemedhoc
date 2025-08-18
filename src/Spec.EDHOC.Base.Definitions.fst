@@ -24,3 +24,9 @@ let label_to_method label
     | 2 -> SigStat
     | 3 -> StatSig
     | 4 -> StatStat
+
+let lemma_method_as_nat_to_method_equiv m
+  = ()
+
+let lemma_label_to_method_label_equiv l
+  = ()

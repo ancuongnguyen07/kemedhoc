@@ -67,18 +67,6 @@ val decrypt_ciphertext3:
   -> Tot (eresult (lbytes (length ciphertext3 - aead_tag_size (get_aead_alg cs))))
   // -> Tot (eresult (plaintext3_bytes cs auth_material_i))
 
-let lemma_decrypt_ciphertext3_valid_length
-  (#cs:supported_cipherSuite) (auth_material_i:authentication_material)
-  (ciphertext3:aead_ciphertext_bytes cs) (th3:hash_out cs) (prk3e2m:hash_out cs)
-  :Lemma (ensures (
-    match (decrypt_ciphertext3 #cs auth_material_i ciphertext3 th3 prk3e2m) with
-      | Fail DecryptionFailed -> True
-      | Res serialized_ptx3 -> length serialized_ptx3 <= max_size_t
-      | _ -> False
-  ))
-  [SMTPat (decrypt_ciphertext3 #cs auth_material_i ciphertext3 th3 prk3e2m)]
-  = ()
-
 val lemma_encrypt_decrypt_ciphertext3_equiv:
   #cs:supported_cipherSuite
   -> #auth_material:authentication_material

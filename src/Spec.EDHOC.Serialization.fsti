@@ -1,3 +1,15 @@
+(*
+I build a customized encoding/deconding mechanism here
+to leverage the simplicity of high-level FStar model.
+Actually, EDHOC uses CBOR under the hood, but there is no
+published verified CBOR model at this moment (EverParse is
+working on it, found a CBOR-specific branch in EverParse repo,
+but it seems way long to be released.)
+
+Several functions here are ported from libsignal
+(https://github.com/Inria-Prosecco/libsignal-protocol-wasm-fstar/tree/master)
+*)
+
 module Spec.EDHOC.Serialization
 
 open FStar.Mul
@@ -46,12 +58,13 @@ val ( @< ):
   -> b:lbytes len2
   -> c:lbytes (len1 + len2)
 
-let lemma_concat_alias_equiv (#len1:size_nat)
-  (#len2:size_nat{len1 + len2 <= max_size_t})
-  (a:lbytes len1) (b:lbytes len2)
-  : Lemma (ensures a @< b == concat a b)
+val lemma_concat_alias_equiv:
+  #len1:size_nat
+  -> #len2:size_nat{len1 + len2 <= max_size_t}
+  -> a:lbytes len1
+  -> b:lbytes len2
+  -> Lemma (ensures a @< b == concat a b)
   [SMTPat (a @< b)]
-  = ()
 
 /// concat2 and concat3 are already available at `Lib.Buffer` in HACL
 /// I need to implement concat4 and concat5 for EDHOC.
