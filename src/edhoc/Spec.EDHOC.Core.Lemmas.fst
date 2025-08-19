@@ -130,6 +130,7 @@ let bundle_msg1_msg3 #cs entr is rs method
   = match (bundle_msg1_msg2 #cs entr is rs method) with
       | Fail e -> Fail e
       | Res (ptx2_i, ptx2_r, msg2, is', rs', hs_i'', hs_r'') -> (
+        assert(hs_i''.method == hs_r''.method);
         match (initiator_send_msg3 #cs entr is' hs_i'' ptx2_i) with
           | Fail e -> Fail e
           | Res (msg3, hs_i''') -> (

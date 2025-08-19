@@ -1,9 +1,9 @@
-EDHOC_HOME ?= .
+EDHOC_HOME ?= ./
 
 # === F* Setup ===
 FSTAR          ?= fstar.exe
-KRML_HOME      ?= ../external-libs/karamel
-HACL_HOME      ?= ../external-libs/hacl-star
+KRML_HOME      ?= ../../external-libs/karamel
+HACL_HOME      ?= ../../external-libs/hacl-star
 FSTAR_HOME     ?= ~/.opam/default/lib/fstar
 
 include $(HACL_HOME)/Makefile.include
