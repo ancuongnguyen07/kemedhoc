@@ -94,6 +94,26 @@ let concat5 #len1 #len2 #len3 #len4 #len5 s1 s2 s3 s4 s5
 let lemma_concat5_comp #len1 #len2 #len3 #len4 #len5 s1 s2 s3 s4 s5
   = ()
 
+let concat6 #len1 #len2 #len3 #len4 #len5 #len6 s1 s2 s3 s4 s5 s6
+  = let s = concat5 s1 s2 s3 s4 s5 in
+  let s = s @< s6 in
+  let s' = Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6 in
+  (**) FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2 + len3 + len4 + len5)) len4;
+  (**) FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2 + len3 + len4 + len5)) len4;
+  (**) FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2 + len3)) len3;
+  (**) FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2 + len3)) len3;
+  (**) FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2)) len2;
+  (**) FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2)) len2;
+  (**) FSeqProp.lemma_split s (len1 + len2);
+  (**) FSeqProp.lemma_split s' (len1 + len2);
+  (**) FSeq.lemma_eq_intro s (Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6);
+  (**) assert (Seq.equal s6 (Seq.sub s (len1 + len2 + len3 + len4 + len5) len6));
+  s
+
+let lemma_concat6_comp #len1 #len2 #len3 #len4 #len5 #len6 s1 s2 s3 s4 s5 s6
+  = ()
+
+
 /// Referenced: libsignal*
 /// Prepend 2 bytes to the given bytes
 let ( @: ) #len a b

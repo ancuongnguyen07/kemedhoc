@@ -483,6 +483,7 @@ val alg_aead_correctness:
       | None -> false
       | Some msg' -> msg' == msg
   )
+  [SMTPat (alg_aead_encrypt a k iv aad msg)]
 
 let aead_correctness:
   #c:supported_cipherSuite
@@ -497,6 +498,7 @@ let aead_correctness:
       | None -> false
       | Some msg' -> msg == msg'
   )
+  [SMTPat (aead_encrypt #c k iv aad msg)]
   = fun #c k iv aad msg -> alg_aead_correctness (get_aead_alg c) k iv aad msg
 
 
@@ -512,9 +514,12 @@ let alg_get_hash_max_input (a:hashAlg)
 let get_hash_max_input (cs:supported_cipherSuite)
   = alg_get_hash_max_input (get_hash_alg cs)
 
+inline_for_extraction
+type valid_hash_input_bytes (a:hashAlg) = b:bytes{length b <= alg_get_hash_max_input a}
+
 val alg_do_hash:
   a:hashAlg
-  -> input:bytes{length input <= alg_get_hash_max_input a}
+  -> input: valid_hash_input_bytes a
   -> Tot (alg_hash_out a)
 
 val lemma_alg_do_hash_spec_hash_equiv:

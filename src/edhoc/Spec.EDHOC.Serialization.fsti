@@ -174,6 +174,46 @@ val lemma_concat5_comp:
   ))
   [SMTPat (concat5 s1 s2 s3 s4 s5)]
 
+val concat6:
+  #len1:size_nat
+  -> #len2:size_nat{len1 + len2 <= max_size_t}
+  -> #len3:size_nat{len1 + len2 + len3 <= max_size_t}
+  -> #len4:size_nat{len1 + len2 + len3 + len4 <= max_size_t}
+  -> #len5:size_nat{len1 + len2 + len3 + len4 + len5 <= max_size_t}
+  -> #len6:size_nat{len1 + len2 + len3 + len4 + len5 + len6 <= max_size_t}
+  -> s1:lbytes len1
+  -> s2:lbytes len2
+  -> s3:lbytes len3
+  -> s4:lbytes len4
+  -> s5:lbytes len5
+  -> s6:lbytes len6
+  -> s:lbytes (len1 + len2 + len3 + len4 + len5 + len6)
+
+val lemma_concat6_comp:
+  #len1:size_nat
+  -> #len2:size_nat{len1 + len2 <= max_size_t}
+  -> #len3:size_nat{len1 + len2 + len3 <= max_size_t}
+  -> #len4:size_nat{len1 + len2 + len3 + len4 <= max_size_t}
+  -> #len5:size_nat{len1 + len2 + len3 + len4 + len5 <= max_size_t}
+  -> #len6:size_nat{len1 + len2 + len3 + len4 + len5 + len6 <= max_size_t}
+  -> s1:lbytes len1
+  -> s2:lbytes len2
+  -> s3:lbytes len3
+  -> s4:lbytes len4
+  -> s5:lbytes len5
+  -> s6:lbytes len6
+  -> Lemma (ensures (
+    let s = concat6 s1 s2 s3 s4 s5 s6 in
+    Seq.equal s1 (Seq.sub s 0 len1)
+    /\ Seq.equal s2 (Seq.sub s len1 len2)
+    /\ Seq.equal s3 (Seq.sub s (len1 + len2) len3)
+    /\ Seq.equal s4 (Seq.sub s (len1 + len2 + len3) len4)
+    /\ Seq.equal s5 (Seq.sub s (len1 + len2 + len3 + len4) len5)
+    /\ Seq.equal s6 (Seq.sub s (len1 + len2 + len3 + len4 + len5) len6)
+    /\ s == Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6
+  ))
+  [SMTPat (concat6 s1 s2 s3 s4 s5 s6)]
+
 let concat_lbytes:
   #len1:size_nat
   -> #len2:size_nat{len1 + len2 <= max_size_t}
