@@ -388,7 +388,11 @@ val lemma_bundle_msg1_msg2:
   -> Lemma (requires precondition_integration_party_states is rs method)
   (ensures (
     match (bundle_msg1_msg2 #cs entr is rs method) with
-      | Fail _ -> True
+      | Fail InvalidECPoint | Fail UnsupportedCipherSuite
+      | Fail SerializationDeserializationFailed | Fail SigningFailed
+      | Fail IntegrityCheckFailed | Fail UnknownCredentialID
+      | Fail InvalidCredential -> true
+      | Fail _ -> false
       | Res (ptx2_i, ptx2_r, msg2, is', rs', hs_i'', hs_r'') ->
         post_hs_after_msg2 #cs hs_i'' hs_r''
         /\ hs_r''.method = method

@@ -381,15 +381,11 @@ inline_for_extraction noextract
 let valid_hs_msg1_to_msg2
   (#cs:supported_cipherSuite) (hs':handshake_state_after_msg1 #cs)
   (hs'':handshake_state_after_msg2 #cs)
-  =
-  // let g_x' = (Some?.v hs'.msg1).g_x in
-  // let g_x'' = (Some?.v hs''.msg1).g_x in
-  hs'.method = hs''.method
+  = hs'.method = hs''.method
   /\ hs'.suite_i = hs''.suite_i
   /\ lbytes_eq hs'.g_x hs''.g_x
   /\ lbytes_eq hs'.msg1_hash hs''.msg1_hash
-  // /\ (Some?.v hs'.msg1) == (Some?.v hs''.msg1)
-  // /\ eqb_from_prop (Some?.v hs'.msg1) (Some?.v hs''.msg1)
+
 
 inline_for_extraction noextract
 let valid_hs_msg2_to_msg3
