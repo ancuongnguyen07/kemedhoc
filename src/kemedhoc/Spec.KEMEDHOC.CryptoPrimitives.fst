@@ -24,6 +24,10 @@ type kemAlg =
   | Frodo640
   | ML_KEM512
 
+/// Currently, HACL* only has a verified implememtation of SHAKE128-based generation algorithm
+inline_for_extraction
+let genFrodoAlg = FrodoParamsSpec.SHAKE128
+
 let is_supported_kem (a:kemAlg)
   : Tot bool
   = match a with
@@ -272,9 +276,12 @@ type kemSharedSecret (kcs: kemCipherSuite) = lbytes (kem_shared_secret_size kcs)
 /// type `state` for randomization in KEM
 inline_for_extraction
 type kemState = FrodoRandomSpec.state_t
+/// Assume the random state is globally available
 
 /// KEM keypair type
-type kemKeyPair (kcs:supportedKemCipherSuite) = kemPublicKey kcs & kemPrivateKey kcs
+type alg_kemKeyPair (a: kemAlg) = (lbytes (alg_kem_public_key_size a)) & (lbytes (alg_kem_priv_key_size a))
+inline_for_extraction
+type kemKeyPair (kcs:supportedKemCipherSuite) = alg_kemKeyPair (get_kem_alg kcs)
 inline_for_extraction
 let get_pub_kem_key (#kcs:supportedKemCipherSuite) (kp: kemKeyPair kcs)
   : kemPublicKey kcs
@@ -287,8 +294,10 @@ let get_priv_kem_key (#kcs:supportedKemCipherSuite) (kp: kemKeyPair kcs)
     | _, priv -> priv
 
 /// KEM Encapsulation output
+type alg_kemEncapsOutput (a: kemAlg) = (lbytes (alg_kem_ciphertext_size a)) & (lbytes (alg_kem_shared_secret_size a))
+inline_for_extraction
 type kemEncapsOutput (kcs:supportedKemCipherSuite) =
-  kemCiphertext kcs & kemSharedSecret kcs
+  alg_kemEncapsOutput (get_kem_alg kcs)
 inline_for_extraction
 let get_kem_ciphertext (#kcs:supportedKemCipherSuite) (encaps: kemEncapsOutput kcs)
   : kemCiphertext kcs
@@ -300,22 +309,52 @@ let get_kem_shared_secret (#kcs:supportedKemCipherSuite) (encaps: kemEncapsOutpu
   = match encaps with
     | _, ss -> ss
 
-(* KEM algorithms: KeyGen, Encaps, Decaps *)
+(*Algorithm-driven KEM algorithm: KeyGen, Encaps, Decaps*)
+/// KEM key generation
+inline_for_extraction
+let kem_entr_len = 48
 
-(*KEM algorithms: KeyGen, Encaps, Decaps*)
+val alg_kem_keygen:
+  a: supportedKemAlg
+  -> entr: entropy
+  -> alg_kemKeyPair a
+
+let alg_kem_keygen a entr
+  = let entr1, kem_entr = crypto_random entr kem_entr_len in
+  let state: kemState = FrodoRandomSpec.randombytes_init_ kem_entr in
+  FrodoKemKeyGen.crypto_kem_keypair (kemAlg_to_frodo_alg a) genFrodoAlg state
+
+/// KEM encapsulation
+val alg_kem_encaps:
+  a: supportedKemAlg
+  -> entr: entropy
+  -> pub_key: lbytes (alg_kem_public_key_size a)
+  -> alg_kemEncapsOutput a
+
+let alg_kem_encaps a entr pub_key
+  = let entr1, kem_entr = crypto_random entr kem_entr_len in
+  let state: kemState = FrodoRandomSpec.randombytes_init_ kem_entr in
+  FrodoKemEncaps.crypto_kem_enc (kemAlg_to_frodo_alg a) genFrodoAlg state pub_key
+
+/// KEM decapsulation
+val alg_kem_decaps:
+  a: supportedKemAlg
+  -> ct: lbytes (alg_kem_ciphertext_size a)
+  -> priv_key: lbytes (alg_kem_priv_key_size a)
+  -> lbytes (alg_kem_shared_secret_size a)
+
+let alg_kem_decaps a ct priv_key
+  = FrodoKemDecaps.crypto_kem_dec (kemAlg_to_frodo_alg a) genFrodoAlg ct priv_key
+
+(*Ciphersuite-driven KEM algorithms: KeyGen, Encaps, Decaps*)
 /// KEM key generation
 val kem_keygen:
   kcs: supportedKemCipherSuite
   -> entr: entropy
   -> kemKeyPair kcs
 
-inline_for_extraction
-let kem_entr_len = 48
-
 let kem_keygen kcs entr
-  = let entr1, kem_entr = crypto_random entr kem_entr_len in
-  let state: kemState = FrodoRandomSpec.randombytes_init_ kem_entr in
-  FrodoKemKeyGen.crypto_kem_keypair (kemAlg_to_frodo_alg (get_kem_alg kcs)) FrodoParamsSpec.AES128 state
+  = alg_kem_keygen (get_kem_alg kcs) entr
 
 /// KEM encapsulation
 val kem_encaps:
@@ -325,9 +364,7 @@ val kem_encaps:
   -> kemEncapsOutput kcs
 
 let kem_encaps kcs entr pub_key
-  = let entr1, kem_entr = crypto_random entr kem_entr_len in
-  let state: kemState = FrodoRandomSpec.randombytes_init_ kem_entr in
-  FrodoKemEncaps.crypto_kem_enc (kemAlg_to_frodo_alg (get_kem_alg kcs)) FrodoParamsSpec.AES128 state pub_key
+  = alg_kem_encaps (get_kem_alg kcs) entr pub_key
 
 /// KEM decapsulation
 val kem_decaps:
@@ -337,9 +374,21 @@ val kem_decaps:
   -> kemSharedSecret kcs
 
 let kem_decaps kcs ct priv_key
-  = FrodoKemDecaps.crypto_kem_dec (kemAlg_to_frodo_alg (get_kem_alg kcs)) FrodoParamsSpec.AES128 ct priv_key
+  = alg_kem_decaps (get_kem_alg kcs) ct priv_key
 
 /// Lemmas for functional correctness of KEM
+let lemma_alg_kem_functional_correctness
+  (a: supportedKemAlg) (entr: entropy)
+  : Lemma (ensures (
+    let pub_key, priv_key = alg_kem_keygen a entr in
+    let ct, ss = alg_kem_encaps a entr pub_key in
+    let decaped_ss = alg_kem_decaps a ct priv_key in
+
+    equal ss decaped_ss
+  ))
+  [SMTPat (alg_kem_keygen a entr)]
+  = admit ()
+
 let lemma_kem_functional_correctness
   (kcs: supportedKemCipherSuite) (entr: entropy)
   : Lemma (ensures (
@@ -350,4 +399,4 @@ let lemma_kem_functional_correctness
     equal ss decaped_ss
   ))
   [SMTPat (kem_keygen kcs entr)]
-  = admit ()
+  = lemma_alg_kem_functional_correctness (get_kem_alg kcs) entr
