@@ -57,7 +57,6 @@ inline_for_extraction
 type c3_buff (kcs: supportedKemCipherSuite)
   = lbuffer uint8 (size (SpecParser.c3_size kcs))
 
-
 (*Crypto Primitives buffer*)
 
 /// Alg-driven KEM buffers

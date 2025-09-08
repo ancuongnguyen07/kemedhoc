@@ -181,6 +181,10 @@ val lemma_deserialize_ptx1_correctness:
 /// Message 1
 /// ------------------------
 
+let concat_msg1_fixed_length (kcs: supportedKemCipherSuite)
+  : size_nat
+  = 1 + 1 + (kem_public_key_size kcs) + (kem_ciphertext_size kcs) + c_id_size + (c1_size kcs)
+
 let concat_msg1_get_length (#kcs: supportedKemCipherSuite)
   (msg1: message1 #kcs)
   : size_nat
