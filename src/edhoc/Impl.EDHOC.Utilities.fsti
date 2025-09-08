@@ -256,6 +256,36 @@ val concat_buff5:
     /\ (as_seq h1 output) == (Seq.concat (Seq.concat (Seq.concat (Seq.concat (as_seq h0 buff1) (as_seq h0 buff2)) (as_seq h0 buff3)) (as_seq h0 buff4)) (as_seq h0 buff5))
   )
 
+val concat_buff6:
+  #t:buftype
+  -> #a:Type0
+  -> #len1:size_t
+  -> #len2:size_t{size_v len1 + size_v len2 <= max_size_t}
+  -> #len3:size_t{size_v len1 + size_v len2 + size_v len3 <= max_size_t}
+  -> #len4:size_t{size_v len1 + size_v len2 + size_v len3 + size_v len4 <= max_size_t}
+  -> #len5:size_t{size_v len1 + size_v len2 + size_v len3 + size_v len4 + size_v len5 <= max_size_t}
+  -> #len6:size_t{size_v len1 + size_v len2 + size_v len3 + size_v len4 + size_v len5 + size_v len6 <= max_size_t}
+  -> buff1:lbuffer_t t a len1
+  -> buff2:lbuffer_t t a len2
+  -> buff3:lbuffer_t t a len3
+  -> buff4:lbuffer_t t a len4
+  -> buff5:lbuffer_t t a len5
+  -> buff6:lbuffer_t t a len6
+  -> output:lbuffer a (len1 +! len2 +! len3 +! len4 +! len5 +! len6)
+  -> ST.Stack unit
+  (requires fun h0 ->
+    live h0 buff1 /\ live h0 buff2 /\ live h0 buff3 /\ live h0 buff4
+    /\ live h0 buff5 /\ live h0 buff6 /\ live h0 output
+    /\ disjoint output buff1 /\ disjoint output buff2
+    /\ disjoint output buff3 /\ disjoint output buff4
+    /\ disjoint output buff5 /\ disjoint output buff6 
+  )
+  (ensures fun h0 _ h1 ->
+    modifies1 output h0 h1
+    /\ (as_seq h1 output)
+      == (Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat (as_seq h0 buff1) (as_seq h0 buff2)) (as_seq h0 buff3)) (as_seq h0 buff4)) (as_seq h0 buff5)) (as_seq h0 buff6))
+  )
+
 
 inline_for_extraction
 val split_buffer:

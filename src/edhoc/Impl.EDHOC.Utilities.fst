@@ -93,6 +93,44 @@ let concat_buff5 #t #a #len1 #len2 #len3 #len4 #len5 buff1 buff2 buff3
     (size_v len3) (as_seq h0 buff3) (size_v len4) (as_seq h0 buff4)
     (size_v len5) (as_seq h1 buff5) (as_seq h4 output)
 
+let concat_buff6 #t #a #len1 #len2 #len3 #len4 #len5 #len6 buff1 buff2
+  buff3 buff4 buff5 buff6 output
+  = let h0 = ST.get () in
+  update_sub output (size 0) len1 buff1;
+  update_sub output len1 len2 buff2;
+  let h1 = ST.get () in
+  (**) Seq.eq_intro (Seq.sub (as_seq h1 output) 0 (size_v len1)) (as_seq h0 buff1);
+
+  update_sub output (len1 +! len2) len3 buff3;
+  let h2 = ST.get () in
+  (**) Seq.eq_intro (Seq.sub (as_seq h2 output) 0 (size_v len1)) (as_seq h0 buff1);
+  (**) Seq.eq_intro (Seq.sub (as_seq h2 output) (size_v len1) (size_v len2)) (as_seq h0 buff2);
+
+  update_sub output (len1 +! len2 +! len3) len4 buff4;
+  let h3 = ST.get () in
+  (**) Seq.eq_intro (Seq.sub (as_seq h3 output) 0 (size_v len1)) (as_seq h0 buff1);
+  (**) Seq.eq_intro (Seq.sub (as_seq h3 output) (size_v len1) (size_v len2)) (as_seq h0 buff2);
+  (**) Seq.eq_intro (Seq.sub (as_seq h3 output) (size_v len1 + size_v len2) (size_v len3)) (as_seq h0 buff3);
+
+  update_sub output (len1 +! len2 +! len3 +! len4) len5 buff5;
+  let h4 = ST.get () in
+  (**) Seq.eq_intro (Seq.sub (as_seq h4 output) 0 (size_v len1)) (as_seq h0 buff1);
+  (**) Seq.eq_intro (Seq.sub (as_seq h4 output) (size_v len1) (size_v len2)) (as_seq h0 buff2);
+  (**) Seq.eq_intro (Seq.sub (as_seq h4 output) (size_v len1 + size_v len2) (size_v len3)) (as_seq h0 buff3);
+  (**) Seq.eq_intro (Seq.sub (as_seq h4 output) (size_v len1 + size_v len2 + size_v len3) (size_v len4)) (as_seq h0 buff4);
+
+  update_sub output (len1 +! len2 +! len3 +! len4 +! len5) len6 buff6;
+  let h5 = ST.get () in
+  (**) Seq.eq_intro (Seq.sub (as_seq h5 output) 0 (size_v len1)) (as_seq h0 buff1);
+  (**) Seq.eq_intro (Seq.sub (as_seq h5 output) (size_v len1) (size_v len2)) (as_seq h0 buff2);
+  (**) Seq.eq_intro (Seq.sub (as_seq h5 output) (size_v len1 + size_v len2) (size_v len3)) (as_seq h0 buff3);
+  (**) Seq.eq_intro (Seq.sub (as_seq h5 output) (size_v len1 + size_v len2 + size_v len3) (size_v len4)) (as_seq h0 buff4);
+  (**) Seq.eq_intro (Seq.sub (as_seq h5 output) (size_v len1 + size_v len2 + size_v len3 + size_v len4) (size_v len5)) (as_seq h0 buff5);
+  (**) SerdSpec.lemma_concat6 (size_v len1) (as_seq h0 buff1) (size_v len2) (as_seq h0 buff2)
+    (size_v len3) (as_seq h0 buff3) (size_v len4) (as_seq h0 buff4)
+    (size_v len5) (as_seq h0 buff5) (size_v len6) (as_seq h1 buff6) (as_seq h5 output)
+
+
 let split_buffer #a #len s pos
   = let h0 = ST.get () in
   ST.push_frame();

@@ -107,6 +107,29 @@ val lemma_concat5:
                 /\ Seq.sub s (len1 + len2 + len3 + len4) len5 == s5)
   (ensures s == Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5)
 
+val lemma_concat6:
+  #a:Type0
+  -> len1:size_nat
+  -> s1:Seq.lseq a len1
+  -> len2:size_nat{len1 + len2 <= max_size_t}
+  -> s2:Seq.lseq a len2
+  -> len3:size_nat{len1 + len2 + len3 <= max_size_t}
+  -> s3:Seq.lseq a len3
+  -> len4:size_nat{len1 + len2 + len3 + len4 <= max_size_t}
+  -> s4:Seq.lseq a len4
+  -> len5:size_nat{len1 + len2 + len3 + len4 + len5 <= max_size_t}
+  -> s5:Seq.lseq a len5
+  -> len6:size_nat{len1 + len2 + len3 + len4 + len5 + len6 <= max_size_t}
+  -> s6:Seq.lseq a len6
+  -> s:Seq.lseq a (len1 + len2 + len3 + len4 + len5 + len6)
+  -> Lemma (requires Seq.sub s 0 len1 == s1
+                /\ Seq.sub s len1 len2 == s2
+                /\ Seq.sub s (len1 + len2) len3 == s3
+                /\ Seq.sub s (len1 + len2 + len3) len4 == s4
+                /\ Seq.sub s (len1 + len2 + len3 + len4) len5 == s5
+                /\ Seq.sub s (len1 + len2 + len3 + len4 + len5) len6 == s6)
+  (ensures s == Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6)
+
 val concat4:
   #len1:size_nat
   -> #len2:size_nat{len1 + len2 <= max_size_t}

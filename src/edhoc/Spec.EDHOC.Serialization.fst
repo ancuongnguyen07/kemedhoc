@@ -43,6 +43,18 @@ let lemma_concat5 #a len1 s1 len2 s2 len3 s3 len4 s4 len5 s5 s
   FSeqProp.lemma_split s' (len1 + len2);
   FSeq.lemma_eq_intro s (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5)
 
+let lemma_concat6 #a len1 s1 len2 s2 len3 s3 len4 s4 len5 s5 len6 s6 s
+  = let s' = Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6 in
+  FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2 + len3 + len4 + len5)) len4;
+  FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2 + len3 + len4 + len5)) len4;
+  FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2 + len3)) len3;
+  FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2 + len3)) len3;
+  FSeqProp.lemma_split (Seq.sub s 0 (len1 + len2)) len2;
+  FSeqProp.lemma_split (Seq.sub s' 0 (len1 + len2)) len2;
+  FSeqProp.lemma_split s (len1 + len2);
+  FSeqProp.lemma_split s' (len1 + len2);
+  FSeq.lemma_eq_intro s (Seq.concat (Seq.concat (Seq.concat (Seq.concat (Seq.concat s1 s2) s3) s4) s5) s6)
+
 let concat4 #len1 #len2 #len3 #len4 s1 s2 s3 s4
   = let s = s1 @< s2 in
   (**) FSeqProp.lemma_split s len1;
