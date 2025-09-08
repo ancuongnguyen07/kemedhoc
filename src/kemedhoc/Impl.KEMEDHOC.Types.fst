@@ -75,6 +75,20 @@ type alg_kem_shared_secret_buff (a: kemAlg)
 
 /// Ciphersuite-driven KEM buffers
 inline_for_extraction
+let kem_public_key_size_t (kcs: kemCipherSuite)
+  = size (kem_public_key_size kcs)
+inline_for_extraction
+let kem_priv_key_size_t (kcs: kemCipherSuite)
+  = size (kem_priv_key_size kcs)
+inline_for_extraction
+let kem_ciphertext_size_t (kcs: kemCipherSuite)
+  = size (kem_ciphertext_size kcs)
+inline_for_extraction
+let kem_shared_secret_size_t (kcs: kemCipherSuite)
+  = size (kem_shared_secret_size kcs)
+
+
+inline_for_extraction
 type kem_pub_key_buff (kcs: kemCipherSuite)
   = alg_kem_pub_key_buff (get_kem_alg kcs)
 inline_for_extraction
@@ -84,7 +98,7 @@ inline_for_extraction
 type kem_ciphertext_buff (kcs: kemCipherSuite)
   = alg_kem_ciphertext_buff (get_kem_alg kcs)
 inline_for_extraction
-type kem_shared_secret_size (kcs: kemCipherSuite)
+type kem_shared_secret_buff (kcs: kemCipherSuite)
   = alg_kem_shared_secret_buff (get_kem_alg kcs)
 
 

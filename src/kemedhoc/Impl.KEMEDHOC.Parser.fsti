@@ -31,6 +31,15 @@ open LowStar.BufferOps
 
 open Impl.KEMEDHOC.CryptoPrimitives
 
+(*---------------------------- Utility sizes*)
+inline_for_extraction
+let plaintext1_size_t = size Spec.id_cred_size +! size Spec.cred_size
+inline_for_extraction
+let plaintext2_size_t (kcs: supportedKemCipherSuite)
+    = size Spec.c_id_size +! size Spec.id_cred_size +! size Spec.cred_size +! size (SpecCrypto.mac23_size kcs)
+inline_for_extraction
+let plaintext3_size_t (kcs: supportedKemCipherSuite)
+    = size Spec.id_cred_size +! size (SpecCrypto.mac23_size kcs)
 
 (*---------------------------- Utility buffers*)
 inline_for_extraction
@@ -273,10 +282,13 @@ let construct_message1 (kcs: supportedKemCipherSuite)
     : Tot (message1 kcs)
     = { method = method; suite_i = suite_i; pk_x = pk_x; ct_auth_R = ct_auth_R; c_i = c_i; c1 = c1 }
 
+let concat_msg1_fixed_length_t (kcs: supportedKemCipherSuite)
+    = size (Spec.concat_msg1_fixed_length kcs)
+
 val concat_msg1:
     kcs: supportedKemCipherSuite
     -> msg1: message1 kcs
-    -> msg1_buffer: lbuffer uint8 (size (Spec.concat_msg1_fixed_length kcs))
+    -> msg1_buffer: lbuffer uint8 (concat_msg1_fixed_length_t kcs)
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_message1 h0 msg1 /\ live h0 msg1_buffer
