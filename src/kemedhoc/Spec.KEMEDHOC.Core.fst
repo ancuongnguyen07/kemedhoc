@@ -141,7 +141,7 @@ let responder_send_msg2 kcs rs hs msg1 entr
   // derive PRK2e
   let prk2e = extract_prk2e hs.prk1e th2 k_xy in
   // derive SALT3e2m
-  let salt3e2m = expand_salt3e2m prk2e th2 in
+  let salt3e2m = expand_salt info_label_salt3e2m prk2e th2 in
   // derive PRK3e2m
   let prk3e2m = extract_prk3e2m salt3e2m hs.k_auth_R in
 
@@ -187,7 +187,7 @@ let initiator_process_msg2 kcs is hs msg2
     | None -> Fail DecryptionFailed
     | Some ptx2_byte -> (
       // derive SALT3e2m
-      let salt3e2m = expand_salt3e2m prk2e th2 in
+      let salt3e2m = expand_salt info_label_salt3e2m prk2e th2 in
       // derive PRK3e2m
       let prk3e2m = extract_prk3e2m salt3e2m hs.k_auth_R in
       // construct ptx2
@@ -255,7 +255,7 @@ let initiator_send_msg3 kcs is hs ptx2 msg2
   let ctx3 = construct_context3 is.id_cred th3 cred_I in
   // derive salt4e3m
   let prk3e2m = Some?.v hs.prk3e2m in
-  let salt4e3m = expand_salt4e3m prk3e2m th3 in
+  let salt4e3m = expand_salt info_label_salt4e3m prk3e2m th3 in
   // derive prk4e3m
   let k_auth_I = Some?.v hs.k_auth_I in
   let prk4e3m = extract_prk4e3m salt4e3m k_auth_I in
@@ -297,7 +297,7 @@ let responder_process_msg3 kcs rs hs ptx2 msg3
 
       // derive salt4e3m
       let prk3e2m = Some?.v hs.prk3e2m in
-      let salt4e3m = expand_salt4e3m prk3e2m th3 in
+      let salt4e3m = expand_salt info_label_salt4e3m prk3e2m th3 in
       // derive prk4e3m
       let k_auth_I = Some?.v hs.k_auth_I in
       let prk4e3m = extract_prk4e3m salt4e3m k_auth_I in

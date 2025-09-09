@@ -237,72 +237,33 @@ val expand_prk_exporter:
 /// Encryption Key
 /// ---------------
 
-val expand_k1:
+val expand_k:
   #kcs: supportedKemCipherSuite
-  -> prk1e: hash_out kcs
-  -> th1: hash_out kcs
-  -> aead_key kcs
-
-val expand_k2:
-  #kcs: supportedKemCipherSuite
-  -> prk2e: hash_out kcs
-  -> th2: hash_out kcs
-  -> aead_key kcs
-
-val expand_k3:
-  #kcs: supportedKemCipherSuite
-  -> prk3e2m: hash_out kcs
-  -> th3: hash_out kcs
-  -> aead_key kcs
-
-val expand_k4:
-  #kcs: supportedKemCipherSuite
-  -> prk4e3m: hash_out kcs
-  -> th4: hash_out kcs
+  -> key_label: nat{key_label <= 13}
+  -> prk: hash_out kcs
+  -> th: hash_out kcs
   -> aead_key kcs
 
 /// ---------------
 /// Initial Vector
 /// ---------------
 
-val expand_iv1:
+val expand_iv:
   #kcs: supportedKemCipherSuite
-  -> prk1e: hash_out kcs
-  -> th1: hash_out kcs
-  -> aead_iv
-
-val expand_iv2:
-  #kcs: supportedKemCipherSuite
-  -> prk2e: hash_out kcs
-  -> th2: hash_out kcs
-  -> aead_iv
-
-val expand_iv3:
-  #kcs: supportedKemCipherSuite
-  -> prk3e2m: hash_out kcs
-  -> th3: hash_out kcs
-  -> aead_iv
-
-val expand_iv4:
-  #kcs: supportedKemCipherSuite
-  -> prk4e3m: hash_out kcs
-  -> th4: hash_out kcs
+  -> iv_label: nat{iv_label <= 13}
+  -> prk: hash_out kcs
+  -> th: hash_out kcs
   -> aead_iv
 
 /// ---------------
 /// SALT
 /// ---------------
 
-val expand_salt3e2m:
+val expand_salt:
   #kcs: supportedKemCipherSuite
-  -> prk2e: hash_out kcs
-  -> th2: hash_out kcs
-  -> hash_out kcs
-
-val expand_salt4e3m:
-  #kcs: supportedKemCipherSuite
-  -> prk3e2m: hash_out kcs
-  -> th3: hash_out kcs
+  -> salt_label: nat{salt_label <= 13}
+  -> prk: hash_out kcs
+  -> th: hash_out kcs
   -> hash_out kcs
 
 /// ---------------

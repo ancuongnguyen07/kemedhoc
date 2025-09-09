@@ -78,67 +78,29 @@ let expand_prk_exporter #kcs prk_out
 /// Encryption Key
 /// ---------------
 
-let expand_k1 #kcs prk1e th1
-  = let k1_len = aead_key_size kcs in
-  let info_struct = construct_info info_label_k1 th1 k1_len in
+let expand_k #kcs key_label prk th
+  = let k_len = aead_key_size kcs in
+  let info_struct = construct_info key_label th k_len in
   let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk1e info_byte k1_len
-
-let expand_k2 #kcs prk2e th2
-  = let k2_len = aead_key_size kcs in
-  let info_struct = construct_info info_label_k2 th2 k2_len in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk2e info_byte k2_len
-
-let expand_k3 #kcs prk3e2m th3
-  = let k3_len = aead_key_size kcs in
-  let info_struct = construct_info info_label_k3 th3 k3_len in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk3e2m info_byte k3_len
-
-let expand_k4 #kcs prk4e3m th4
-  = let k4_len = aead_key_size kcs in
-  let info_struct = construct_info info_label_k4 th4 k4_len in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk4e3m info_byte k4_len
+  hkdf_expand kcs prk info_byte k_len
 
 /// ---------------
 /// Initial Vector
 /// ---------------
 
-let expand_iv1 #kcs prk1e th1
-  = let info_struct = construct_info info_label_iv1 th1 aead_iv_size in
+let expand_iv #kcs iv_label prk th
+  = let info_struct = construct_info iv_label th aead_iv_size in
   let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk1e info_byte aead_iv_size
-
-let expand_iv2 #kcs prk2e th2
-  = let info_struct = construct_info info_label_iv2 th2 aead_iv_size in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk2e info_byte aead_iv_size
-
-let expand_iv3 #kcs prk3e2m th3
-  = let info_struct = construct_info info_label_iv3 th3 aead_iv_size in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk3e2m info_byte aead_iv_size
-
-let expand_iv4 #kcs prk4e3m th4
-  = let info_struct = construct_info info_label_iv4 th4 aead_iv_size in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk4e3m info_byte aead_iv_size
+  hkdf_expand kcs prk info_byte aead_iv_size
 
 /// ---------------
 /// SALT
 /// ---------------
 
-let expand_salt3e2m #kcs prk2e th2
-  = let info_struct = construct_info info_label_salt3e2m th2 (hash_size kcs) in
+let expand_salt #kcs salt_label prk th
+  = let info_struct = construct_info salt_label th (hash_size kcs) in
   let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk2e info_byte (hash_size kcs)
-
-let expand_salt4e3m #kcs prk3e2m th3
-  = let info_struct = construct_info info_label_salt4e3m th3 (hash_size kcs) in
-  let info_byte = concat_info info_struct in
-  hkdf_expand kcs prk3e2m info_byte (hash_size kcs)
+  hkdf_expand kcs prk info_byte (hash_size kcs)
 
 /// ---------------
 /// MAC
