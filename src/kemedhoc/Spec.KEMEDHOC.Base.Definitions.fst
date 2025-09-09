@@ -1,5 +1,7 @@
 module Spec.KEMEDHOC.Base.Definitions
 
+module TypeEdhoc = TypeHelper.EDHOC
+
 type error =
   (*EDHOC standardized errors*)
   | UnspecifiedError
@@ -10,6 +12,9 @@ type error =
   | InvalidCredential
   | DecryptionFailed
   | IntegrityCheckFailed
+
+inline_for_extraction
+type c_response = TypeEdhoc.c_response
 
 let error_to_code (e: error): nat
   = match e with
