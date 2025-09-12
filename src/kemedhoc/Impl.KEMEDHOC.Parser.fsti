@@ -58,6 +58,10 @@ unopteq type plaintext1 = {
 let plaintext1_disjoint (p1: plaintext1)
     = disjoint p1.id_cred_I p1.cred_I
 
+let plaintext1_disjoint_to_lbuffer (#t:buftype) (#a:Type0)
+    (p1: plaintext1) (b: buffer_t t a)
+    = disjoint p1.id_cred_I b /\ disjoint p1.cred_I b
+
 let plaintext1_live (h: HS.mem) (p1: plaintext1) 
     = live h p1.id_cred_I /\ live h p1.cred_I
 
@@ -96,6 +100,11 @@ unopteq type message1 (kcs: supportedKemCipherSuite) = {
 
 let message1_disjoint (#kcs: supportedKemCipherSuite) (m1: message1 kcs)
     = B.all_disjoint [loc m1.method; loc m1.suite_i; loc m1.pk_x; loc m1.ct_auth_R; loc m1.c_i; loc m1.c1]
+
+let message1_disjoint_to_lbuffer (#kcs: supportedKemCipherSuite) (#t:buftype) (#a:Type0)
+    (m1: message1 kcs) (b: buffer_t t a)
+    = disjoint m1.method b /\ disjoint m1.suite_i b /\ disjoint m1.pk_x b
+    /\ disjoint m1.ct_auth_R b /\ disjoint m1.c_i b /\ disjoint m1.c1 b
 
 let message1_live (#kcs: supportedKemCipherSuite) (h: HS.mem) (m1: message1 kcs)
     = live h m1.method /\ live h m1.suite_i /\live h m1.pk_x
@@ -142,6 +151,10 @@ unopteq type plaintext2 (kcs: supportedKemCipherSuite) = {
 let plaintext2_disjoint (#kcs: supportedKemCipherSuite) (p2: plaintext2 kcs)
     = B.all_disjoint [loc p2.c_R; loc p2.id_cred_R; loc p2.cred_R; loc p2.mac2]
 
+let plaintext2_disjoint_to_lbuffer (#kcs: supportedKemCipherSuite) (#t:buftype) (#a:Type0)
+    (p2: plaintext2 kcs) (b: buffer_t t a)
+    = disjoint p2.c_R b /\ disjoint p2.id_cred_R b /\ disjoint p2.cred_R b /\ disjoint p2.mac2 b
+
 let plaintext2_live (#kcs: supportedKemCipherSuite) (h: HS.mem) (p2: plaintext2 kcs)
     = live h p2.c_R /\ live h p2.id_cred_R /\ live h p2.cred_R /\ live h p2.mac2
 
@@ -175,6 +188,10 @@ unopteq type message2 (kcs: supportedKemCipherSuite) = {
 let message2_disjoint (#kcs: supportedKemCipherSuite) (m2: message2 kcs)
     = B.all_disjoint [loc m2.ct_y; loc m2.ct_auth_I; loc m2.c2]
 
+let message2_disjoint_to_lbuffer (#kcs: supportedKemCipherSuite) (#t:buftype) (#a:Type0)
+    (m2: message2 kcs) (b: buffer_t t a)
+    = disjoint m2.ct_y b /\ disjoint m2.ct_auth_I b /\ disjoint m2.c2 b
+
 let message2_live (#kcs: supportedKemCipherSuite) (h: HS.mem) (m2: message2 kcs)
     = live h m2.ct_y /\ live h m2.ct_auth_I /\ live h m2.c2
 
@@ -202,6 +219,10 @@ unopteq type plaintext3 (kcs: supportedKemCipherSuite) = {
 
 let plaintext3_disjoint (#kcs: supportedKemCipherSuite) (p3: plaintext3 kcs)
     = disjoint p3.id_cred_I p3.mac3
+
+let plaintext3_disjoint_to_lbuffer (#kcs: supportedKemCipherSuite) (#t:buftype) (#a:Type0)
+    (p3: plaintext3 kcs) (b: buffer_t t a)
+    = disjoint p3.id_cred_I b /\ disjoint p3.mac3 b
 
 let plaintext3_live (#kcs: supportedKemCipherSuite) (h: HS.mem) (p3: plaintext3 kcs)
     = live h p3.id_cred_I /\ live h p3.mac3
@@ -245,7 +266,7 @@ val concat_ptx1:
     (requires fun h0 ->
         is_valid_plaintext1 h0 p1
         /\ live h0 p1_buffer
-        /\ B.loc_disjoint (loc p1_buffer) (plaintext1_union p1)
+        /\ plaintext1_disjoint_to_lbuffer p1 p1_buffer
     )
     (ensures fun h0 _ h1 ->
         let p1_s = plaintext1_eval h0 p1 in
@@ -261,7 +282,7 @@ val deserialize_ptx1:
     -> ST.Stack unit
     (requires fun h0 ->
         live h0 p1_buffer /\ is_valid_plaintext1 h0 p1
-        /\ B.loc_disjoint (loc p1_buffer) (plaintext1_union p1)
+        /\ plaintext1_disjoint_to_lbuffer p1 p1_buffer
     )
     (ensures fun h0 _ h1 ->
         let p1_s_deserd = plaintext1_eval h1 p1 in
@@ -292,7 +313,7 @@ val concat_msg1:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_message1 h0 msg1 /\ live h0 msg1_buffer
-        /\ B.loc_disjoint (loc msg1_buffer) (message1_union msg1)
+        /\ message1_disjoint_to_lbuffer msg1 msg1_buffer
     )
     (ensures fun h0 _ h1 ->
         let m1_s = message1_eval h0 msg1 in
@@ -318,7 +339,7 @@ val concat_ptx2:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_plaintext2 h0 p2 /\ live h0 p2_buffer
-        /\ B.loc_disjoint (loc p2_buffer) (plaintext2_union p2)
+        /\ plaintext2_disjoint_to_lbuffer p2 p2_buffer
     )
     (ensures fun h0 _ h1 ->
         let p2_s = plaintext2_eval #kcs h0 p2 in
@@ -335,7 +356,7 @@ val deserialize_ptx2:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_plaintext2 h0 p2 /\ live h0 p2_buffer
-        /\ B.loc_disjoint (loc p2_buffer) (plaintext2_union p2)
+        /\ plaintext2_disjoint_to_lbuffer p2 p2_buffer
     )
     (ensures fun h0 _ h1 ->
         let p2_s_deserd = plaintext2_eval h1 p2 in
@@ -368,7 +389,7 @@ val concat_msg2:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_message2 h0 msg2 /\ live h0 msg2_buffer
-        /\ B.loc_disjoint (loc msg2_buffer) (message2_union msg2)
+        /\ message2_disjoint_to_lbuffer msg2 msg2_buffer
     )
     (ensures fun h0 _ h1 ->
         let m2_s = message2_eval #kcs h0 msg2 in
@@ -393,7 +414,7 @@ val concat_ptx3:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_plaintext3 h0 p3 /\ live h0 p3_buffer
-        /\ B.loc_disjoint (loc p3_buffer) (plaintext3_union p3)
+        /\ plaintext3_disjoint_to_lbuffer p3 p3_buffer
     )
     (ensures fun h0 _ h1 ->
         let p3_s = plaintext3_eval #kcs h0 p3 in
@@ -410,7 +431,7 @@ val deserialize_ptx3:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_plaintext3 h0 p3 /\ live h0 p3_buffer
-        /\ B.loc_disjoint (loc p3_buffer) (plaintext3_union p3)
+        /\ plaintext3_disjoint_to_lbuffer p3 p3_buffer
     )
     (ensures fun h0 _ h1 ->
         let p3_s_deserd = plaintext3_eval h1 p3 in

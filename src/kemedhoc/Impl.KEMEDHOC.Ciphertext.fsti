@@ -39,7 +39,10 @@ val encrypt_plaintext1:
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_plaintext1 h0 ptx1 /\ live h0 th1 /\ live h0 prk1e /\ live h0 c1
-    /\ B.all_disjoint [plaintext1_union ptx1; loc th1; loc prk1e; loc c1]
+    // /\ B.all_disjoint [plaintext1_union ptx1; loc th1; loc prk1e; loc c1]
+    /\ B.all_disjoint [loc th1; loc prk1e; loc c1]
+    /\ plaintext1_disjoint_to_lbuffer ptx1 th1 /\ plaintext1_disjoint_to_lbuffer ptx1 prk1e
+    /\ plaintext1_disjoint_to_lbuffer ptx1 c1
   )
   (ensures fun h0 res h1 ->
     let c1_s = Spec.encrypt_plaintext1 #kcs (plaintext1_eval h0 ptx1) (as_seq h0 th1) (as_seq h0 prk1e) in
@@ -93,7 +96,10 @@ val encrypt_plaintext2:
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_plaintext2 h0 ptx2 /\ live h0 th2 /\ live h0 prk2e /\ live h0 c2
-    /\ B.all_disjoint [plaintext2_union ptx2; loc th2; loc prk2e; loc c2]
+    // /\ B.all_disjoint [plaintext2_union ptx2; loc th2; loc prk2e; loc c2]
+    /\ B.all_disjoint [loc th2; loc prk2e; loc c2]
+    /\ plaintext2_disjoint_to_lbuffer ptx2 th2 /\ plaintext2_disjoint_to_lbuffer ptx2 prk2e
+    /\ plaintext2_disjoint_to_lbuffer ptx2 c2
   )
   (ensures fun h0 res h1 ->
     let c2_s = Spec.encrypt_plaintext2 #kcs (plaintext2_eval h0 ptx2) (as_seq h0 th2) (as_seq h0 prk2e) in
@@ -147,7 +153,10 @@ val encrypt_plaintext3:
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_plaintext3 h0 ptx3 /\ live h0 th3 /\ live h0 prk3e2m /\ live h0 c3
-    /\ B.all_disjoint [plaintext3_union ptx3; loc th3; loc prk3e2m; loc c3]
+    // /\ B.all_disjoint [plaintext3_union ptx3; loc th3; loc prk3e2m; loc c3]
+    /\ B.all_disjoint [loc th3; loc prk3e2m; loc c3]
+    /\ plaintext3_disjoint_to_lbuffer ptx3 th3 /\ plaintext3_disjoint_to_lbuffer ptx3 prk3e2m
+    /\ plaintext3_disjoint_to_lbuffer ptx3 c3
   )
   (ensures fun h0 res h1 ->
     let c3_s = Spec.encrypt_plaintext3 #kcs (plaintext3_eval h0 ptx3) (as_seq h0 th3) (as_seq h0 prk3e2m) in

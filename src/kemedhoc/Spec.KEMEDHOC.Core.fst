@@ -64,7 +64,7 @@ let initiator_send_msg1 kcs is entr
   // construct plaintext1
   let cred_I = is.id_cred in
   let ptx1 = construct_ptx1 is.id_cred cred_I in
-  let ptx1_byte = concat_ptx1 ptx1 in
+  // let ptx1_byte = concat_ptx1 ptx1 in
   // encrypt plaintext1 -> ciphertext1
   let c1 = encrypt_plaintext1 ptx1 th1 prk1e in
   // construct message1

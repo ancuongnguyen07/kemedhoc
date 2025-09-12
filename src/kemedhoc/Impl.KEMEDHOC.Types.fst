@@ -19,20 +19,87 @@ module SpecParser = Spec.KEMEDHOC.Parser
 open Spec.KEMEDHOC.CryptoPrimitives
 // module ImplEdhocCrypto = Impl.EDHOC.CryptoPrimitives
 module SpecEdhocCrypto = Spec.EDHOC.CryptoPrimitives
+module SpecEdhocSerd = Spec.EDHOC.Serialization
+module SpecCrypto = Spec.KEMEDHOC.CryptoPrimitives
+
+open Impl.EDHOC.Utilities
 
 /// The Low* type that represents an optional
 /// lbytes sequence
 noeq type lbufferOpt (len: size_t) = {
-  is_some: bool;
+  is_some: lbuffer uint8 1ul;
   value: lbuffer uint8 len
 }
+
+let lbufferOpt_is_Some (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  : GTot bool
+  = SpecEdhocSerd.bytes_to_nat (as_seq h buff.is_some) = 1
+
+let lbufferOpt_is_None (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  : GTot bool
+  = SpecEdhocSerd.bytes_to_nat (as_seq h buff.is_some) = 0
+
+let lbufferOpt_live (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  = live h buff.value /\ live h buff.is_some
+
+let lbufferOpt_disjoint (#len: size_t)
+  (buff: lbufferOpt len)
+  = disjoint buff.value buff.is_some
+
+let is_valid_lbufferOpt (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  = lbufferOpt_live h buff /\ lbufferOpt_disjoint buff
+
+let is_legit_lbufferOpt (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  = is_valid_lbufferOpt h buff
+  /\ (lbufferOpt_is_Some h buff \/ lbufferOpt_is_None h buff)
+
+
+type valid_lbufferOpt (#len: size_t) (h: HS.mem)
+  = bo: lbufferOpt len{ is_valid_lbufferOpt h bo }
+
+let lbufferOpt_disjoint_to_lbuff (#t: buftype) (#a: Type0)
+  (#len: size_t) (buff: lbufferOpt len) (b: buffer_t t a)
+  = disjoint buff.value b /\ disjoint buff.is_some b
+
+let lbufferOpt_loc (#len: size_t)
+  (buff: lbufferOpt len)
+  = loc buff.value |+| loc buff.is_some
+
+let lbufferOpt_set_Some (#len: size_t)
+  (buff_opt: lbufferOpt len)
+  : ST.Stack unit
+  (requires fun h0 ->
+    is_valid_lbufferOpt h0 buff_opt
+  )
+  (ensures fun h0 _ h1 ->
+    modifies1 buff_opt.is_some h0 h1
+    /\ SpecEdhocSerd.bytes_to_nat (as_seq h1 buff_opt.is_some) = 1
+  )
+  = nat_to_bytes 1ul buff_opt.is_some 1
+
+let lbufferOpt_set_None (#len: size_t)
+  (buff_opt: lbufferOpt len)
+  : ST.Stack unit
+  (requires fun h0 ->
+    is_valid_lbufferOpt h0 buff_opt
+  )
+  (ensures fun h0 _ h1 ->
+    modifies1 buff_opt.is_some h0 h1
+    /\ SpecEdhocSerd.bytes_to_nat (as_seq h1 buff_opt.is_some) = 0
+  )
+  = nat_to_bytes 1ul buff_opt.is_some 0
 
 /// Convert lbuffer_opt to `option lbytes`
 /// only for proofs
 let eval_lbuffer_opt (#len: size_t)
   (h: HS.mem) (buff: lbufferOpt len)
   : GTot (option (lbytes (size_v len)))
-  = if (buff.is_some)
+  = if (lbufferOpt_is_Some h buff)
     then Some (as_seq h buff.value)
     else None
 
@@ -89,6 +156,10 @@ let kem_shared_secret_size_t (kcs: kemCipherSuite)
 
 
 inline_for_extraction
+let hash_size_t (kcs: kemCipherSuite)
+  = size (hash_size kcs)
+
+inline_for_extraction
 type kem_pub_key_buff (kcs: kemCipherSuite)
   = alg_kem_pub_key_buff (get_kem_alg kcs)
 inline_for_extraction
@@ -100,6 +171,23 @@ type kem_ciphertext_buff (kcs: kemCipherSuite)
 inline_for_extraction
 type kem_shared_secret_buff (kcs: kemCipherSuite)
   = alg_kem_shared_secret_buff (get_kem_alg kcs)
+
+/// KEM key pair types
+inline_for_extraction
+type kem_key_pair_m (kcs: kemCipherSuite) = kem_pub_key_buff kcs & kem_priv_key_buff kcs
+inline_for_extraction
+let get_pub_kem_key_m (#kcs: kemCipherSuite) (kp: kem_key_pair_m kcs)
+  : (kem_pub_key_buff kcs)
+  = match kp with | pub, _ -> pub
+let get_priv_kem_key_m (#kcs: kemCipherSuite) (kp: kem_key_pair_m kcs)
+  : (kem_priv_key_buff kcs)
+  = match kp with | _, priv -> priv
+
+let kem_key_pair_m_eval (#kcs: supportedKemCipherSuite)
+  (h: HS.mem) (kp: kem_key_pair_m kcs)
+  : GTot (SpecCrypto.kemKeyPair kcs)
+  = match kp with
+    | (pk, sk) -> (as_seq h pk, as_seq h sk)
 
 
 /// Hash out buffer
