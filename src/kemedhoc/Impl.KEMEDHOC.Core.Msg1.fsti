@@ -69,9 +69,20 @@ val initiator_send_msg1:
             |+| loc msg1.ct_auth_R |+| loc hs.k_auth_R
             |+| loc hs.th1
             |+| loc hs.prk1e) h0 h1
-        
       )
       | TypeEdhoc.CSuccess -> (
+        // let modified_locs = ( loc entropy_p |+| loc msg1.c_i
+        //     |+| loc msg1.pk_x |+| loc is.eph_kem_priv_key.value
+        //     |+| loc kem_state
+        //     |+| loc is.eph_kem_priv_key.is_some
+        //     |+| loc msg1.ct_auth_R |+| loc hs.k_auth_R
+        //     |+| loc hs.th1
+        //     |+| loc hs.prk1e
+        //     |+| loc msg1.c1 |+| loc msg1.method |+| loc msg1.suite_i
+        //     |+| loc hs.msg1_hash
+        // ) in
+
+        // modifies modified_locs h0 h1
         True
       )
       | _ -> False

@@ -21,7 +21,7 @@ module SpecParser = Spec.KEMEDHOC.Parser
 module TypeEdhoc = TypeHelper.EDHOC
 module SpecEdhocSerd = Spec.EDHOC.Serialization
 
-#push-options "--z3rlimit 60 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3rlimit 65 --max_fuel 4 --max_ifuel 4"
 let initiator_send_msg1 kcs is msg1 hs
   = ST.push_frame();
   (**) let h0 = ST.get () in
@@ -129,7 +129,17 @@ let initiator_send_msg1 kcs is msg1 hs
     | TypeEdhoc.CSuccess -> (
       (**) let hx = ST.get() in
       (**) assert(TypeEdhoc.CSuccess? res);
-      // (**) assert(modifies1 msg1.c1 h6 h7);
+      (**) assert(modifies1 msg1.c1 h6 h7);
+      (**) assert(modifies (loc entropy_p |+| loc msg1.c_i
+            |+| loc pk_x |+| loc sk_x |+| loc kem_state
+            |+| loc sk_x_is_some
+            |+| loc ct_auth_R |+| loc k_auth_R
+            |+| loc hs.th1
+            |+| loc hs.prk1e
+            |+| loc cred_I
+            |+| loc msg1.c1
+      ) h0 h7);
+
       // construct message1
       // only need to update the method and suite_i fields
       (**) assert(live hx msg1.method /\ FBytes.repr_bytes 5 = 1);
@@ -142,6 +152,16 @@ let initiator_send_msg1 kcs is msg1 hs
         SpecEdhocSerd.bytes_to_nat (as_seq h8 msg1.method) = 5
         /\ SpecEdhocSerd.bytes_to_nat (as_seq h8 msg1.suite_i) = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs)
       );
+      (**) assert(modifies (loc entropy_p |+| loc msg1.c_i
+            |+| loc pk_x |+| loc sk_x |+| loc kem_state
+            |+| loc sk_x_is_some
+            |+| loc ct_auth_R |+| loc k_auth_R
+            |+| loc hs.th1
+            |+| loc hs.prk1e
+            |+| loc cred_I
+            |+| loc msg1.c1
+            |+| loc msg1.method |+| loc msg1.suite_i
+      ) h0 h8);
 
       // compute hash of message1
       let msg1_concat_len = concat_msg1_fixed_length_t kcs in
@@ -150,11 +170,34 @@ let initiator_send_msg1 kcs is msg1 hs
       (**) assert(is_valid_message1 h8 msg1);
       concat_msg1 kcs msg1 msg1_concat_buffer;
       (**) let h9 = ST.get () in
+      (**) assert(modifies (loc entropy_p |+| loc msg1.c_i
+            |+| loc pk_x |+| loc sk_x |+| loc kem_state
+            |+| loc sk_x_is_some
+            |+| loc ct_auth_R |+| loc k_auth_R
+            |+| loc hs.th1
+            |+| loc hs.prk1e
+            |+| loc cred_I
+            |+| loc msg1.c1
+            |+| loc msg1.method |+| loc msg1.suite_i
+            |+| loc msg1_concat_buffer
+      ) h0 h9);
 
       (**) assert(disjoint msg1_concat_buffer hs.msg1_hash);
       (**) assert(live h9 msg1_concat_buffer /\ live h9 hs.msg1_hash);
       do_hash kcs hs.msg1_hash msg1_concat_len msg1_concat_buffer;
       (**) let h10 = ST.get () in
+      (**) assert(modifies (loc entropy_p |+| loc msg1.c_i
+            |+| loc pk_x |+| loc sk_x |+| loc kem_state
+            |+| loc sk_x_is_some
+            |+| loc ct_auth_R |+| loc k_auth_R
+            |+| loc hs.th1
+            |+| loc hs.prk1e
+            |+| loc cred_I
+            |+| loc msg1.c1
+            |+| loc msg1.method |+| loc msg1.suite_i
+            |+| loc msg1_concat_buffer
+            |+| loc hs.msg1_hash
+      ) h0 h9);
 
       res 
     ) in
