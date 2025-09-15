@@ -56,8 +56,8 @@ val compute_th2:
   -> msg1: message1 kcs
   -> th2: hash_out_buff kcs
   -> ST.Stack unit
-  (requires fun h0 ->
-    is_valid_message1 h0 msg1 /\ live h0 ct_y /\ live h0 k_auth_I /\ live h0 th2
+  (requires fun h0 -> is_legit_message1 h0 msg1
+    /\ is_valid_message1 h0 msg1 /\ live h0 ct_y /\ live h0 k_auth_I /\ live h0 th2
     /\ B.all_disjoint [loc ct_y; loc k_auth_I; loc th2; message1_union msg1]
   )
   (ensures fun h0 _ h1 ->

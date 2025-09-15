@@ -116,10 +116,10 @@ let is_legit_message1 (#kcs: supportedKemCipherSuite) (h: HS.mem) (m1: message1 
 
 let is_valid_message1 (#kcs: supportedKemCipherSuite) (h: HS.mem) (m1: message1 kcs) 
     = message1_disjoint m1 /\ message1_live h m1
-    /\ is_legit_message1 h m1
+    // /\ is_legit_message1 h m1
       
 
-type legitMessage1 (kcs: supportedKemCipherSuite) (h: HS.mem) = m1:message1 kcs{is_legit_message1 h m1} 
+type legitMessage1 (kcs: supportedKemCipherSuite) (h: HS.mem) = m1:message1 kcs{is_valid_message1 h m1 /\ is_legit_message1 h m1} 
 
 // convert the low-level message1 to the high-level sequence
 let message1_eval (#kcs: supportedKemCipherSuite) (h: HS.mem) (m1: legitMessage1 kcs h) 
@@ -311,8 +311,8 @@ val concat_msg1:
     -> msg1: message1 kcs
     -> msg1_buffer: lbuffer uint8 (concat_msg1_fixed_length_t kcs)
     -> ST.Stack unit
-    (requires fun h0 ->
-        is_valid_message1 h0 msg1 /\ live h0 msg1_buffer
+    (requires fun h0 -> is_legit_message1 h0 msg1
+        /\ is_valid_message1 h0 msg1 /\ live h0 msg1_buffer
         /\ message1_disjoint_to_lbuffer msg1 msg1_buffer
     )
     (ensures fun h0 _ h1 ->
