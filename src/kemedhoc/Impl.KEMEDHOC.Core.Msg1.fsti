@@ -86,10 +86,15 @@ val responder_process_msg1:
       | TypeEdhoc.CDecryptionFailure -> (
         modifies base_modified_locs h0 h1
       )
-      | TypeEdhoc.CInvalidCredential
-      | TypeEdhoc.CSuccess -> (
+      | TypeEdhoc.CInvalidCredential -> (
         let modified_locs = base_modified_locs |+| loc hs.msg1_hash
                           |+| plaintext1_union ptx1 in
+
+        modifies modified_locs h0 h1
+      )
+      | TypeEdhoc.CSuccess -> (
+        let modified_locs = base_modified_locs |+| loc hs.msg1_hash
+                          |+| plaintext1_union ptx1 |+| lbufferOpt_loc hs.remote_id_cred in
 
         modifies modified_locs h0 h1
       )

@@ -68,7 +68,8 @@ let handshake_state_m_disjoint_to_p1 (#kcs: supportedKemCipherSuite)
 let party_state_disjoint_to_p1 (#kcs: supportedKemCipherSuite)
   (ps: party_state_m kcs) (p1: plaintext1)
   = B.all_disjoint [
-    loc ps.suite; kem_key_pair_m_union ps.static_kem_kp;
+    loc ps.suite; loc (fst ps.static_kem_kp);
+    loc (snd ps.static_kem_kp);
     loc ps.id_cred;
     loc ps.eph_kem_priv_key.is_some; loc ps.eph_kem_priv_key.value;
     loc ps.remote_static_kem_pub_key; loc ps.remote_id_cred;
@@ -130,7 +131,6 @@ val responder_process_msg1_set_up:
     /\ is_valid_message1 h1 msg1 /\ is_legit_message1 h1 msg1
   )
 
-
 #push-options "--z3rlimit 30 --max_fuel 4 --max_ifuel 4"
 let responder_process_msg1_set_up kcs rs msg1 hs
   = (**) let h0 = ST.get () in 
@@ -185,8 +185,8 @@ val responder_process_msg1_decrypt_c1_get_ptx1:
     /\ ( match res with
         | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
         | TypeEdhoc.CDecryptionFailure -> modifies0 h0 h1
-        | TypeEdhoc.CInvalidCredential
-        | TypeEdhoc.CSuccess -> modifies modified_locs h0 h1
+        | TypeEdhoc.CInvalidCredential -> modifies modified_locs h0 h1
+        | TypeEdhoc.CSuccess -> modifies (modified_locs |+| lbufferOpt_loc hs.remote_id_cred) h0 h1
         | _ -> False
     )
   )
@@ -196,8 +196,8 @@ let check_credential (cred_A cred_B: id_cred_buffer)
   (requires fun h0 ->
     live h0 cred_A /\ live h0 cred_B
   )
-  (ensures fun h0 res h1 ->
-    modifies0 h0 h1
+  (ensures fun h0 res h1 -> (res == TypeEdhoc.CSuccess \/ res == TypeEdhoc.CInvalidCredential)
+    /\ modifies0 h0 h1
     /\ (match res with
       | TypeEdhoc.CSuccess -> (
         (Seq.equal (as_seq h0 cred_A) (as_seq h0 cred_B))
@@ -238,7 +238,13 @@ let responder_process_msg1_decrypt_c1_get_ptx1 kcs rs msg1 hs ptx1
 
       // check if the credential decrypted in plaintext 1
       // matches the remote credential stored locally.
-      check_credential ptx1.id_cred_I rs.remote_id_cred
+        match (check_credential ptx1.id_cred_I rs.remote_id_cred) with
+          | TypeEdhoc.CSuccess -> (
+            lbufferOpt_set_Some hs.remote_id_cred;
+            copy hs.remote_id_cred.value ptx1.id_cred_I;
+            TypeEdhoc.CSuccess
+          )
+          | TypeEdhoc.CInvalidCredential -> TypeEdhoc.CInvalidCredential
 
     ) in
 

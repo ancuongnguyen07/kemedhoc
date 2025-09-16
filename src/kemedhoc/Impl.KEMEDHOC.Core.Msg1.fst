@@ -24,7 +24,7 @@ module SpecEdhocSerd = Spec.EDHOC.Serialization
 open Impl.KEMEDHOC.Core.Msg1.Aux
 
 /// Responder's side
-#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 45 --max_fuel 4 --max_ifuel 4"
 let responder_process_msg1 kcs rs msg1 hs ptx1
   = (**) let h0 = ST.get () in
   ST.push_frame();
