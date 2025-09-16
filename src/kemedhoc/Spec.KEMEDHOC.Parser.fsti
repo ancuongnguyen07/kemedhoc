@@ -73,6 +73,10 @@ unopteq type plaintext1 = {
   cred_I: cred_byte;
 }
 
+let plaintext1_equal (p1 p2: plaintext1)
+  = Seq.equal p1.id_cred_I p2.id_cred_I
+    /\ Seq.equal p1.cred_I p2.cred_I
+
 (*---------------------------- Message 1 Type*)
 unopteq type message1 (#kcs: supportedKemCipherSuite) = {
   method: method_enum;
@@ -103,6 +107,13 @@ unopteq type plaintext2 (#kcs: supportedKemCipherSuite) = {
   mac2: mac23_byte kcs;
 }
 
+let plaintext2_equal (#kcs: supportedKemCipherSuite)
+  (p1: plaintext2 #kcs) (p2: plaintext2 #kcs)
+  = Seq.equal p1.c_R p2.c_R
+    /\ Seq.equal p1.id_cred_R p2.id_cred_R
+    /\ Seq.equal p1.cred_R p2.cred_R
+    /\ Seq.equal p1.mac2 p2.mac2
+
 (*---------------------------- Message 2 Type*)
 unopteq type message2 (#kcs: supportedKemCipherSuite) = {
   ct_y: kemCiphertext kcs;
@@ -123,6 +134,11 @@ unopteq type plaintext3 (#kcs: supportedKemCipherSuite) = {
   // does not support EAD3
   mac3: mac23_byte kcs;
 }
+
+let plaintext3_equal (#kcs: supportedKemCipherSuite)
+  (p1: plaintext3 #kcs) (p2: plaintext3 #kcs)
+  = Seq.equal p1.id_cred_I p2.id_cred_I
+    /\ Seq.equal p1.mac3 p2.mac3
 
 (*---------------------------- Message 3 Type*)
 inline_for_extraction

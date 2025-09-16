@@ -16,6 +16,17 @@ type error =
 inline_for_extraction
 type c_response = TypeEdhoc.c_response
 
+let error_to_c_response (e: error)
+  : Tot c_response
+  = match e with
+    | UnspecifiedError -> TypeEdhoc.CUnspecifiedError
+    | UnsupportedCipherSuite -> TypeEdhoc.CUnsupportedCipherSuite
+    | UnknownCredentialID -> TypeEdhoc.CUnknownCredentialID
+    | InvalidState -> TypeEdhoc.CInvalidState
+    | InvalidCredential -> TypeEdhoc.CInvalidCredential
+    | DecryptionFailed -> TypeEdhoc.CDecryptionFailure
+    | IntegrityCheckFailed -> TypeEdhoc.CIntegrityCheckFailed
+
 let error_to_code (e: error): nat
   = match e with
     | UnspecifiedError -> 1

@@ -25,34 +25,31 @@ open Impl.KEMEDHOC.Core.Msg1.Aux
 
 /// Responder's side
 #push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
-let responder_process_msg1 kcs rs msg1 hs
+let responder_process_msg1 kcs rs msg1 hs ptx1
   = (**) let h0 = ST.get () in
   ST.push_frame();
   responder_process_msg1_set_up kcs rs msg1 hs;
-  // decrypt ciphertext1 -> get plaintext1
-  // let ptx1_buffer = create (plaintext1_size_t kcs) (u8 0) in
-  // let res = decrypt_ciphertext1 #kcs msg1.c1 hs.th1 hs.prk1e ptx1_buffer in
-  // let final_res = match res with
-  //   | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
-  //   | TypeEdhoc.CDecryptionFailure -> res
-  //   | TypeEdhoc.CSuccess -> (
-  //     // compute hash of message1
-  //     let msg1_concat_len = concat_msg1_fixed_length_t kcs in
-  //     let msg1_concat_buffer = create msg1_concat_len (u8 0) in
-  //     (**) assert(message1_disjoint_to_lbuffer msg1 msg1_concat_buffer);
-  //     do_hash kcs hs.msg1_hash msg1_concat_len msg1_concat_buffer;
-  //     (**) let h5 = ST.get () in
-  //     (**) assert(modifies (loc hs.k_auth_R |+| loc hs.th1 |+| loc hs.prk1e
-  //           |+| loc ptx1_buffer
-  //           |+| loc hs.msg1_hash
-  //     ) h0 h5);
-
-  //     res
-
-  //   ) in
+  let final_res = responder_process_msg1_decrypt_c1_get_ptx1 kcs rs msg1 hs ptx1 in
 
   ST.pop_frame();
-  TypeEdhoc.CSuccess
+  (**) let h_final = ST.get () in
+  (**) assume(
+    let res_s = Spec.responder_process_msg1 kcs (party_state_m_eval h0 rs)
+                (message1_eval h0 msg1) in
+
+    let hs_s_final = handshake_state_m_eval h_final hs in
+    let ptx1_s_final = plaintext1_eval h_final ptx1 in
+
+    (match res_s with
+      | Fail e -> final_res == error_to_c_response e
+      | Res (hs_s, p1_s) -> (
+        final_res == TypeEdhoc.CSuccess /\
+        Spec.hs_equal hs_s_final hs_s /\
+        SpecParser.plaintext1_equal ptx1_s_final p1_s
+      )
+    )
+  );
+  final_res
 
 #pop-options
 

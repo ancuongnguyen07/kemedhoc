@@ -42,6 +42,59 @@ open Impl.KEMEDHOC.TranscriptHash
 open Impl.KEMEDHOC.Core
 open Spec.KEMEDHOC.Base.Definitions
 
+(*-------------- Utilities*)
+let handshake_state_m_disjoint_to_p1 (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state_m kcs) (p1: plaintext1)
+  = B.all_disjoint [loc hs.suite_i; loc hs.msg1_hash;
+      loc hs.k_xy.is_some; loc hs.k_xy.value;
+      loc hs.k_auth_R;
+      loc hs.k_auth_I.is_some; loc hs.k_auth_I.value;
+      loc hs.th1;
+      loc hs.th2.is_some; loc hs.th2.value;
+      loc hs.th3.is_some; loc hs.th3.value;
+      loc hs.th4.is_some; loc hs.th4.value;
+      loc hs.prk1e;
+      loc hs.prk2e.is_some; loc hs.prk2e.value;
+      loc hs.prk3e2m.is_some; loc hs.prk3e2m.value;
+      loc hs.prk4e3m.is_some; loc hs.prk4e3m.value;
+      loc hs.prk_out.is_some; loc hs.prk_out.value;
+      loc hs.prk_exporter.is_some; loc hs.prk_exporter.value;
+      loc hs.remote_id_cred.is_some; loc hs.remote_id_cred.value;
+
+    // plaintext1 fields
+    loc p1.id_cred_I; loc p1.cred_I
+  ]
+
+let party_state_disjoint_to_p1 (#kcs: supportedKemCipherSuite)
+  (ps: party_state_m kcs) (p1: plaintext1)
+  = B.all_disjoint [
+    loc ps.suite; kem_key_pair_m_union ps.static_kem_kp;
+    loc ps.id_cred;
+    loc ps.eph_kem_priv_key.is_some; loc ps.eph_kem_priv_key.value;
+    loc ps.remote_static_kem_pub_key; loc ps.remote_id_cred;
+
+    // plaintext1 fields
+    loc p1.id_cred_I; loc p1.cred_I
+  ]
+
+let message1_disjoint_to_p1 (#kcs: supportedKemCipherSuite)
+  (msg1: message1 kcs) (p1: plaintext1)
+  = B.all_disjoint [
+    loc msg1.method; loc msg1.suite_i;
+    loc msg1.c_i;
+    loc msg1.pk_x;
+    loc msg1.ct_auth_R;
+    loc msg1.c1;
+
+    // plaintext1 fields
+    loc p1.id_cred_I; loc p1.cred_I
+  ]
+
+let plaintext1_disjoint_to_lbuffer (#t:buftype) (#a:Type0)
+  (p1: plaintext1) (b: buffer_t t a)
+  = B.all_disjoint [
+    loc p1.id_cred_I; loc p1.cred_I;
+    loc b]
 
 (*-------------- Responder's side*)
 val responder_process_msg1_set_up:
@@ -101,24 +154,109 @@ let responder_process_msg1_set_up kcs rs msg1 hs
   (**) assert(modifies1 hs.prk1e h2 h3);
   (**) assert(modifies (loc hs.k_auth_R |+| loc hs.th1 |+| loc hs.prk1e) h0 h3);
   ()
+#pop-options
 
-// let responder_process_msg1_decrypt_c1
-//   (kcs: supportedKemCipherSuite) (rs: party_state_m kcs)
-//   (msg1: message1 kcs) (hs: handshake_state_m kcs)
-//   : ST.Stack c_response
-//   (requires fun h0 ->
-//     is_valid_handshake_state_m h0 hs
-//     /\ is_valid_party_state_m h0 rs
-//     /\ is_valid_message1 h0 msg1 /\ is_legit_message1 h0 msg1
+val responder_process_msg1_decrypt_c1_get_ptx1:
+  kcs: supportedKemCipherSuite
+  -> rs: party_state_m kcs
+  -> msg1: message1 kcs
+  -> hs: handshake_state_m kcs
+  -> ptx1: plaintext1
+  -> ST.Stack c_response
+  (requires fun h0 ->
+    is_valid_handshake_state_m h0 hs
+    /\ is_valid_party_state_m h0 rs
+    /\ is_valid_message1 h0 msg1 /\ is_legit_message1 h0 msg1
+    /\ is_valid_plaintext1 h0 ptx1
 
-//     // Disjointness
-//     /\ handshake_state_m_disjoint_to_party_state hs rs
-//     /\ handshake_state_m_disjoint_to_msg1 hs msg1
-//     /\ party_state_disjoint_to_msg1 rs msg1
-//   )
-//   (ensures fun h0 res h1 ->
-  
-//   )
+    // Disjointness
+    /\ handshake_state_m_disjoint_to_party_state hs rs
+    /\ handshake_state_m_disjoint_to_p1 hs ptx1
+    /\ handshake_state_m_disjoint_to_msg1 hs msg1
+    /\ party_state_disjoint_to_p1 rs ptx1
+    /\ party_state_disjoint_to_msg1 rs msg1
+  )
+  (ensures fun h0 res h1 ->
+    let modified_locs = loc hs.msg1_hash |+| plaintext1_union ptx1 in
+
+    is_valid_handshake_state_m h1 hs
+    /\ is_valid_party_state_m h1 rs
+    /\ is_valid_plaintext1 h1 ptx1
+    /\ ( match res with
+        | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+        | TypeEdhoc.CDecryptionFailure -> modifies0 h0 h1
+        | TypeEdhoc.CInvalidCredential
+        | TypeEdhoc.CSuccess -> modifies modified_locs h0 h1
+        | _ -> False
+    )
+  )
+
+let check_credential (cred_A cred_B: id_cred_buffer)
+  : ST.Stack c_response
+  (requires fun h0 ->
+    live h0 cred_A /\ live h0 cred_B
+  )
+  (ensures fun h0 res h1 ->
+    modifies0 h0 h1
+    /\ (match res with
+      | TypeEdhoc.CSuccess -> (
+        (Seq.equal (as_seq h0 cred_A) (as_seq h0 cred_B))
+      )
+      | TypeEdhoc.CInvalidCredential ->
+        ~(Seq.equal (as_seq h0 cred_A) (as_seq h0 cred_B))
+      | _ -> False
+    )
+  )
+  = if (lbytes_eq cred_A cred_B) then TypeEdhoc.CSuccess
+  else TypeEdhoc.CInvalidCredential
+
+#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+let responder_process_msg1_decrypt_c1_get_ptx1 kcs rs msg1 hs ptx1
+  = ST.push_frame();
+  (**) let h0 = ST.get () in
+
+  // decrypt ciphertext1 -> get plaintext1
+  let ptx1_buffer = create (plaintext1_size_t) (u8 0) in
+  let res = decrypt_ciphertext1 #kcs msg1.c1 hs.th1 hs.prk1e ptx1_buffer in
+
+  let final_res = match res with
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    | TypeEdhoc.CDecryptionFailure -> res
+    | TypeEdhoc.CSuccess -> (
+
+      // compute hash of message1
+      let msg1_concat_len = concat_msg1_fixed_length_t kcs in
+      let msg1_concat_buffer = create msg1_concat_len (u8 0) in
+      (**) assert(message1_disjoint_to_lbuffer msg1 msg1_concat_buffer);
+      do_hash kcs hs.msg1_hash msg1_concat_len msg1_concat_buffer;
+      (**) let h5 = ST.get () in
+
+      // deserialize plaintext1
+      deserialize_ptx1 ptx1_buffer ptx1;
+      (**) let h6 = ST.get () in
+      // (**) modifies (loc hs.msg1_hash |+| plaintext1_union ptx1) h0 h6;
+
+      // check if the credential decrypted in plaintext 1
+      // matches the remote credential stored locally.
+      check_credential ptx1.id_cred_I rs.remote_id_cred
+
+    ) in
+
+  ST.pop_frame();
+  (**) let h_final = ST.get() in
+  (**) assert(match final_res with
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    | TypeEdhoc.CDecryptionFailure
+    | TypeEdhoc.CInvalidCredential
+    | TypeEdhoc.CSuccess -> True
+    | _ -> False
+  );
+  (**) assert(
+    is_valid_handshake_state_m h_final hs
+    /\ is_valid_party_state_m h_final rs
+    /\ is_valid_plaintext1 h_final ptx1
+  );
+  final_res
 
 #pop-options
 

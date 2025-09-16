@@ -40,32 +40,75 @@ open Impl.KEMEDHOC.TranscriptHash
 open Impl.KEMEDHOC.Core
 open Spec.KEMEDHOC.Base.Definitions
 
+open Impl.KEMEDHOC.Core.Msg1.Aux
+
 (*------------------ Message 1*)
 val responder_process_msg1:
   kcs: supportedKemCipherSuite
   -> rs: party_state_m kcs
   -> msg1: message1 kcs
   -> hs: handshake_state_m kcs
+  -> ptx1: plaintext1
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_party_state_m h0 rs /\ live h0 entropy_p /\ live h0 kem_state
-    /\ is_valid_message1 h0 msg1
-    /\ is_legit_message1 h0 msg1 /\ is_valid_handshake_state_m h0 hs
+    /\ is_valid_message1 h0 msg1 /\ is_legit_message1 h0 msg1
+    /\ is_valid_handshake_state_m h0 hs
+    /\ is_valid_plaintext1 h0 ptx1
     
     // Disjointness
     /\ handshake_state_m_disjoint_to_party_state hs rs
     /\ handshake_state_m_disjoint_to_lbuffer hs kem_state
     /\ handshake_state_m_disjoint_to_lbuffer hs entropy_p
     /\ handshake_state_m_disjoint_to_msg1 hs msg1
+    /\ handshake_state_m_disjoint_to_p1 hs ptx1
     /\ party_state_disjoint_to_lbuffer rs kem_state
     /\ party_state_disjoint_to_lbuffer rs entropy_p
     /\ party_state_disjoint_to_msg1 rs msg1
+    /\ party_state_disjoint_to_p1 rs ptx1
     /\ message1_disjoint_to_lbuffer msg1 kem_state
     /\ message1_disjoint_to_lbuffer msg1 entropy_p
+    // disjoint between msg1 and ptx1
+    /\ message1_disjoint_to_p1 msg1 ptx1
+    /\ plaintext1_disjoint_to_lbuffer ptx1 kem_state
+    /\ plaintext1_disjoint_to_lbuffer ptx1 entropy_p
     /\ disjoint kem_state entropy_p
   )
   (ensures fun h0 res h1 ->
-    True
+    let base_modified_locs = loc hs.k_auth_R |+| loc hs.th1
+                            |+| loc hs.prk1e in
+
+    is_valid_handshake_state_m h1 hs
+    /\ is_valid_party_state_m h1 rs
+    /\ is_valid_plaintext1 h1 ptx1
+    /\ (match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+      | TypeEdhoc.CDecryptionFailure -> (
+        modifies base_modified_locs h0 h1
+      )
+      | TypeEdhoc.CInvalidCredential
+      | TypeEdhoc.CSuccess -> (
+        let modified_locs = base_modified_locs |+| loc hs.msg1_hash
+                          |+| plaintext1_union ptx1 in
+
+        modifies modified_locs h0 h1
+      )
+      | _ -> False
+    )
+    /\ ( let res_s = Spec.responder_process_msg1 kcs (party_state_m_eval h0 rs)
+                    (message1_eval h0 msg1) in
+
+      let hs_s_final = handshake_state_m_eval h1 hs in
+      let ptx1_s_final = plaintext1_eval h1 ptx1 in
+
+      match res_s with
+        | Fail e -> res == error_to_c_response e
+        | Res (hs_s, p1_s) -> (
+          res == TypeEdhoc.CSuccess /\
+          Spec.hs_equal hs_s_final hs_s /\
+          SpecParser.plaintext1_equal ptx1_s_final p1_s
+        )
+    )
   )
 
 /// Initiator's side
