@@ -128,9 +128,9 @@ let hs_equal_after_msg1 (#kcs: supportedKemCipherSuite)
     /\ Seq.equal hs1.prk1e hs2.prk1e
 
 /// -------- Initial state
-type handshake_state_init (#kcs: supportedKemCipherSuite)
-  = hs:handshake_state #kcs {
-    hs.suite_i = Some?.v (get_kemCipherSuite_label kcs)
+let is_valid_handshake_state_init (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state #kcs)
+  = hs.suite_i = Some?.v (get_kemCipherSuite_label kcs)
     /\ Option.isNone hs.k_xy
     /\ Option.isNone hs.k_auth_I
     /\ Option.isNone hs.th2
@@ -141,6 +141,10 @@ type handshake_state_init (#kcs: supportedKemCipherSuite)
     /\ Option.isNone hs.prk4e3m
     /\ Option.isNone hs.prk_out
     /\ Option.isNone hs.prk_exporter
+
+type handshake_state_init (#kcs: supportedKemCipherSuite)
+  = hs:handshake_state #kcs {
+    is_valid_handshake_state_init #kcs hs
   }
 
 val init_handshake_state:
@@ -154,9 +158,9 @@ val init_handshake_state:
 /// -------- After Msg2
 
 /// Valid transition of `handshake` during the handshake process.
-type handshake_state_after_msg2 (#kcs: supportedKemCipherSuite)
-  = hs:handshake_state #kcs {
-    Option.isSome hs.k_auth_I
+let is_valid_handshake_state_after_msg2 (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state #kcs)
+  = Option.isSome hs.k_auth_I
     /\ Option.isSome hs.k_xy
     /\ Option.isSome hs.th2
     /\ Option.isSome hs.prk2e
@@ -165,6 +169,10 @@ type handshake_state_after_msg2 (#kcs: supportedKemCipherSuite)
     /\ Option.isNone hs.prk4e3m
     /\ Option.isNone hs.prk_out
     /\ Option.isNone hs.prk_exporter
+
+type handshake_state_after_msg2 (#kcs: supportedKemCipherSuite)
+  = hs:handshake_state #kcs {
+    is_valid_handshake_state_after_msg2 #kcs hs
   }
 
 let hs_equal_after_msg2 (#kcs: supportedKemCipherSuite)
@@ -177,10 +185,9 @@ let hs_equal_after_msg2 (#kcs: supportedKemCipherSuite)
     
 
 /// -------- After Msg3
-
-type handshake_state_after_msg3 (#kcs: supportedKemCipherSuite)
-  = hs:handshake_state #kcs {
-    // fields should be Some after msg2
+let is_valid_handshake_state_after_msg3 (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state #kcs)
+  = // fields should be Some after msg2
     Option.isSome hs.k_auth_I
     /\ Option.isSome hs.k_xy
     /\ Option.isSome hs.th2
@@ -191,6 +198,10 @@ type handshake_state_after_msg3 (#kcs: supportedKemCipherSuite)
     /\ Option.isSome hs.prk4e3m
     /\ Option.isSome hs.prk_out
     /\ Option.isSome hs.prk_exporter
+
+type handshake_state_after_msg3 (#kcs: supportedKemCipherSuite)
+  = hs:handshake_state #kcs {
+    is_valid_handshake_state_after_msg3 #kcs hs
   }
 
 let hs_equal_after_msg3 (#kcs: supportedKemCipherSuite)

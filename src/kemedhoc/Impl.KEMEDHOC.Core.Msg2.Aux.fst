@@ -182,68 +182,6 @@ let message2_disjoint_to_msg1 (#kcs: supportedKemCipherSuite)
   ]
 
 
-#push-options "--z3rlimit 40 --max_fuel 4 --max_ifuel 4"
-let responder_construct_msg2_uti (#kcs: supportedKemCipherSuite)
-  (hs: handshake_state_m kcs) (ctx2: context2 kcs) (c2: c2_buff kcs)
-  : ST.Stack c_response
-  (requires fun h0 ->
-    is_valid_handshake_state_m h0 hs
-    /\ is_valid_context2 h0 ctx2
-    /\ live h0 c2
-
-    // Disjointness
-    /\ handshake_state_m_disjoint_to_lbuffer hs c2
-    /\ B.all_disjoint [loc c2; loc ctx2.c_r; loc ctx2.id_cred_r;
-                      loc ctx2.cred_r; loc ctx2.th2; loc hs.th2.value;
-                      loc hs.prk2e.value; loc hs.prk3e2m.value]
-
-    /\ lbufferOpt_is_Some h0 hs.prk3e2m
-  
-  )
-  (ensures fun h0 res h1 ->
-    match res with
-      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h1
-      | TypeEdhoc.CSuccess -> (
-        modifies1 c2 h0 h1
-        /\ is_valid_handshake_state_m h1 hs
-        /\ is_valid_context2 h1 ctx2
-      )
-      | _ -> False
-  )
-  = ST.push_frame();
-  (**) let h0 = ST.get () in 
-  // derive MAC2
-  let mac2: mac23_buff kcs = create (size (SpecCrypto.mac23_size kcs)) (u8 0) in
-  (**) let h1 = ST.get () in
-  (**) assert(is_valid_context2 h1 ctx2 /\ live h1 hs.prk3e2m.value /\ live h1 mac2
-        /\ B.all_disjoint [loc hs.prk3e2m.value; loc hs.th2.value ; loc mac2]
-    );
-  // !!! Error in BigOps here. Do not know why
-  expand_mac2 #kcs hs.prk3e2m.value ctx2 mac2;
-  (**) let h2 = ST.get () in
-
-  // construct plaintext2
-  let p2: plaintext2 kcs = {
-    c_R = ctx2.c_r;
-    id_cred_R = ctx2.id_cred_r;
-    cred_R = ctx2.cred_r;
-    mac2 = mac2;
-  } in
-
-  // encrypt plaintext2
-  let res = encrypt_plaintext2 #kcs p2 hs.th2.value hs.prk2e.value c2 in
-  (**) let h3 = ST.get () in
-  (**) assert(res == TypeEdhoc.CSuccess \/ res == TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig);
-  (**) assert(match res with
-      | TypeEdhoc.CSuccess -> modifies1 c2 h2 h3
-      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h2 h3  
-  );
-
-  ST.pop_frame();
-  res
-
-#pop-options
-
 (*----------------- Initiator's side*)
 val initiator_process_msg2_set_up:
   kcs: supportedKemCipherSuite
@@ -306,6 +244,33 @@ let initiator_process_msg2_set_up kcs is hs msg2
 
 #pop-options
 
+
+// val initiator_process_msg2_decrypt_c2:
+//   kcs: supportedKemCipherSuite
+//   -> is: party_state_m kcs
+//   -> hs: handshake_state_m kcs
+//   -> msg2: message2 kcs
+//   -> ptx2: plaintext2 kcs
+//   -> ST.Stack c_response
+//   (requires fun h0 ->
+//     is_valid_handshake_state_m h0 hs /\ is_valid_handshake_state_init h0 hs
+//     /\ is_valid_party_state_m h0 is
+//     /\ is_valid_message2 h0 msg2
+//     /\ is_valid_plaintext2 h0 ptx2
+
+//     // Disjointness
+//     /\ handshake_state_m_disjoint_to_party_state hs is
+//     /\ handshake_state_m_disjoint_to_msg2 hs msg2
+//     /\ handshake_state_m_disjoint_to_p2 hs ptx2
+//     /\ party_state_disjoint_to_msg2 is msg2
+//     /\ party_state_disjoint_to_p2 is ptx2
+//     /\ message2_disjoint_to_p2 msg2 ptx2
+//   )
+//   (ensures fun h0 res h1 ->
+//     True
+//   )
+
+
 (*----------------- Responder's side*)
 val responder_send_msg2_set_up:
   kcs: supportedKemCipherSuite
@@ -347,11 +312,159 @@ val responder_send_msg2_set_up:
       |+| lbufferOpt_loc hs.prk2e |+| lbufferOpt_loc hs.prk3e2m in
 
     modifies modified_locs h0 h1
+    /\ lbufferOpt_is_Some h1 hs.k_xy /\ lbufferOpt_is_Some h1 hs.k_auth_I
+    /\ lbufferOpt_is_Some h1 hs.th2 /\ lbufferOpt_is_Some h1 hs.prk2e
+    /\ lbufferOpt_is_Some h1 hs.prk3e2m
     /\ is_valid_handshake_state_m h1 hs
     /\ is_valid_party_state_m h1 rs
     /\ is_valid_message1 h0 msg1 /\ is_valid_message2 h0 msg2
 
   )
+
+val responder_construct_msg2:
+  kcs: supportedKemCipherSuite
+  -> rs: party_state_m kcs
+  -> hs: handshake_state_m kcs
+  -> msg2: message2 kcs
+  -> ST.Stack c_response
+  (requires fun h0 ->
+    is_valid_handshake_state_m h0 hs
+    /\ is_valid_party_state_m h0 rs
+    /\ is_valid_message2 h0 msg2
+    /\ live h0 entropy_p
+
+    /\ lbufferOpt_is_Some h0 hs.prk3e2m
+    /\ lbufferOpt_is_Some h0 hs.th2 /\ lbufferOpt_is_Some h0 hs.prk2e
+
+    // Disjointness
+    /\ handshake_state_m_disjoint_to_party_state hs rs
+    /\ handshake_state_m_disjoint_to_msg2 hs msg2
+    /\ handshake_state_m_disjoint_to_lbuffer hs entropy_p
+    /\ party_state_disjoint_to_msg2 rs msg2
+    /\ party_state_disjoint_to_lbuffer rs entropy_p
+    /\ message2_disjoint_to_lbuffer msg2 entropy_p
+  )
+  (ensures fun h0 res h1 ->
+    (match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h1
+      | TypeEdhoc.CSuccess -> modifies1 msg2.c2 h0 h1
+      | _ -> False)
+    /\ is_valid_handshake_state_m h1 hs
+    /\ is_valid_party_state_m h1 rs
+    /\ is_valid_message2 h1 msg2
+  )
+
+#push-options "--z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+let responder_construct_msg2_uti (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state_m kcs) (ctx2: context2 kcs) (c2: c2_buff kcs)
+  : ST.Stack c_response
+  (requires fun h0 ->
+    is_valid_handshake_state_m h0 hs
+    /\ is_valid_context2 h0 ctx2
+    /\ live h0 c2
+    /\ loc ctx2.th2 == loc hs.th2.value
+
+    // Disjointness
+    /\ handshake_state_m_disjoint_to_lbuffer hs c2
+    /\ B.all_disjoint [loc c2; loc ctx2.c_r; loc ctx2.id_cred_r;
+                      loc ctx2.cred_r; loc ctx2.th2;
+                      loc hs.prk2e.value; loc hs.prk3e2m.value]
+
+    /\ lbufferOpt_is_Some h0 hs.prk3e2m /\ lbufferOpt_is_Some h0 hs.th2
+    /\ lbufferOpt_is_Some h0 hs.prk2e
+  
+  )
+  (ensures fun h0 res h1 ->
+    match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h1
+      | TypeEdhoc.CSuccess -> (
+        modifies1 c2 h0 h1
+        /\ is_valid_handshake_state_m h1 hs
+        /\ is_valid_context2 h1 ctx2
+      )
+      | _ -> False
+  )
+  = ST.push_frame();
+  (**) let h0 = ST.get () in 
+  // derive MAC2
+  let mac2: mac23_buff kcs = create (size (SpecCrypto.mac23_size kcs)) (u8 0) in
+  (**) let h1 = ST.get () in
+  (**) assert(is_valid_context2 h1 ctx2 /\ live h1 hs.prk3e2m.value /\ live h1 mac2
+        /\ B.all_disjoint [loc hs.prk3e2m.value; loc hs.th2.value ; loc mac2]
+    );
+  // !!! Error in BigOps here. Do not know why
+  expand_mac2 #kcs hs.prk3e2m.value ctx2 mac2;
+  (**) let h2 = ST.get () in
+
+  // construct plaintext2
+  let p2: plaintext2 kcs = {
+    c_R = ctx2.c_r;
+    id_cred_R = ctx2.id_cred_r;
+    cred_R = ctx2.cred_r;
+    mac2 = mac2;
+  } in
+
+  // encrypt plaintext2
+  let res = encrypt_plaintext2 #kcs p2 hs.th2.value hs.prk2e.value c2 in
+  (**) let h3 = ST.get () in
+  (**) assert(res == TypeEdhoc.CSuccess \/ res == TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig);
+  (**) assert(match res with
+      | TypeEdhoc.CSuccess -> modifies1 c2 h2 h3
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h2 h3  
+  );
+
+  ST.pop_frame();
+  res
+
+#pop-options
+
+#push-options "--z3refresh --z3rlimit 60 --max_fuel 4 --max_ifuel 4"
+let responder_construct_msg2 kcs rs hs msg2
+  = ST.push_frame ();
+  (**) let h0 = ST.get () in
+
+  // randomly generate connection ID C_R
+  let c_R = create (size SpecParser.c_id_size) (u8 0) in
+  crypto_random c_R (size SpecParser.c_id_size);
+  // get credential cred_R
+  let cred_R = create (size SpecParser.cred_size) (u8 0) in
+  copy cred_R rs.id_cred;
+  (**) let h1 = ST.get() in
+
+  // construct context2
+  let ctx2: context2 kcs = {
+    c_r = c_R;
+    id_cred_r = rs.id_cred;
+    th2 = hs.th2.value;
+    cred_r = cred_R;
+  } in
+  (**) let h2 = ST.get() in
+
+  let res = responder_construct_msg2_uti #kcs hs ctx2 msg2.c2 in
+  (**) let h3 = ST.get () in
+  (**) assert(
+    match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h2 h3
+      | TypeEdhoc.CSuccess -> modifies1 msg2.c2 h2 h3
+      | _ -> False
+  );
+
+  ST.pop_frame ();
+  (**) let h_final = ST.get () in
+  (**) assert(~(live h_final c_R) /\ ~(live h_final cred_R));
+  (**) assume(
+    match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h_final
+      | TypeEdhoc.CSuccess -> modifies1 msg2.c2 h0 h_final
+      | _ -> False
+  );
+  // (**) assert(is_valid_handshake_state_m h_final hs
+  //     /\ is_valid_party_state_m h_final rs
+  //     /\ is_valid_message2 h_final msg2
+  // );
+  res
+
+#pop-options
 
 #push-options "--z3refresh --z3rlimit 60 --max_fuel 4 --max_ifuel 4"
 let responder_send_msg2_set_up_uti (kcs: supportedKemCipherSuite)
@@ -389,6 +502,8 @@ let responder_send_msg2_set_up_uti (kcs: supportedKemCipherSuite)
               |+| lbufferOpt_loc hs.th2 |+| lbufferOpt_loc hs.prk2e in
 
     modifies modified_locs h0 h1
+    /\ lbufferOpt_is_Some h1 hs.k_xy /\ lbufferOpt_is_Some h1 hs.k_auth_I
+    /\ lbufferOpt_is_Some h1 hs.th2 /\ lbufferOpt_is_Some h1 hs.prk2e
     /\ is_valid_handshake_state_m h1 hs
     /\ is_valid_party_state_m h1 rs
     /\ is_valid_message1 h0 msg1 /\ is_valid_message2 h0 msg2
@@ -448,75 +563,5 @@ let responder_send_msg2_set_up kcs rs hs msg1 msg2
               |+| lbufferOpt_loc hs.th2
               |+| lbufferOpt_loc hs.prk2e |+| lbufferOpt_loc hs.prk3e2m) h0 h_final);
   ()
-
-#pop-options
-
-val responder_construct_msg2:
-  kcs: supportedKemCipherSuite
-  -> rs: party_state_m kcs
-  -> hs: handshake_state_m kcs
-  -> msg2: message2 kcs
-  -> ST.Stack c_response
-  (requires fun h0 ->
-    is_valid_handshake_state_m h0 hs
-    /\ is_valid_party_state_m h0 rs
-    /\ is_valid_message2 h0 msg2
-    /\ live h0 entropy_p
-
-    // Disjointness
-    /\ handshake_state_m_disjoint_to_party_state hs rs
-    /\ handshake_state_m_disjoint_to_msg2 hs msg2
-    /\ handshake_state_m_disjoint_to_lbuffer hs entropy_p
-    /\ party_state_disjoint_to_msg2 rs msg2
-    /\ party_state_disjoint_to_lbuffer rs entropy_p
-    /\ message2_disjoint_to_lbuffer msg2 entropy_p
-  )
-  (ensures fun h0 res h1 ->
-    True
-    // (match res with
-    //   | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h1
-    //   | TypeEdhoc.CSuccess -> modifies1 msg2.c2 h0 h1
-    //   | _ -> False)
-    // /\ is_valid_handshake_state_m h1 hs
-    // /\ is_valid_party_state_m h1 rs
-    // /\ is_valid_message2 h1 msg2
-  )
-
-#push-options "--z3refresh --z3rlimit 60 --max_fuel 4 --max_ifuel 4"
-let responder_construct_msg2 kcs rs hs msg2
-  = (**) let h0 = ST.get () in
-  ST.push_frame ();
-
-  // randomly generate connection ID C_R
-  let c_R = create (size SpecParser.c_id_size) (u8 0) in
-  crypto_random c_R (size SpecParser.c_id_size);
-  // get credential cred_R
-  let cred_R = create (size SpecParser.cred_size) (u8 0) in
-  copy cred_R rs.id_cred;
-  (**) let h1 = ST.get() in
-
-  // construct context2
-  let ctx2: context2 kcs = {
-    c_r = c_R;
-    id_cred_r = rs.id_cred;
-    th2 = hs.th2.value;
-    cred_r = cred_R;
-  } in
-
-  // let res = responder_construct_msg2_uti #kcs hs ctx2 msg2.c2 in
-
-  ST.pop_frame ();
-  (**) let h_final = ST.get () in
-  // (**) assert(
-  //   match res with
-  //     | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h_final
-  //     | TypeEdhoc.CSuccess -> modifies1 msg2.c2 h0 h_final
-  // );
-  // (**) assert(is_valid_handshake_state_m h_final hs
-  //     /\ is_valid_party_state_m h_final rs
-  //     /\ is_valid_message2 h_final msg2
-  // );
-  // res
-  TypeEdhoc.CSuccess
 
 #pop-options
