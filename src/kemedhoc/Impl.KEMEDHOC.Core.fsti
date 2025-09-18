@@ -307,7 +307,7 @@ let handshake_state_m_eval (#kcs: supportedKemCipherSuite)
 
 /// Refined types for handshake state during the protocol run
 
-let is_hanbshake_state_m_after_init (#kcs: supportedKemCipherSuite)
+let is_handshake_state_m_after_init (#kcs: supportedKemCipherSuite)
   (h: HS.mem) (hs: handshake_state_m kcs)
   = is_valid_handshake_state_m h hs
   /\ lbufferOpt_is_None h hs.k_xy
@@ -321,6 +321,34 @@ let is_hanbshake_state_m_after_init (#kcs: supportedKemCipherSuite)
     /\ lbufferOpt_is_None h hs.prk_out
     /\ lbufferOpt_is_None h hs.prk_exporter
     /\ lbufferOpt_is_None h hs.remote_id_cred
+
+let is_valid_handshake_state_m_after_msg2 (#kcs: supportedKemCipherSuite)
+  (h: HS.mem) (hs: handshake_state_m kcs)
+  = is_valid_handshake_state_m h hs
+  // should be Some after Msg2
+  /\ lbufferOpt_is_Some h hs.k_auth_I
+  /\ lbufferOpt_is_Some h hs.k_xy
+  /\ lbufferOpt_is_Some h hs.th2
+  /\ lbufferOpt_is_Some h hs.prk2e
+  /\ lbufferOpt_is_Some h hs.prk3e2m
+  // should be None
+  /\ lbufferOpt_is_None h hs.prk4e3m
+  /\ lbufferOpt_is_None h hs.prk_out
+  /\ lbufferOpt_is_None h hs.prk_exporter
+
+let is_valid_handshake_state_m_after_msg3 (#kcs: supportedKemCipherSuite)
+  (h: HS.mem) (hs: handshake_state_m kcs)
+  = is_valid_handshake_state_m h hs
+  // should be Some
+  /\ lbufferOpt_is_Some h hs.k_auth_I
+  /\ lbufferOpt_is_Some h hs.k_xy
+  /\ lbufferOpt_is_Some h hs.th2
+  /\ lbufferOpt_is_Some h hs.prk2e
+  /\ lbufferOpt_is_Some h hs.prk3e2m
+  // should be Some after Msg3
+  /\ lbufferOpt_is_Some h hs.prk4e3m
+  /\ lbufferOpt_is_Some h hs.prk_out
+  /\ lbufferOpt_is_Some h hs.prk_exporter
 
 let modified_loc_hs_after_init (#kcs: supportedKemCipherSuite)
   (hs: handshake_state_m kcs)
@@ -342,6 +370,6 @@ val init_handshake_state:
                 (as_seq h0 hs.th1) (as_seq h0 hs.k_auth_R) (as_seq h0 hs.prk1e) in
 
     modifies (modified_loc_hs_after_init hs) h0 h1
-    /\ is_hanbshake_state_m_after_init h1 hs
+    /\ is_handshake_state_m_after_init h1 hs
     /\ Spec.hs_equal (handshake_state_m_eval h1 hs) hs_s
   )

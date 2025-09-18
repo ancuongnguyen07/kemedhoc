@@ -152,7 +152,8 @@ val concat_context2:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_context2 h0 ctx2 /\ live h0 ctx2_buffer
-        /\ B.loc_disjoint (loc ctx2_buffer) (context2_union ctx2)
+        /\ disjoint ctx2_buffer ctx2.c_r /\ disjoint ctx2_buffer ctx2.id_cred_r
+        /\ disjoint ctx2_buffer ctx2.th2 /\ disjoint ctx2_buffer ctx2.cred_r
     )
     (ensures fun h0 _ h1 ->
         let concatenated_ctx2_s = Spec.concat_context2 #kcs (context2_eval h0 ctx2) in
@@ -202,7 +203,8 @@ val concat_context3:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_context3 h0 ctx3 /\ live h0 ctx3_buffer
-        /\ B.loc_disjoint (loc ctx3_buffer) (context3_union ctx3)
+        /\ disjoint ctx3_buffer ctx3.id_cred_i /\ disjoint ctx3_buffer ctx3.th3
+        /\ disjoint ctx3_buffer ctx3.cred_i
     )
     (ensures fun h0 _ h1 ->
         let concatenated_ctx3_s = Spec.concat_context3 #kcs (context3_eval h0 ctx3) in
@@ -392,7 +394,8 @@ val expand_mac2:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_context2 h0 ctx2 /\ live h0 prk3e2m /\ live h0 mac2
-        /\ B.all_disjoint [loc prk3e2m; context2_union ctx2; loc mac2]
+        /\ B.all_disjoint [loc prk3e2m; loc ctx2.c_r; loc ctx2.id_cred_r;
+                            loc ctx2.th2; loc ctx2.cred_r; loc mac2]
     )
     (ensures fun h0 _ h1 ->
         let mac2_s = Spec.expand_mac2 #kcs (as_seq h0 prk3e2m) (context2_eval h0 ctx2) in
@@ -409,7 +412,8 @@ val expand_mac3:
     -> ST.Stack unit
     (requires fun h0 ->
         is_valid_context3 h0 ctx3 /\ live h0 prk4e3m /\ live h0 mac3
-        /\ B.all_disjoint [loc prk4e3m; context3_union ctx3; loc mac3]
+        /\ B.all_disjoint [loc prk4e3m; loc ctx3.id_cred_i;
+                            loc ctx3.th3; loc ctx3.cred_i; loc mac3]
     )
     (ensures fun h0 _ h1 ->
         let mac3_s = Spec.expand_mac3 #kcs (as_seq h0 prk4e3m) (context3_eval h0 ctx3) in
