@@ -52,7 +52,7 @@ val responder_send_msg2:
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_handshake_state_m h0 hs
-    /\ is_valid_party_state_m h0 rs
+    /\ is_party_state_eph_est_m h0 rs
     /\ is_valid_message1 h0 msg1 /\ is_legit_message1 h0 msg1
     /\ is_valid_message2 h0 msg2
     /\ live h0 entropy_p /\ live h0 kem_state
@@ -86,16 +86,22 @@ val responder_send_msg2:
               |+| lbufferOpt_loc hs.th2
               |+| lbufferOpt_loc hs.prk2e |+| lbufferOpt_loc hs.prk3e2m in 
 
+    // memory modification post-condition
     (match res with
       | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies modified_locs h0 h1
       | TypeEdhoc.CSuccess -> modifies (modified_locs |+| loc msg2.c2) h0 h1
       | _ -> False)
+    // validity of management states and messages
     /\ (is_valid_handshake_state_m h1 hs
       /\ Spec.is_valid_handshake_state_after_msg2 (handshake_state_m_eval h1 hs)
       /\ is_valid_party_state_m h1 rs
       /\ is_valid_message2 h1 msg2
     )
-    /\ (
+    // functional correctness respect to the high-level specification
+    // The error CUnsupportedAlgorithmOrInvalidConfig is implementation-specific
+    // so it is not covered by the specification
+    /\ ( res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+      ==> (
       let rs_init = party_state_m_eval h0 rs in
       let hs_init = handshake_state_m_eval h0 hs in
       let msg1_init = message1_eval h0 msg1 in
@@ -113,7 +119,7 @@ val responder_send_msg2:
           /\ Spec.hs_equal hs_s_final hs_s
           /\ SpecParser.message2_equal msg2_s_final m2_s
         )
-    )
+    ))
   )
 
 
@@ -127,9 +133,13 @@ val initiator_process_msg2:
   -> ST.Stack c_response
   (requires fun h0 ->
     is_valid_handshake_state_m h0 hs
-    /\ is_valid_party_state_m h0 is
+    /\ is_party_state_eph_est_m h0 is
     /\ is_valid_message2 h0 msg2
     /\ is_valid_plaintext2 h0 p2
+
+    /\ (let hs_init = handshake_state_m_eval h0 hs in
+      Spec.is_valid_handshake_state_init hs_init
+    )
 
     // Disjointness
     /\ handshake_state_m_disjoint_to_party_state hs is
@@ -140,5 +150,43 @@ val initiator_process_msg2:
     /\ message2_disjoint_to_p2 msg2 p2
   )
   (ensures fun h0 res h1 ->
-    True
+    let base_modified_locs = lbufferOpt_loc hs.k_xy |+| lbufferOpt_loc hs.k_auth_I
+              |+| lbufferOpt_loc hs.th2 |+| lbufferOpt_loc hs.prk2e in
+
+    // memory modification post-condition
+    (match res with
+      | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+      | TypeEdhoc.CDecryptionFailure -> modifies base_modified_locs h0 h1
+      | TypeEdhoc.CInvalidCredential
+      | TypeEdhoc.CIntegrityCheckFailed
+      | TypeEdhoc.CSuccess -> modifies (base_modified_locs |+| lbufferOpt_loc hs.prk3e2m
+                                      |+| plaintext2_union p2) h0 h1
+      | _ -> False
+    )
+    // validity of management states and messages
+    /\ (is_valid_handshake_state_m h1 hs
+      /\ (res == TypeEdhoc.CSuccess ==> Spec.is_valid_handshake_state_after_msg2 (handshake_state_m_eval h1 hs))
+      /\ is_valid_party_state_m h1 is
+      /\ is_valid_plaintext2 h1 p2
+    )
+    // functional correctness respect to the high-level specification
+    // The error CUnsupportedAlgorithmOrInvalidConfig is implementation-specific
+    // so it is not covered by the specification
+    /\ (res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    ==> (
+      let rs_init = party_state_m_eval h0 is in
+      let hs_init = handshake_state_m_eval h0 hs in
+      let msg2_init = message2_eval h0 msg2 in
+
+      let res_s = Spec.initiator_process_msg2 kcs rs_init hs_init msg2_init in
+      let hs_s_final = handshake_state_m_eval h1 hs in
+
+      match res_s with
+        | Fail e -> error_to_c_response e == res
+        | Res (hs_s, p2_s) -> (
+          res == TypeEdhoc.CSuccess
+          /\ Spec.hs_equal hs_s_final hs_s
+          /\ SpecParser.plaintext2_equal (plaintext2_eval h1 p2) p2_s
+        )
+    ))
   )

@@ -40,6 +40,7 @@ open Impl.KEMEDHOC.Parser
 open Impl.KEMEDHOC.Ciphertext
 open Impl.KEMEDHOC.TranscriptHash
 open Impl.KEMEDHOC.Core
+open Impl.KEMEDHOC.Core.Utilities
 open Spec.KEMEDHOC.Base.Definitions
 
 (*-------------- Utilities*)
