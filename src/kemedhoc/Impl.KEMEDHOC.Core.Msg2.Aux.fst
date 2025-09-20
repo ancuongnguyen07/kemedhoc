@@ -506,7 +506,7 @@ val responder_construct_msg2:
     /\ is_valid_message2 h1 msg2
   )
 
-#push-options "--z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
 let responder_construct_msg2_uti (#kcs: supportedKemCipherSuite)
   (hs: handshake_state_m kcs) (ctx2: context2 kcs) (c2: c2_buff kcs)
   : ST.Stack c_response
@@ -566,6 +566,10 @@ let responder_construct_msg2_uti (#kcs: supportedKemCipherSuite)
   );
 
   ST.pop_frame();
+  (**) let h_final = ST.get () in
+  (**) assert(
+    is_valid_handshake_state_m h_final hs /\ is_valid_context2 h_final ctx2
+  );
   res
 
 #pop-options

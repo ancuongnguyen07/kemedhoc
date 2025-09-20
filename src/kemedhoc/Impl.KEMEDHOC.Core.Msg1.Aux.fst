@@ -176,6 +176,7 @@ val responder_process_msg1_decrypt_c1_get_ptx1:
     /\ handshake_state_m_disjoint_to_msg1 hs msg1
     /\ party_state_disjoint_to_p1 rs ptx1
     /\ party_state_disjoint_to_msg1 rs msg1
+    /\ message1_disjoint_to_p1 msg1 ptx1
   )
   (ensures fun h0 res h1 ->
     let modified_locs = loc hs.msg1_hash |+| plaintext1_union ptx1 in
@@ -187,7 +188,10 @@ val responder_process_msg1_decrypt_c1_get_ptx1:
         | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
         | TypeEdhoc.CDecryptionFailure -> modifies0 h0 h1
         | TypeEdhoc.CInvalidCredential -> modifies modified_locs h0 h1
-        | TypeEdhoc.CSuccess -> modifies (modified_locs |+| lbufferOpt_loc hs.remote_id_cred) h0 h1
+        | TypeEdhoc.CSuccess -> (
+          modifies (modified_locs |+| lbufferOpt_loc hs.remote_id_cred) h0 h1
+          /\ lbufferOpt_is_Some h1 hs.remote_id_cred
+        )
         | _ -> False
     )
   )
@@ -211,51 +215,147 @@ let check_credential (cred_A cred_B: id_cred_buffer)
   = if (lbytes_eq cred_A cred_B) then TypeEdhoc.CSuccess
   else TypeEdhoc.CInvalidCredential
 
-#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 50 --max_fuel 2 --max_ifuel 2"
+
+let responder_process_msg1_decrypt_c1_get_ptx1_set_up (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state_m kcs) (msg1: message1 kcs) (ptx1: plaintext1) (ptx1_buffer: plaintext1_buff)
+  : ST.Stack unit
+  (requires fun h0 ->
+    is_valid_handshake_state_m h0 hs
+    /\ is_valid_message1 h0 msg1 /\ is_legit_message1 h0 msg1
+    /\ is_valid_plaintext1 h0 ptx1
+    /\ live h0 ptx1_buffer
+
+    // Disjointness
+    /\ handshake_state_m_disjoint_to_msg1 hs msg1
+    /\ handshake_state_m_disjoint_to_p1 hs ptx1
+    /\ handshake_state_m_disjoint_to_lbuffer hs ptx1_buffer
+    /\ message1_disjoint_to_p1 msg1 ptx1
+    /\ message1_disjoint_to_lbuffer msg1 ptx1_buffer
+    /\ plaintext1_disjoint_to_lbuffer ptx1 ptx1_buffer
+  )
+  (ensures fun h0 _ h1 ->
+    let modified_locs = loc hs.msg1_hash |+| plaintext1_union ptx1 in
+
+    modifies modified_locs h0 h1
+    /\ is_valid_handshake_state_m h1 hs
+    /\ is_valid_plaintext1 h1 ptx1
+  )
+  = (**) let h0 = ST.get () in
+  ST.push_frame ();
+
+  // compute hash of message1
+  let msg1_concat_len = concat_msg1_fixed_length_t kcs in
+  let msg1_concat_buffer = create msg1_concat_len (u8 0) in
+  (**) assert(message1_disjoint_to_lbuffer msg1 msg1_concat_buffer);
+  do_hash kcs hs.msg1_hash msg1_concat_len msg1_concat_buffer;
+  (**) let h5 = ST.get () in
+
+  // deserialize plaintext1
+  deserialize_ptx1 ptx1_buffer ptx1;
+  (**) let h6 = ST.get () in
+  // (**) modifies (loc hs.msg1_hash |+| plaintext1_union ptx1) h0 h6;
+  ST.pop_frame();
+  ()
+
+
+let responder_process_msg1_decrypt_c1_get_ptx1_uti (#kcs: supportedKemCipherSuite)
+  (hs: handshake_state_m kcs) (p1: plaintext1) (id_cred_I: id_cred_buffer)
+  : ST.Stack c_response
+  (requires fun h0 ->
+    is_valid_handshake_state_m h0 hs
+    /\ is_valid_plaintext1 h0 p1 /\ live h0 id_cred_I
+
+    // Disjointness
+    /\ handshake_state_m_disjoint_to_p1 hs p1
+    /\ handshake_state_m_disjoint_to_lbuffer hs id_cred_I
+    /\ plaintext1_disjoint_to_lbuffer p1 id_cred_I
+  )
+  (ensures fun h0 res h1 ->
+    (match res with
+      | TypeEdhoc.CInvalidCredential -> modifies0 h0 h1
+      | TypeEdhoc.CSuccess -> (
+        modifies (lbufferOpt_loc hs.remote_id_cred) h0 h1
+        /\ lbufferOpt_is_Some h1 hs.remote_id_cred
+      )
+      | _ -> False
+    )
+    /\ is_valid_handshake_state_m h1 hs
+    /\ is_valid_plaintext1 h1 p1
+  )
+  = // check if the credential decrypted in plaintext 1
+  // matches the remote credential stored locally.
+  match (check_credential p1.id_cred_I id_cred_I) with
+    | TypeEdhoc.CSuccess -> (
+
+      lbufferOpt_set_Some hs.remote_id_cred;
+      copy hs.remote_id_cred.value p1.id_cred_I;
+
+      TypeEdhoc.CSuccess
+    )
+    | TypeEdhoc.CInvalidCredential -> TypeEdhoc.CInvalidCredential
+
+
 let responder_process_msg1_decrypt_c1_get_ptx1 kcs rs msg1 hs ptx1
-  = ST.push_frame();
-  (**) let h0 = ST.get () in
+  =  (**) let h0 = ST.get () in
+  ST.push_frame();
 
   // decrypt ciphertext1 -> get plaintext1
   let ptx1_buffer = create (plaintext1_size_t) (u8 0) in
   let res = decrypt_ciphertext1 #kcs msg1.c1 hs.th1 hs.prk1e ptx1_buffer in
+  (**) let h1 = ST.get () in
 
   let final_res = match res with
-    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
-    | TypeEdhoc.CDecryptionFailure -> res
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> (
+      (**) assert(modifies0 h0 h1);
+      TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    )
+    | TypeEdhoc.CDecryptionFailure -> (
+      (**) assert(modifies1 ptx1_buffer h0 h1);
+      TypeEdhoc.CDecryptionFailure
+    )
     | TypeEdhoc.CSuccess -> (
+      
+      responder_process_msg1_decrypt_c1_get_ptx1_set_up #kcs hs msg1 ptx1 ptx1_buffer;
+      (**) let h2 = ST.get () in
+      (**) assert(modifies (loc hs.msg1_hash |+| plaintext1_union ptx1) h1 h2);
 
-      // compute hash of message1
-      let msg1_concat_len = concat_msg1_fixed_length_t kcs in
-      let msg1_concat_buffer = create msg1_concat_len (u8 0) in
-      (**) assert(message1_disjoint_to_lbuffer msg1 msg1_concat_buffer);
-      do_hash kcs hs.msg1_hash msg1_concat_len msg1_concat_buffer;
-      (**) let h5 = ST.get () in
-
-      // deserialize plaintext1
-      deserialize_ptx1 ptx1_buffer ptx1;
-      (**) let h6 = ST.get () in
-      // (**) modifies (loc hs.msg1_hash |+| plaintext1_union ptx1) h0 h6;
-
-      // check if the credential decrypted in plaintext 1
-      // matches the remote credential stored locally.
-        match (check_credential ptx1.id_cred_I rs.remote_id_cred) with
+      let sub_res = responder_process_msg1_decrypt_c1_get_ptx1_uti #kcs hs ptx1 rs.remote_id_cred in
+      (**) let h3 = ST.get () in
+      (**) assert(
+        match sub_res with
+          | TypeEdhoc.CInvalidCredential -> modifies0 h2 h3
           | TypeEdhoc.CSuccess -> (
-            lbufferOpt_set_Some hs.remote_id_cred;
-            copy hs.remote_id_cred.value ptx1.id_cred_I;
-            TypeEdhoc.CSuccess
+            modifies (lbufferOpt_loc hs.remote_id_cred) h2 h3
+            /\ lbufferOpt_is_Some h3 hs.remote_id_cred
           )
-          | TypeEdhoc.CInvalidCredential -> TypeEdhoc.CInvalidCredential
+          | _ -> False
+      );
 
+      sub_res
     ) in
+  (**) let hx = ST.get () in
+  (**) assert(
+    let base_modified_locs = loc hs.msg1_hash |+| plaintext1_union ptx1 in
+    match final_res with
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    | TypeEdhoc.CDecryptionFailure -> modifies0 h1 hx
+    | TypeEdhoc.CInvalidCredential -> modifies base_modified_locs h1 hx
+    | TypeEdhoc.CSuccess -> modifies (base_modified_locs |+| lbufferOpt_loc hs.remote_id_cred) h1 hx
+  );
 
   ST.pop_frame();
   (**) let h_final = ST.get() in
-  (**) assert(match final_res with
-    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
-    | TypeEdhoc.CDecryptionFailure
-    | TypeEdhoc.CInvalidCredential
-    | TypeEdhoc.CSuccess -> True
+  (**) assert(
+    let base_modified_locs = loc hs.msg1_hash |+| plaintext1_union ptx1 in
+    match final_res with
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h_final
+    | TypeEdhoc.CDecryptionFailure -> modifies0 h0 h_final
+    | TypeEdhoc.CInvalidCredential -> modifies base_modified_locs h0 h_final
+    | TypeEdhoc.CSuccess -> (
+      modifies (base_modified_locs |+| lbufferOpt_loc hs.remote_id_cred) h0 h_final
+      /\ lbufferOpt_is_Some h_final hs.remote_id_cred
+    )
     | _ -> False
   );
   (**) assert(
@@ -332,7 +432,7 @@ val initiator_set_up_msg1:
     // )
   )
 
-#push-options "--z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 40 --max_fuel 2 --max_ifuel 2"
 let initiator_set_up_msg1 kcs is hs msg1
   = (**) let h0 = ST.get () in
 
@@ -417,26 +517,27 @@ val initiator_construct_msg1_uti:
   )
   (ensures fun h0 res h1 ->
     res == mode
+    /\ is_valid_handshake_state_m h1 hs
+    /\ is_valid_party_state_m h1 is
+    /\ is_valid_message1 h1 msg1 
     /\ (match res with
       | TypeEdhoc.CSuccess -> (
         let modified_locs = loc msg1.method |+| loc msg1.suite_i
                 |+| loc hs.msg1_hash in
 
         modifies modified_locs h0 h1
-        /\ is_valid_handshake_state_m h1 hs
-        /\ is_valid_party_state_m h1 is
-        /\ is_valid_message1 h1 msg1 /\ is_legit_message1 h1 msg1
+        /\ is_legit_message1 h1 msg1
       )
       | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> modifies0 h0 h1
     )
   )
 
-#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 40 --max_fuel 2 --max_ifuel 2"
 let initiator_construct_msg1_uti kcs mode is hs msg1
   = match mode with
     | TypeEdhoc.CSuccess -> (
-      ST.push_frame();
       (**) let h0 = ST.get () in
+      ST.push_frame();
 
       // construct message1
       // only need to update the method and suite_i fields
@@ -480,16 +581,13 @@ let initiator_construct_msg1_uti kcs mode is hs msg1
       //       |+| loc hs.msg1_hash
       // ) h0 h10);
 
-      (**) assert(
-        (
-          is_valid_handshake_state_m h10 hs
-          /\ is_valid_party_state_m h10 is
-          /\ is_valid_message1 h10 msg1 /\ is_legit_message1 h10 msg1
-        )
-      );
-
       ST.pop_frame();
       (**) let h_final = ST.get () in
+      (**) assert(
+        modifies (loc msg1.method |+| loc msg1.suite_i
+                |+| loc hs.msg1_hash) h0 h_final
+        /\ is_legit_message1 h_final msg1
+      );
       (**) assert(
         (
           is_valid_handshake_state_m h_final hs
@@ -497,9 +595,9 @@ let initiator_construct_msg1_uti kcs mode is hs msg1
           /\ is_valid_message1 h_final msg1 /\ is_legit_message1 h_final msg1
         )
       );
-      mode
+      TypeEdhoc.CSuccess 
     )
-    | _ -> mode
+    | TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig -> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
 #pop-options
 
 
@@ -534,7 +632,7 @@ val initiator_construct_msg1:
       | _ -> False
   )
 
-#push-options "--z3refresh --z3rlimit 40 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 40 --max_fuel 2 --max_ifuel 2"
 let initiator_construct_msg1 kcs is hs msg1
   = ST.push_frame();
   (**) let h0 = ST.get () in
