@@ -111,7 +111,8 @@ let is_valid_party_state_m (#kcs: supportedKemCipherSuite)
   = let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h ps.suite) in
   
   party_state_live h ps /\ party_state_disjoint ps
-  /\ suite_label = 9
+  /\ (suite_label = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs))
+  /\ is_valid_lbufferOpt h ps.eph_kem_priv_key
 
 type valid_party_state_m (kcs: supportedKemCipherSuite) (h: HS.mem)
   = ps:party_state_m kcs {is_valid_party_state_m h ps}
@@ -200,9 +201,16 @@ let handshake_state_m_disjoint (#kcs: supportedKemCipherSuite)
 
 let is_valid_handshake_state_m (#kcs: supportedKemCipherSuite)
   (h: HS.mem) (hs: handshake_state_m kcs)
-  = let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h hs.suite_i) in
-  handshake_state_m_live h hs /\ handshake_state_m_disjoint h hs
-  /\ suite_label = 9
+  = handshake_state_m_live h hs /\ handshake_state_m_disjoint h hs
+  /\ ( let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h hs.suite_i) in
+    suite_label = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs)
+  )
+  /\ is_valid_lbufferOpt h hs.k_xy /\ is_valid_lbufferOpt h hs.k_auth_I
+  /\ is_valid_lbufferOpt h hs.th2 /\ is_valid_lbufferOpt h hs.th3
+  /\ is_valid_lbufferOpt h hs.th4 /\ is_valid_lbufferOpt h hs.prk2e
+  /\ is_valid_lbufferOpt h hs.prk3e2m /\ is_valid_lbufferOpt h hs.prk4e3m
+  /\ is_valid_lbufferOpt h hs.prk_out /\ is_valid_lbufferOpt h hs.prk_exporter
+  /\ is_valid_lbufferOpt h hs.remote_id_cred
 
 inline_for_extraction
 type valid_handshake_state_m (kcs: supportedKemCipherSuite) (h: HS.mem)
@@ -309,22 +317,38 @@ let handshake_state_m_eval (#kcs: supportedKemCipherSuite)
 
 let is_handshake_state_m_after_init (#kcs: supportedKemCipherSuite)
   (h: HS.mem) (hs: handshake_state_m kcs)
-  = is_valid_handshake_state_m h hs
+  = ( let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h hs.suite_i) in
+    suite_label = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs)
+  )
   /\ lbufferOpt_is_None h hs.k_xy
-    /\ lbufferOpt_is_None h hs.k_auth_I
-    /\ lbufferOpt_is_None h hs.th2
-    /\ lbufferOpt_is_None h hs.th3
-    /\ lbufferOpt_is_None h hs.th4
-    /\ lbufferOpt_is_None h hs.prk2e
-    /\ lbufferOpt_is_None h hs.prk3e2m
-    /\ lbufferOpt_is_None h hs.prk4e3m
-    /\ lbufferOpt_is_None h hs.prk_out
-    /\ lbufferOpt_is_None h hs.prk_exporter
-    /\ lbufferOpt_is_None h hs.remote_id_cred
+  /\ lbufferOpt_is_None h hs.k_auth_I
+  /\ lbufferOpt_is_None h hs.th2
+  /\ lbufferOpt_is_None h hs.th3
+  /\ lbufferOpt_is_None h hs.th4
+  /\ lbufferOpt_is_None h hs.prk2e
+  /\ lbufferOpt_is_None h hs.prk3e2m
+  /\ lbufferOpt_is_None h hs.prk4e3m
+  /\ lbufferOpt_is_None h hs.prk_out
+  /\ lbufferOpt_is_None h hs.prk_exporter
+  // /\ lbufferOpt_is_None h hs.remote_id_cred
+
+let lemma_is_valid_handshake_m_after_init_equiv_spec
+  (#kcs: supportedKemCipherSuite) (h: HS.mem) (hs: handshake_state_m kcs)
+  : Lemma (requires is_valid_handshake_state_m h hs)
+  (ensures (
+    let hs_eval = handshake_state_m_eval #kcs h hs in
+
+    is_handshake_state_m_after_init h hs
+    <==> Spec.is_valid_handshake_state_init hs_eval)
+  )
+  [SMTPat (is_handshake_state_m_after_init #kcs h hs)]
+  = ()
 
 let is_valid_handshake_state_m_after_msg2 (#kcs: supportedKemCipherSuite)
   (h: HS.mem) (hs: handshake_state_m kcs)
-  = is_valid_handshake_state_m h hs
+  = ( let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h hs.suite_i) in
+    suite_label = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs)
+  )
   // should be Some after Msg2
   /\ lbufferOpt_is_Some h hs.k_auth_I
   /\ lbufferOpt_is_Some h hs.k_xy
@@ -336,19 +360,45 @@ let is_valid_handshake_state_m_after_msg2 (#kcs: supportedKemCipherSuite)
   /\ lbufferOpt_is_None h hs.prk_out
   /\ lbufferOpt_is_None h hs.prk_exporter
 
+let lemma_is_valid_handshake_state_m_after_msg2_equiv_spec
+  (#kcs: supportedKemCipherSuite) (h: HS.mem) (hs: handshake_state_m kcs)
+  : Lemma (requires is_valid_handshake_state_m h hs)
+  (ensures (
+    let hs_eval = handshake_state_m_eval #kcs h hs in
+
+    is_valid_handshake_state_m_after_msg2 h hs
+    <==> Spec.is_valid_handshake_state_after_msg2 hs_eval
+  ))
+  [SMTPat (is_valid_handshake_state_m_after_msg2 #kcs h hs)]
+  = ()
+
 let is_valid_handshake_state_m_after_msg3 (#kcs: supportedKemCipherSuite)
   (h: HS.mem) (hs: handshake_state_m kcs)
-  = is_valid_handshake_state_m h hs
+  = ( let suite_label = SpecSerdEdhoc.bytes_to_nat (as_seq h hs.suite_i) in
+    suite_label = Some?.v (SpecCrypto.get_kemCipherSuite_label kcs)
+  )
   // should be Some
   /\ lbufferOpt_is_Some h hs.k_auth_I
   /\ lbufferOpt_is_Some h hs.k_xy
   /\ lbufferOpt_is_Some h hs.th2
   /\ lbufferOpt_is_Some h hs.prk2e
   /\ lbufferOpt_is_Some h hs.prk3e2m
-  // should be Some after Msg3
+  // should be Some after Msg32
+  /\ lbufferOpt_is_Some h hs.th3
   /\ lbufferOpt_is_Some h hs.prk4e3m
   /\ lbufferOpt_is_Some h hs.prk_out
   /\ lbufferOpt_is_Some h hs.prk_exporter
+
+let lemma_is_valid_handshake_state_m_after_msg3_equiv_spec
+  (#kcs: supportedKemCipherSuite) (h: HS.mem) (hs: handshake_state_m kcs)
+  : Lemma (requires is_valid_handshake_state_m h hs)
+  (ensures (
+    let hs_eval = handshake_state_m_eval #kcs h hs in
+    is_valid_handshake_state_m_after_msg3 h hs
+    <==> Spec.is_valid_handshake_state_after_msg3 hs_eval
+  ))
+  [SMTPat (is_valid_handshake_state_m_after_msg3 #kcs h hs)]
+  = ()
 
 let modified_loc_hs_after_init (#kcs: supportedKemCipherSuite)
   (hs: handshake_state_m kcs)
@@ -370,6 +420,7 @@ val init_handshake_state:
                 (as_seq h0 hs.th1) (as_seq h0 hs.k_auth_R) (as_seq h0 hs.prk1e) in
 
     modifies (modified_loc_hs_after_init hs) h0 h1
+    /\ is_valid_handshake_state_m h1 hs
     /\ is_handshake_state_m_after_init h1 hs
     /\ Spec.hs_equal (handshake_state_m_eval h1 hs) hs_s
   )

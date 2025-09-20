@@ -141,6 +141,8 @@ let is_valid_handshake_state_init (#kcs: supportedKemCipherSuite)
     /\ Option.isNone hs.prk4e3m
     /\ Option.isNone hs.prk_out
     /\ Option.isNone hs.prk_exporter
+    // remote_id_cred is only used by the Responder
+    // so no need to specify here
 
 type handshake_state_init (#kcs: supportedKemCipherSuite)
   = hs:handshake_state #kcs {
@@ -160,7 +162,8 @@ val init_handshake_state:
 /// Valid transition of `handshake` during the handshake process.
 let is_valid_handshake_state_after_msg2 (#kcs: supportedKemCipherSuite)
   (hs: handshake_state #kcs)
-  = Option.isSome hs.k_auth_I
+  = hs.suite_i = Some?.v (get_kemCipherSuite_label kcs)
+    /\ Option.isSome hs.k_auth_I
     /\ Option.isSome hs.k_xy
     /\ Option.isSome hs.th2
     /\ Option.isSome hs.prk2e
@@ -187,8 +190,9 @@ let hs_equal_after_msg2 (#kcs: supportedKemCipherSuite)
 /// -------- After Msg3
 let is_valid_handshake_state_after_msg3 (#kcs: supportedKemCipherSuite)
   (hs: handshake_state #kcs)
-  = // fields should be Some after msg2
-    Option.isSome hs.k_auth_I
+  = hs.suite_i = Some?.v (get_kemCipherSuite_label kcs)
+  // fields should be Some after msg2
+    /\ Option.isSome hs.k_auth_I
     /\ Option.isSome hs.k_xy
     /\ Option.isSome hs.th2
     /\ Option.isSome hs.prk2e

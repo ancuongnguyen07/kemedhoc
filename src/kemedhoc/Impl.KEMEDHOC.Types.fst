@@ -52,13 +52,14 @@ let lbufferOpt_disjoint (#len: size_t)
 let is_valid_lbufferOpt (#len: size_t)
   (h: HS.mem) (buff: lbufferOpt len)
   = lbufferOpt_live h buff /\ lbufferOpt_disjoint buff
+  /\ (lbufferOpt_is_Some h buff \/ lbufferOpt_is_None h buff)
 
 let is_legit_lbufferOpt (#len: size_t)
   (h: HS.mem) (buff: lbufferOpt len)
   = is_valid_lbufferOpt h buff
   /\ (lbufferOpt_is_Some h buff \/ lbufferOpt_is_None h buff)
 
-
+inline_for_extraction
 type valid_lbufferOpt (#len: size_t) (h: HS.mem)
   = bo: lbufferOpt len{ is_valid_lbufferOpt h bo }
 
@@ -97,11 +98,27 @@ let lbufferOpt_set_None (#len: size_t)
 /// Convert lbuffer_opt to `option lbytes`
 /// only for proofs
 let eval_lbuffer_opt (#len: size_t)
-  (h: HS.mem) (buff: lbufferOpt len)
+  (h: HS.mem) (buff: valid_lbufferOpt #len h)
   : GTot (option (lbytes (size_v len)))
   = if (lbufferOpt_is_Some h buff)
     then Some (as_seq h buff.value)
     else None
+
+let lemma_lbufferOpt_is_Some_equiv (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  : Lemma (requires is_valid_lbufferOpt h buff)
+  (ensures lbufferOpt_is_Some h buff <==> Option.isSome (eval_lbuffer_opt h buff))
+  [SMTPat (lbufferOpt_is_Some h buff)]
+  = ()
+
+let lemma_lbufferOpt_is_None_equiv (#len: size_t)
+  (h: HS.mem) (buff: lbufferOpt len)
+  : Lemma (requires is_valid_lbufferOpt h buff)
+  (ensures lbufferOpt_is_None h buff <==> Option.isNone (eval_lbuffer_opt h buff))
+  [SMTPat (lbufferOpt_is_None h buff)]
+  = ()
+
+(*EDHOC message buffers*)
 
 /// Plaintext buffers
 inline_for_extraction
