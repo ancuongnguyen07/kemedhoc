@@ -30,22 +30,25 @@ let responder_process_msg3 kcs rs hs p2 msg3 p3
   let res = responder_process_msg3_decrypt_msg3 #kcs rs hs p2 msg3 p3 in
   (**) let h_final = ST.get() in
   (**) assume(
-    let res_s = Spec.responder_process_msg3 kcs (party_state_m_eval h0 rs)
-                (handshake_state_m_eval h0 hs)
-                (plaintext2_eval h0 p2)
-                (as_seq h0 msg3) in
+    res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    ==> (
+      let res_s = Spec.responder_process_msg3 kcs (party_state_m_eval h0 rs)
+                  (handshake_state_m_eval h0 hs)
+                  (plaintext2_eval h0 p2)
+                  (as_seq h0 msg3) in
 
-    let hs_s_final = handshake_state_m_eval h_final hs in
-    let p3_s_final = plaintext3_eval h_final p3 in
+      match res_s with
+        | Fail e -> res == error_to_c_response e
+        | Res (hs_s, p3_s) -> (
+          let hs_s_final = handshake_state_m_eval h_final hs in
+          let p3_s_final = plaintext3_eval h_final p3 in
 
-    match res_s with
-      | Fail e -> res == error_to_c_response e
-      | Res (hs_s, p3_s) -> (
-        res == TypeEdhoc.CSuccess
-        /\ Spec.is_valid_handshake_state_after_msg3 hs_s_final
-        /\ Spec.hs_equal hs_s_final hs_s
-        /\ SpecParser.plaintext3_equal p3_s_final p3_s
-      )
+          res == TypeEdhoc.CSuccess
+          /\ Spec.is_valid_handshake_state_after_msg3 hs_s_final
+          /\ Spec.hs_equal hs_s hs_s_final
+          /\ SpecParser.plaintext3_equal p3_s_final p3_s
+        )
+    )
   );
   res
 
@@ -59,21 +62,23 @@ let initiator_send_msg3 kcs is hs p2 msg3
 
   (**) let h_final = ST.get() in
   (**) assume(
-    let res_s = Spec.initiator_send_msg3 kcs (party_state_m_eval h0 is)
-                (handshake_state_m_eval h0 hs)
-                (plaintext2_eval h0 p2) in
+    final_res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    ==> (let res_s = Spec.initiator_send_msg3 kcs (party_state_m_eval h0 is)
+                  (handshake_state_m_eval h0 hs)
+                  (plaintext2_eval h0 p2) in
 
-    let hs_s_final = handshake_state_m_eval h_final hs in
-    let msg3_s_final = as_seq h_final msg3 in
+      match res_s with
+        | Fail e -> final_res == error_to_c_response e
+        | Res (msg3_s, hs_s) -> (
+          let hs_s_final = handshake_state_m_eval h_final hs in
+          let msg3_s_final = as_seq h_final msg3 in
 
-    match res_s with
-      | Fail e -> final_res == error_to_c_response e
-      | Res (msg3_s, hs_s) -> (
-        final_res == TypeEdhoc.CSuccess
-        /\ Spec.is_valid_handshake_state_after_msg3 hs_s_final
-        /\ Spec.hs_equal hs_s_final hs_s
-        /\ Seq.equal msg3_s_final msg3_s
-      )
+          final_res == TypeEdhoc.CSuccess
+          /\ Spec.is_valid_handshake_state_after_msg3 hs_s_final
+          /\ Spec.hs_equal hs_s_final hs_s
+          /\ Seq.equal msg3_s_final msg3_s
+        )
+    )
   );
   final_res
 

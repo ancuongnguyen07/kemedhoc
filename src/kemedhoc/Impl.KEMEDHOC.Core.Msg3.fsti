@@ -112,8 +112,8 @@ val responder_process_msg3:
       )
       | _ -> False)
       // Functional correctness w.r.t. the high-level specification
-      /\ (
-        let rs_init = party_state_m_eval h0 rs in
+      /\ (res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+      ==> (let rs_init = party_state_m_eval h0 rs in
         let hs_init = handshake_state_m_eval h0 hs in
         let p2_init = plaintext2_eval h0 p2 in
         let msg3_init = as_seq h0 msg3 in
@@ -129,7 +129,7 @@ val responder_process_msg3:
             /\ Spec.hs_equal hs_s hs_final
             /\ SpecParser.plaintext3_equal (plaintext3_eval h1 p3) p3_s
           )
-      )
+      ))
   )
 
 (*------------------ Initiator's side*)
@@ -179,8 +179,8 @@ val initiator_send_msg3:
       )
       | _ -> False)
     // Functional correctness w.r.t. the high-level specification
-    /\ (
-      let is_init = party_state_m_eval h0 is in
+    /\ (res <> TypeEdhoc.CUnsupportedAlgorithmOrInvalidConfig
+    ==> (let is_init = party_state_m_eval h0 is in
       let hs_init = handshake_state_m_eval h0 hs in
       let p2_init = plaintext2_eval h0 p2 in
 
@@ -192,8 +192,8 @@ val initiator_send_msg3:
 
           res == TypeEdhoc.CSuccess
           /\ Spec.is_valid_handshake_state_after_msg3 hs_final
-          /\ Spec.hs_equal hs_s hs_final
+          /\ Spec.hs_equal hs_final hs_s 
           /\ Seq.equal (as_seq h1 msg3) m3_s
         )
-    )
+    ))
   )
