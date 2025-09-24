@@ -324,7 +324,6 @@ val initiator_send_msg3:
   -> is: party_state_eph_est #kcs
   -> hs: handshake_state_after_msg2 #kcs
   -> ptx2: plaintext2 #kcs
-  -> msg2: message2 #kcs
   -> eresult (message3 kcs & handshake_state_after_msg3 #kcs)
 
 /// Responder processes message 3

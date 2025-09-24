@@ -246,7 +246,7 @@ let bundle_msg1_msg2 (kcs: supportedKemCipherSuite)
 (*------------------ Message 3*)
 
 /// Initiator sends message 3
-let initiator_send_msg3 kcs is hs ptx2 msg2
+let initiator_send_msg3 kcs is hs ptx2
   = // derive TH3
   let th2 = Some?.v hs.th2 in
   let th3 = compute_th3 th2 ptx2 ptx2.id_cred_R in
@@ -343,7 +343,7 @@ let bundle_msg1_msg2_msg3 (kcs: supportedKemCipherSuite)
   = match (bundle_msg1_msg2 kcs is rs entr) with
     | Fail e -> Fail e
     | Res (msg2, hs_i'', hs_r'', is', rs, ptx2) -> (
-      match (initiator_send_msg3 kcs is' hs_i'' ptx2 msg2) with
+      match (initiator_send_msg3 kcs is' hs_i'' ptx2) with
         | Res (c3, hs_i''') -> (
           match (responder_process_msg3 kcs rs hs_r'' ptx2 c3) with
             | Fail e -> Fail e
