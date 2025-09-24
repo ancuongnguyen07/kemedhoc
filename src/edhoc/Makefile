@@ -97,6 +97,7 @@ ENABLE_HINTS = \
 #   inline_for_extraction in the presence of interfaces
 # - --cache_dir, to place checked files there
 FSTAR_FLAGS = \
+  --z3version 4.13.3 \
   --cmi --query_stats \
   --z3rlimit_factor 16 \
   --cache_checked_modules $(FSTAR_INCLUDES) \
