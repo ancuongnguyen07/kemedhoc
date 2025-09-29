@@ -23,16 +23,19 @@ for f in "$DIR"/*.time; do
     if [[ "$time_str" =~ ^([0-9]+):([0-9]+\.[0-9]+)$ ]]; then
         min=${BASH_REMATCH[1]}
         sec=${BASH_REMATCH[2]}
-        total=$(echo "scale=2; $total + $min + $sec / 60" | bc -l)
+        total=$(echo "$total + $min * 60 + $sec" | bc)
     elif [[ "$time_str" =~ ^([0-9]+):([0-9]+):([0-9]+\.[0-9]+)$ ]]; then
         hour=${BASH_REMATCH[1]}
         min=${BASH_REMATCH[2]}
         sec=${BASH_REMATCH[3]}
-        total=$(echo "scale=2; $total + $hour * 60 + $min + $sec / 60" | bc -l)
+        total=$(echo "$total + $hour * 3600 + $min * 60 + $sec" | bc)
     else
         echo "Unrecognized time format in file $f: $time_str"
         exit 1
     fi
 done
 
-echo "Total verification time in minutes for "$DIR": $total minutes"
+TOTAL_MIN=$(echo "$total/60" | bc)
+TOTAL_SEC=$(echo "$total%60" | bc)
+
+echo "Total verification time in minutes for $DIR: $TOTAL_MIN minutes $TOTAL_SEC seconds"
