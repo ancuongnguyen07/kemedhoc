@@ -622,7 +622,7 @@ let responder_construct_msg2 kcs rs hs msg2
 
 #pop-options
 
-#push-options "--z3refresh --z3rlimit 60 --max_fuel 4 --max_ifuel 4"
+#push-options "--z3refresh --z3rlimit 100 --max_fuel 4 --max_ifuel 4"
 let responder_send_msg2_set_up_uti (kcs: supportedKemCipherSuite)
   (rs: party_state_m kcs) (hs: handshake_state_m kcs)
   (msg1: message1 kcs) (msg2: message2 kcs)

@@ -229,7 +229,7 @@ let expand_salt #kcs salt_label prk th salt
 /// ---------------
 /// MAC
 /// ---------------
-#push-options "--z3rlimit 10"
+#push-options "--z3rlimit 20 --fuel 2 --ifuel 2"
 let expand_mac2 #kcs prk3e2m ctx2 mac2
     = ST.push_frame();
     (**) let h0 = ST.get () in

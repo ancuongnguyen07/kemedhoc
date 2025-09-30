@@ -224,7 +224,7 @@ HAND_WRITTEN_C_FILES =
 #
 # See the advanced topics section for an in-depth explanation of how the -bundle
 # option works. We also use -minimal.
-EDHOC_CORE_BUNDLE = -bundle 'Impl.EDHOC.Core=Impl.EDHOC.Core.*'
+KEMEDHOC_CORE_BUNDLE = -bundle 'Impl.KEMEDHOC.Core=Impl.KEMEDHOC.Core.*'
 
 KRML_FLAGS += -header c/header.h
 
@@ -241,7 +241,7 @@ dist/Makefile.basic: $(filter-out %prims.krml,$(ALL_KRML_FILES)) $(HAND_WRITTEN_
           -bundle 'EverCrypt,EverCrypt.\*[rename=EverCrypt]' \
           -library EverCrypt,EverCrypt.* \
           -bundle 'FStar.\*,LowStar.\*,C,C.\*[rename=Mitls_Kremlib]' \
-    $(EDHOC_CORE_BUNDLE) \
+    $(KEMEDHOC_CORE_BUNDLE) \
 	  -bundle '*[rename=Hacl]'\
 	  -library Hacl.* \
 	  -minimal \
