@@ -13,6 +13,8 @@ if [ -z "$1" ]; then
 fi
 
 ABS_DIR=$(realpath "$1")
-TOTAL=$(cloc --force-lang="F#,fst" --force-lang="F#,fsti" --include-ext="fst,fsti" $ABS_DIR | grep SUM | awk '{print $5}')
+TOTAL_FStar=$(cloc --force-lang="F#,fst" --force-lang="F#,fsti" --include-ext="fst,fsti" --match-f='^[Spec|Type].*'  "$ABS_DIR" | grep SUM | awk '{print $5}')
+TOTAL_LowStar=$(cloc --force-lang="F#,fst" --force-lang="F#,fsti" --include-ext="fst,fsti" --match-f='^Impl.*'  "$ABS_DIR" | grep SUM | awk '{print $5}')
 
-echo "Total lines of code in F* (.fst, .fsti) files in $ABS_DIR: $TOTAL"
+echo "Total lines of code in F* (.fst, .fsti) files in $ABS_DIR: $TOTAL_FStar"
+echo "Total lines of code in Low* (.fst, .fsti) files in $ABS_DIR: $TOTAL_LowStar"
