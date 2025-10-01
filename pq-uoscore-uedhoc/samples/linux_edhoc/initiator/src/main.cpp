@@ -17,6 +17,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include <time.h>
+
 #include "cmdparser.hpp"
 
 extern "C" {
@@ -160,7 +163,7 @@ int main(int argc, char** argv)
 	const bool pq_mode = parser.get<bool>("q");
 	const uint8_t auth_method = parser.get<uint8_t>("m");
 	if (auth_method < 0 || auth_method > 4) {
-		std::cerr << "Invalid chosen method, only 0-5 are allowed" << std::endl;
+		std::cerr << "Invalid chosen method, only 0-4 are allowed" << std::endl;
 		exit(1);
 	}
 
@@ -281,6 +284,7 @@ int main(int argc, char** argv)
 #endif // T1_RFC9529
 
 	struct cred_array cred_r_array = { .len = 1, .ptr = &cred_r };
+	long t1 = clock();
 
 	uint32_t x_len = 0;
 	uint32_t g_x_len = 0;
@@ -337,6 +341,7 @@ int main(int argc, char** argv)
 		}
 
 		TRY(kem_gen_keypair(ML_KEM_512, &G_X_random, &X_random));
+		printf("Generate ephemeral KEM key pair for Initiator\n");
 	}
 
 	c_i.g_x = G_X_random;
@@ -367,6 +372,11 @@ int main(int argc, char** argv)
 			   &oscore_master_salt));
 	PRINT_ARRAY("OSCORE Master Salt", oscore_master_salt.ptr,
 		    oscore_master_salt.len);
+
+
+	long t2 = clock();
+	double ms_mili = ((double)(t2 - t1)) / CLOCKS_PER_SEC * 1000;
+	printf("EDHOC Initiator runs successfully in %.2f ms\n", ms_mili);
 
 	close(sockfd);
 	return 0;

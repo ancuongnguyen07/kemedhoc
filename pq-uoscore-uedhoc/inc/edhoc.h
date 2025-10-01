@@ -14,6 +14,8 @@
 
 #include <stdint.h>
 
+#include <time.h>
+
 #include "edhoc/edhoc_method_type.h"
 #include "edhoc/messages.h"
 #include "edhoc/suites.h"
@@ -167,6 +169,7 @@ enum err edhoc_initiator_run_extended(
  * @return 			Ok or error code.
  */
 enum err edhoc_responder_run(
+	long *time_stamp,
 	struct edhoc_responder_context *c, struct cred_array *cred_i_array,
 	struct byte_array *err_msg, struct byte_array *prk_out,
 	enum err (*tx)(void *sock, struct byte_array *data),
@@ -189,6 +192,7 @@ enum err edhoc_responder_run(
  * @return 			Ok or error code.
  */
 enum err edhoc_responder_run_extended(
+	long *time_stamp,
 	struct edhoc_responder_context *c, struct cred_array *cred_i_array,
 	struct byte_array *err_msg, struct byte_array *prk_out,
 	struct byte_array *initiator_pk, struct byte_array *c_i_bytes,

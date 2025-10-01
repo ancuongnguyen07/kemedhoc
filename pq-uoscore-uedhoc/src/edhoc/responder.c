@@ -270,6 +270,8 @@ enum err msg2_gen(struct edhoc_responder_context *c, struct runtime_context *rc,
 	printf("Responder Authentication method: %d\n", rc->method);
 	// get the key exchange algorithm: ECDH, KEM, or NIKE
 	const enum ecdh_alg ke_alg = rc->suite.edhoc_ecdh;
+
+	printf("Key exchange algorithm: %d\n", ke_alg);
 	
 
 	/*Calculate the shared secret G_XY*/
@@ -290,6 +292,7 @@ enum err msg2_gen(struct edhoc_responder_context *c, struct runtime_context *rc,
 		
 		uint32_t desired_len = get_kem_ctxt_len(ke_alg);
 		if (desired_len > c->g_y.len) {
+			printf("desired_len = %d, c->g_y.len = %d\n", desired_len, c->g_y.len);
 			return buffer_to_small;
 		}
 		else {
@@ -517,6 +520,7 @@ enum err msg4_gen(struct edhoc_responder_context *c, struct runtime_context *rc)
 #endif // MESSAGE_4
 
 enum err edhoc_responder_run_extended(
+	long *time_stamp,
 	struct edhoc_responder_context *c, struct cred_array *cred_i_array,
 	struct byte_array *err_msg, struct byte_array *prk_out,
 	struct byte_array *initiator_pub_key, struct byte_array *c_i_bytes,
@@ -530,6 +534,9 @@ enum err edhoc_responder_run_extended(
 	/*receive message 1*/
 	PRINT_MSG("waiting to receive message 1...\n");
 	TRY(rx(c->sock, &rc.msg));
+	if (rc.msg.len > 0) {
+		*time_stamp = clock();
+	}
 
 	/*create and send message 2*/
 	TRY(msg2_gen(c, &rc, cred_i_array ,c_i_bytes));
@@ -552,6 +559,7 @@ enum err edhoc_responder_run_extended(
 }
 
 enum err edhoc_responder_run(
+	long *time_stamp,
 	struct edhoc_responder_context *c, struct cred_array *cred_i_array,
 	struct byte_array *err_msg, struct byte_array *prk_out,
 	enum err (*tx)(void *sock, struct byte_array *data),
@@ -559,7 +567,7 @@ enum err edhoc_responder_run(
 	enum err (*ead_process)(void *params, struct byte_array *ead13))
 {
 	BYTE_ARRAY_NEW(c_i, C_I_SIZE, C_I_SIZE);
-	return edhoc_responder_run_extended(c, cred_i_array, err_msg, prk_out,
+	return edhoc_responder_run_extended(time_stamp, c, cred_i_array, err_msg, prk_out,
 					    &NULL_ARRAY, &c_i, tx, rx,
 					    ead_process);
 }

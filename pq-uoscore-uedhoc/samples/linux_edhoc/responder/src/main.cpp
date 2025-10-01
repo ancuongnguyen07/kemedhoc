@@ -19,6 +19,8 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <time.h>
+
 extern "C" {
 #include "edhoc.h"
 #include "sock.h"
@@ -317,8 +319,8 @@ int main()
 	BYTE_ARRAY_NEW(G_Y_random, 768, 768);
 	// uint8_t* fixed_y = c_r.y.ptr;
 
-	// c_r.g_y = G_Y_random;
-	// c_r.y = Y_random;
+	c_r.g_y = G_Y_random;
+	c_r.y = Y_random;
 	// _memcpy_s(c)
 
 	// PRINT_ARRAY("Y", c_r.y.ptr, c_r.y.len);
@@ -339,7 +341,9 @@ int main()
 		uECC_set_rng(default_CSPRNG);
 #endif
 
-		TRY(edhoc_responder_run(&c_r, &cred_i_array, &err_msg, &PRK_out,
+		long t1 = 0;
+
+		TRY(edhoc_responder_run(&t1, &c_r, &cred_i_array, &err_msg, &PRK_out,
 					tx, rx, ead_process));
 		PRINT_ARRAY("PRK_out", PRK_out.ptr, PRK_out.len);
 
@@ -360,6 +364,10 @@ int main()
 		// zeroize((void*)c_r.g_y.ptr, c_r.g_y.len, c_r.g_y.len);
 		// c_r.g_y.len = G_Y_random.len;
 		// zeroize((void*)c_r.y.ptr, c_r.y.len, c_r.y.len);
+
+		long t2 = clock();
+		double ms_mili = ((double)(t2 - t1)) / CLOCKS_PER_SEC * 1000;
+		printf("EDHOC Responder runs successfully in %.2f ms\n", ms_mili);
 	}
 
 	close(sockfd);
