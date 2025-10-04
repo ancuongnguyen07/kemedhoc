@@ -111,6 +111,8 @@ let deserialize_ptx2_mem cs auth_material
     /\ Seq.equal id_cred_r (as_seq h2 id_cred_r_buff)
   );
 
+  (**) assert(disjoint sig_or_mac2_buff serialized_ptx2_mem);
+  
   copy sig_or_mac2_buff
     (Buffer.sub  serialized_ptx2_mem (len_c_r +! len_id_cred_r) (len_sig_or_mac2));
   /// A place holder for deserializing EAD as

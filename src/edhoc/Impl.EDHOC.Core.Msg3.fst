@@ -26,6 +26,8 @@ module SpecEncDec = Spec.EDHOC.Ciphertext
 (*-------------------------------------------*)
 (*---------------------------- Responder side*)
 (*-------------------------------------------*)
+#push-options "--z3refresh --z3rlimit 70 --fuel 2 --ifuel 1"
+
 let responder_process_msg3 #cs #msg3_len method rs_m hs_m ptx2_m msg3_m
   = let hinit = ST.get () in
   /// get authentication materials
@@ -195,7 +197,6 @@ let responder_process_msg3 #cs #msg3_len method rs_m hs_m ptx2_m msg3_m
 (*-------------------------------------------*)
 (*---------------------------- Initiator side*)
 (*-------------------------------------------*)
-#push-options "--z3rlimit 30 --max_fuel 4"
 let initiator_send_msg3 #cs #msg3_len method is_m hs_m ptx2_m msg3_buff
   = let hinit = ST.get () in
   /// get authentication materials

@@ -24,7 +24,7 @@ module SpecEncDec = Spec.EDHOC.Ciphertext
 
 // open Spec.EDHOC.CryptoPrimitives
 
-#push-options "--z3rlimit 25 --max_fuel 4"
+#push-options "--z3refresh --z3rlimit 70 --fuel 2 --ifuel 1"
 (*-------------------------------------------*)
 (*---------------------------- Initiator side*)
 (*-------------------------------------------*)
@@ -220,13 +220,10 @@ let initiator_process_msg2 #cs local_auth_material remote_auth_material is_m hs_
     // CSuccess
 
   )
-#pop-options
 
 (*-------------------------------------------*)
 (*---------------------------- Responder side*)
 (*-------------------------------------------*)
-#restart-solver
-#push-options "--z3rlimit 20 --max_fuel 4"
 let responder_send_msg2 #cs #auth_material #ptx2_len #msg2_len ptx2_buff
   msg2_buff rs_m hs_m
   =
