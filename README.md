@@ -6,6 +6,22 @@ The protocol design and implementation detail are available in [my thesis](./doc
 
 The active repository is maintained at https://github.com/ancuongnguyen07/kemedhoc.
 
+Table of contents:
+- [KEMEDHOC\*](#kemedhoc)
+- [Installing Dependencies](#installing-dependencies)
+  - [Ocaml](#ocaml)
+  - [ProVerif](#proverif)
+  - [Z3 SMT solver](#z3-smt-solver)
+  - [FStar](#fstar)
+  - [KaRaMel](#karamel)
+  - [Dockerfile](#dockerfile)
+- [Verifying protocol](#verifying-protocol)
+  - [EDHOC\*](#edhoc)
+  - [KEMEDHOC\*](#kemedhoc-1)
+  - [KEMEDHOC ProVerif model](#kemedhoc-proverif-model)
+- [Running protocol](#running-protocol)
+
+
 # Installing Dependencies
 
 ## Ocaml
