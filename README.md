@@ -35,11 +35,11 @@ eval $(opam env --switch=4.12.0)
 
 ## ProVerif
 ```sh
-opam install proverif
 # install graphviz if you do not already have
 # graphviz is required for visualizing function of ProVerif,
 # e.g., illustration of attack traces.
 opam depext proverif
+opam install proverif
 ```
 
 ## Z3 SMT solver
