@@ -103,8 +103,6 @@ static bool decode_message_1_kem_kem(zcbor_state_t *state, struct message_1_kem 
 			&& ((zcbor_bstr_decode(state, (&(*result).msg_1->message_1_G_X))))
 			&& ((zcbor_union_start_code(state) && (int_res = ((((zcbor_int32_decode(state, (&(*result).msg_1->message_1_C_I_int)))) && (((*result).msg_1->message_1_C_I_choice = message_1_C_I_int_c), true))
 			|| (((zcbor_bstr_decode(state, (&(*result).msg_1->message_1_C_I_bstr)))) && (((*result).msg_1->message_1_C_I_choice = message_1_C_I_bstr_c), true))), zcbor_union_end_code(state), int_res)))
-			// && (zcbor_bstr_decode(state, (&(*result).ct_auth_r))) // KEM-KEM specific field
-			// && (zcbor_bstr_decode(state, (&(*result).enc_auth_r))) // KEM-KEM specific field
 			&& ((*result).msg_1->message_1_ead_1_present = ((zcbor_bstr_decode(state, (&(*result).msg_1->message_1_ead_1)))), 1) // Optional EAD_1 field
 		)));
 	}
