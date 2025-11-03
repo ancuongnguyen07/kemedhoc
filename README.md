@@ -95,6 +95,7 @@ make -C src/kemedhoc verify
 ## KEMEDHOC ProVerif model
 To verify KEMEDHOC specification with ProVerif, run the following command
 ```sh
+cd pv-models
 ./run-proverif.sh -f kemedhoc.pv -D <DEF>
 # <DEF> should be [Anonymity, Model, ReflectionSimul]
 # - Anonymity: model for validating identity leakage
