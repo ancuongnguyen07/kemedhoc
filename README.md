@@ -1,10 +1,11 @@
 # KEMEDHOC*
-A formally verified implementation of KEMEDHOC, a quantum-safe variant of EDHOC key exchange protocol ([RFC9528](https://datatracker.ietf.org/doc/html/rfc9528)),
+An implementation of KEMEDHOC, including machine-checked proofs, a quantum-safe variant of EDHOC key exchange protocol ([RFC9528](https://datatracker.ietf.org/doc/html/rfc9528)),
 powered by F*/Low*/KaRaMel toolchain.
 
 The protocol design and implementation detail are available in [my thesis](./docs/master_thesis_2025.pdf).
 
-The active repository is maintained at https://github.com/ancuongnguyen07/kemedhoc.
+This is a _research artifact_, not a production-ready software. Please
+use the library with your _own risk_.
 
 Table of contents:
 - [KEMEDHOC\*](#kemedhoc)
