@@ -4,8 +4,7 @@ powered by F*/Low*/KaRaMel toolchain.
 
 The protocol design and implementation detail are available in [my thesis](./docs/master_thesis_2025.pdf).
 
-This is a _research artifact_, not a production-ready software. Please
-use the library with your _own risk_.
+*Disclaimer:* This is a _research artifact_, not a production-ready software. Use the library with your _own risk_.
 
 Table of contents:
 - [KEMEDHOC\*](#kemedhoc)
